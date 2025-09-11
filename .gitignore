@@ -9,3 +9,4 @@ env/
 venv/
 *.log
 output
+images
