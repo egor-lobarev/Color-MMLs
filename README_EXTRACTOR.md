@@ -46,7 +46,7 @@ python qwen25vl_extract.py path/to/image.jpg
 python qwen25vl_extract.py path/to/image.jpg --save-tokens
 
 # pick a different model / output dir / prompt
-python qwen25vl_extract.py path/to/image.jpg \
+python embedding_extractor.py --image munsell_sRGB.png \
   --model Qwen/Qwen2.5-VL-7B-Instruct \
   --outdir outputs \
   --prompt "Describe the image."
