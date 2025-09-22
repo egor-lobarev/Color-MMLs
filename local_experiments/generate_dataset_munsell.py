@@ -13,9 +13,9 @@ from matplotlib import cm, colors as mcolors
 
 # --- Paths ---
 HERE = os.path.dirname(os.path.abspath(__file__))
-DATASET_DIR = os.path.join(HERE, "color_dataset", "value_change")
+DATASET_DIR = os.path.join(HERE, "color_dataset", "black")
 PICTURE_CFG_PATH = os.path.join(HERE, "picture_config.json")
-CHAINS_CFG_PATH = os.path.join(HERE, "chains_config_value.json")
+CHAINS_CFG_PATH = os.path.join(HERE, "black.json")
 MANIFEST_PATH = os.path.join(DATASET_DIR, "manifest.json")
 
 

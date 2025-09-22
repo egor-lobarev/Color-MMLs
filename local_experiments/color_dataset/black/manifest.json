@@ -1,0 +1,35 @@
+{
+  "picture_size": {
+    "width": 224,
+    "height": 224
+  },
+  "color_space": "sRGB",
+  "chains": [
+    {
+      "description": "chain fixed H=N C=0 V=None",
+      "variable": "v",
+      "fixed": {
+        "h": "N",
+        "c": 0
+      },
+      "items": [
+        {
+          "index": 1,
+          "H": "N",
+          "C": 0,
+          "V": 0,
+          "notation": "N0",
+          "xyY": {
+            "x": 0.31006,
+            "y": 0.31616,
+            "Y": 0.0
+          }
+        }
+      ],
+      "map_picture_to_variable_value": {
+        "1": 0
+      }
+    }
+  ],
+  "diagram_all": "chains_xy.png"
+}

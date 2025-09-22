@@ -4,3 +4,10 @@ transformers ~= 4.56.1
 accelerate ~=1.10.1
 qwen-vl-utils
 torchvision
+colour-science
+matplotlib
+numpy
+tqdm
+pandas
+scikit-learn
+seaborn

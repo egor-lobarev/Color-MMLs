@@ -1,0 +1,10 @@
+{
+    "chains": [
+      {
+        "name": "black",
+        "variable": "v",
+        "values": [0],
+        "fixed": { "h": "N", "c": 0 }
+      }
+    ]
+  }

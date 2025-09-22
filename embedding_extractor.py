@@ -237,6 +237,20 @@ class Qwen25VLEmbeddingExtractor:
         if "lm_last_hidden" in result:
             result["lm_pooled_mean"] = result["lm_last_hidden"].mean(dim=1, keepdim=True)  # [1, 1, D]
 
+        # Also get the model's generated answer (text) for the given prompt+images
+        try:
+            generated_ids = self.model.generate(
+                **inputs,
+                max_new_tokens=256,
+                do_sample=False
+            )
+            # Decode the full sequence; for simplicity we keep the full decoded text.
+            generated_texts = self.processor.batch_decode(generated_ids, skip_special_tokens=True)
+            result["model_answer"] = generated_texts[0] if len(generated_texts) > 0 else ""
+        except (RuntimeError, ValueError) as _e:
+            # If generation fails for any reason, omit the answer but keep embeddings
+            result["model_answer"] = ""
+
         return result
 
 
@@ -313,6 +327,7 @@ def main():
                     "image": p.as_posix(),
                     "model": args.model,
                     "prompt": args.prompt,
+                    "answer": out.get("model_answer", ""),
                     "saved": saved,
                     "shapes": {k: tensor_shape(out.get(k)) for k in
                                ("vision_pooled_mean","projected_pooled_mean","lm_pooled_mean",
@@ -358,6 +373,7 @@ def main():
     for i, (p, stem) in enumerate(zip(img_paths, stems)):
         img_dir = batch_dir / stem; img_dir.mkdir(parents=True, exist_ok=True)
         saved = {}
+        answer_i = None
 
         if not need_fallback and vtoks is not None:
             s, e = idxs[i]
@@ -405,6 +421,8 @@ def main():
             if args.save_tokens and "lm_last_hidden" in out_i:
                 save_tensor(img_dir / "lm_last_hidden.npy", out_i["lm_last_hidden"])
                 saved["lm_last_hidden"] = (img_dir / "lm_last_hidden.npy").as_posix()
+            # capture per-image answer
+            answer_i = out_i.get("model_answer", "")
 
         # Manifest for this image
         with open(img_dir / "manifest.json", "w", encoding="utf-8") as f:
@@ -412,6 +430,7 @@ def main():
                 "image": p.as_posix(),
                 "model": args.model,
                 "prompt": args.prompt,
+                "answer": answer_i,
                 "saved": saved
             }, f, ensure_ascii=False, indent=2)
 
@@ -423,6 +442,7 @@ def main():
             "batch_size": len(images),
             "model": args.model,
             "prompt": args.prompt,
+            "batch_answer": out_batch.get("model_answer", ""),
             "global_saved": global_saved,
             "images": [p.as_posix() for p in img_paths],
         }, f, ensure_ascii=False, indent=2)
