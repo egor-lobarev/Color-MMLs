@@ -1,0 +1,40 @@
+{
+    "chains": [
+      {
+        "name": "black",
+        "variable": "v",
+        "values": [0],
+        "fixed": { "h": "N", "c": 0 }
+      },
+      {
+        "name": "value_sweep_red_c6",
+        "variable": "v",
+        "values": [3, 4, 5, 6, 7, 8, 9],
+        "fixed": { "h": "2.5R", "c": 6 }
+      },
+      {
+        "name": "value_sweep_yellow_c6",
+        "variable": "v",
+        "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        "fixed": { "h": "5Y", "c": 6 }
+      },
+      {
+        "name": "value_sweep_blue_c6",
+        "variable": "v",
+        "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        "fixed": { "h": "5B", "c": 6 }
+      },
+      {
+        "name": "value_sweep_green_c6",
+        "variable": "v",
+        "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        "fixed": { "h": "5G", "c": 6 }
+      },
+      {
+        "name": "value_sweep_neutral",
+        "variable": "v",
+        "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+        "fixed": { "h": "N", "c": 0 }
+      }
+    ]
+  }

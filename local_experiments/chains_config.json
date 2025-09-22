@@ -1,0 +1,48 @@
+{
+  "chains": [
+    {
+      "name": "chroma_variation_red",
+      "variable": "c",
+      "values": [0, 2, 4, 6, 8, 10, 12],
+      "fixed": { "h": "2.5R", "v": 5 }
+    },
+    {
+      "name": "chroma_variation_yellow",
+      "variable": "c",
+      "values": [0, 2, 4, 6, 8, 10, 12],
+      "fixed": { "h": "5Y", "v": 5 }
+    },
+    {
+      "name": "chroma_variation_blue",
+      "variable": "c",
+      "values": [0, 2, 4, 6, 8, 10, 12],
+      "fixed": { "h": "5B", "v": 5 }
+    },
+    {
+      "name": "chroma_variation_green",
+      "variable": "c",
+      "values": [0, 2, 4, 6, 8, 10, 12],
+      "fixed": { "h": "5G", "v": 5 }
+    },
+    {
+      "name": "chroma_variation_purple",
+      "variable": "c",
+      "values": [0, 2, 4, 6, 8, 10, 12],
+      "fixed": { "h": "5P", "v": 5 }
+    },
+
+    {
+      "name": "value_variation_yellow",
+      "variable": "v",
+      "values": [0, 2, 3, 4, 5, 6, 7, 8],
+      "fixed": { "h": "5Y", "c": 6 }
+    },
+
+    {
+      "name": "hue_variation_fixed_vc",
+      "variable": "h",
+      "values": ["2.5R", "5R", "7.5R", "10R", "2.5YR", "5YR", "7.5YR", "10YR", "2.5Y", "5Y", "7.5Y", "10Y"],
+      "fixed": { "c": 6, "v": 5 }
+    }
+  ]
+}

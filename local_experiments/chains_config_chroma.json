@@ -1,0 +1,40 @@
+{
+    "chains": [
+      {
+            "name": "black",
+            "variable": "v",
+            "values": [0, 1],
+            "fixed": { "h": "N", "c": 0 }
+      },
+      {
+        "name": "chroma_sweep_red_v5",
+        "variable": "c",
+        "values": [0, 2, 4, 6, 8, 10, 12, 14],
+        "fixed": { "h": "2.5R", "v": 5 }
+      },
+      {
+        "name": "chroma_sweep_yellow_v5",
+        "variable": "c",
+        "values": [0, 2, 4, 6, 8, 10, 12, 14],
+        "fixed": { "h": "5Y", "v": 5 }
+      },
+      {
+        "name": "chroma_sweep_blue_v5",
+        "variable": "c",
+        "values": [0, 2, 4, 6, 8, 10, 12, 14],
+        "fixed": { "h": "5B", "v": 5 }
+      },
+      {
+        "name": "chroma_sweep_green_v5",
+        "variable": "c",
+        "values": [0, 2, 4, 6, 8, 10, 12, 14],
+        "fixed": { "h": "5G", "v": 5 }
+      },
+      {
+        "name": "chroma_sweep_purple_v5",
+        "variable": "c",
+        "values": [0, 2, 4, 6, 8, 10, 12, 14],
+        "fixed": { "h": "5P", "v": 5 }
+      }
+    ]
+  }
