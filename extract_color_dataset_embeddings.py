@@ -44,10 +44,49 @@ def main() -> None:
     out_root = out_root_root / subfolder_name
     out_root.mkdir(parents=True, exist_ok=True)
 
+    # Load dataset manifest to enrich embedding manifests with color metadata
+    dataset_manifest_path = dataset_dir / "manifest.json"
+    picture_size: Dict[str, int] = {}
+    diagram_all_name: str = ""
+    index_to_meta: Dict[str, Dict] = {}
+    if dataset_manifest_path.exists():
+        try:
+            with open(dataset_manifest_path, "r", encoding="utf-8") as f:
+                ds_manifest = json.load(f)
+            # picture size
+            if isinstance(ds_manifest.get("picture_size"), dict):
+                picture_size = {
+                    "width": ds_manifest["picture_size"].get("width"),
+                    "height": ds_manifest["picture_size"].get("height"),
+                }
+            # diagram image file to skip
+            if isinstance(ds_manifest.get("diagram_all"), str):
+                diagram_all_name = ds_manifest["diagram_all"]
+            # Build index -> {notation, xyY}
+            for chain in ds_manifest.get("chains", []):
+                for item in chain.get("items", []):
+                    idx = str(item.get("index"))
+                    if not idx or idx == "None":
+                        continue
+                    index_to_meta[idx] = {
+                        "notation": item.get("notation"),
+                        "xyY": item.get("xyY"),
+                    }
+        except Exception:
+            # If dataset manifest is malformed, proceed without enrichment
+            picture_size = {}
+            diagram_all_name = ""
+            index_to_meta = {}
+
     valid_exts = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".tif", ".tiff"}
 
     # Collect images from the dataset subfolder (non-recursive)
-    img_paths: List[Path] = [p for p in sorted(dataset_dir.iterdir()) if p.suffix.lower() in valid_exts]
+    img_paths: List[Path] = [
+        p for p in sorted(dataset_dir.iterdir())
+        if p.suffix.lower() in valid_exts
+        and p.name != "chains_xy.png"
+        and (not diagram_all_name or p.name != diagram_all_name)
+    ]
     if not img_paths:
         raise SystemExit("No images found in dataset folder. Supported: " + ", ".join(sorted(valid_exts)))
 
@@ -87,6 +126,7 @@ def main() -> None:
             saved = save_all(img_dir, out, save_tokens)
 
             with open(img_dir / "manifest.json", "w", encoding="utf-8") as f:
+                meta = index_to_meta.get(stem, {})
                 json.dump({
                     "image": p.as_posix(),
                     "model": model_name,
@@ -95,7 +135,10 @@ def main() -> None:
                     "saved": saved,
                     "shapes": {k: tensor_shape(out.get(k)) for k in
                                ("vision_pooled_mean","projected_pooled_mean","lm_pooled_mean",
-                                "vision_tokens","projected_tokens","lm_last_hidden","visual_token_lens")}
+                                "vision_tokens","projected_tokens","lm_last_hidden","visual_token_lens")},
+                    "picture_size": picture_size or None,
+                    "munsell_spec": meta.get("notation"),
+                    "xyY": meta.get("xyY"),
                 }, f, ensure_ascii=False, indent=2)
 
             console["items"].append({"image": p.as_posix(), "dir": (out_root / stem).as_posix(), "saved": saved})
@@ -201,12 +244,16 @@ def main() -> None:
             answer_i = out_i.get("model_answer", "")
 
         with open(img_dir / "manifest.json", "w", encoding="utf-8") as f:
+            meta = index_to_meta.get(stem, {})
             json.dump({
                 "image": p.as_posix(),
-                "model": args.model,
-                "prompt": args.prompt,
+                "model": model_name,
+                "prompt": prompt,
                 "answer": answer_i,
-                "saved": saved
+                "saved": saved,
+                "picture_size": picture_size or None,
+                "munsell_spec": meta.get("notation"),
+                "xyY": meta.get("xyY"),
             }, f, ensure_ascii=False, indent=2)
 
         console["items"].append({"image": p.as_posix(), "dir": img_dir.as_posix(), "saved": saved})
@@ -214,8 +261,8 @@ def main() -> None:
     with open(batch_dir / "manifest.json", "w", encoding="utf-8") as f:
         json.dump({
             "batch_size": len(images),
-                "model": model_name,
-                "prompt": prompt,
+            "model": model_name,
+            "prompt": prompt,
             "batch_answer": out_batch.get("model_answer", ""),
             "global_saved": global_saved,
             "images": [p.as_posix() for p in img_paths],
