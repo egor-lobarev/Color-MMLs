@@ -76,7 +76,7 @@ class Qwen25VLEmbeddingExtractor:
         self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
             model_name,
             torch_dtype=self.torch_dtype,
-            device_map="auto" if self.device == "cuda" else None,
+            device_map="auto" if self.device == "cuda:0" else None,
             trust_remote_code=True
         ).to(self.device)
 
