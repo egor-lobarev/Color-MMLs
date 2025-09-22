@@ -1,78 +1,165 @@
 # Color-MMLs
 
-В данном проекте предлагается исследовать цветовое пространство у нейросетевых моделей формата VLM - vision language model и сравнить с GT данными, полученными в результате психофизических испытаний с человеком. 
+This project investigates color space representations in Vision-Language Models (VLMs) and compares them with ground truth data obtained from psychophysical experiments with humans.
 
-В качестве VLM модели в начале берём Qwen-2.5VL. Инструкцию по запуску можно найти по ссылке https://github.com/QwenLM/Qwen2.5-VL?ysclid=mdaeaktv2u49645692.
+We use **Qwen-2.5VL** as our primary VLM model. Setup instructions can be found at: https://github.com/QwenLM/Qwen2.5-VL
 
-В качестве датасета с большими цветовыми расстояниями предлагается взять открытые данные Мансела (Munsell color system). Изначально система была разработана в 1940-м году. В её основу легло введение таких хорошо интерпретируемых терминов, как H (hue -- оттенок), C (croma -- насыщенность) и V (value -- яркость)). По результатам психофизических исследований были выбраны цепочки Мансела такие, что воспринимаемая разница между цветами одинакова. В отличие от пороговых измерений расстояния между цветами данный датасет позволяет сравнивать удаленные цвета.
-Так например разница между парами цветов по munsell системе H=2.5R	C=1	V=8, H=2.5R	C=2	V=8 и H=2.5R	C=4	V=8 и H=2.5R	C=5	V=8 должна восприниматься одинаково.
-Однако расстояние по С V и H лучше не сравнивать, однородность там скорее всего теряется. Стоит сравнивать только цепочки, где меняется только одно значения - H, С или V.
-В изначальном датасете были множественные ошибки. Самую актуальную версию исправленного датасета можно найти по ссылке https://github.com/iitpvisionlab/mrr-revised  -- Munsel v3.2.
+## Dataset: Munsell Color System
 
-В таблице представлен перевод цветов из системы munsell в цветовые координаты xyY (search for cromaticity diagram). C помощью open-source библиотеки colour-scince цвета можно перевести из этой системы в какую угодно для отображения. Например: xyY -> XYZ -> sRGB -> clip[0,1] -> matplotlib.
+We use the **Munsell color system** as our dataset with well-defined perceptual color distances. Originally developed in the 1940s, the system is based on three interpretable terms:
+- **H (Hue)** - color shade
+- **C (Chroma)** - color saturation  
+- **V (Value)** - color brightness
 
-# Описание задания 
+Based on psychophysical research, Munsell chains were designed such that the perceived difference between colors is uniform. Unlike threshold measurements of color distances, this dataset allows comparison of distant colors.
 
-- Взять Clip, а в идеале Vit используемого Qwen и сравнить эмбеддинги цветов из цепочек мансела - проверить одинаковые расстояния между векторами или нет. Предлагается взять угол между векторами и смотреть на дисперсию, чтобы оценить неодинаковость эмбеддингов цветов из цепочки. Конечный результат - сравнение отдельно по цепочкам H, C и V.
-- Повторить аналогичный эксперимент с Qwen 7B или 30B. Здесь постановка эксперимента может быть разная. Предлагается задать промптом модель воспринимать цвета меньше основываясь на числах кодировки цвета и больше на её внутреннем представлении. Пример промпта будет ниже. Конечно чем больше модель, тем более богатым будет её внутренне представление и скорее тем ближе к человеческому, однако на сервере предлагается запустить ту модель, которая там запускается. Либо можно провести эксперимент с большой моделью по API Qwen. Эксперимент ставится следующим образом: предлагается представлять модели пары цветов из цепочки и нет и спрашивать, какие лежат ближе по разнице друг к другу. Постановка эксперимента может быть изменениа, с обоснованием.
+For example, the perceived difference between these Munsell color pairs should be equal:
+- H=2.5R C=1 V=8 ↔ H=2.5R C=2 V=8
+- H=2.5R C=2 V=8 ↔ H=2.5R C=4 V=8  
+- H=2.5R C=4 V=8 ↔ H=2.5R C=5 V=8
 
-Пример промпта:
+**Important**: Distances across different parameters (H, C, V) should not be compared directly as uniformity is likely lost. Only compare within chains where only one parameter changes.
 
-Imagine you are a human with normal vision and typical color perception. You are presented with two colors, and your task is to intuitively feel the difference between them, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. As you process these colors in your hidden layers, think about how they might evoke different sensations, moods, or associations. Based on this abstract feeling answer the folowing question: ...
+The original dataset contained multiple errors. The most current corrected version can be found at: https://github.com/iitpvisionlab/mrr-revised (Munsell v3.2)
 
-# Возможная постановка эксперимента
+Colors are converted from Munsell system to xyY chromaticity coordinates. Using the open-source `colour-science` library, colors can be converted to any display format: xyY → XYZ → sRGB → clip[0,1] → matplotlib.
 
-### 1. Подготовка пар цветов
+## Current Experiments: Embedding Analysis
 
-- Берутся цепочки цветов Мансела, где изменяется только один параметр: **H (оттенок), C (насыщенность) или V (яркость)**.
-- Формируются **пары соседних цветов** в цепочке (например, `H=2.5R C=1 V=8` и `H=5R C=1 V=8`).
-- Также формируются **контрольные пары** — цвета из разных цепочек, но с тем же числовым расстоянием по Munsell, но различными по восприятию.
+### 1. Vision-Language Model Embedding Extraction
 
-### 2. Запрос к модели
+We extract embeddings from different components of Qwen-2.5VL:
+- **Vision embeddings** (pre-LM): Raw visual features from the vision encoder
+- **Language Model embeddings** (post-vision): Semantic representations after multimodal projection
+- **Visual token lengths**: Number of visual tokens per image
 
-Модели задаётся задача сравнения пар цветов с помощью промпта, например:
+### 2. Embedding Analysis Methods
 
-Пример 1 пары:
+**PCA Analysis:**
+- Determine how many components describe the data dispersion
+- Analyze explained variance ratios
+- Compare dimensionality requirements across embedding types
 
-> **"You are a human with normal vision. Compare the following two pairs of colors and tell which pair looks more similar in terms of perceived color difference. Focus not on numbers, but on how different they feel to you."**
+**t-SNE Visualization:**
+- 2D projection of high-dimensional embeddings
+- Color-coded by Munsell attributes (H, C, V)
+- Identify clustering patterns and color relationships
 
-Пример:
+**Cross-Embedding Correlation:**
+- Cosine similarity between Vision and LM embeddings
+- Per-sample analysis of embedding alignment
+- Assessment of how well different model components agree on color representations
+
+### 3. Key Findings
+
+**Vision-LM Embedding Relationship:**
+- Very low cosine similarity (~0.042) between Vision and LM embeddings
+- Indicates orthogonal representations: Vision captures visual properties, LM captures semantic properties
+- This separation is expected and beneficial for multimodal understanding
+
+**Chroma Progression Analysis:**
+- Step distance vs embedding distance correlations
+- Evaluation of how well embeddings capture Munsell chroma progressions
+- Comparison across different hue families (2.5R, 5Y, 5B, 5G, 5P)
+
+## Future Experiments: Color Pair Comparisons
+
+### 1. Experimental Setup
+
+**Color Pair Preparation:**
+- Extract Munsell chains where only one parameter changes: **H (hue), C (chroma), or V (value)**
+- Create **adjacent color pairs** within chains (e.g., `H=2.5R C=1 V=8` and `H=5R C=1 V=8`)
+- Generate **control pairs** — colors from different chains with same numerical Munsell distance but different perceptual properties
+
+### 2. Model Comparison Tasks
+
+**Prompt-based Color Comparison:**
 ```
+Imagine you are a human with normal vision and typical color perception. You are presented with two colors, and your task is to intuitively feel the difference between them, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. As you process these colors in your hidden layers, think about how they might evoke different sensations, moods, or associations. Based on this abstract feeling answer the following question: ...
+```
+
+**Example Comparison Task:**
+```
+You are a human with normal vision. Compare the following two pairs of colors and tell which pair looks more similar in terms of perceived color difference. Focus not on numbers, but on how different they feel to you.
+
 Pair A: Color 1 - H=2.5R C=2 V=8, Color 2 - H=5R C=2 V=8  
 Pair B: Color 1 - H=2.5R C=2 V=8, Color 2 - H=2.5R C=4 V=8  
 Which pair looks more similar in terms of perceived difference?
 ```
 
-Для 3-х и более цветов модель можно просить выстраивать их в ряд по схожести и затем сравниваться с Манселлом.
+### 3. Color Topology Determination
 
-### 3. Повторение для множества пар
+**Ranking Tasks:**
+- Present 3+ colors and ask model to rank by similarity
+- Compare rankings with Munsell ground truth
+- Analyze consistency across different hue families
 
-- Эксперимент повторяется для множества пар из разных цепочек.
-- Можно использовать **баллы схожести** (например, вероятность выбора одной из пар) или попросить модель **ранжировать** несколько пар по степени различия.
+**Distance Estimation:**
+- Ask model to estimate relative distances between color pairs
+- Compare with known Munsell perceptual distances
+- Identify systematic biases in model's color perception
 
----
+### 4. Validation Against Munsell Ground Truth
 
-# Валидация на Munsell
+**Perceptual Uniformity Test:**
+- Known: Adjacent colors in Munsell chains have equal perceived distances
+- Test: Does the model correctly identify these uniform progressions?
+- Measure: Percentage of responses consistent with Munsell GT
 
-### 1. Сравнение с ground truth
+**Distance Proportionality:**
+- Test if model maintains proportional relationships (2-step distance = 2× 1-step distance)
+- Use Spearman correlation between predicted and actual distance rankings
+- Focus on **V (value) chains** as they are most perceptually uniform
 
-- Известно, что в Munsell-цепочках **воспринимаемое расстояние между соседними цветами одинаково**.
-- Если модель **правильно понимает перцептивные различия**, то:
-  - Она должна считать **соседние цвета в одной цепочке** более похожими друг на друга, чем цвета из разных цепочек.
-  - Она должна **сохранять пропорциональность** воспринимаемых различий (например, цвета на расстоянии 2 шага — вдвое "дальше", чем на расстоянии 1).
+## Research Goals
 
-### 2. Анализ согласованности
+### Primary Objective
+Develop methods to evaluate current embedding spaces and VLM color representations for their correspondence to perceptual uniformity using the Munsell dataset.
 
-- Считается **процент согласованных ответов** с Munsell GT.
-- Можно использовать **метрики ранжирования** (например, **Spearman correlation** между предсказанными и реальными рангами различий).
+### Key Research Questions
+1. **Embedding Space Analysis**: How well do VLM embeddings capture perceptual color relationships?
+2. **Component Comparison**: How do different model components (Vision vs LM) represent color information?
+3. **Perceptual Alignment**: To what extent do VLM color representations align with human perceptual uniformity?
+4. **Color Topology**: Can we determine the internal color topology of VLMs through systematic comparison tasks?
 
-## В экспериментах рекомендуется рассматривать цепочки по V - они наиболее перцптивно равномерны.
+### Expected Outcomes
+- Quantitative metrics for evaluating VLM color representations
+- Understanding of how different model components process color information
+- Framework for comparing VLM color perception with human psychophysical data
+- Insights into the internal color topology of large multimodal models
 
-# Конечная цель
-Конечной целью является получение способа провери текущего пространства эмбеддингов или представление VLM о цветах и их соответсвие перцептивной однородности на примере датасета munsell.
+## Technical Implementation
 
-# Дополнительные материалы 
+### Current Status
+- ✅ Embedding extraction from Qwen-2.5VL components
+- ✅ PCA and t-SNE analysis of color embeddings
+- ✅ Cross-embedding correlation analysis
+- ✅ Chroma progression analysis
 
-С дополнительными материалами по колориметрии можно ознакомится на записях лекций от Ершова Егора, нашего заведующего лабороторией.
+### Next Steps
+- 🔄 Color pair comparison experiments
+- 🔄 Prompt-based color similarity tasks
+- 🔄 Ranking and distance estimation experiments
+- 🔄 Validation against Munsell ground truth
+
+## Additional Resources
+
+For additional materials on colorimetry, refer to lecture recordings by Egor Ershov, head of our laboratory:
 
 https://disk.yandex.ru/d/Ke9peZ57RO5DDA
+
+## Repository Structure
+
+```
+Color-MMLs/
+├── embeddings/                    # Extracted embeddings
+│   ├── chroma_change/            # Chroma variation embeddings
+│   └── [other_datasets]/         # Other color datasets
+├── local_experiments/            # Experimental configurations
+│   ├── color_dataset/           # Generated color datasets
+│   └── embedding_config.json    # Embedding extraction config
+├── embedding_extractor.py        # Main embedding extraction script
+├── extract_color_dataset_embeddings.py  # Dataset-specific extraction
+├── embeddings.ipynb             # Analysis notebook
+└── requirements.txt             # Python dependencies
+```
