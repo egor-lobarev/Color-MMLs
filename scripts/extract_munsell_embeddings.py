@@ -94,6 +94,7 @@ def main() -> None:
     prompt = cfg.get("prompt", "Describe the image(s).")
     save_tokens = bool(cfg.get("save_tokens", False))
     restart_model_per_image = bool(cfg.get("restart_model_per_image", False))
+    init_prompt = cfg.get("init_prompt", None)
 
     extractor = None
     console = {"mode": "per-image", "items": []}
@@ -107,7 +108,7 @@ def main() -> None:
                     torch.cuda.empty_cache()
             extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device)
         elif extractor is None:
-            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device)
+            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, system_prompt=init_prompt)
 
         out = extractor.extract([img], prompt=prompt)
         img_dir = out_root / stem

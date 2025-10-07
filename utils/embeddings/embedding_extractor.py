@@ -37,6 +37,10 @@ from utils.embeddings.images_loader import (
     save_tensor
 )
 
+with open((Path(__file__).parent / "configs" / "picture_config.json"), "r", encoding="utf-8") as f:
+    pic_cfg = json.load(f)
+min_pic_size = min(pic_cfg.get("height"), pic_cfg.get("height"))
+max_pic_size = max(pic_cfg.get("height"), pic_cfg.get("height"))
 
 class Qwen25VLEmbeddingExtractor:
     """
@@ -69,14 +73,14 @@ class Qwen25VLEmbeddingExtractor:
     # extractor.close()
     """
 
-    def __init__(self, model_name="Qwen/Qwen2.5-VL-7B-Instruct", device=None, torch_dtype=None):
+    def __init__(self, model_name="Qwen/Qwen2.5-VL-7B-Instruct", device=None, torch_dtype=None, system_prompt=None):
         # Pick a sensible device automatically; allow manual override via CLI
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         # Prefer bf16 on GPU when available to reduce memory without much quality impact
         self.torch_dtype = torch_dtype or (torch.bfloat16 if torch.cuda.is_available() else torch.float32)
 
         # The processor handles both text and images; trust_remote_code is needed for Qwen2.5-VL processors
-        self.processor = AutoProcessor.from_pretrained(model_name, trust_remote_code=True)
+        self.processor = AutoProcessor.from_pretrained(model_name, min_pixels=min_pic_size, max_pixels=max_pic_size trust_remote_code=True)
 
         # Load model; on CPU we avoid device_map="auto". trust_remote_code for Qwen-specific model code.
         self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
@@ -85,6 +89,14 @@ class Qwen25VLEmbeddingExtractor:
             device_map="cuda:0",
             trust_remote_code=True
         ).to(self.device)
+        
+        # Store system prompt
+        self.system_prompt = system_prompt
+        self.system_inputs = None
+        
+        if system_prompt:
+            self._precompute_system_tokens()
+        
 
         # Place to store hooked activations
         self.captures: Dict[str, torch.Tensor] = {}
@@ -161,6 +173,31 @@ class Qwen25VLEmbeddingExtractor:
         for part in path.split("."):
             obj = getattr(obj, part)
         return obj
+    
+    def _precompute_system_tokens(self):
+        """Precompute system prompt tokens once at initialization"""
+        system_messages = [{
+            "role": "system", 
+            "content": [{"type": "text", "text": self.system_prompt}]
+        }]
+        
+        # Convert system prompt to tokens once
+        system_text = self.processor.apply_chat_template(
+            system_messages,
+            add_generation_prompt=False,
+            tokenize=False
+        )
+        
+        # Tokenize system prompt once
+        self.system_inputs = self.processor(
+            text=[system_text],
+            images=None,  # No images for system prompt
+            return_tensors="pt"
+        )
+        
+        # Move to device
+        self.system_inputs = {k: v.to(self.device) if torch.is_tensor(v) else v 
+                            for k, v in self.system_inputs.items()}
 
 
     def preprocess(self, images: List[Image.Image], prompt: str = "Describe the images.") -> Dict[str, torch.Tensor]:
@@ -173,15 +210,24 @@ class Qwen25VLEmbeddingExtractor:
         """
 
         assert isinstance(images, list) and len(images) > 0, "Provide a non-empty list of PIL images."
+        
+        messages = []
+        
+        # Add system message if system_prompt is set
+        if self.system_prompt:
+            messages.append({
+                "role": "system", 
+                "content": [{"type": "text", "text": self.system_prompt}]
+            })
 
-        # One user turn containing N images + one text chunk
-        messages = [{
+        # Add user message with images and prompt
+        messages.append({
             "role": "user",
             "content": (
-                    [{"type": "image", "image": im} for im in images] +
-                    [{"type": "text", "text": prompt}]
+                [{"type": "image", "image": im} for im in images] +
+                [{"type": "text", "text": prompt}]
             )
-        }]
+        })
 
         # IMPORTANT: text only here (no images kwarg)
         chat_text = self.processor.apply_chat_template(
