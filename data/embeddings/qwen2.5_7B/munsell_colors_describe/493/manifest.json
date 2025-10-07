@@ -1,0 +1,59 @@
+{
+  "image": "data/munsell_colors/pics/493.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid light yellow color. It appears uniform and does not contain any gradients, patterns, or variations in shade.",
+  "saved": {
+    "vision_pooled_mean": "embeddings/munsell_colors/493/vision_pooled_mean.npy",
+    "lm_pooled_mean": "embeddings/munsell_colors/493/lm_pooled_mean.npy",
+    "visual_token_lens": "embeddings/munsell_colors/493/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0Y",
+    "V": 8,
+    "C": 8,
+    "x": 0.379,
+    "y": 0.424,
+    "Y": 52.8,
+    "picture": "493.png",
+    "R": 0.795056597879,
+    "G": 0.763198456949,
+    "B": 0.45881380464
+  },
+  "munsell_spec": "10.0Y",
+  "xyY": {
+    "x": 0.379,
+    "y": 0.424,
+    "Y": 52.8
+  },
+  "RGB": {
+    "R": 0.795056597879,
+    "G": 0.763198456949,
+    "B": 0.45881380464
+  }
+}
