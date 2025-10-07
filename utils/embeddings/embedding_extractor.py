@@ -19,6 +19,7 @@ CLI usage examples:
 
 """
 
+import os
 import re
 import json
 from pathlib import Path
@@ -36,6 +37,10 @@ from utils.embeddings.images_loader import (
     tensor_shape,
     save_tensor
 )
+
+# Disable transformers warnings
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 with open((Path(__file__).parent / "configs" / "picture_config.json"), "r", encoding="utf-8") as f:
     pic_cfg = json.load(f)
@@ -78,9 +83,8 @@ class Qwen25VLEmbeddingExtractor:
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         # Prefer bf16 on GPU when available to reduce memory without much quality impact
         self.torch_dtype = torch_dtype or (torch.bfloat16 if torch.cuda.is_available() else torch.float32)
-
         # The processor handles both text and images; trust_remote_code is needed for Qwen2.5-VL processors
-        self.processor = AutoProcessor.from_pretrained(model_name, min_pixels=min_pic_size, max_pixels=max_pic_size trust_remote_code=True)
+        self.processor = AutoProcessor.from_pretrained(model_name, min_pixels=min_pic_size**2, max_pixels=max_pic_size**2, trust_remote_code=True)
 
         # Load model; on CPU we avoid device_map="auto". trust_remote_code for Qwen-specific model code.
         self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
