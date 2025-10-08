@@ -50,9 +50,8 @@ def main() -> None:
     if not pics_dir.exists() or not pics_dir.is_dir():
         raise SystemExit(f"Pics directory not found or not a directory: {pics_dir.as_posix()}")
 
-    subfolder_name = csv_path.parent.name
     out_root_root = Path(cfg.get("outdir_root", "embeddings")).expanduser()
-    out_root = out_root_root / subfolder_name
+    out_root = out_root_root
     out_root.mkdir(parents=True, exist_ok=True)
 
     # Read CSV with pandas and build image list
@@ -120,6 +119,8 @@ def main() -> None:
             json.dump({
                 "image": p.as_posix(),
                 "model": model_name,
+                "init_prompt" : init_prompt,
+                "restart_model_per_image": restart_model_per_image,
                 "prompt": prompt,
                 "answer": out.get("model_answer", ""),
                 "saved": saved,

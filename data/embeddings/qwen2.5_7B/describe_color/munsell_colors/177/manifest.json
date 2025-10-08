@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/177.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of light orange. It appears to be a soft and warm hue, reminiscent of a sunset or a ripe peach. There are no variations in color or texture within the image; it is a single, consistent color across its entirety.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/177/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/177/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/177/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0R",
+    "V": 6,
+    "C": 10,
+    "x": 0.475,
+    "y": 0.347,
+    "Y": 22.4,
+    "picture": "177.png",
+    "R": 0.793002694713,
+    "G": 0.392767354891,
+    "B": 0.336865977811
+  },
+  "munsell_spec": "10.0R",
+  "xyY": {
+    "x": 0.475,
+    "y": 0.347,
+    "Y": 22.4
+  },
+  "RGB": {
+    "R": 0.793002694713,
+    "G": 0.392767354891,
+    "B": 0.336865977811
+  }
+}

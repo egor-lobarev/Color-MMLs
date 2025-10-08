@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/978.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of dark blue. It appears to be a deep, rich blue without any variations in hue or tone.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/978/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/978/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/978/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "5.0B",
+    "V": 4,
+    "C": 2,
+    "x": 0.279,
+    "y": 0.297,
+    "Y": 10.7,
+    "picture": "978.png",
+    "R": 0.32288484583,
+    "G": 0.365023732413,
+    "B": 0.417184389378
+  },
+  "munsell_spec": "5.0B",
+  "xyY": {
+    "x": 0.279,
+    "y": 0.297,
+    "Y": 10.7
+  },
+  "RGB": {
+    "R": 0.32288484583,
+    "G": 0.365023732413,
+    "B": 0.417184389378
+  }
+}

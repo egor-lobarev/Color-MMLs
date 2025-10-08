@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/1192.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of blue. It appears to be a light or pastel blue, reminiscent of a clear sky on a calm day. There are no variations in hue, saturation, or tone within the image; it is a single, consistent color covering the entire frame.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1192/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1192/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1192/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 6,
+    "C": 8,
+    "x": 0.252,
+    "y": 0.24,
+    "Y": 22.8,
+    "picture": "1192.png",
+    "R": 0.46692424791,
+    "G": 0.501848035478,
+    "B": 0.7199532837
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.252,
+    "y": 0.24,
+    "Y": 22.8
+  },
+  "RGB": {
+    "R": 0.46692424791,
+    "G": 0.501848035478,
+    "B": 0.7199532837
+  }
+}

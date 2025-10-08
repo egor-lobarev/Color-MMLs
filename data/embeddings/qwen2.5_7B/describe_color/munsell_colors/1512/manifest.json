@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/1512.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of light purple. It appears to be a soft and pastel-like hue, often associated with calmness or serenity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1512/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1512/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1512/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "7.5P",
+    "V": 7,
+    "C": 4,
+    "x": 0.306,
+    "y": 0.275,
+    "Y": 36.8,
+    "picture": "1512.png",
+    "R": 0.723185589271,
+    "G": 0.598513654699,
+    "B": 0.761360371936
+  },
+  "munsell_spec": "7.5P",
+  "xyY": {
+    "x": 0.306,
+    "y": 0.275,
+    "Y": 36.8
+  },
+  "RGB": {
+    "R": 0.723185589271,
+    "G": 0.598513654699,
+    "B": 0.761360371936
+  }
+}

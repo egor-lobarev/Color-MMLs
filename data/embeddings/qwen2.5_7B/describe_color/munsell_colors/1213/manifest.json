@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/1213.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid black color. There are no variations or gradients within the color, and it appears uniform across the entire area of the image.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1213/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1213/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/1213/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 1,
+    "C": 8,
+    "x": 0.222,
+    "y": 0.157,
+    "Y": 0.74,
+    "picture": "1213.png",
+    "R": 0.0856572205971,
+    "G": 0.0605952374188,
+    "B": 0.1897879968
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.222,
+    "y": 0.157,
+    "Y": 0.74
+  },
+  "RGB": {
+    "R": 0.0856572205971,
+    "G": 0.0605952374188,
+    "B": 0.1897879968
+  }
+}
