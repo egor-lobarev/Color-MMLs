@@ -147,19 +147,3 @@ Develop methods to evaluate current embedding spaces and VLM color representatio
 For additional materials on colorimetry, refer to lecture recordings by Egor Ershov, head of our laboratory:
 
 https://disk.yandex.ru/d/Ke9peZ57RO5DDA
-
-## Repository Structure
-
-```
-Color-MMLs/
-├── embeddings/                    # Extracted embeddings
-│   ├── chroma_change/            # Chroma variation embeddings
-│   └── [other_datasets]/         # Other color datasets
-├── local_experiments/            # Experimental configurations
-│   ├── color_dataset/           # Generated color datasets
-│   └── embedding_config.json    # Embedding extraction config
-├── embedding_extractor.py        # Main embedding extraction script
-├── extract_color_dataset_embeddings.py  # Dataset-specific extraction
-├── embeddings.ipynb             # Analysis notebook
-└── requirements.txt             # Python dependencies
-```

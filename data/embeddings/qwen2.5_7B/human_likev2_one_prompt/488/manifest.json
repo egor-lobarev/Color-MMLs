@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/488.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "Imagine you are experiencing color through the lens of human vision. Before you analyze or name a color, you perceive it through a biological system with specific mechanisms. Consider these processes as you look at a solid color: Adaptation & Constancy: Your eyes automatically adjust to the light. Is this a color you'd see in the bright midday sun, requiring a slight squint? Or is it a color of dusk, where your rods are more active and your perception shifts? Your brain tries to see the 'true' color of the object despite the lighting. Spatial Perception & Context: Colors are not isolated.  Consider the role of your fovea for sharp, central color detail versus your peripheral vision's blurrier, motion-sensitive take. Perceptual Uniqueness: This isn't about RGB values. It's about the raw, pre-cognitive experience. Is it a 'loud' color that seems to generate its own light, or a 'quiet' one that absorbs the light around it? Does it feel dense and opaque, or thin and translucent? Your task is to begin with these physiological and perceptual sensations, and then let them evolve into an intuitive, abstract description. Describe the color not by what it is, but by how it behaves and feels to a human sensory system. What transient mood, fleeting sensation, or half-remembered memory does it evoke?",
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "system\nImagine you are experiencing color through the lens of human vision. Before you analyze or name a color, you perceive it through a biological system with specific mechanisms. Consider these processes as you look at a solid color: Adaptation & Constancy: Your eyes automatically adjust to the light. Is this a color you'd see in the bright midday sun, requiring a slight squint? Or is it a color of dusk, where your rods are more active and your perception shifts? Your brain tries to see the 'true' color of the object despite the lighting. Spatial Perception & Context: Colors are not isolated.  Consider the role of your fovea for sharp, central color detail versus your peripheral vision's blurrier, motion-sensitive take. Perceptual Uniqueness: This isn't about RGB values. It's about the raw, pre-cognitive experience. Is it a 'loud' color that seems to generate its own light, or a 'quiet' one that absorbs the light around it? Does it feel dense and opaque, or thin and translucent? Your task is to begin with these physiological and perceptual sensations, and then let them evolve into an intuitive, abstract description. Describe the color not by what it is, but by how it behaves and feels to a human sensory system. What transient mood, fleeting sensation, or half-remembered memory does it evoke?\nuser\nDescribe the color.\n addCriterion\nThe color in the image is a soft, muted yellow. It appears to be a pastel shade, almost like a pale lemon or a light buttercream frosting. The hue is gentle and non-distracting, suggesting a calm and soothing atmosphere. It doesn't have any strong contrasts or sharp edges; instead, it blends softly into the surrounding area.\n\nWhen I look at this color, it evokes feelings of nostalgia, perhaps reminiscent of a warm summer day spent outdoors. It could also remind me of the soft glow of candlelight or the gentle warmth of a sunrise or sunset. The color feels warm and inviting, almost like a hug from the sun itself. It's a color that makes me feel relaxed and at ease, as if everything is just right and nothing needs to change.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/human_likev2_one_prompt/488/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/human_likev2_one_prompt/488/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/human_likev2_one_prompt/488/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      358,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0Y",
+    "V": 7,
+    "C": 8,
+    "x": 0.389,
+    "y": 0.439,
+    "Y": 38.1,
+    "picture": "488.png",
+    "R": 0.690045933007,
+    "G": 0.660488734417,
+    "B": 0.347272341745
+  },
+  "munsell_spec": "10.0Y",
+  "xyY": {
+    "x": 0.389,
+    "y": 0.439,
+    "Y": 38.1
+  },
+  "RGB": {
+    "R": 0.690045933007,
+    "G": 0.660488734417,
+    "B": 0.347272341745
+  }
+}
