@@ -11,4 +11,4 @@ tqdm
 pandas
 scikit-learn
 seaborn
--e
+-e .

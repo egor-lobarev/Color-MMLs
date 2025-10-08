@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/58.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of dark brown. It appears to be a deep, rich brown color that could be described as a rich, earthy tone. There are no variations or gradients within this single color.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/58/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/58/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/58/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 2,
+    "C": 4,
+    "x": 0.42,
+    "y": 0.297,
+    "Y": 2.35,
+    "picture": "58.png",
+    "R": 0.272613834175,
+    "G": 0.116694512725,
+    "B": 0.154796176436
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.42,
+    "y": 0.297,
+    "Y": 2.35
+  },
+  "RGB": {
+    "R": 0.272613834175,
+    "G": 0.116694512725,
+    "B": 0.154796176436
+  }
+}

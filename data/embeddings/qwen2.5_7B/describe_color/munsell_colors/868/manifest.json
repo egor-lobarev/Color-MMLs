@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/868.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of blue. It appears to be a medium to dark blue, reminiscent of the color often associated with the sky or the ocean. There are no variations in hue, tone, or texture within the image; it is a single, flat color.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/868/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/868/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/868/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "5.0BG",
+    "V": 5,
+    "C": 2,
+    "x": 0.282,
+    "y": 0.318,
+    "Y": 18.3,
+    "picture": "868.png",
+    "R": 0.395613334967,
+    "G": 0.479537989645,
+    "B": 0.501052486717
+  },
+  "munsell_spec": "5.0BG",
+  "xyY": {
+    "x": 0.282,
+    "y": 0.318,
+    "Y": 18.3
+  },
+  "RGB": {
+    "R": 0.395613334967,
+    "G": 0.479537989645,
+    "B": 0.501052486717
+  }
+}

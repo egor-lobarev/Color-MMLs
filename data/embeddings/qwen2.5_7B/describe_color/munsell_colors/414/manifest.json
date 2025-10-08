@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/414.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of yellow. It appears to be a bright and vivid yellow, reminiscent of the color often associated with sunshine or lemons. There are no variations in hue, saturation, or tone within this single color.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/414/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/414/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/414/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "5.0Y",
+    "V": 6,
+    "C": 10,
+    "x": 0.456,
+    "y": 0.469,
+    "Y": 25.2,
+    "picture": "414.png",
+    "R": 0.65497750322,
+    "G": 0.524048475911,
+    "B": 0.0593963544223
+  },
+  "munsell_spec": "5.0Y",
+  "xyY": {
+    "x": 0.456,
+    "y": 0.469,
+    "Y": 25.2
+  },
+  "RGB": {
+    "R": 0.65497750322,
+    "G": 0.524048475911,
+    "B": 0.0593963544223
+  }
+}

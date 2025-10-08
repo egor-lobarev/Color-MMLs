@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/237.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of light orange. It appears to be a soft and warm hue, reminiscent of a sunset or a bright, sunny day.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/237/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/237/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/237/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 7,
+    "C": 8,
+    "x": 0.429,
+    "y": 0.36,
+    "Y": 35.9,
+    "picture": "237.png",
+    "R": 0.870127568284,
+    "G": 0.554161781758,
+    "B": 0.452892842553
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.429,
+    "y": 0.36,
+    "Y": 35.9
+  },
+  "RGB": {
+    "R": 0.870127568284,
+    "G": 0.554161781758,
+    "B": 0.452892842553
+  }
+}

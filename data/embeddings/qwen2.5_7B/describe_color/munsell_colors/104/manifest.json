@@ -1,0 +1,59 @@
+{
+  "image": "data/colors/munsell_colors/pics/104.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of dark purple. There are no variations in hue or brightness within the image; it is a single, consistent color throughout.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/104/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/104/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color/munsell_colors/104/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 2,
+    "C": 8,
+    "x": 0.543,
+    "y": 0.292,
+    "Y": 1.89,
+    "picture": "104.png",
+    "R": 0.312375729413,
+    "G": 0.0238069919836,
+    "B": 0.0958485432128
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.543,
+    "y": 0.292,
+    "Y": 1.89
+  },
+  "RGB": {
+    "R": 0.312375729413,
+    "G": 0.0238069919836,
+    "B": 0.0958485432128
+  }
+}
