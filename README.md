@@ -20,7 +20,7 @@ For example, the perceived difference between these Munsell color pairs should b
 
 **Important**: Distances across different parameters (H, C, V) should not be compared directly as uniformity is likely lost. Only compare within chains where only one parameter changes.
 
-The original dataset contained multiple errors. The most current corrected version can be found at: https://github.com/iitpvisionlab/mrr-revised (Munsell v3.2)
+The original dataset contained multiple errors. The most current corrected version can be found at: https://github.com/iitpvisionlab/mrr-revised (Munsell v3.3)
 
 Colors are converted from Munsell system to xyY chromaticity coordinates. Using the open-source `colour-science` library, colors can be converted to any display format: xyY → XYZ → sRGB → clip[0,1] → matplotlib.
 

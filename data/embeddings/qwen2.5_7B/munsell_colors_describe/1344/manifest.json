@@ -1,0 +1,59 @@
+{
+  "image": "data/munsell_colors/pics/1344.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid light blue color. It appears to be a uniform shade without any gradients, patterns, or variations in hue, saturation, or brightness.",
+  "saved": {
+    "vision_pooled_mean": "embeddings/munsell_colors/1344/vision_pooled_mean.npy",
+    "lm_pooled_mean": "embeddings/munsell_colors/1344/lm_pooled_mean.npy",
+    "visual_token_lens": "embeddings/munsell_colors/1344/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0PB",
+    "V": 9,
+    "C": 2,
+    "x": 0.3,
+    "y": 0.299,
+    "Y": 73.5,
+    "picture": "1344.png",
+    "R": 0.890363205015,
+    "G": 0.857059190269,
+    "B": 0.969978169809
+  },
+  "munsell_spec": "10.0PB",
+  "xyY": {
+    "x": 0.3,
+    "y": 0.299,
+    "Y": 73.5
+  },
+  "RGB": {
+    "R": 0.890363205015,
+    "G": 0.857059190269,
+    "B": 0.969978169809
+  }
+}

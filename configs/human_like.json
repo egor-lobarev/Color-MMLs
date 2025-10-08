@@ -1,0 +1,13 @@
+{
+  "csv": "data/colors/munsell_colors/munsell_manifest.csv",
+  "pics_dir": "data/colors/munsell_colors/pics",
+  "outdir_root": "data/embeddings/qwen2.5_7B/human_like",
+  "dataset_dir": "data/munsell_colors",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Imagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.",
+  "save_tokens": false,
+  "device": "cuda:0",
+  "batch": false,
+  "lm_per_image": false,
+  "restart_model_per_image": true
+}

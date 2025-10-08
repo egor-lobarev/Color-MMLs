@@ -1,0 +1,12 @@
+{
+  "csv": "data/colors/munsell_colors/munsell_manifest.csv",
+  "pics_dir": "data/colors/munsell_colors/pics",
+  "outdir_root": "data/embeddings/qwen2.5_7B/describe_color",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "save_tokens": false,
+  "device": "cuda:0",
+  "batch": false,
+  "lm_per_image": false,
+  "restart_model_per_image": true
+}

@@ -1,0 +1,59 @@
+{
+  "image": "data/munsell_colors/pics/93.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid light pink color. It appears uniform and does not contain any gradients, patterns, or variations in shade.",
+  "saved": {
+    "vision_pooled_mean": "embeddings/munsell_colors/93/vision_pooled_mean.npy",
+    "lm_pooled_mean": "embeddings/munsell_colors/93/lm_pooled_mean.npy",
+    "visual_token_lens": "embeddings/munsell_colors/93/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 7,
+    "C": 14,
+    "x": 0.499,
+    "y": 0.306,
+    "Y": 28.5,
+    "picture": "93.png",
+    "R": 0.990011690589,
+    "G": 0.335104221205,
+    "B": 0.436264178196
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.499,
+    "y": 0.306,
+    "Y": 28.5
+  },
+  "RGB": {
+    "R": 0.990011690589,
+    "G": 0.335104221205,
+    "B": 0.436264178196
+  }
+}
