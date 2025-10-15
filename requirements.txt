@@ -11,4 +11,5 @@ tqdm
 pandas
 scikit-learn
 seaborn
+umap-learn
 -e .
