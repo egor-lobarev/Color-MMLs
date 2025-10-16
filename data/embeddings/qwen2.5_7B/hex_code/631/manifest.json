@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/631.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "system\nYou are a helpful assistant.\nuser\nSay the HEX code of color of picture. In format '#XXXXXX'\n addCriterion\nThe image you provided is a solid white background. The hexadecimal code for white is:\n\n#FFFFFF",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/631/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/631/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/hex_code/631/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      97,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "7.5GY",
+    "V": 8,
+    "C": 2,
+    "x": 0.314,
+    "y": 0.338,
+    "Y": 57.4,
+    "picture": "631.png",
+    "R": 0.768004209815,
+    "G": 0.7885346597,
+    "B": 0.759392944618
+  },
+  "munsell_spec": "7.5GY",
+  "xyY": {
+    "x": 0.314,
+    "y": 0.338,
+    "Y": 57.4
+  },
+  "RGB": {
+    "R": 0.768004209815,
+    "G": 0.7885346597,
+    "B": 0.759392944618
+  }
+}

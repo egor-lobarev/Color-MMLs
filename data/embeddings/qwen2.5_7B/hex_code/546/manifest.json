@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/546.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "system\nYou are a helpful assistant.\nuser\nSay the HEX code of color of picture. In format '#XXXXXX'\n addCriterion\nThe color in the image is light yellow. The corresponding HEX code for this color is:\n\n#FFFFE0",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/546/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/546/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/hex_code/546/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      97,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "2.5GY",
+    "V": 9,
+    "C": 8,
+    "x": 0.36,
+    "y": 0.415,
+    "Y": 70.9,
+    "picture": "546.png",
+    "R": 0.86052785389,
+    "G": 0.880817835745,
+    "B": 0.580205716138
+  },
+  "munsell_spec": "2.5GY",
+  "xyY": {
+    "x": 0.36,
+    "y": 0.415,
+    "Y": 70.9
+  },
+  "RGB": {
+    "R": 0.86052785389,
+    "G": 0.880817835745,
+    "B": 0.580205716138
+  }
+}

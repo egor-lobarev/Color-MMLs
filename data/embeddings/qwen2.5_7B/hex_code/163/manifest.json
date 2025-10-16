@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/163.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "system\nYou are a helpful assistant.\nuser\nSay the HEX code of color of picture. In format '#XXXXXX'\n addCriterion\nThe color in the image is a solid shade of brown. The corresponding HEX code for this color is:\n\n#8B4513",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/163/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/163/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/hex_code/163/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      97,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0R",
+    "V": 4,
+    "C": 12,
+    "x": 0.574,
+    "y": 0.333,
+    "Y": 7.4,
+    "picture": "163.png",
+    "R": 0.574236475762,
+    "G": 0.13373497495,
+    "B": 0.122379080883
+  },
+  "munsell_spec": "10.0R",
+  "xyY": {
+    "x": 0.574,
+    "y": 0.333,
+    "Y": 7.4
+  },
+  "RGB": {
+    "R": 0.574236475762,
+    "G": 0.13373497495,
+    "B": 0.122379080883
+  }
+}

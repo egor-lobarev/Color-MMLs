@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/601.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "system\nYou are a helpful assistant.\nuser\nSay the HEX code of color of picture. In format '#XXXXXX'\n addCriterion\nThe image you provided is completely black, which corresponds to the hexadecimal color code `#000000`.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/601/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/601/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/hex_code/601/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      97,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "7.5GY",
+    "V": 1,
+    "C": 4,
+    "x": 0.301,
+    "y": 0.586,
+    "Y": 0.85,
+    "picture": "601.png",
+    "R": 0.00342570933788,
+    "G": 0.110803888137,
+    "B": 0.00312269234471
+  },
+  "munsell_spec": "7.5GY",
+  "xyY": {
+    "x": 0.301,
+    "y": 0.586,
+    "Y": 0.85
+  },
+  "RGB": {
+    "R": 0.00342570933788,
+    "G": 0.110803888137,
+    "B": 0.00312269234471
+  }
+}
