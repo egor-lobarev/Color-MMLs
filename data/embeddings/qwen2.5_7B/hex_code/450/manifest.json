@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/450.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "system\nYou are a helpful assistant.\nuser\nSay the HEX code of color of picture. In format '#XXXXXX'\n addCriterion\nThe image you provided is a solid light gray color. The hexadecimal code for this shade of light gray is:\n\n`#D3D3D3`",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/450/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/450/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/hex_code/450/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      97,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "7.5Y",
+    "V": 7,
+    "C": 2,
+    "x": 0.327,
+    "y": 0.339,
+    "Y": 41.8,
+    "picture": "450.png",
+    "R": 0.707491452425,
+    "G": 0.673011219488,
+    "B": 0.644122129353
+  },
+  "munsell_spec": "7.5Y",
+  "xyY": {
+    "x": 0.327,
+    "y": 0.339,
+    "Y": 41.8
+  },
+  "RGB": {
+    "R": 0.707491452425,
+    "G": 0.673011219488,
+    "B": 0.644122129353
+  }
+}

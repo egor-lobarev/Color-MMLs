@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/1722.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "system\nYou are a helpful assistant.\nuser\nSay the HEX code of color of picture. In format '#XXXXXX'\n addCriterion\nThe color in the image is a solid dark purple. The corresponding HEX code for this color is:\n\n`#4B0082`",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/1722/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/1722/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/hex_code/1722/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      97,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 2,
+    "C": 4,
+    "x": 0.39,
+    "y": 0.268,
+    "Y": 2.31,
+    "picture": "1722.png",
+    "R": 0.268795212274,
+    "G": 0.111982708586,
+    "B": 0.18393649005
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.39,
+    "y": 0.268,
+    "Y": 2.31
+  },
+  "RGB": {
+    "R": 0.268795212274,
+    "G": 0.111982708586,
+    "B": 0.18393649005
+  }
+}

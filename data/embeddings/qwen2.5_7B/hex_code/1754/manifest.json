@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/1754.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "system\nYou are a helpful assistant.\nuser\nSay the HEX code of color of picture. In format '#XXXXXX'\n addCriterion\nThe color in the image is a light pink shade. The corresponding HEX code for this color is:\n\n`#FFC0CB`",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/1754/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/hex_code/1754/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/hex_code/1754/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      97,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 8,
+    "C": 6,
+    "x": 0.368,
+    "y": 0.294,
+    "Y": 48.8,
+    "picture": "1754.png",
+    "R": 0.977496918603,
+    "G": 0.623640409924,
+    "B": 0.753176824679
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.368,
+    "y": 0.294,
+    "Y": 48.8
+  },
+  "RGB": {
+    "R": 0.977496918603,
+    "G": 0.623640409924,
+    "B": 0.753176824679
+  }
+}
