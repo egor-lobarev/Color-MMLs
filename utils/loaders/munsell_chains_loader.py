@@ -193,7 +193,7 @@ class MunsellChainsLoader(EmbeddingsLoader):
         }
     
     def get_chain_by_specification(self, variable: str, values: (List | None) = None,
-                                 fixed_h=None, fixed_c: int = None, fixed_v: int = None) -> Dict[str, Any]:
+                                 fixed_h=None, fixed_c: int | None = None, fixed_v: int | None = None) -> Dict[str, Any]:
         """
         Generate a chain using MunsellColor.chain and get embeddings.
         
@@ -215,6 +215,61 @@ class MunsellChainsLoader(EmbeddingsLoader):
         # Get chain data
         return self.get_chain(munsell_colors)
     
+    def get_list_of_chains_by_specifications(self, variables: list[str], values: List[List[str] | None], fixed_h: List[str], fixed_c: List[int | None], fixed_v: List[int | None]):
+        """Returns multiple chains information.
+
+        Args:
+            variables (list[str]): List of which parameter to vary 'h', 'c' or 'v'.
+            values (List[List[str]  |  None]): List of list of variables parameters or None.
+            fixed_h (List[str]): List of fixed H values.
+            fixed_c (List[int  |  None]): List of fixed C values.
+            fixed_v (List[int  |  None]): List of fixed V values.
+        """
+        all_metadata = []
+        lm_pooled_list = []
+        vl_pooled_list = []
+        for variable, vals, h_fix, c_fix, v_fix in zip(variables, values, fixed_h, fixed_c, fixed_v):
+            # Ensure only two fixed values, set the one being varied to None
+            if variable == 'h':
+                chain = self.get_chain_by_specification(
+                    variable=variable,
+                    values=vals,
+                    fixed_h=None,
+                    fixed_c=c_fix,
+                    fixed_v=v_fix
+                )
+            elif variable == 'c':
+                chain = self.get_chain_by_specification(
+                    variable=variable,
+                    values=vals,
+                    fixed_h=h_fix,
+                    fixed_c=None,
+                    fixed_v=v_fix
+                )
+            elif variable == 'v':
+                chain = self.get_chain_by_specification(
+                    variable=variable,
+                    values=vals,
+                    fixed_h=h_fix,
+                    fixed_c=c_fix,
+                    fixed_v=None
+                )
+            else:
+                raise ValueError(f"Invalid variable: {variable}")
+            if chain['metadata']:
+                all_metadata.extend(chain['metadata'])
+            if chain['lm_pooled'] is not None:
+                lm_pooled_list.append(chain['lm_pooled'])
+            if chain['vl_pooled'] is not None:
+                vl_pooled_list.append(chain['vl_pooled'])
+        lm_pooled = np.vstack(lm_pooled_list) if lm_pooled_list else None
+        vl_pooled = np.vstack(vl_pooled_list) if vl_pooled_list else None
+        return {
+            'metadata': all_metadata,
+            'lm_pooled': lm_pooled,
+            'vl_pooled': vl_pooled
+        }
+    
     def get_all_available_colors(self) -> List[Dict[str, Any]]:
         """Get all colors that have both CSV data and embeddings."""
         available_colors = []
@@ -235,6 +290,9 @@ class MunsellChainsLoader(EmbeddingsLoader):
                 available_colors.append(color_data)
         
         return available_colors
+    
+    def get_all_available_embeddings(self) -> Dict[str, Any]:
+        return self.get_embeddings_by_indices(list(self.embeddings_index.keys()))
     
     def get_color_statistics(self) -> Dict[str, Any]:
         """Get statistics about available colors."""
