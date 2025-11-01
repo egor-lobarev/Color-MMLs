@@ -77,7 +77,7 @@ class MunsellChainsLoader(EmbeddingsLoader):
         
         xyY = np.array([x, y, Y], dtype=float)
         # Normalize Y if it's in 0-100 range
-        xyY[2] = xyY[2] / 102.5
+        xyY[2] = xyY[2] / 100
         
         XYZ = colour.xyY_to_XYZ(xyY)
         srgb = colour.XYZ_to_sRGB(XYZ, apply_cctf_encoding=True)
@@ -130,7 +130,7 @@ class MunsellChainsLoader(EmbeddingsLoader):
                 for _, row in matches.iterrows():
                     color_data = {
                         'munsell_color': munsell_color,
-                        'csv_index': int(row['index']),
+                        'csv_index': int(row['picture'].split('.')[0]),
                         'xyY': (row['x'], row['y'], row['Y']),
                         'RGB': (row['R'], row['G'], row['B']),
                         'H': row['H'],
@@ -140,9 +140,11 @@ class MunsellChainsLoader(EmbeddingsLoader):
                     }
                     
                     # Check if embedding exists for this index
-                    csv_idx_str = str(int(row['index']))
+                    csv_idx_str = str(color_data['csv_index'])
                     if csv_idx_str in self.embeddings_index:
                         color_data['embedding_index'] = csv_idx_str
+                    else: 
+                        raise ValueError(f"Not found embeddings for notation {munsell_color}")
                     
                     found_colors.append(color_data)
         
