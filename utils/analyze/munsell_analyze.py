@@ -4,8 +4,13 @@ from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import numpy as np
+from numpy.linalg import norm
+from scipy.spatial.distance import cosine, euclidean, cityblock
 import pandas as pd
 from colour.plotting import plot_chromaticity_diagram_CIE1931
+from colour import xyY_to_XYZ
+from colour.models import XYZ_to_CAM16UCS
+from colour.difference.cam16_ucs import delta_E_CAM16UCS
 from ..loaders.munsell_chains_loader import MunsellChainsLoader
 
 class MunsellEmbeddingsAnalyzer:
@@ -289,4 +294,59 @@ class MunsellEmbeddingsAnalyzer:
         ax.legend()
         plt.tight_layout()
         plt.show()
+    
+    def calculate_distances_matrix(self, variable : str, values : list[int], fixed_h : str, fixed_c : int, fixed_v : int):
+        """Calculates the distance matrix by diffrent variables: cosine distance of VL and LM embeddings, sRGB euclidean distance, munsell Manhattan distance betwee variables in a chain, CIE CAM 16USC.
+
+        Args:
+            variable (str): 'h', 'c', 'v
+            values (list[int]): List of variables in chain.
+            fixed_h (str): Fixed H munsell value ('2.5R').
+            fixed_c (int): Fixed C munsell value.
+            fixed_v (int): Fixed V munsell value.
+
+        Returns:
+            dict: Dict with keys "srgb","vl_cosine","lm_cosine","cam","munsell" and according matrix with distances: in a i row distance from i-th to all.
+        """
+        chain = self.chain_loader.get_chain_by_specification(variable, values, fixed_h, fixed_c, fixed_v)
+        metadata = pd.DataFrame(chain['metadata'])
+        vl_embeds = np.array(chain['vl_pooled'])
+        lm_embeds = np.array(chain['lm_pooled'])
+        srgb_colors_arr = metadata['RGB'].to_numpy()
+        variable_arr = metadata[variable.upper()].to_numpy()
+        xyY_arr = metadata['xyY'].to_numpy()
+        
+        if len(metadata) < 2:
+            return
+        distances_matrix = {
+            "srgb": np.zeros((len(metadata), len(metadata))),
+            "vl_cosine": np.zeros((len(metadata), len(metadata))),
+            "lm_cosine": np.zeros((len(metadata), len(metadata))),
+            "cam": np.zeros((len(metadata), len(metadata))),
+            "munsell": np.zeros((len(metadata), len(metadata)))
+            }
+        
+        for first_idx in range(len(metadata)):
+            for second_idx in range(len(metadata)):        
+                first_srgb = srgb_colors_arr[first_idx]
+                first_xyy = xyY_arr[first_idx]
+                first_vl_emb = vl_embeds[first_idx]
+                first_lm_emb = lm_embeds[first_idx]
+                first_cam = XYZ_to_CAM16UCS(xyY_to_XYZ(first_xyy))
+                first_munsell_variable = variable_arr[first_idx]
+                
+                second_srgb = srgb_colors_arr[second_idx]
+                second_xyy = xyY_arr[second_idx]
+                second_vl_emb = vl_embeds[second_idx]
+                second_lm_emb = lm_embeds[second_idx]
+                second_cam = XYZ_to_CAM16UCS(xyY_to_XYZ(second_xyy))
+                second_munsell_variable = variable_arr[second_idx]
+                
+                distances_matrix['srgb'][first_idx, second_idx] = euclidean(first_srgb, second_srgb)
+                distances_matrix['vl_cosine'][first_idx, second_idx] = cosine(first_vl_emb, second_vl_emb)
+                distances_matrix['lm_cosine'][first_idx, second_idx] = cosine(first_lm_emb, second_lm_emb)
+                distances_matrix['cam'][first_idx, second_idx] = delta_E_CAM16UCS(first_cam, second_cam)
+                distances_matrix['munsell'][first_idx, second_idx] = np.abs(first_munsell_variable - second_munsell_variable)
+        
+        return distances_matrix
     
