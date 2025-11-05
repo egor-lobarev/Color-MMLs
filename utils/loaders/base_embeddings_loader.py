@@ -108,18 +108,21 @@ class EmbeddingsLoader:
         
         return result
     
-    def load_embeddings(self, embedding_indices: List[str]) -> Dict[str, np.ndarray]:
+    def load_embeddings(self, embedding_indices: List[str] | None = None) -> Dict[str, np.ndarray]:
         """
         Load embeddings for given indices.
         
         Args:
-            embedding_indices: List of embedding indices to load
+            embedding_indices: List of embedding indices to load. If None returns all embeddings.
             
         Returns:
             Dictionary with 'lm_pooled' and 'vl_pooled' arrays
         """
         lm_embeddings = []
         vl_embeddings = []
+        
+        if embedding_indices is None:
+            embedding_indices = list(self.embeddings_index.keys())
         
         for idx in embedding_indices:
             if idx in self.embeddings_index:
