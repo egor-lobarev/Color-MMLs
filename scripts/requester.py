@@ -1,6 +1,6 @@
 import requests
 
-url = "http://localhost/predict"
+url = "http://localhost:7860/predict"
 
 params = {
     "image_url": "https://github.com/egor-lobarev/Color-MMLs/blob/analyze_simar/data/colors/munsell_colors/pics/1.png",
