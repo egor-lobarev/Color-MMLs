@@ -151,12 +151,12 @@ https://disk.yandex.ru/d/Ke9peZ57RO5DDA
 
 ### Useful commands
 
-Build master-node image (on Windows)
+Build color-mmls image (on Windows)
 ```shell
 docker buildx build -t color-mmls .
 ```
 
-Run master-node
+Run color-mmls
 ```shell
 docker run --rm -it --gpus=all -p 7860:7860 color-mmls
 ```
