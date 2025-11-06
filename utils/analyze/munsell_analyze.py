@@ -1,5 +1,6 @@
 from pathlib import Path
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -298,11 +299,11 @@ class MunsellEmbeddingsAnalyzer:
         plt.show()
     
     def calculate_distances_matrix(self,
-                                   variable : str,
-                                   values : list[int] | None,
-                                   fixed_h : str,
-                                   fixed_c : int,
-                                   fixed_v : int,
+                                   variable: str,
+                                   values: list[int] | None,
+                                   fixed_h: str,
+                                   fixed_c: int,
+                                   fixed_v: int,
                                    return_rgb: bool=False):
         """Calculates the distance matrix by different variables: cosine distance of VL and LM embeddings, sRGB euclidean distance, munsell Manhattan distance between variables in a chain, CIE CAM 16USC.
 
@@ -379,3 +380,52 @@ class MunsellEmbeddingsAnalyzer:
         ax2.grid(True)
         
         plt.show()
+
+    def draw_munsell_chain(self, variable, values, fixed_h, fixed_c, fixed_v):
+        chain = self.chain_loader.get_chain_by_specification(variable, values, fixed_h, fixed_c, fixed_v)['metadata']
+        # Create figure
+        fig, ax = plt.subplots(1, 1, figsize=(8,6))
+        
+        # Calculate swatch dimensions
+        n_colors = len(chain)
+        swatch_width = 2
+        swatch_height = 10
+        
+        # Draw each color swatch
+        for i, color in enumerate(chain):
+            # Convert xyY to RGB using normalized Y
+            
+            rgb = color['RGB']
+            # Create rectangle for color swatch
+            rect = patches.Rectangle((i, 0), swatch_width, swatch_height, 
+                                facecolor=rgb, edgecolor='black', linewidth=0.5)
+            ax.add_patch(rect)
+            
+            # Add label
+            if variable == 'h':
+                label = f"{color['H']}"
+            elif variable == 'v':
+                label = f"V{color['V']}\n{color['H']}/C{color['C']}"
+            elif variable == 'c':
+                label = f"C{color['C']}\n{color['H']}/V{color['V']}"
+            
+            ax.text(i + swatch_width/2, -0.1, label, ha='center', va='top', 
+                    fontsize=12, rotation=45)
+        
+        # Set axis properties
+        ax.set_xlim(0, n_colors)
+        ax.set_ylim(-0.3, 5)
+        ax.set_aspect('equal')
+        ax.axis('off')
+        
+        # Add title
+        title_parts = []
+        if fixed_h: title_parts.append(f"Hue: {fixed_h}")
+        if fixed_v: title_parts.append(f"Value: {fixed_v}")
+        if fixed_c: title_parts.append(f"Chroma: {fixed_c}")
+        title_parts.append(f"Varying: {variable}")
+        
+        ax.set_title(" / ".join(title_parts), fontsize=12, pad=20)
+        
+        plt.tight_layout()
+        return fig, ax
