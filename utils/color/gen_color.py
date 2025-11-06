@@ -1,5 +1,5 @@
 import random
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
 import colour
 import numpy as np
@@ -29,9 +29,9 @@ class MunsellColor:
     def chain(
         variable: str,
         values: List,
-        fixed_h=None,
-        fixed_c: int | None = None,
-        fixed_v: int | None = None,
+        fixed_h: Optional[int] = None,
+        fixed_c: Optional[int] = None,
+        fixed_v: Optional[int] = None,
     ) -> List["MunsellColor"]:
         """
         Generate a chain of Munsell colors where two parameters are fixed

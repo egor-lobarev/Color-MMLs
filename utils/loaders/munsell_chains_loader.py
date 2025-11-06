@@ -5,7 +5,7 @@ Specialized loader for Munsell color chains that inherits from EmbeddingsLoader.
 Adds CSV parsing, MunsellColor integration, and chain generation functionality.
 """
 from pathlib import Path
-from typing import List, Dict, Any, Tuple, Union
+from typing import List, Dict, Any, Tuple, Union, Optional
 import pandas as pd
 import numpy as np
 from .base_embeddings_loader import EmbeddingsLoader
@@ -194,8 +194,13 @@ class MunsellChainsLoader(EmbeddingsLoader):
             'metadata': metadata
         }
     
-    def get_chain_by_specification(self, variable: str, values: (List | None) = None,
-                                 fixed_h=None, fixed_c: int | None = None, fixed_v: int | None = None) -> Dict[str, Any]:
+    def get_chain_by_specification(self,
+                                   variable: str,
+                                   values: Optional[List[int | str]] = None,
+                                   fixed_h: Optional[int] = None,
+                                   fixed_c: Optional[int] = None,
+                                   fixed_v: Optional[int] = None
+                                   ) -> Dict[str, Any]:
         """
         Generate a chain using MunsellColor.chain and get embeddings.
         
@@ -217,7 +222,12 @@ class MunsellChainsLoader(EmbeddingsLoader):
         # Get chain data
         return self.get_chain(munsell_colors)
     
-    def get_list_of_chains_by_specifications(self, variables: list[str], values: List[List[str] | None], fixed_h: List[str], fixed_c: List[int | None], fixed_v: List[int | None]):
+    def get_list_of_chains_by_specifications(self,
+                                             variables: list[str],
+                                             values: Optional[List[str | int]],
+                                             fixed_h: Optional[List[int]],
+                                             fixed_c: Optional[List[int]],
+                                             fixed_v: Optional[List[int]]):
         """Returns multiple chains information.
 
         Args:
