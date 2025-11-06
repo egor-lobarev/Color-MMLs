@@ -147,3 +147,17 @@ Develop methods to evaluate current embedding spaces and VLM color representatio
 For additional materials on colorimetry, refer to lecture recordings by Egor Ershov, head of our laboratory:
 
 https://disk.yandex.ru/d/Ke9peZ57RO5DDA
+
+
+### Useful commands
+
+Build master-node image (on Windows)
+```shell
+docker buildx build -t color-mmls .
+```
+
+Run master-node
+```shell
+docker run --rm -it --gpus=all -p 7860:7860 color-mmls
+```
+
