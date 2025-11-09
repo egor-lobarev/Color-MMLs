@@ -1,0 +1,59 @@
+{
+  "dataset": "leeds",
+  "image": "data/colors/combvd/leeds/3.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "prompt": "Imagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nImagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.\n addCriterion\n addCriterion\n:",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/3/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/3/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/3/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      149,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "index": 3,
+  "xyz": [
+    0.05095399926486737,
+    0.0540180011461319,
+    0.057152997201873765
+  ],
+  "xyY": [
+    0.31428835784187253,
+    0.3331873674109018,
+    0.0540180011461319
+  ],
+  "srgb": [
+    0.25667256966243496,
+    0.2584515557414156,
+    0.2533751637034337
+  ],
+  "rgb_255": [
+    65,
+    66,
+    65
+  ]
+}

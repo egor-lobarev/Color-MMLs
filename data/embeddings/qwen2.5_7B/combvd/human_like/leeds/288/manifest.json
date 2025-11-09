@@ -1,0 +1,59 @@
+{
+  "dataset": "leeds",
+  "image": "data/colors/combvd/leeds/288.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "prompt": "Imagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nImagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.\n addCriterion\n addCriterion\n: The color in the image is a deep, rich brown. It evokes a sense of warmth, stability, and earthiness. This color can make one feel grounded and secure, reminiscent of the rich soil that nourishes life. It's also associated with tradition and timelessness, suggesting something that has been around for a long time and will continue to endure. The brown can be comforting and calming, often associated with nature and the outdoors. It can also be seen as a symbol of maturity and wisdom, as it is often found in the bark of trees and the fur of animals. Overall, this color can create a feeling of comfort, security, and connection to the natural world.\n\n",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/288/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/288/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/288/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      149,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "index": 288,
+  "xyz": [
+    0.20075599263408642,
+    0.14144899742306044,
+    0.07620600735396306
+  ],
+  "xyY": [
+    0.47980572660912524,
+    0.3380623317701176,
+    0.14144899742306044
+  ],
+  "srgb": [
+    0.6615131572742659,
+    0.30141334437929806,
+    0.27814099036534434
+  ],
+  "rgb_255": [
+    169,
+    77,
+    71
+  ]
+}
