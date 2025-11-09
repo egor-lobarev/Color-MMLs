@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional, List
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from sklearn.manifold import TSNE
@@ -43,7 +44,7 @@ class MunsellEmbeddingsAnalyzer:
         scaler = StandardScaler()
         embedding_matrix_scaled = scaler.fit_transform(embedding_matrix)
         pca = PCA()
-        pca_result = pca.fit_transform(embedding_matrix_scaled)
+        pca_result = pca.fit_transform(embedding_matrix)
         explained_variance_ratio = pca.explained_variance_ratio_
         cumulative_variance = np.cumsum(explained_variance_ratio)
         n_components_90 = np.argmax(cumulative_variance >= 0.90) + 1
@@ -149,7 +150,9 @@ class MunsellEmbeddingsAnalyzer:
         plt.tight_layout()
         plt.show()
         
-    def tsne(self, variables, values, fixed_h, fixed_c, fixed_v, perplexity=7, n_iter=5000):
+    def _tsne_by_matrix(self, perplexity=7, n_iter=5000):
+        
+    def tsne(self, variables, values, fixed_h, fixed_c, fixed_v, perplexity=7, n_iter=5000, leave_one_grey=True):
         """Perform t-SNE for both LM and VL embeddings using get_list_of_chains_by_specifications, with C=0 filtering."""
 
         data = self.chain_loader.get_list_of_chains_by_specifications(
@@ -169,17 +172,19 @@ class MunsellEmbeddingsAnalyzer:
             if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
                 results[embedding_name] = None
                 continue
-            # Filtration
-            meta = pd.DataFrame(color_metadata)
-            if 'V' not in meta.columns or 'C' not in meta.columns:
-                raise ValueError(f"color_metadata must contain 'V' and 'C' columns for {embedding_name}")
-            meta['idx'] = np.arange(len(meta))
-            keep_indices = set(meta.loc[meta['C'] != 0,'idx'].tolist())
-            for v_value, group in meta.groupby('V'):
-                c0_rows = group[group['C'] == 0]
-                if not c0_rows.empty:
-                    keep_indices.add(c0_rows.iloc[0]['idx'])
-            keep_indices = sorted(keep_indices)
+            keep_indices = set(meta['idx'].tolist())
+            if leave_one_grey:
+                # Filtration
+                meta = pd.DataFrame(color_metadata)
+                if 'V' not in meta.columns or 'C' not in meta.columns:
+                    raise ValueError(f"color_metadata must contain 'V' and 'C' columns for {embedding_name}")
+                meta['idx'] = np.arange(len(meta))
+                keep_indices = set(meta.loc[meta['C'] != 0,'idx'].tolist())
+                for v_value, group in meta.groupby('V'):
+                    c0_rows = group[group['C'] == 0]
+                    if not c0_rows.empty:
+                        keep_indices.add(c0_rows.iloc[0]['idx'])
+                keep_indices = sorted(keep_indices)
             embedding_matrix_filtered = embedding_matrix_full[keep_indices]
             meta_filtered = meta.loc[meta['idx'].isin(keep_indices)].reset_index(drop=True)
             pca_result = self._pca_by_matrix(embedding_matrix_filtered)
@@ -205,6 +210,7 @@ class MunsellEmbeddingsAnalyzer:
                 'meta_filtered': meta_filtered
             }
         return results
+    
     @staticmethod
     def plot_tsne_results(tsne_results, embedding_name):
         """Plot t-SNE results using filtered metadata"""
@@ -265,7 +271,7 @@ class MunsellEmbeddingsAnalyzer:
         plt.tight_layout()
         plt.show()
     
-    def plot_chromaticity_diagram(self, variables, values, fixed_h, fixed_c, fixed_v, show_labels=False):
+    def plot_chromaticity_diagram(self, variables, values, fixed_h, fixed_c, fixed_v, show_labels=False, show=False):
         """
         Plot xy chromaticity for all points (not per-chain) using colour-science CIE1931 diagram.
         Args:
@@ -296,14 +302,17 @@ class MunsellEmbeddingsAnalyzer:
         ax.set_title('All points on CIE 1931 Chromaticity Diagram')
         ax.legend()
         plt.tight_layout()
-        plt.show()
+        if show:
+            plt.show()
+            
+        return fig, ax
     
     def calculate_distances_matrix(self,
                                    variable: str,
-                                   values: list[int] | None,
-                                   fixed_h: str,
-                                   fixed_c: int,
-                                   fixed_v: int,
+                                   values: Optional[list[int | str]],
+                                   fixed_h: Optional[str],
+                                   fixed_c: Optional[int],
+                                   fixed_v: Optional[int],
                                    return_rgb: bool=False):
         """Calculates the distance matrix by different variables: cosine distance of VL and LM embeddings, sRGB euclidean distance, munsell Manhattan distance between variables in a chain, CIE CAM 16USC.
 
@@ -325,9 +334,7 @@ class MunsellEmbeddingsAnalyzer:
         srgb_colors_arr = metadata['RGB'].to_numpy()
         variable_arr = metadata[variable.upper()].to_numpy()
         xyY_arr = metadata['xyY'].to_numpy()
-        
-        if len(metadata) < 2:
-            return
+
         distances_matrix = {
             "srgb": np.zeros((len(metadata), len(metadata))),
             "vl_cosine": np.zeros((len(metadata), len(metadata))),
@@ -362,11 +369,39 @@ class MunsellEmbeddingsAnalyzer:
             return distances_matrix, srgb_colors_arr
         return distances_matrix
 
+    def calculate_list_distances_matrix(self,
+                                        variables: list[str],
+                                        values: list[Optional[list[str | int]]],
+                                        fixed_h: list[Optional[str]],
+                                        fixed_c: list[Optional[int]],
+                                        fixed_v: list[Optional[int]],
+                                        return_rgb: bool=False):
+        self.chain_loader.get_list_of_chains_by_specifications(variables, values, fixed_h, fixed_c, fixed_v)
+        list_of_distances_matrix = []
+        rgb_list = []
+        rgb = None
+        
+        for var, val, h_fix, c_fix, v_fix in zip(variables, values, fixed_h, fixed_c, fixed_v):
+            if return_rgb:
+                matrix, rgb = self.calculate_distances_matrix(var, val, h_fix, c_fix, v_fix, return_rgb)
+            else:
+                matrix = self.calculate_distances_matrix(var, val, h_fix, c_fix, v_fix, return_rgb)
+            list_of_distances_matrix.append(matrix)
+            rgb_list.append(rgb)
+            
+        if return_rgb:
+            return list_of_distances_matrix, rgb_list
+        return list_of_distances_matrix
+        
+
     @staticmethod
-    def plot_distance_matrix_result(distances_dict, init_idx=0, x : str="munsell", rgb_arr=None):
+    def plot_distance_matrix_result(distances_dict, init_idx=0, x : str="munsell", rgb_arr=None, show=True, fig = None, axes=None):
         if rgb_arr is None:
             rgb_arr = []
-        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+        if axes is not None:
+            ax1, ax2 = axes
+        else:
+            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
         ax1.plot(distances_dict[x][init_idx, :], distances_dict['vl_cosine'][init_idx, :], linewidth=2, linestyle='--')
         ax1.scatter(distances_dict[x][init_idx, :], distances_dict['vl_cosine'][init_idx, :], c=rgb_arr, s=300, alpha=1)
         ax1.set_xlabel(x)
@@ -379,8 +414,18 @@ class MunsellEmbeddingsAnalyzer:
         ax2.set_ylabel('LM cosine distances')
         ax2.grid(True)
         
-        plt.show()
-
+        if show:
+            plt.show()
+        return fig, axes
+    
+    def plot_list_distances_maxtrix_result(self, list_distances_dict, init_idx=0, x : str="munsell", rgb_arr=None, show=True):
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+        for idx, dist_dict in enumerate(list_distances_dict):
+            self.plot_distance_matrix_result(dist_dict, init_idx, x, rgb_arr[idx] if rgb_arr else None, False, fig, (ax1, ax2))
+        if show:
+            plt.show()        
+        return fig, (ax1, ax2)
+    
     def draw_munsell_chain(self, variable, values, fixed_h, fixed_c, fixed_v):
         chain = self.chain_loader.get_chain_by_specification(variable, values, fixed_h, fixed_c, fixed_v)['metadata']
         # Create figure

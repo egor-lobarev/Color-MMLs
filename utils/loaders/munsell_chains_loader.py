@@ -197,7 +197,7 @@ class MunsellChainsLoader(EmbeddingsLoader):
     def get_chain_by_specification(self,
                                    variable: str,
                                    values: Optional[List[int | str]] = None,
-                                   fixed_h: Optional[int] = None,
+                                   fixed_h: Optional[str] = None,
                                    fixed_c: Optional[int] = None,
                                    fixed_v: Optional[int] = None
                                    ) -> Dict[str, Any]:
@@ -224,10 +224,10 @@ class MunsellChainsLoader(EmbeddingsLoader):
     
     def get_list_of_chains_by_specifications(self,
                                              variables: list[str],
-                                             values: Optional[List[str | int]],
-                                             fixed_h: Optional[List[int]],
-                                             fixed_c: Optional[List[int]],
-                                             fixed_v: Optional[List[int]]):
+                                             values: List[Optional[List[str | int]]],
+                                             fixed_h: List[Optional[str]],
+                                             fixed_c: List[Optional[int]],
+                                             fixed_v: List[Optional[int]]):
         """Returns multiple chains information.
 
         Args:
@@ -236,6 +236,10 @@ class MunsellChainsLoader(EmbeddingsLoader):
             fixed_h (List[str]): List of fixed H values.
             fixed_c (List[int  |  None]): List of fixed C values.
             fixed_v (List[int  |  None]): List of fixed V values.
+            
+        Returns: 
+        Dict{'metadata': all_metadata, 'lm_pooled': lm_pooled, 'vl_pooled': vl_pooled}
+        
         """
         all_metadata = []
         lm_pooled_list = []
