@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors_2.0/pics/56.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid, uniform shade of brown. It appears to be a muted or earthy tone, possibly resembling a natural wood or soil color. There are no variations in hue, saturation, or brightness within the image; it is a single, consistent color across its entirety.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color_musell_2.0/56/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color_musell_2.0/56/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color_musell_2.0/56/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 4,
+    "C": 6,
+    "x": 0.4299,
+    "y": 0.3226,
+    "Y": 12.0,
+    "picture": "56.png",
+    "R": 0.572918694481,
+    "G": 0.301485769581,
+    "B": 0.316619685172
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.4299,
+    "y": 0.3226,
+    "Y": 12.0
+  },
+  "RGB": {
+    "R": 0.572918694481,
+    "G": 0.301485769581,
+    "B": 0.316619685172
+  }
+}
