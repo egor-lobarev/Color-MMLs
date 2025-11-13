@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors_2.0/pics/412.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n addCriterion\nThe image you provided is a solid yellow color. It appears to be a bright, vivid shade of yellow that covers the entire visible area of the image.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color_musell_2.0/412/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/describe_color_musell_2.0/412/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/describe_color_musell_2.0/412/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "10.0Y",
+    "V": 9,
+    "C": 12,
+    "x": 0.4271,
+    "y": 0.492,
+    "Y": 78.66,
+    "picture": "412.png",
+    "R": 0.972764134235,
+    "G": 0.915912737193,
+    "B": 0.124642341034
+  },
+  "munsell_spec": "10.0Y",
+  "xyY": {
+    "x": 0.4271,
+    "y": 0.492,
+    "Y": 78.66
+  },
+  "RGB": {
+    "R": 0.972764134235,
+    "G": 0.915912737193,
+    "B": 0.124642341034
+  }
+}

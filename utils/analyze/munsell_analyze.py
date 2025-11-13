@@ -150,8 +150,7 @@ class MunsellEmbeddingsAnalyzer:
         plt.tight_layout()
         plt.show()
         
-    def _tsne_by_matrix(self, perplexity=7, n_iter=5000):
-        
+
     def tsne(self, variables, values, fixed_h, fixed_c, fixed_v, perplexity=7, n_iter=5000, leave_one_grey=True):
         """Perform t-SNE for both LM and VL embeddings using get_list_of_chains_by_specifications, with C=0 filtering."""
 
