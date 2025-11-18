@@ -2,9 +2,13 @@ import requests
 
 url = "http://localhost:7860/predict"
 
+
+
 params = {
-    "image_url": "https://94.124.179.195:9001/api/v1/download-shared-object/aHR0cHM6Ly8xMjcuMC4wLjE6OTAwMC9jb2xvci1tbWxzL211bnNlbGxfY29sb3JzLzEucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9Skc1R05IV0g5Vk1HT0RSTjNTQVIlMkYyMDI1MTExMyUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTExMTNUMDc1NjE1WiZYLUFtei1FeHBpcmVzPTYwNDgwMCZYLUFtei1TZWN1cml0eS1Ub2tlbj1leUpoYkdjaU9pSklVelV4TWlJc0luUjVjQ0k2SWtwWFZDSjkuZXlKaFkyTmxjM05MWlhraU9pSktSelZIVGtoWFNEbFdUVWRQUkZKT00xTkJVaUlzSW1WNGNDSTZNVGMyTlRZeE1UWTFOQ3dpY0dGeVpXNTBJam9pYzJKdmJIQnlieUo5Lm9YQ1dDbXgtQTNlNUVBakd2aHZKOFB1VjllVmFZQmxvSW1NRUs5d3NieFlqb3RleFJ4enZpUTJVcDFkZGlINGNGamxjWmRLOTBZNVRicDhRbXJSLTNBJlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZ2ZXJzaW9uSWQ9bnVsbCZYLUFtei1TaWduYXR1cmU9NGFhOTI1Y2ZjZDhlODYzYTUyYTA4Njg4NWZmOGRlZTY0MjQ0OTZlYjU2NjI4MTc1NzQzZGJiMzg0MTZlYzFlMQ",
-    "prompt": "describe"
+    "images": "1.png, 10.png",
+    "prompt": "describe",
+    "bucket": "color-mmls",
+    "folder": "munsell_colors"
 }
 
 response = requests.get(url, params=params)
