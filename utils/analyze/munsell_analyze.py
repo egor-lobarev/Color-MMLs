@@ -12,7 +12,7 @@ import pandas as pd
 from colour.plotting import plot_chromaticity_diagram_CIE1931
 from colour import xyY_to_XYZ
 from colour.models import XYZ_to_CAM16LCD
-from colour.difference.cam16_ucs import delta_E_CAM16LCD
+from colour.difference.cam16_ucs import delta_E_CAM16UCS
 from ..loaders.munsell_chains_loader import MunsellChainsLoader
 
 class MunsellEmbeddingsAnalyzer:
@@ -312,7 +312,8 @@ class MunsellEmbeddingsAnalyzer:
                                    fixed_h: Optional[str],
                                    fixed_c: Optional[int],
                                    fixed_v: Optional[int],
-                                   return_rgb: bool=False):
+                                   return_rgb: bool=False,
+                                   cumulative: bool=False):
         """Calculates the distance matrix by different variables: cosine distance of VL and LM embeddings, sRGB euclidean distance, munsell Manhattan distance between variables in a chain, CIE CAM 16USC.
 
         Args:
@@ -322,6 +323,7 @@ class MunsellEmbeddingsAnalyzer:
             fixed_c (int): Fixed C munsell value.
             fixed_v (int): Fixed V munsell value.
             return_rgb (bool): True or False
+            cumulative (bool): True or False. To calculate cumulative distance in chain or absolute.
 
         Returns:
             dict: Dict with keys "srgb","vl_cosine","lm_cosine","cam","munsell" and according matrix with distances: in a i row distance from i-th to all. If return_srgb is true returns tuple (dict, srgb_array)
@@ -343,27 +345,70 @@ class MunsellEmbeddingsAnalyzer:
             "chain_info" : {"variable" : [variable, values]}
             }
         
-        for first_idx in range(len(metadata)):
-            for second_idx in range(len(metadata)):        
-                first_srgb = srgb_colors_arr[first_idx]
-                first_xyy = xyY_arr[first_idx]
-                first_vl_emb = vl_embeds[first_idx]
-                first_lm_emb = lm_embeds[first_idx]
-                first_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(first_xyy))
-                first_munsell_variable = variable_arr[first_idx]
-                
-                second_srgb = srgb_colors_arr[second_idx]
-                second_xyy = xyY_arr[second_idx]
-                second_vl_emb = vl_embeds[second_idx]
-                second_lm_emb = lm_embeds[second_idx]
-                second_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(second_xyy))
-                second_munsell_variable = variable_arr[second_idx]
-                
-                distances_matrix['srgb'][first_idx, second_idx] = euclidean(first_srgb, second_srgb)
-                distances_matrix['vl_cosine'][first_idx, second_idx] = cosine(first_vl_emb, second_vl_emb)
-                distances_matrix['lm_cosine'][first_idx, second_idx] = cosine(first_lm_emb, second_lm_emb)
-                distances_matrix['cam'][first_idx, second_idx] = delta_E_CAM16LCD(first_cam, second_cam)
-                distances_matrix['munsell'][first_idx, second_idx] = np.abs(first_munsell_variable - second_munsell_variable)
+        if cumulative:
+            cumulative_totals = {
+                "srgb": 0.0,
+                "vl_cosine": 0.0,
+                "lm_cosine": 0.0,
+                "cam": 0.0,
+                "munsell": 0.0
+            }
+            for idx in range(1, len(metadata)):
+                prev_idx = idx - 1
+
+                prev_srgb = srgb_colors_arr[prev_idx]
+                prev_xyy = xyY_arr[prev_idx]
+                prev_vl_emb = vl_embeds[prev_idx]
+                prev_lm_emb = lm_embeds[prev_idx]
+                prev_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(prev_xyy))
+                prev_munsell_variable = variable_arr[prev_idx]
+
+                current_srgb = srgb_colors_arr[idx]
+                current_xyy = xyY_arr[idx]
+                current_vl_emb = vl_embeds[idx]
+                current_lm_emb = lm_embeds[idx]
+                current_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(current_xyy))
+                current_munsell_variable = variable_arr[idx]
+
+                srgb_distance = euclidean(prev_srgb, current_srgb)
+                vl_cosine_distance = cosine(prev_vl_emb, current_vl_emb)
+                lm_cosine_distance = cosine(prev_lm_emb, current_lm_emb)
+                cam_distance = delta_E_CAM16UCS(prev_cam, current_cam)
+                munsell_distance = np.abs(prev_munsell_variable - current_munsell_variable)
+
+                cumulative_totals["srgb"] += srgb_distance
+                cumulative_totals["vl_cosine"] += vl_cosine_distance
+                cumulative_totals["lm_cosine"] += lm_cosine_distance
+                cumulative_totals["cam"] += cam_distance
+                cumulative_totals["munsell"] += munsell_distance
+
+                distances_matrix["srgb"][0, idx] = cumulative_totals["srgb"]
+                distances_matrix["vl_cosine"][0, idx] = cumulative_totals["vl_cosine"]
+                distances_matrix["lm_cosine"][0, idx] = cumulative_totals["lm_cosine"]
+                distances_matrix["cam"][0, idx] = cumulative_totals["cam"]
+                distances_matrix["munsell"][0, idx] = cumulative_totals["munsell"]
+        else:
+            for first_idx in range(len(metadata)):
+                for second_idx in range(len(metadata)):
+                    first_srgb = srgb_colors_arr[first_idx]
+                    first_xyy = xyY_arr[first_idx]
+                    first_vl_emb = vl_embeds[first_idx]
+                    first_lm_emb = lm_embeds[first_idx]
+                    first_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(first_xyy))
+                    first_munsell_variable = variable_arr[first_idx]
+
+                    second_srgb = srgb_colors_arr[second_idx]
+                    second_xyy = xyY_arr[second_idx]
+                    second_vl_emb = vl_embeds[second_idx]
+                    second_lm_emb = lm_embeds[second_idx]
+                    second_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(second_xyy))
+                    second_munsell_variable = variable_arr[second_idx]
+
+                    distances_matrix['srgb'][first_idx, second_idx] = euclidean(first_srgb, second_srgb)
+                    distances_matrix['vl_cosine'][first_idx, second_idx] = cosine(first_vl_emb, second_vl_emb)
+                    distances_matrix['lm_cosine'][first_idx, second_idx] = cosine(first_lm_emb, second_lm_emb)
+                    distances_matrix['cam'][first_idx, second_idx] = delta_E_CAM16UCS(first_cam, second_cam)
+                    distances_matrix['munsell'][first_idx, second_idx] = np.abs(first_munsell_variable - second_munsell_variable)
         if return_rgb:
             return distances_matrix, srgb_colors_arr
         return distances_matrix
@@ -374,7 +419,8 @@ class MunsellEmbeddingsAnalyzer:
                                         fixed_h: list[Optional[str]],
                                         fixed_c: list[Optional[int]],
                                         fixed_v: list[Optional[int]],
-                                        return_rgb: bool=False):
+                                        return_rgb: bool=False,
+                                        cumulative: bool=False):
         self.chain_loader.get_list_of_chains_by_specifications(variables, values, fixed_h, fixed_c, fixed_v)
         list_of_distances_matrix = []
         rgb_list = []
@@ -382,9 +428,9 @@ class MunsellEmbeddingsAnalyzer:
         
         for var, val, h_fix, c_fix, v_fix in zip(variables, values, fixed_h, fixed_c, fixed_v):
             if return_rgb:
-                matrix, rgb = self.calculate_distances_matrix(var, val, h_fix, c_fix, v_fix, return_rgb)
+                matrix, rgb = self.calculate_distances_matrix(var, val, h_fix, c_fix, v_fix, return_rgb, cumulative)
             else:
-                matrix = self.calculate_distances_matrix(var, val, h_fix, c_fix, v_fix, return_rgb)
+                matrix = self.calculate_distances_matrix(var, val, h_fix, c_fix, v_fix, return_rgb, cumulative)
             list_of_distances_matrix.append(matrix)
             rgb_list.append(rgb)
             
@@ -401,14 +447,14 @@ class MunsellEmbeddingsAnalyzer:
             ax1, ax2 = axes
         else:
             fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
-        ax1.plot(distances_dict[x][init_idx, :], distances_dict['vl_cosine'][init_idx, :], linewidth=2, linestyle='--')
-        ax1.scatter(distances_dict[x][init_idx, :], distances_dict['vl_cosine'][init_idx, :], c=rgb_arr, s=300, alpha=1)
+        ax1.plot(distances_dict[x][init_idx, 1:], distances_dict['vl_cosine'][init_idx, 1:], linewidth=2, linestyle='--')
+        ax1.scatter(distances_dict[x][init_idx, 1:], distances_dict['vl_cosine'][init_idx, 1:], c=rgb_arr[1:], s=300, alpha=1)
         ax1.set_xlabel(x)
         ax1.set_ylabel('VL cosine distances')
         ax1.grid(True)
         
-        ax2.scatter(distances_dict[x][init_idx, :], distances_dict['lm_cosine'][init_idx, :], c=rgb_arr, s=300, alpha=1)
-        ax2.plot(distances_dict[x][init_idx, :], distances_dict['lm_cosine'][init_idx, :], linewidth=2, linestyle='--')
+        ax2.scatter(distances_dict[x][init_idx, 1:], distances_dict['lm_cosine'][init_idx, 1:], c=rgb_arr[1:], s=300, alpha=1)
+        ax2.plot(distances_dict[x][init_idx, 1:], distances_dict['lm_cosine'][init_idx, 1:], linewidth=2, linestyle='--')
         ax2.set_xlabel(x)
         ax2.set_ylabel('LM cosine distances')
         ax2.grid(True)
