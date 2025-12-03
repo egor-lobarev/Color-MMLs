@@ -1,0 +1,35 @@
+version: '3'
+services:
+  vlm:
+    container_name: color-mmls
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 7860:7860
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - lab-net
+
+  jupyter:
+    container_name: jupyter_lab
+    build:
+      context: .
+      dockerfile: ./jupyter/Dockerfile
+    volumes:
+      - ./notebooks:/home/jovyan/notebooks
+    ports:
+      - 8888:8888
+    networks:
+      - lab-net
+    command: "start-notebook.sh --NotebookApp.token="
+
+networks:
+  lab-net:
+    driver: bridge

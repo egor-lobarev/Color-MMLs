@@ -161,3 +161,12 @@ Run color-mmls
 docker run --rm -it --gpus=all -p 7860:7860 color-mmls
 ```
 
+Build Jupyter lab with color-mmls
+```shell
+docker compose build
+```
+
+Run Jupyter lab with color-mmls
+```shell
+docker compose up -d
+```
