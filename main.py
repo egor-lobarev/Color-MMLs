@@ -70,3 +70,9 @@ def predict(images: str = Query(...), prompt: str = Query(...), bucket: str = Qu
         generated_ids_trimmed, skip_special_tokens=True, clean_up_tokenization_spaces=False
     )
     return {"response": output_texts[0]}
+
+
+'''
+You are given three images with solid colors. First image with solid color is reference.
+Say whcih image — second or third is more similar to reference.
+'''
