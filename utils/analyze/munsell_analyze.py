@@ -1,5 +1,6 @@
 from pathlib import Path
 import matplotlib.pyplot as plt
+import matplotlib.patches as patches
 from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -19,8 +20,8 @@ class MunsellEmbeddingsAnalyzer:
         plt.style.use('default')
         plt.rcParams['figure.figsize'] = (8, 6)
         plt.rcParams['font.size'] = 14
-
-    def _prepare_embedding_matrix(self, embeddings_list: list):
+    @staticmethod
+    def _prepare_embedding_matrix(embeddings_list: list):
         """Convert list of embeddings to matrix, filtering out None values"""
         valid_embeddings = [emb for emb in embeddings_list if emb is not None]
         if not valid_embeddings:
@@ -32,10 +33,11 @@ class MunsellEmbeddingsAnalyzer:
         # Stack embeddings into matrix
         embedding_matrix = np.vstack(valid_embeddings)
         return embedding_matrix, valid_indices
-    
-    def _pca_by_matrix(self, embedding_matrix: np.ndarray):
+
+    @staticmethod
+    def _pca_by_matrix(embedding_matrix: np.ndarray):
         if embedding_matrix is None or len(embedding_matrix) == 0:
-            return
+            raise RuntimeError("Empty embedding matrix provided for PCA.")
         
         embedding_matrix = np.array(embedding_matrix)
         scaler = StandardScaler()
@@ -110,8 +112,9 @@ class MunsellEmbeddingsAnalyzer:
             else:
                 result[embed_type] = None
         return result
-    
-    def plot_pca_variance(self, pca_results, embedding_name):
+
+    @staticmethod
+    def plot_pca_variance(pca_results, embedding_name):
         """Plot explained variance for PCA"""
         if embedding_name not in pca_results or pca_results[embedding_name] is None:
             return
@@ -202,8 +205,8 @@ class MunsellEmbeddingsAnalyzer:
                 'meta_filtered': meta_filtered
             }
         return results
-
-    def plot_tsne_results(self, tsne_results, embedding_name):
+    @staticmethod
+    def plot_tsne_results(tsne_results, embedding_name):
         """Plot t-SNE results using filtered metadata"""
         if embedding_name not in tsne_results or tsne_results[embedding_name] is None:
             return
@@ -295,7 +298,13 @@ class MunsellEmbeddingsAnalyzer:
         plt.tight_layout()
         plt.show()
     
-    def calculate_distances_matrix(self, variable : str, values : list[int] | None, fixed_h : str, fixed_c : int, fixed_v : int, return_rgb: bool=False):
+    def calculate_distances_matrix(self,
+                                   variable: str,
+                                   values: list[int] | None,
+                                   fixed_h: str,
+                                   fixed_c: int,
+                                   fixed_v: int,
+                                   return_rgb: bool=False):
         """Calculates the distance matrix by different variables: cosine distance of VL and LM embeddings, sRGB euclidean distance, munsell Manhattan distance between variables in a chain, CIE CAM 16USC.
 
         Args:
@@ -325,7 +334,7 @@ class MunsellEmbeddingsAnalyzer:
             "lm_cosine": np.zeros((len(metadata), len(metadata))),
             "cam": np.zeros((len(metadata), len(metadata))),
             "munsell": np.zeros((len(metadata), len(metadata))),
-            "chain_info" : {"variable" : variable, values}
+            "chain_info" : {"variable" : [variable, values]}
             }
         
         for first_idx in range(len(metadata)):
@@ -352,8 +361,11 @@ class MunsellEmbeddingsAnalyzer:
         if return_rgb:
             return distances_matrix, srgb_colors_arr
         return distances_matrix
-    
-    def plot_distance_matrix_result(self, distances_dict, init_idx=0, x : str="munsell", rgb_arr=[]):
+
+    @staticmethod
+    def plot_distance_matrix_result(distances_dict, init_idx=0, x : str="munsell", rgb_arr=None):
+        if rgb_arr is None:
+            rgb_arr = []
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
         ax1.plot(distances_dict[x][init_idx, :], distances_dict['vl_cosine'][init_idx, :], linewidth=2, linestyle='--')
         ax1.scatter(distances_dict[x][init_idx, :], distances_dict['vl_cosine'][init_idx, :], c=rgb_arr, s=300, alpha=1)
@@ -368,3 +380,52 @@ class MunsellEmbeddingsAnalyzer:
         ax2.grid(True)
         
         plt.show()
+
+    def draw_munsell_chain(self, variable, values, fixed_h, fixed_c, fixed_v):
+        chain = self.chain_loader.get_chain_by_specification(variable, values, fixed_h, fixed_c, fixed_v)['metadata']
+        # Create figure
+        fig, ax = plt.subplots(1, 1, figsize=(8,6))
+        
+        # Calculate swatch dimensions
+        n_colors = len(chain)
+        swatch_width = 2
+        swatch_height = 10
+        
+        # Draw each color swatch
+        for i, color in enumerate(chain):
+            # Convert xyY to RGB using normalized Y
+            
+            rgb = color['RGB']
+            # Create rectangle for color swatch
+            rect = patches.Rectangle((i, 0), swatch_width, swatch_height, 
+                                facecolor=rgb, edgecolor='black', linewidth=0.5)
+            ax.add_patch(rect)
+            
+            # Add label
+            if variable == 'h':
+                label = f"{color['H']}"
+            elif variable == 'v':
+                label = f"V{color['V']}\n{color['H']}/C{color['C']}"
+            elif variable == 'c':
+                label = f"C{color['C']}\n{color['H']}/V{color['V']}"
+            
+            ax.text(i + swatch_width/2, -0.1, label, ha='center', va='top', 
+                    fontsize=12, rotation=45)
+        
+        # Set axis properties
+        ax.set_xlim(0, n_colors)
+        ax.set_ylim(-0.3, 5)
+        ax.set_aspect('equal')
+        ax.axis('off')
+        
+        # Add title
+        title_parts = []
+        if fixed_h: title_parts.append(f"Hue: {fixed_h}")
+        if fixed_v: title_parts.append(f"Value: {fixed_v}")
+        if fixed_c: title_parts.append(f"Chroma: {fixed_c}")
+        title_parts.append(f"Varying: {variable}")
+        
+        ax.set_title(" / ".join(title_parts), fontsize=12, pad=20)
+        
+        plt.tight_layout()
+        return fig, ax
