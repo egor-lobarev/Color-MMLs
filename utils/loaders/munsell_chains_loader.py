@@ -125,7 +125,25 @@ class MunsellChainsLoader(EmbeddingsLoader):
                 (self.color_table['C'] == c_val) &
                 (self.color_table['V'] == v_val)
             ]
-            
+            if c_val == 0:
+                # Any color with C = 0 is achromatic, so also check for that
+                achromatic_20 = self.color_table[
+                    (self.color_table['H'] == 'N') &
+                    (self.color_table['C'] == c_val) &
+                    (self.color_table['V'] == v_val)
+                ]
+                matches = pd.concat([matches, achromatic_20]).drop_duplicates().reset_index(drop=True)
+                
+                # Additionally, check for 2.5* hue as containing achromatic colors
+                hue = ''.join(c for c in h_val if c.isupper())
+                achromatic_33 = self.color_table[
+                    (self.color_table['H'] == '2.5'+ hue) &
+                    (self.color_table['C'] == c_val) &
+                    (self.color_table['V'] == v_val)
+                ]
+                
+                matches = pd.concat([matches, achromatic_33]).drop_duplicates().reset_index(drop=True)
+                
             if not matches.empty:
                 for _, row in matches.iterrows():
                     color_data = {
@@ -197,7 +215,7 @@ class MunsellChainsLoader(EmbeddingsLoader):
     def get_chain_by_specification(self,
                                    variable: str,
                                    values: Optional[List[int | str]] = None,
-                                   fixed_h: Optional[int] = None,
+                                   fixed_h: Optional[str] = None,
                                    fixed_c: Optional[int] = None,
                                    fixed_v: Optional[int] = None
                                    ) -> Dict[str, Any]:
@@ -224,10 +242,10 @@ class MunsellChainsLoader(EmbeddingsLoader):
     
     def get_list_of_chains_by_specifications(self,
                                              variables: list[str],
-                                             values: Optional[List[str | int]],
-                                             fixed_h: Optional[List[int]],
-                                             fixed_c: Optional[List[int]],
-                                             fixed_v: Optional[List[int]]):
+                                             values: List[Optional[List[str | int]]],
+                                             fixed_h: List[Optional[str]],
+                                             fixed_c: List[Optional[int]],
+                                             fixed_v: List[Optional[int]]):
         """Returns multiple chains information.
 
         Args:
@@ -236,6 +254,10 @@ class MunsellChainsLoader(EmbeddingsLoader):
             fixed_h (List[str]): List of fixed H values.
             fixed_c (List[int  |  None]): List of fixed C values.
             fixed_v (List[int  |  None]): List of fixed V values.
+            
+        Returns: 
+        Dict{'metadata': all_metadata, 'lm_pooled': lm_pooled, 'vl_pooled': vl_pooled}
+        
         """
         all_metadata = []
         lm_pooled_list = []
