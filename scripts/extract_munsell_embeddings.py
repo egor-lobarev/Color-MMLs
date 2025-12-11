@@ -42,6 +42,7 @@ def main() -> None:
     args = parser.parse_args()
 
     cfg = _load_config(Path(args.config))
+    print(cfg)
 
     csv_path = Path(cfg.get("csv", "data/munsell_colors/munsell_manifest.csv")).expanduser()
     pics_dir = Path(cfg.get("pics_dir", "data/munsell_colors/pics")).expanduser()

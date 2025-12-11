@@ -5,6 +5,7 @@ import csv
 import json
 import os
 from typing import Tuple
+from pathlib import Path
 
 import pandas as pd
 from tqdm import tqdm
@@ -14,17 +15,12 @@ from utils.color.is_in_srgb import is_in_srgb_gamut
 
 
 # Resolve project root and local_experiments path for imports and configs
-THIS_FILE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(THIS_FILE_DIR)
-LOCAL_EXPERIMENTS_DIR = os.path.join(PROJECT_ROOT, "local_experiments")
+PICTURE_CONFIG_PATH =  Path("configs") / "picture_config.json"
+SOURCE_CSV_PATH = Path('data') / "munsell_2-0.csv"
 
-# Use config from the central configs folder
-PICTURE_CONFIG_PATH = os.path.join(PROJECT_ROOT, "configs", "picture_config.json")
-SOURCE_CSV_PATH = os.path.join(LOCAL_EXPERIMENTS_DIR, "munsell_3-3.csv")
-
-OUTPUT_BASE_DIR = os.path.join(PROJECT_ROOT, "data", "munsell_colors")
+OUTPUT_BASE_DIR = Path("data") / 'colors' / "munsell_colors_2.0"
 OUTPUT_PICS_DIR = os.path.join(OUTPUT_BASE_DIR, "pics")
-OUTPUT_CSV_PATH = os.path.join(OUTPUT_BASE_DIR, "munsell_manifest.csv")
+OUTPUT_CSV_PATH = os.path.join(OUTPUT_BASE_DIR, "munsell_manifest_2.0.csv")
 
 
 def load_picture_config(path: str) -> Tuple[int, int, str]:
@@ -107,7 +103,8 @@ def main():
         df.at[idx, "B"] = srgb[2]
 
         image_index += 1
-
+        
+    df.dropna(axis=0, how='any', inplace=True)
     # Write augmented CSV
     df.to_csv(OUTPUT_CSV_PATH, index=False)
 
