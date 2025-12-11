@@ -125,7 +125,25 @@ class MunsellChainsLoader(EmbeddingsLoader):
                 (self.color_table['C'] == c_val) &
                 (self.color_table['V'] == v_val)
             ]
-            
+            if c_val == 0:
+                # Any color with C = 0 is achromatic, so also check for that
+                achromatic_20 = self.color_table[
+                    (self.color_table['H'] == 'N') &
+                    (self.color_table['C'] == c_val) &
+                    (self.color_table['V'] == v_val)
+                ]
+                matches = pd.concat([matches, achromatic_20]).drop_duplicates().reset_index(drop=True)
+                
+                # Additionally, check for 2.5* hue as containing achromatic colors
+                hue = ''.join(c for c in h_val if c.isupper())
+                achromatic_33 = self.color_table[
+                    (self.color_table['H'] == '2.5'+ hue) &
+                    (self.color_table['C'] == c_val) &
+                    (self.color_table['V'] == v_val)
+                ]
+                
+                matches = pd.concat([matches, achromatic_33]).drop_duplicates().reset_index(drop=True)
+                
             if not matches.empty:
                 for _, row in matches.iterrows():
                     color_data = {

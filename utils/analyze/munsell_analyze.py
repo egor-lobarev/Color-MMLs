@@ -166,26 +166,26 @@ class MunsellEmbeddingsAnalyzer:
             raise ValueError("No metadata found for chain group.")
 
         results = {}
+        meta = pd.DataFrame(color_metadata)
         for embedding_name in ['lm_pooled', 'vl_pooled']:
             embedding_matrix_full = data.get(embedding_name, None)
             if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
                 results[embedding_name] = None
                 continue
-            keep_indices = set(meta['idx'].tolist())
+            keep_indices = set(meta['csv_index'].tolist())
             if leave_one_grey:
                 # Filtration
-                meta = pd.DataFrame(color_metadata)
                 if 'V' not in meta.columns or 'C' not in meta.columns:
                     raise ValueError(f"color_metadata must contain 'V' and 'C' columns for {embedding_name}")
-                meta['idx'] = np.arange(len(meta))
-                keep_indices = set(meta.loc[meta['C'] != 0,'idx'].tolist())
+                meta['csv_index'] = np.arange(len(meta))
+                keep_indices = set(meta.loc[meta['C'] != 0,'csv_index'].tolist())
                 for v_value, group in meta.groupby('V'):
                     c0_rows = group[group['C'] == 0]
                     if not c0_rows.empty:
-                        keep_indices.add(c0_rows.iloc[0]['idx'])
+                        keep_indices.add(c0_rows.iloc[0]['csv_index'])
                 keep_indices = sorted(keep_indices)
             embedding_matrix_filtered = embedding_matrix_full[keep_indices]
-            meta_filtered = meta.loc[meta['idx'].isin(keep_indices)].reset_index(drop=True)
+            meta_filtered = meta.loc[meta['csv_index'].isin(keep_indices)].reset_index(drop=True)
             pca_result = self._pca_by_matrix(embedding_matrix_filtered)
             # Standardize
             # scaler = StandardScaler()
