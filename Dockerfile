@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
         torchvision \
         git+https://github.com/huggingface/transformers \
         accelerate \
-        qwen-vl-utils[decord]==0.0.8 \
+        qwen-vl-utils==0.0.8 \
         fastapi \
         uvicorn[standard] \
         minio
