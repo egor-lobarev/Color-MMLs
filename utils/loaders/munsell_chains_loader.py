@@ -51,23 +51,17 @@ class MunsellChainsLoader(EmbeddingsLoader):
         df = pd.read_csv(self.csv_path)
         
         # Ensure required columns exist
-        required_cols = ['H', 'V', 'C', 'x', 'y', 'Y']
+        required_cols = ['H', 'V', 'C', 'x', 'y', 'Y', 'picture', 'R', 'G', 'B']
         missing_cols = [col for col in required_cols if col not in df.columns]
         if missing_cols:
             raise ValueError(f"Missing required columns: {missing_cols}")
-        
-        # Add RGB conversion using the existing function
-        rgb_values = []
+        index_values = []
         for _, row in df.iterrows():
-            rgb = self._xyY_to_rgb(row['x'], row['y'], row['Y'])
-            rgb_values.append(rgb)
-        
-        df['R'] = [rgb[0] for rgb in rgb_values]
-        df['G'] = [rgb[1] for rgb in rgb_values]
-        df['B'] = [rgb[2] for rgb in rgb_values]
+            index =  str(row['picture']).split('.')[0]
+            index_values.append(index)
         
         # Add index column for mapping to embeddings
-        df['index'] = df.index
+        df['index'] = index_values
         
         return df
     
