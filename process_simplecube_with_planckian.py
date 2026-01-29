@@ -313,7 +313,7 @@ def process_simplecube_dataset(input_dir, output_dir, num_augmentations=5,
         for _, row in tqdm(original_gt_df.iterrows(), total=len(original_gt_df), 
                           desc=f"Processing {subdir.name} images", leave=False):
             img_name = row['image']
-            img_path = subdir / f"{img_name}.png"
+            img_path = subdir / 'PNG' / f"{img_name}.png"
             
             if not img_path.exists():
                 print(f"Warning: Image {img_path} not found, skipping...")
