@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/train/PNG/00_2223_planck_000_2178K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image you provided appears to be a simple composition with two distinct areas: a large, solid brown area on the left and a smaller black square on the right. There is no visible light source or gradient indicating any specific type of illumination. The black square does not appear to be illuminated from within, as it maintains its dark coloration.\n\nIf you're asking about the type of illumination (e.g., direct, diffused, etc.), there isn't enough information in the image to determine that. The black square could be reflecting ambient light, but without additional context or a light source depicted, we cannot make a definitive statement about the illumination type. If you have more details or another image showing the same object under different lighting conditions, please provide them for a more accurate analysis.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/00_2223_planck_000_2178K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/00_2223_planck_000_2178K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/00_2223_planck_000_2178K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

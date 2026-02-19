@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/train/PNG/02_8317_planck_000_6552K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image depicts a scene with a large, multi-story building that appears to be a historical or institutional structure, possibly a university or government building, given its architectural style and size. The sky is overcast, suggesting it might be a cloudy day, which typically results in diffused lighting. There is no direct sunlight visible, indicating that the light source (the sun) is obscured by clouds.\n\nThe ground is covered with snow, which reflects some of the ambient light, making the scene appear somewhat brighter than it would on a completely cloudy day without any snow. However, the overall illumination is still relatively low due to the lack of direct sunlight.\n\nIn summary, the illumination in this image is characterized by diffuse, soft lighting from an overcast sky, with a slight increase in brightness due to the reflective snow on the ground.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/02_8317_planck_000_6552K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/02_8317_planck_000_6552K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/02_8317_planck_000_6552K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

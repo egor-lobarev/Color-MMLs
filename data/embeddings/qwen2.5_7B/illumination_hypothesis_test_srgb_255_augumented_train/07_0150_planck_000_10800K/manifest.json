@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/train/PNG/07_0150_planck_000_10800K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image shows a landscape with a prominent hill or mountain in the foreground and a structure, possibly a castle or fortress, perched on top of it. The sky appears to be overcast, with a mix of clouds that suggest diffused natural light rather than direct sunlight. The overall lighting in the image is relatively even, without harsh shadows or bright highlights, indicating that the scene is illuminated by ambient daylight. There are no strong contrasts between light and dark areas, which suggests that the image was taken during a time when the sun was not directly overhead, such as early morning or late afternoon. The lack of strong directional light also implies that the sun's position relative to the landscape is not causing significant changes in the illumination across the scene.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/07_0150_planck_000_10800K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/07_0150_planck_000_10800K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_train/07_0150_planck_000_10800K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}
