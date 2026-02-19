@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/test/PNG/00_2552_planck_000_8451K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image appears to be a stylized, artistic depiction of a figure on horseback, possibly inspired by Western themes. The lighting in the image seems to be artificial and somewhat flat, as there are no strong shadows or highlights that would suggest natural sunlight. The colors are vibrant, with a strong contrast between the reds and blues, which could indicate a controlled light source used for artistic effect.\n\nThe overall illumination suggests that the image was created using digital tools, where the artist has manually adjusted the lighting to achieve the desired mood and visual impact. There's no indication of natural outdoor lighting, such as sunlight or moonlight, but rather a more controlled, studio-like environment.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_2552_planck_000_8451K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_2552_planck_000_8451K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_2552_planck_000_8451K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

@@ -38,9 +38,10 @@ def save_preview(img_path, img):
     cv2.imwrite(img_path, cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
 
 def get_vllm_input(img_png_path):
-    gt_path = Path(img_png_path).parent.parent / 'gt.csv'
-    gt_data = pd.read_csv(gt_path)
-    illum = gt_data[gt_data["image"] == Path(img_png_path).stem][["mean_r", "mean_g", "mean_b"]].values[0]
+    # gt_path = Path(img_png_path).parent.parent / 'gt.csv'
+    # gt_data = pd.read_csv(gt_path)
+    # illum = gt_data[gt_data["image"] == Path(img_png_path).stem][["mean_r", "mean_g", "mean_b"]].values[0]
+    # illum /= illum.sum()
     
     # 1. Load Raw Data
     cam = cv2.imread(img_png_path, cv2.IMREAD_UNCHANGED)
@@ -48,9 +49,10 @@ def get_vllm_input(img_png_path):
     # 2. Linearize (CRITICAL: Must remove black level)
     # Note: Ensure you check if saturation_lvl is consistent across your dataset
     cam = linearize(cv2.cvtColor(cam, cv2.COLOR_BGR2RGB).astype(np.float64))
+    rgb_input = cam
     # mask_clipped = np.max(cam, axis=2) > 0.99
     # # 3. DO NOT Apply White Balance
-    cam_wb = np.clip(cam/illum, 0, 1)
+    # cam_wb = np.clip(cam/illum, 0, 1)
     # We want the 'cam' variable which still has the color cast!
     # sensor_gains = np.array([2.4, 1.0, 1.5])
     # cam_balanced = cam * sensor_gains
@@ -58,9 +60,9 @@ def get_vllm_input(img_png_path):
     # 4. Apply Matrix (The "Pseudo-sRGB" transform)
     # This aligns the sensor colors to human/sRGB primaries
     # even though the white point is still wrong.
-    rgb_input = np.dot(cam_wb, cam2rgb.T)
+    # rgb_input = np.dot(cam_wb, cam2rgb.T)
     
-    illum_xyz = np.dot(cam2rgb, illum)
+    # illum_xyz = np.dot(cam2rgb, illum)
     # rgb_input = rgb_input * illum_xyz
     
     # brightest_point = np.percentile(rgb_input, 98)
@@ -81,7 +83,7 @@ def get_vllm_input(img_png_path):
     
     # 5. Apply Gamma (CRITICAL for vLLM)
     # vLLMs expect non-linear data (approx 1/2.2)
-    rgb_input = np.clip(rgb_input, 0, 1)**(1/2.2)
+    rgb_input = np.clip(rgb_input, 0, 1) #**(1/2.2)
 
     # 6. Format for Model
     return (rgb_input * 255).astype(np.uint8)

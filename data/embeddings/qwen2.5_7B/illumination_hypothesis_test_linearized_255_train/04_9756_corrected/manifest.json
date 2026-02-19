@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube++/train/PNG/04_9756_corrected.JPG",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image appears to be taken in a very low-light environment, possibly during nighttime or in a dark outdoor setting. The overall illumination is quite dim, with most of the scene appearing in shades of dark green and black. There is minimal light source visible, which suggests that the image was likely captured using a camera with a long exposure time or in a low-light condition. The lack of distinct features or colors indicates that the scene is not well-lit, making it challenging to discern specific details about the environment.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/04_9756_corrected/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/04_9756_corrected/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/04_9756_corrected/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

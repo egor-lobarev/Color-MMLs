@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/test/PNG/00_0414_planck_000_6951K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image appears to be taken during daylight hours, as there is sufficient natural light illuminating the scene. The sky seems overcast, which diffuses the sunlight and creates a soft lighting effect without harsh shadows. The snow on the ground reflects some of the light, adding to the overall brightness of the scene. The building and surrounding area are clearly visible, indicating that the illumination is adequate for capturing the details of the environment.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_0414_planck_000_6951K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_0414_planck_000_6951K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_0414_planck_000_6951K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

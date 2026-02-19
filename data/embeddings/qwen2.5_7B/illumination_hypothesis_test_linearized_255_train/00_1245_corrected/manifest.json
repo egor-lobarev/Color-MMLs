@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube++/train/PNG/00_1245_corrected.JPG",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image appears to be taken in a dimly lit environment, with most of the light coming from a single source that seems to be positioned off-camera to the left. The primary light source creates a greenish hue on the objects and the wall, suggesting it might be a fluorescent or LED light with a green filter or a similar color temperature. The rest of the room is relatively dark, indicating low ambient lighting. The objects on the shelf, including what looks like a book and a decorative item, are partially illuminated by this light source, but the overall scene is quite shadowy.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/00_1245_corrected/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/00_1245_corrected/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/00_1245_corrected/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

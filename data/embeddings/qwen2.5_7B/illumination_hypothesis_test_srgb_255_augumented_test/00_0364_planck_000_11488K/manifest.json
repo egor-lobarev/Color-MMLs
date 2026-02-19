@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/test/PNG/00_0364_planck_000_11488K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image shows a sign with the logo \"DKV\" on it, which appears to be illuminated by daylight. The lighting suggests that the photo was taken during the daytime under natural light conditions. There are no artificial lights or shadows indicating nighttime or low-light conditions. The visibility of details like the sign and background buildings further supports the presence of sufficient ambient light for clear illumination.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_0364_planck_000_11488K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_0364_planck_000_11488K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/00_0364_planck_000_11488K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

@@ -70,7 +70,7 @@ def planckian_to_rgb(temperature_kelvin):
     sd = colour.sd_blackbody(temperature_kelvin)
     
     # Convert SPD to XYZ tristimulus
-    XYZ = colour.SD_to_XYZ(sd)
+    XYZ = colour.sd_to_XYZ(sd)
     
     # Normalize to Y=1.0 (illuminant standard)
     XYZ = np.array(XYZ)

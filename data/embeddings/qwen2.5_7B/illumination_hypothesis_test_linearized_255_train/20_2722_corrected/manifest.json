@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube++/train/PNG/20_2722_corrected.JPG",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image appears to be taken in low-light conditions, possibly during nighttime or in a very dimly lit environment. The overall scene is dark with minimal visible details, and there's a strong green tint over the entire image, which could suggest that the photo was taken under artificial lighting with a green filter or that it has been edited to have this effect. The structure in the background seems to be a building partially obscured by trees, but due to the darkness, specific features of the building are not clearly discernible.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/20_2722_corrected/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/20_2722_corrected/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/20_2722_corrected/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/test/PNG/02_8087_planck_000_8331K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image appears to be taken in a dimly lit environment, possibly a subway or underground station. The primary source of light seems to come from overhead fluorescent lights, which cast a cool white glow on the surroundings. The walls and ceiling are reflective, amplifying the light but also creating some glare. There's a person visible in the background, standing near what looks like a bench or a piece of equipment, but their details are not very clear due to the low lighting conditions. The overall atmosphere is somewhat moody and subdued, with shadows and reflections adding depth to the scene.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/02_8087_planck_000_8331K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/02_8087_planck_000_8331K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/02_8087_planck_000_8331K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube++/train/PNG/05_9640_corrected.JPG",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image depicts a dark, almost entirely black scene with a few faint shapes that appear to be birds in flight. The overall illumination is very low, with minimal light sources or highlights visible. The darkness dominates the image, creating a sense of mystery or perhaps a night-time setting. There are no bright spots or strong contrasts, which suggests that the image was taken in low-light conditions or under artificial lighting that does not provide much visibility.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/05_9640_corrected/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/05_9640_corrected/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/05_9640_corrected/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

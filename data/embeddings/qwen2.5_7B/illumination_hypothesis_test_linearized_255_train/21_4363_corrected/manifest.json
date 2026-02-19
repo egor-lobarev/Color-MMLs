@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube++/train/PNG/21_4363_corrected.JPG",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image appears to be taken in low-light conditions, possibly at night or in a dimly lit area. The lighting seems to come from a single light source, likely a streetlight, which casts shadows and highlights on the surface of what looks like a road or pavement. The yellow lines on the surface are illuminated by the light, while the rest of the image is relatively dark. There's a noticeable shadow cast on the right side of the image, indicating that the light source is positioned off-camera to the left. The overall illumination is uneven, with some areas brightly lit and others in deep shadow.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/21_4363_corrected/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/21_4363_corrected/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_linearized_255_train/21_4363_corrected/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

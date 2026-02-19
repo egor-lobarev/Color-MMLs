@@ -1,0 +1,38 @@
+{
+  "image": "/alpha/lobarev_e/SimpleCube_augmented/test/PNG/02_8705_planck_000_7026K.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": "You are an expert at analyzing illumination in images.",
+  "restart_model_per_image": false,
+  "prompt": "What is the illumination in this image?",
+  "answer": "system\nYou are an expert at analyzing illumination in images.\nuser\nWhat is the illumination in this image?\n addCriterion\nThe image shows a surface that appears to be made of stones or bricks, with a relatively even and diffused lighting across the scene. The light source seems to be coming from above, as there are no strong shadows or highlights indicating a direct light source from one side. The overall illumination is soft and even, suggesting a diffuse light setup, possibly from an overcast sky or a well-diffused artificial light source. There are no harsh contrasts or deep shadows, which indicates a balanced and even lighting condition.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/02_8705_planck_000_7026K/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/02_8705_planck_000_7026K/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/illumination_hypothesis_test_srgb_255_augumented_test/02_8705_planck_000_7026K/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      54,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      84,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  }
+}

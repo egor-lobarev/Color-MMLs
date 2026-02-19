@@ -55,7 +55,8 @@ def main() -> None:
         raise SystemExit(f"PNG subfolder not found in: {data_path.as_posix()}")
 
     # Find all .JPG files in PNG subfolder
-    img_paths = sorted(png_dir.glob("*.JPG"))
+    # img_paths = sorted(png_dir.glob("*.JPG"))
+    img_paths = sorted(png_dir.glob("*.png"))
     if not img_paths:
         raise SystemExit(f"No .JPG files found in: {png_dir.as_posix()}")
 

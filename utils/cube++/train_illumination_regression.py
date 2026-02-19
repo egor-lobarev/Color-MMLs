@@ -11,14 +11,14 @@ import json
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_squared_error
 import sys
 import os
 
 # Add project root to path for imports
 sys.path.append(str(Path(__file__).parent.parent.parent))
-from utils.cube++.calc_metrics import calc_metrics, parse_csv
+from .calc_metrics import calc_metrics, parse_csv
 
 
 def load_embeddings_and_gt(embeddings_dir: Path, gt_csv_path: Path):
@@ -63,7 +63,7 @@ def load_embeddings_and_gt(embeddings_dir: Path, gt_csv_path: Path):
     return embeddings_dict, gt_df, image_names
 
 
-def train_regression_model(X_train, y_train, X_test, y_test):
+def train_regression_model(X_train: np.typing.NDArray, y_train, X_test: np.typing.NDArray, y_test):
     """
     Train linear regression model and calculate metrics.
     
@@ -81,7 +81,9 @@ def train_regression_model(X_train, y_train, X_test, y_test):
         test_metrics: Test metrics
     """
     # Train model
-    model = LinearRegression()
+    model = Ridge()
+    X_train = X_train.squeeze()
+    X_test = X_test.squeeze()
     model.fit(X_train, y_train)
     
     # Make predictions
@@ -173,7 +175,6 @@ def main():
     print("Loading train embeddings and ground truth...")
     train_embeddings_dict, train_gt_df, train_image_names = load_embeddings_and_gt(
         train_embeddings_dir, train_gt_csv)
-    
     print("Loading test embeddings and ground truth...")
     test_embeddings_dict, test_gt_df, test_image_names = load_embeddings_and_gt(
         test_embeddings_dir, test_gt_csv)
@@ -181,7 +182,6 @@ def main():
     # Prepare ground truth arrays
     train_gt_arrays = {}
     test_gt_arrays = {}
-    
     for emb_type, (valid_images, _) in train_embeddings_dict.items():
         # Filter ground truth for valid images
         train_gt = []
@@ -191,7 +191,6 @@ def main():
                                train_gt_df.loc[img_name, 'mean_g'], 
                                train_gt_df.loc[img_name, 'mean_b']])
         train_gt_arrays[emb_type] = np.array(train_gt)
-    
     for emb_type, (valid_images, _) in test_embeddings_dict.items():
         # Filter ground truth for valid images
         test_gt = []
