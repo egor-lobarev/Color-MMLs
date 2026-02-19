@@ -1,0 +1,43 @@
+{
+  "experiment_name": "illumination_hypothesis_test_linearized_255",
+  "config": {
+    "experiment_name": "illumination_hypothesis_test_linearized_255",
+    "train_data_path": "/alpha/lobarev_e/SimpleCube++/train",
+    "test_data_path": "/alpha/lobarev_e/SimpleCube++/test",
+    "outdir_root": "data/embeddings/qwen2.5_7B",
+    "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+    "prompt": "What is the illumination in this image?",
+    "init_prompt": "You are an expert at analyzing illumination in images.",
+    "device": "cuda:0",
+    "save_tokens": false,
+    "restart_model_per_image": false
+  },
+  "results": {
+    "vision_pooled_mean": {
+      "train_metrics": {
+        "mean_repr_ang_error": 1.5576415230161156,
+        "mse": 7.412312256004185e-05
+      },
+      "test_metrics": {
+        "mean_repr_ang_error": 6.830714645108471,
+        "mse": 0.0014861256867550778
+      },
+      "train_samples": 1772,
+      "test_samples": 462,
+      "embedding_dim": 1
+    },
+    "lm_pooled_mean": {
+      "train_metrics": {
+        "mean_repr_ang_error": 0.050399341427013036,
+        "mse": 7.232009142723225e-08
+      },
+      "test_metrics": {
+        "mean_repr_ang_error": 7.728732678487761,
+        "mse": 0.0020230785793150046
+      },
+      "train_samples": 1772,
+      "test_samples": 462,
+      "embedding_dim": 1
+    }
+  }
+}
