@@ -1,5 +1,5 @@
 {
-  "experiment_name": "illumination_hypothesis_test",
+  "experiment_name": "illumination_hypothesis_test_raw_linearized",
   "train_data_path": "path/to/your/train_dataset",
   "test_data_path": "path/to/your/test_dataset", 
   "outdir_root": "data/embeddings/qwen2.5_7B",
@@ -8,5 +8,5 @@
   "init_prompt": "You are an expert at analyzing illumination in images.",
   "device": "cuda:0",
   "save_tokens": false,
-  "restart_model_per_image": true
+  "restart_model_per_image": false
 }
