@@ -28,8 +28,8 @@ class MunsellColor:
     @staticmethod
     def chain(
         variable: str,
-        values: List,
-        fixed_h: Optional[int] = None,
+        values: List[int | str],
+        fixed_h: Optional[str] = None,
         fixed_c: Optional[int] = None,
         fixed_v: Optional[int] = None,
     ) -> List["MunsellColor"]:
