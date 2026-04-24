@@ -735,14 +735,52 @@ class MunsellEmbeddingsAnalyzer:
         if len(explained_var) >= 3:
             title += f"<br>(Var explained: PC1={explained_var[0]:.2%}, PC2={explained_var[1]:.2%}, PC3={explained_var[2]:.2%})"
         
+        # fig.update_layout(
+        #     title=title,
+        #     scene=dict(
+        #         xaxis_title='PC1',
+        #         yaxis_title='PC2',
+        #         zaxis_title='PC3'
+        #     ),
+        #     margin=dict(l=0, r=0, b=0, t=60)
+        # )
         fig.update_layout(
-            title=title,
             scene=dict(
-                xaxis_title='PC1',
-                yaxis_title='PC2',
-                zaxis_title='PC3'
+                xaxis=dict(
+                    visible=False,           # Hide axis line
+                    showticklabels=False,    # Hide tick labels
+                    showgrid=False,          # Hide grid lines
+                    showline=False,          # Hide axis line
+                    showbackground=False,    # Hide axis background
+                    zeroline=False           # Hide zero line
+                ),
+                yaxis=dict(
+                    visible=False,
+                    showticklabels=False,
+                    showgrid=False,
+                    showline=False,
+                    showbackground=False,
+                    zeroline=False
+                ),
+                zaxis=dict(
+                    visible=False,
+                    showticklabels=False,
+                    showgrid=False,
+                    showline=False,
+                    showbackground=False,
+                    zeroline=False
+                ),
+                # Remove the gray cube background
+                bgcolor='rgba(0,0,0,0)',
+                # Remove the axis lines and planes
+                aspectmode='data',  # Keeps point proportions
             ),
-            margin=dict(l=0, r=0, b=0, t=60)
+            # Remove all margins and background
+            margin=dict(l=0, r=0, t=0, b=0),
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            # Remove title if you don't want it
+            showlegend=False
         )
         fig.show()
     
