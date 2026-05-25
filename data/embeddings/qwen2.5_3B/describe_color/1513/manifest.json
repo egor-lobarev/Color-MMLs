@@ -1,0 +1,61 @@
+{
+  "image": "data/colors/munsell_colors/pics/1513.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n\nThe color you've described is a very light, pastel shade of purple. It's a soft and delicate hue that is often associated with tranquility, calmness, and elegance. This color can be used in various contexts to create a soothing and inviting atmosphere.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1513/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1513/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_3B/describe_color/1513/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      86,
+      2048
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "csv_row": {
+    "H": "7.5P",
+    "V": 7,
+    "C": 6,
+    "x": 0.304,
+    "y": 0.255,
+    "Y": 34.4,
+    "picture": "1513.png",
+    "R": 0.737692709312,
+    "G": 0.558855067568,
+    "B": 0.78667902691
+  },
+  "munsell_spec": "7.5P",
+  "xyY": {
+    "x": 0.304,
+    "y": 0.255,
+    "Y": 34.4
+  },
+  "RGB": {
+    "R": 0.737692709312,
+    "G": 0.558855067568,
+    "B": 0.78667902691
+  }
+}
