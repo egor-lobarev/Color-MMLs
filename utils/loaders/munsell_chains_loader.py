@@ -308,11 +308,11 @@ class MunsellChainsLoader(EmbeddingsLoader):
                 color_data = {
                     'csv_index': int(row['index']),
                     'H': row['H'],
-                    'C': int(row['C']),
-                    'V': int(row['V']),
+                    'C': row.get("C"),
+                    'V': row.get("V"),
                     'xyY': (row['x'], row['y'], row['Y']),
-                    'RGB': (row['R'], row['G'], row['B']),
-                    'munsell_spec': f"{row['H']} {row['V']}/{row['C']}",
+                    'RGB': [row.get("R"), row.get('G'), row.get('B')],
+                    'munsell_spec': f"{row.get('H')} {row.get('V')}/{row.get('C')}",
                     'embedding_index': idx_str
                 }
                 available_colors.append(color_data)
