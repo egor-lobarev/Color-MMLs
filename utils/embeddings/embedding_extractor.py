@@ -28,7 +28,7 @@ from typing import Dict, Optional, List
 import argparse
 import torch
 from PIL import Image
-from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration
+from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration, BitsAndBytesConfig
 
 from utils.embeddings.images_loader import (
     gather_image_paths,
@@ -78,21 +78,31 @@ class Qwen25VLEmbeddingExtractor:
     # extractor.close()
     """
 
-    def __init__(self, model_name="Qwen/Qwen2.5-VL-7B-Instruct", device=None, torch_dtype=None, system_prompt=None):
+    def __init__(self, model_name="Qwen/Qwen2.5-VL-7B-Instruct", device=None, quantize_4_bit=False, torch_dtype=None, system_prompt=None):
         # Pick a sensible device automatically; allow manual override via CLI
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         # Prefer bf16 on GPU when available to reduce memory without much quality impact
         self.torch_dtype = torch_dtype or (torch.bfloat16 if torch.cuda.is_available() else torch.float32)
         # The processor handles both text and images; trust_remote_code is needed for Qwen2.5-VL processors
         self.processor = AutoProcessor.from_pretrained(model_name, min_pixels=224**2, max_pixels=224**2, trust_remote_code=True)
+            
 
         # Load model; on CPU we avoid device_map="auto". trust_remote_code for Qwen-specific model code.
-        self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-            model_name,
-            torch_dtype=self.torch_dtype,
-            device_map="cuda:0",
-            trust_remote_code=True
-        ).to(self.device)
+        if quantize_4_bit:
+            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                model_name,
+                torch_dtype=self.torch_dtype,
+                device_map="cuda:0",
+                trust_remote_code=True,
+                quantization_config=BitsAndBytesConfig(load_in_4bit=True),
+            )    
+        else:
+            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                model_name,
+                torch_dtype=self.torch_dtype,
+                device_map="cuda:0",
+                trust_remote_code=True,
+            ).to(self.device)
         
         # Store system prompt
         self.system_prompt = system_prompt

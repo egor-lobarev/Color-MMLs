@@ -86,7 +86,7 @@ def main() -> None:
     if not img_paths:
         raise SystemExit("No images found corresponding to CSV 'picture' column.")
 
-    print("Found images to process:", [p.as_posix() for p in img_paths])
+    print("Found images to process:", len([p.as_posix() for p in img_paths]))
     images = load_images(img_paths)
 
     model_name = cfg.get("model", "Qwen/Qwen2.5-VL-7B-Instruct")
@@ -94,6 +94,7 @@ def main() -> None:
     prompt = cfg.get("prompt", "Describe the image(s).")
     save_tokens = bool(cfg.get("save_tokens", False))
     restart_model_per_image = bool(cfg.get("restart_model_per_image", False))
+    quantize_4_bit = bool(cfg.get("quantize_4_bit", False))
     init_prompt = cfg.get("init_prompt", None)
 
     extractor = None
@@ -106,9 +107,9 @@ def main() -> None:
                 del extractor
                 if torch.cuda.is_available():
                     torch.cuda.empty_cache()
-            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device)
+            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit)
         elif extractor is None:
-            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, system_prompt=init_prompt)
+            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, system_prompt=init_prompt)
 
         out = extractor.extract([img], prompt=prompt)
         img_dir = out_root / stem
