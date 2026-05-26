@@ -95,6 +95,9 @@ def main() -> None:
     save_tokens = bool(cfg.get("save_tokens", False))
     restart_model_per_image = bool(cfg.get("restart_model_per_image", False))
     quantize_4_bit = bool(cfg.get("quantize_4_bit", False))
+    quantize_8_bit = bool(cfg.get("quantize_8_bit", False))
+    if quantize_8_bit and quantize_4_bit:
+        raise ValueError("In config both 4 bit and 8 bit quantization set true, choose one.")
     init_prompt = cfg.get("init_prompt", None)
 
     extractor = None
@@ -107,9 +110,9 @@ def main() -> None:
                 del extractor
                 if torch.cuda.is_available():
                     torch.cuda.empty_cache()
-            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit)
+            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, quantize_8_bit=quantize_8_bit, system_prompt=init_prompt)
         elif extractor is None:
-            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, system_prompt=init_prompt)
+            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, quantize_8_bit=quantize_8_bit, system_prompt=init_prompt)
 
         out = extractor.extract([img], prompt=prompt)
         img_dir = out_root / stem
