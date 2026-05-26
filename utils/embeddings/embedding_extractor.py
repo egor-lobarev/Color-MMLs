@@ -29,6 +29,8 @@ import argparse
 import torch
 from PIL import Image
 from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration, BitsAndBytesConfig
+from qwen_vl_utils import process_vision_info  # pip install qwen-vl-utils
+
 
 from utils.embeddings.images_loader import (
     gather_image_paths,
@@ -78,7 +80,7 @@ class Qwen25VLEmbeddingExtractor:
     # extractor.close()
     """
 
-    def __init__(self, model_name="Qwen/Qwen2.5-VL-7B-Instruct", device=None, quantize_4_bit=False, torch_dtype=None, system_prompt=None):
+    def __init__(self, model_name="Qwen/Qwen2.5-VL-7B-Instruct", device=None, quantize_4_bit=False, quantize_8_bit=False, torch_dtype=None, system_prompt=None):
         # Pick a sensible device automatically; allow manual override via CLI
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         # Prefer bf16 on GPU when available to reduce memory without much quality impact
@@ -88,21 +90,49 @@ class Qwen25VLEmbeddingExtractor:
             
 
         # Load model; on CPU we avoid device_map="auto". trust_remote_code for Qwen-specific model code.
+
         if quantize_4_bit:
+            bnb_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                bnb_4bit_use_double_quant=True,       # nested quantization, saves a bit more memory
+                bnb_4bit_quant_type="nf4",            # NF4 > fp4 for LLM weights
+                llm_int8_skip_modules=[               # these stay in bf16
+                    "visual",                         # vision tower
+                    "merger",                         # multimodal projector (Qwen2.5-VL specific name)
+                ]
+            )
             self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 model_name,
-                torch_dtype=self.torch_dtype,
-                device_map="cuda:0",
+                dtype=self.torch_dtype,
+                device_map=device,
                 trust_remote_code=True,
-                quantization_config=BitsAndBytesConfig(load_in_4bit=True),
-            )    
+                quantization_config=bnb_config,
+            )
+            print("Using 4 bit quantized model\n")
+        elif quantize_8_bit:
+            bnb_config = BitsAndBytesConfig(
+                load_in_8bit=True,
+                llm_int8_skip_modules=[
+                    "visual",
+                    "merger",
+                ]
+            )
+            self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
+                model_name,
+                dtype=self.torch_dtype,
+                device_map=device,
+                trust_remote_code=True,
+                quantization_config=BitsAndBytesConfig(load_in_8bit=True),
+            )
+            print("Using 8 bit quantized model")
         else:
             self.model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 model_name,
-                torch_dtype=self.torch_dtype,
-                device_map="cuda:0",
+                dtype=self.torch_dtype,
+                device_map=device,
                 trust_remote_code=True,
-            ).to(self.device)
+            )
         
         # Store system prompt
         self.system_prompt = system_prompt
@@ -263,21 +293,42 @@ class Qwen25VLEmbeddingExtractor:
 
     @torch.no_grad()
     def extract(self, images: List[Image.Image], prompt: str = "Describe the images.") -> Dict[str, torch.Tensor]:
-        """
-        Run a forward pass with multiple images.
-        Populates these keys when available:
-          - "vision_tokens"         [sum_i Nv_i, Cv]
-          - "projected_tokens"      [sum_i Nv_i, D]
-          - "lm_last_hidden"        [B=1, T, D]
-          - "visual_token_lens"     [num_images]  (Nv per image)
-          - pooled means:
-              "vision_pooled_mean"      [1, Cv]
-              "projected_pooled_mean"   [1, D]
-              "lm_pooled_mean"          [1, 1, D]
-        """
         self.captures.clear()
 
-        inputs = self.preprocess(images, prompt)
+        messages = []
+        if self.system_prompt:
+            messages.append({
+                "role": "system",
+                "content": [{"type": "text", "text": self.system_prompt}]
+            })
+        messages.append({
+            "role": "user",
+            "content": (
+                [{"type": "image", "image": im} for im in images] +
+                [{"type": "text", "text": prompt}]
+            )
+        })
+
+        # Step 1: render chat template to text
+        text = self.processor.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+
+        # Step 2: extract image tensors via qwen_vl_utils
+        image_inputs, video_inputs = process_vision_info(messages)
+
+        # Step 3: build model inputs
+        inputs = self.processor(
+            text=[text],
+            images=image_inputs,
+            videos=video_inputs,
+            return_tensors="pt"
+        )
+        inputs = {k: v.to(self.device) if torch.is_tensor(v) else v for k, v in inputs.items()}
+
+        # Forward pass for embeddings
         _ = self.model(
             **inputs,
             output_hidden_states=True,
@@ -287,39 +338,23 @@ class Qwen25VLEmbeddingExtractor:
 
         result = dict(self.captures)
 
-        # Per-image visual token counts:
-        # Nv_i = (T_i * H_i * W_i) // (spatial_merge_size ** 2)
-        if "image_grid_thw" in inputs and hasattr(self.model.visual, "spatial_merge_size"):
-            grid = inputs["image_grid_thw"]  # [num_images, 3]
-            s = int(self.model.visual.spatial_merge_size)
-            visual_token_lens = (grid.prod(-1) // (s ** 2)).to(self.device)
-            result["visual_token_lens"] = visual_token_lens  # [num_images]
+        # Generation
+        generated_ids = self.model.generate(**inputs, max_new_tokens=256, do_sample=False)
+        input_len = inputs["input_ids"].shape[1]
+        result["model_answer"] = self.processor.batch_decode(
+            generated_ids[:, input_len:],   # ← slice off input tokens
+            skip_special_tokens=True
+        )[0]
 
-        # Provide pooled variants (mean)
+        # Pooled variants
         if "vision_tokens" in result:
-            result["vision_pooled_mean"] = result["vision_tokens"].mean(dim=0, keepdim=True)  # [1, Cv]
+            result["vision_pooled_mean"] = result["vision_tokens"].mean(dim=0, keepdim=True)
         if "projected_tokens" in result:
-            result["projected_pooled_mean"] = result["projected_tokens"].mean(dim=0, keepdim=True)  # [1, D]
+            result["projected_pooled_mean"] = result["projected_tokens"].mean(dim=0, keepdim=True)
         if "lm_last_hidden" in result:
-            result["lm_pooled_mean"] = result["lm_last_hidden"].mean(dim=1, keepdim=True)  # [1, 1, D]
-
-        # Also get the model's generated answer (text) for the given prompt+images
-        try:
-            generated_ids = self.model.generate(
-                **inputs,
-                max_new_tokens=256,
-                do_sample=False
-            )
-            # Decode the full sequence; for simplicity we keep the full decoded text.
-            generated_texts = self.processor.batch_decode(generated_ids, skip_special_tokens=True)
-            result["model_answer"] = generated_texts[0] if len(generated_texts) > 0 else ""
-        except (RuntimeError, ValueError) as _e:
-            # If generation fails for any reason, omit the answer but keep embeddings
-            result["model_answer"] = ""
+            result["lm_pooled_mean"] = result["lm_last_hidden"].mean(dim=1, keepdim=True)
 
         return result
-
-
 
 
     def close(self):
