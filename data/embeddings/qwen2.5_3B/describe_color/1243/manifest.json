@@ -4,11 +4,10 @@
   "init_prompt": null,
   "restart_model_per_image": false,
   "prompt": "Describe the color.",
-  "answer": "system\nYou are a helpful assistant.\nuser\nDescribe the color.\n\nuser",
+  "answer": "The color you described is a deep, rich shade of blue that appears to be a combination of various hues, creating a sense of depth and complexity. It could be described as a deep, royal blue with undertones of purple or indigo, giving it a slightly darker and more intense appearance compared to lighter shades of blue. The color has a smooth, even tone without any visible speckles or imperfections, suggesting a high-quality, pure hue.",
   "saved": {
     "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1243/vision_pooled_mean.npy",
-    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1243/lm_pooled_mean.npy",
-    "visual_token_lens": "data/embeddings/qwen2.5_3B/describe_color/1243/visual_token_lens.npy"
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1243/lm_pooled_mean.npy"
   },
   "shapes": {
     "vision_pooled_mean": [
@@ -28,12 +27,10 @@
     "projected_tokens": null,
     "lm_last_hidden": [
       1,
-      86,
+      89,
       2048
     ],
-    "visual_token_lens": [
-      1
-    ]
+    "visual_token_lens": null
   },
   "csv_row": {
     "H": "7.5PB",
