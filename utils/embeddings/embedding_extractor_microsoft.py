@@ -1,7 +1,7 @@
 from transformers import AutoProcessor, Phi4MultimodalForCausalLM
 from PIL import Image
 import torch
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 class Phi4EmbeddingExtractor:
     """
@@ -18,9 +18,15 @@ class Phi4EmbeddingExtractor:
         self,
         model_name: str = "microsoft/Phi-4-multimodal-instruct",
         device: str = None,
-        system_prompt=None,
+        quantize_4_bit: bool = False,
+        quantize_8_bit: bool = False,
         torch_dtype=None,
+        system_prompt=None,
     ):
+        if quantize_4_bit or quantize_8_bit:
+            raise NotImplementedError(
+                "Phi4EmbeddingExtractor does not support bitsandbytes quantization yet."
+            )
         self.system_prompt = system_prompt
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.torch_dtype = torch_dtype or (torch.bfloat16 if torch.cuda.is_available() else torch.float32)
@@ -89,12 +95,13 @@ class Phi4EmbeddingExtractor:
         # Phi-4 uses <|image_N|> placeholders in the prompt
         image_tags = "".join([f"<|image_{i+1}|>" for i in range(len(images))])
 
-        messages = [
-            {
-                "role": "user",
-                "content": f"{image_tags}\n{prompt}"
-            }
-        ]
+        messages = []
+        if self.system_prompt:
+            messages.append({"role": "system", "content": self.system_prompt})
+        messages.append({
+            "role": "user",
+            "content": f"{image_tags}\n{prompt}",
+        })
 
         # apply_chat_template with tokenize=True returns inputs directly for Phi-4
         inputs = self.processor.apply_chat_template(
@@ -112,7 +119,9 @@ class Phi4EmbeddingExtractor:
         }
 
     @torch.no_grad()
-    def extract(self, images: List[Image.Image], prompt: str = "Describe the image.") -> Dict:
+    def extract(
+        self, images: List[Image.Image], prompt: str = "Describe the images."
+    ) -> Dict[str, torch.Tensor]:
         self.captures.clear()
 
         inputs = self._build_inputs(images, prompt)

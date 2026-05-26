@@ -24,7 +24,7 @@ import pandas as pd
 import torch
 from tqdm import tqdm
 
-from utils.embeddings.embedding_extractor import Qwen25VLEmbeddingExtractor
+from utils.embeddings.embedding_extractor import EmbeddingsExtractor
 from utils.embeddings.images_loader import load_images, save_all, tensor_shape
 
 

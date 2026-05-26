@@ -1,7 +1,7 @@
 from transformers import AutoProcessor, Gemma4ForConditionalGeneration
 from PIL import Image
 import torch
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 
 class Gemma4EmbeddingExtractor:
@@ -24,8 +24,16 @@ class Gemma4EmbeddingExtractor:
         self,
         model_name: str = "google/gemma-4-31B-it",
         device: str = None,
+        quantize_4_bit: bool = False,
+        quantize_8_bit: bool = False,
         torch_dtype=None,
+        system_prompt=None,
     ):
+        if quantize_4_bit or quantize_8_bit:
+            raise NotImplementedError(
+                "Gemma4EmbeddingExtractor does not support bitsandbytes quantization yet."
+            )
+        self.system_prompt = system_prompt
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.torch_dtype = torch_dtype or (
             torch.bfloat16 if torch.cuda.is_available() else torch.float32
@@ -85,15 +93,19 @@ class Gemma4EmbeddingExtractor:
     ) -> Dict[str, torch.Tensor]:
         """Build inputs using Gemma 4 chat template."""
 
-        messages = [
-            {
-                "role": "user",
-                "content": (
-                    [{"type": "image", "url": None, "image": im} for im in images]
-                    + [{"type": "text", "text": prompt}]
-                ),
-            }
-        ]
+        messages = []
+        if self.system_prompt:
+            messages.append({
+                "role": "system",
+                "content": [{"type": "text", "text": self.system_prompt}],
+            })
+        messages.append({
+            "role": "user",
+            "content": (
+                [{"type": "image", "url": None, "image": im} for im in images]
+                + [{"type": "text", "text": prompt}]
+            ),
+        })
 
         # Gemma 4 processor handles apply_chat_template + tokenization in one call
         inputs = self.processor.apply_chat_template(
@@ -111,8 +123,8 @@ class Gemma4EmbeddingExtractor:
 
     @torch.no_grad()
     def extract(
-        self, images: List[Image.Image], prompt: str = "Describe the image."
-    ) -> Dict:
+        self, images: List[Image.Image], prompt: str = "Describe the images."
+    ) -> Dict[str, torch.Tensor]:
         self.captures.clear()
 
         inputs = self._build_inputs(images, prompt)
