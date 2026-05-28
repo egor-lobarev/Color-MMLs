@@ -2,7 +2,7 @@ import os
 import math
 import torch
 import transformers.modeling_utils as _modeling_utils
-from transformers import Gemma4ForConditionalGeneration
+# from transformers import Gemma4ForConditionalGeneration
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 

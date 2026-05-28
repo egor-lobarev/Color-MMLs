@@ -29,3 +29,5 @@ share/python-wheels/
 MANIFEST
 .DS_Store
 **/tokens/
+phi4/
+qwen2.5/
