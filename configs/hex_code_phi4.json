@@ -2,7 +2,7 @@
   "csv": "data/colors/munsell_colors/munsell_manifest.csv",
   "pics_dir": "data/colors/munsell_colors/pics",
   "outdir_root": "data/embeddings/Phi-4/hex_code",
-  "model": "Phi-4-multimodal-instruct",
+  "model": "microsoft/Phi-4-multimodal-instruct",
   "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
   "save_tokens": false,
   "device": "cuda:0",

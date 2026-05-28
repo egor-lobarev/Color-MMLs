@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/910.png",
+  "model": "microsoft/Phi-4-multimodal-instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "#0000FF",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/Phi-4/hex_code/910/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/Phi-4/hex_code/910/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/Phi-4/hex_code/910/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1152
+    ],
+    "projected_pooled_mean": [
+      1,
+      545,
+      3072
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3072
+    ],
+    "vision_tokens": [
+      2,
+      1024,
+      1152
+    ],
+    "projected_tokens": [
+      1,
+      545,
+      3072
+    ],
+    "lm_last_hidden": [
+      1,
+      563,
+      3072
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0BG",
+    "V": 3,
+    "C": 2,
+    "x": 0.27,
+    "y": 0.301,
+    "Y": 5.8,
+    "picture": "910.png",
+    "R": 0.215741949297,
+    "G": 0.275789407763,
+    "B": 0.31029876927
+  },
+  "munsell_spec": "10.0BG",
+  "xyY": {
+    "x": 0.27,
+    "y": 0.301,
+    "Y": 5.8
+  },
+  "RGB": {
+    "R": 0.215741949297,
+    "G": 0.275789407763,
+    "B": 0.31029876927
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/599.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "The color of the picture is #00FFFF, which is a bright blue color.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/hex_code/599/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/hex_code/599/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      100,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 10,
+    "C": 18,
+    "x": 0.386,
+    "y": 0.52,
+    "Y": 82.7,
+    "picture": "599.png",
+    "R": 0.823008970757,
+    "G": 0.983418938605,
+    "B": 0.166082315073
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.386,
+    "y": 0.52,
+    "Y": 82.7
+  },
+  "RGB": {
+    "R": 0.823008970757,
+    "G": 0.983418938605,
+    "B": 0.166082315073
+  }
+}

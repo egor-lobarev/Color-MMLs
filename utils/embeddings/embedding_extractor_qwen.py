@@ -28,8 +28,13 @@ from typing import Dict, Optional, List
 import argparse
 import torch
 from PIL import Image
-from transformers import AutoProcessor, BitsAndBytesConfig, Qwen2_5_VLForConditionalGeneration
-from qwen_vl_utils import process_vision_info
+from transformers import AutoProcessor, BitsAndBytesConfig
+try:
+    from transformers import Qwen2_5_VLForConditionalGeneration
+    from qwen_vl_utils import process_vision_info
+except ImportError:
+    Warning("")
+    ImportWarning("For qwen using newer version of tranformers is needed.") 
 
 from utils.embeddings.images_loader import (
     gather_image_paths,

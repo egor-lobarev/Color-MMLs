@@ -16,10 +16,6 @@ IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD  = (0.229, 0.224, 0.225)
 
 
-# ---------------------------------------------------------------------------
-# Image preprocessing helpers (from InternVL HF guide)
-# ---------------------------------------------------------------------------
-
 def _build_transform(input_size: int = 448) -> T.Compose:
     return T.Compose([
         T.Lambda(lambda img: img.convert("RGB") if img.mode != "RGB" else img),
@@ -100,18 +96,10 @@ def preprocess_image(
     input_size: int = 448,
     max_num: int = 12,
 ) -> torch.Tensor:
-    """
-    Convert a PIL image to an InternVL pixel_values tensor.
-    Returns shape [N_tiles, 3, input_size, input_size].
-    """
     transform = _build_transform(input_size)
     tiles = _dynamic_preprocess(image, image_size=input_size, use_thumbnail=True, max_num=max_num)
     return torch.stack([transform(t) for t in tiles])
 
-
-# ---------------------------------------------------------------------------
-# Multi-GPU device map (from HF guide — used when world_size > 1)
-# ---------------------------------------------------------------------------
 
 def _split_model_device_map(model_name: str) -> Dict[str, int]:
     config = AutoConfig.from_pretrained(model_name, trust_remote_code=True)
@@ -145,24 +133,20 @@ def _split_model_device_map(model_name: str) -> Dict[str, int]:
     return device_map
 
 
-# ---------------------------------------------------------------------------
-# Main extractor class
-# ---------------------------------------------------------------------------
-
 class InternVL3EmbeddingExtractor:
     """
     Embedding extractor for OpenGVLab/InternVL3-* models.
 
     Captures per forward pass:
-      "vision_tokens"       [N_tiles * T_vis, C]   raw vision encoder output
-      "projected_tokens"    [N_tiles * T_vis, D]   after MLP1 vision->LLM projector
-      "lm_last_hidden"      [B, T_total, D]        last LLM decoder hidden state
+      "vision_tokens"          [1, N_vis, C]    vision encoder patch tokens (no CLS)
+      "projected_tokens"       [1, N_vis, D]    after MLP1 projector
+      "lm_last_hidden"         [1, T, D]        last decoder layer (prefill only)
 
-    Plus mean-pooled variants:
-      "vision_pooled_mean", "projected_pooled_mean", "lm_pooled_mean"
-
-    And the model's text reply:
-      "model_answer"        str
+    Pooled variants (all shape [1, 1, C/D]):
+      "vision_pooled_mean"     mean over N_vis patch tokens
+      "projected_pooled_mean"  mean over N_vis projected tokens
+      "lm_pooled_mean"         masked mean over real tokens (excludes EOS/PAD)
+      "lm_last_token"          last real token (better than mean for classification)
     """
 
     def __init__(
@@ -187,7 +171,6 @@ class InternVL3EmbeddingExtractor:
         self.device = resolve_device(device)
         self.torch_dtype = torch_dtype
 
-        # Multi-GPU: use split device map; single GPU / CPU: use device string directly
         n_gpus = torch.cuda.device_count()
         if n_gpus > 1 and self.device != "cpu":
             print(f"InternVL3EmbeddingExtractor: splitting model across {n_gpus} GPUs.")
@@ -220,59 +203,103 @@ class InternVL3EmbeddingExtractor:
     # ------------------------------------------------------------------
 
     def _register_hooks(self):
-        """
-        InternVL3 architecture:
-          model.vision_model   — InternViT vision encoder
-          model.mlp1           — MLP projection into LLM space
-          model.language_model.model.layers[-1] — last LLM decoder layer
-        """
 
         def _as_tensor(out):
             if hasattr(out, "last_hidden_state") and out.last_hidden_state is not None:
                 return out.last_hidden_state
             return out[0] if isinstance(out, tuple) else out
 
-        # 1) Vision encoder output
+        # 1) Vision encoder — drop CLS, normalize to [1, N_patches, C]
         vision_model = getattr(self.model, "vision_model", None)
         if vision_model is None:
             available = [n for n, _ in self.model.named_children()]
-            raise AttributeError(
-                f"No vision_model found on InternVL model. Children: {available}"
-            )
+            raise AttributeError(f"No vision_model found. Children: {available}")
 
         def hook_vision(_m, _inp, out):
-            hidden = _as_tensor(out)
-            # Drop CLS token (index 0) to keep only patch tokens
-            patch_tokens = hidden[:, 1:, :] if hidden.dim() == 3 else hidden
-            self.captures["vision_tokens"] = patch_tokens.detach()
+            hidden = _as_tensor(out)                          # [N_tiles, N_patch+1, C]
+            patch = hidden[:, 1:, :] if hidden.dim() == 3 else hidden  # drop CLS
+            # Flatten tiles into token sequence → [1, N_tiles*N_patch, C]
+            flat = patch.reshape(1, -1, patch.shape[-1])
+            self.captures["vision_tokens"] = flat.detach().cpu()
 
         self.hooks.append(vision_model.register_forward_hook(hook_vision))
 
-        # 2) MLP1 projector output
+        # 2) MLP1 projector — normalize to [1, N_projected, D]
         mlp1 = getattr(self.model, "mlp1", None)
         if mlp1 is None:
             available = [n for n, _ in self.model.named_children()]
-            raise AttributeError(
-                f"No mlp1 projector found on InternVL model. Children: {available}"
-            )
+            raise AttributeError(f"No mlp1 projector found. Children: {available}")
 
         def hook_mlp1(_m, _inp, out):
-            self.captures["projected_tokens"] = _as_tensor(out).detach()
+            hidden = _as_tensor(out)                          # [N_vis, D] or [1, N_vis, D]
+            if hidden.dim() == 2:
+                hidden = hidden.unsqueeze(0)                  # → [1, N_vis, D]
+            self.captures["projected_tokens"] = hidden.detach().cpu()
 
         self.hooks.append(mlp1.register_forward_hook(hook_mlp1))
 
         # 3) Last LLM decoder layer
+        #    Also capture attention_mask from the layer's INPUT so we can do
+        #    masked pooling later — avoids averaging over EOS/PAD tokens.
         try:
             last_layer = self.model.language_model.model.layers[-1]
         except AttributeError:
-            # Fallback path for some InternVL variants
             last_layer = self.model.language_model.model.decoder.layers[-1]
 
         def hook_last_layer(_m, _inp, out):
-            hidden = out[0] if isinstance(out, tuple) else out
-            self.captures["lm_last_hidden"] = hidden.detach()
+            hidden = out[0] if isinstance(out, tuple) else out  # [B, T, D]
+            if hidden.dim() == 2:
+                hidden = hidden.unsqueeze(0)
+            self.captures["lm_last_hidden"] = hidden.detach().cpu()
+
+            # Grab attention_mask from the layer's keyword inputs if available.
+            # InternVL/Qwen2 decoder layers receive it as a keyword arg.
+            # _inp is a tuple of positional args; kwargs aren't directly exposed
+            # via forward hooks, so we rely on the hidden state length instead
+            # (see _masked_pool below).
 
         self.hooks.append(last_layer.register_forward_hook(hook_last_layer))
+
+    # ------------------------------------------------------------------
+    # Pooling helpers
+    # ------------------------------------------------------------------
+
+    @staticmethod
+    def _masked_pool(
+        hidden: torch.Tensor,           # [1, T, D]  on CPU
+        eos_token_id: int,
+        input_ids: Optional[torch.Tensor],  # [1, T] token ids, CPU
+    ) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Returns:
+          lm_pooled_mean  [1, 1, D]  mean over real (non-EOS/PAD) tokens
+          lm_last_token   [1, 1, D]  last real token
+        """
+        T = hidden.shape[1]
+
+        if input_ids is not None and input_ids.shape[1] == T:
+            # Build mask: 1 for real tokens, 0 for EOS/PAD
+            # InternVL uses eos_token_id as pad_token_id
+            mask = (input_ids != eos_token_id).float()   # [1, T]
+
+            # Last real token index
+            real_lengths = mask.sum(dim=1).long()        # [1]
+            last_idx = (real_lengths - 1).clamp(min=0)  # [1]
+        else:
+            # Fallback: treat all tokens as real
+            mask = torch.ones(1, T, dtype=torch.float32)
+            last_idx = torch.tensor([T - 1])
+
+        # Masked mean
+        mask_3d = mask.unsqueeze(-1)                     # [1, T, 1]
+        pooled_mean = (hidden * mask_3d).sum(dim=1, keepdim=True) / mask_3d.sum(dim=1, keepdim=True).clamp(min=1)
+
+        # Last real token
+        last_token = hidden[
+            torch.arange(hidden.shape[0]), last_idx
+        ].unsqueeze(1)                                   # [1, 1, D]
+
+        return pooled_mean, last_token
 
     # ------------------------------------------------------------------
     # Preprocessing
@@ -281,11 +308,6 @@ class InternVL3EmbeddingExtractor:
     def preprocess_images(
         self, images: List[Image.Image]
     ) -> Tuple[torch.Tensor, List[int]]:
-        """
-        Tile each image and return:
-          pixel_values   [sum(N_tiles_i), 3, H, W]  bfloat16 on model device
-          num_patches    [N_images]  number of tiles per image
-        """
         tiles_per_image = [
             preprocess_image(img, self.input_size, self.max_tiles)
             for img in images
@@ -297,15 +319,46 @@ class InternVL3EmbeddingExtractor:
         return pixel_values, num_patches
 
     def _build_question(self, n_images: int, prompt: str) -> str:
-        """
-        Build the <image> tag string matching InternVL HF guide format.
-        Single image  → "<image>\n{prompt}"
-        Multi image   → "Image-1: <image>\nImage-2: <image>\n{prompt}"
-        """
         if n_images == 1:
             return f"<image>\n{prompt}"
         tags = "".join(f"Image-{i + 1}: <image>\n" for i in range(n_images))
         return f"{tags}{prompt}"
+
+    def _get_input_ids(self, question: str, pixel_values: torch.Tensor) -> Optional[torch.Tensor]:
+        """
+        Tokenize the prefill prompt (without generation) so we have input_ids
+        for masked pooling. Mirrors what model.chat() does internally.
+        """
+        try:
+            IMG_CONTEXT_TOKEN = "<IMG_CONTEXT>"
+            img_context_token_id = self.tokenizer.convert_tokens_to_ids(IMG_CONTEXT_TOKEN)
+            num_image_tokens = pixel_values.shape[0] * self.model.num_image_token
+
+            # Build the prompt string the same way InternVL's chat() does
+            if self.system_prompt:
+                system = self.system_prompt
+            else:
+                system = self.model.system_message if hasattr(self.model, "system_message") else ""
+
+            template = self.model.conv_template if hasattr(self.model, "conv_template") else None
+            if template is not None:
+                # Use model's own conversation template for exact match
+                from copy import deepcopy
+                conv = deepcopy(template)
+                conv.system_message = system
+                image_tokens = IMG_CONTEXT_TOKEN * num_image_tokens
+                conv.append_message(conv.roles[0], image_tokens + "\n" + question)
+                conv.append_message(conv.roles[1], None)
+                query = conv.get_prompt()
+            else:
+                query = question
+
+            input_ids = self.tokenizer(
+                query, return_tensors="pt", add_special_tokens=False
+            ).input_ids                                   # [1, T_prefill]
+            return input_ids
+        except Exception:
+            return None
 
     # ------------------------------------------------------------------
     # Public API
@@ -319,15 +372,6 @@ class InternVL3EmbeddingExtractor:
         generation_config: Optional[Dict] = None,
         history: Optional[List] = None,
     ) -> Dict:
-        """
-        Run a single forward + generation pass.
-
-        Returns a dict with keys:
-          vision_tokens, projected_tokens, lm_last_hidden   (raw tensors)
-          vision_pooled_mean, projected_pooled_mean, lm_pooled_mean
-          model_answer   (str)
-          history        (list, for multi-turn continuation)
-        """
         self.captures.clear()
 
         if generation_config is None:
@@ -336,8 +380,9 @@ class InternVL3EmbeddingExtractor:
         pixel_values, num_patches = self.preprocess_images(images)
         question = self._build_question(len(images), prompt)
 
-        # model.chat triggers a full forward + generate internally;
-        # hooks fire during the forward pass inside chat()
+        # Try to build input_ids for masked pooling before chat() runs
+        input_ids = self._get_input_ids(question, pixel_values)
+
         response, new_history = self.model.chat(
             self.tokenizer,
             pixel_values,
@@ -350,14 +395,23 @@ class InternVL3EmbeddingExtractor:
 
         result = dict(self.captures)
 
-        # Pooled means
-        for key, pool_key, dim in (
-            ("vision_tokens",    "vision_pooled_mean",    0),
-            ("projected_tokens", "projected_pooled_mean", 0),
-            ("lm_last_hidden",   "lm_pooled_mean",        1),
+        # --- Vision & projected: mean over token dim=1 → [1, 1, C] ---
+        for key, pool_key in (
+            ("vision_tokens",    "vision_pooled_mean"),
+            ("projected_tokens", "projected_pooled_mean"),
         ):
             if key in result:
-                result[pool_key] = result[key].mean(dim=dim, keepdim=True)
+                t = result[key]                          # already [1, N, C]
+                result[pool_key] = t.mean(dim=1, keepdim=True)   # [1, 1, C]
+
+        # --- LM: masked mean + last real token → [1, 1, D] ---
+        if "lm_last_hidden" in result:
+            hidden = result["lm_last_hidden"]            # [1, T, D] on CPU
+            eos_id = self.tokenizer.eos_token_id or self.tokenizer.convert_tokens_to_ids("<|im_end|>")
+
+            lm_mean, lm_last = self._masked_pool(hidden, eos_id, input_ids)
+            result["lm_pooled_mean"] = lm_mean           # [1, 1, D]
+            result["lm_last_token"]  = lm_last           # [1, 1, D]
 
         result["model_answer"] = response
         result["history"] = new_history
@@ -370,17 +424,10 @@ class InternVL3EmbeddingExtractor:
         prompts: List[str],
         generation_config: Optional[Dict] = None,
     ) -> List[Dict]:
-        """
-        Batch inference — one list of images per sample.
-        Uses model.batch_chat for efficiency.
-        Returns a list of result dicts (same keys as extract(), minus history).
-        """
         if generation_config is None:
             generation_config = {"max_new_tokens": 256, "do_sample": False}
 
-        all_tiles = []
-        num_patches_list = []
-        questions = []
+        all_tiles, num_patches_list, questions = [], [], []
 
         for images, prompt in zip(batch_images, prompts):
             pv, np_ = self.preprocess_images(images)
@@ -400,26 +447,29 @@ class InternVL3EmbeddingExtractor:
         )
 
         raw = dict(self.captures)
+        eos_id = self.tokenizer.eos_token_id or self.tokenizer.convert_tokens_to_ids("<|im_end|>")
+
         results = []
-        for i, response in enumerate(responses):
-            r = {}
-            # NOTE: hooks fire once for the whole batch — we return the same
-            # shared tensors for each sample and let callers slice as needed.
-            r.update(raw)
-            for key, pool_key, dim in (
-                ("vision_tokens",    "vision_pooled_mean",    0),
-                ("projected_tokens", "projected_pooled_mean", 0),
-                ("lm_last_hidden",   "lm_pooled_mean",        1),
+        for response in responses:
+            r = dict(raw)
+            for key, pool_key in (
+                ("vision_tokens",    "vision_pooled_mean"),
+                ("projected_tokens", "projected_pooled_mean"),
             ):
                 if key in raw:
-                    r[pool_key] = raw[key].mean(dim=dim, keepdim=True)
+                    r[pool_key] = raw[key].mean(dim=1, keepdim=True)
+
+            if "lm_last_hidden" in raw:
+                lm_mean, lm_last = self._masked_pool(raw["lm_last_hidden"], eos_id, None)
+                r["lm_pooled_mean"] = lm_mean
+                r["lm_last_token"]  = lm_last
+
             r["model_answer"] = response
             results.append(r)
 
         return results
 
     def remove_hooks(self):
-        """Release all registered forward hooks."""
         for h in self.hooks:
             h.remove()
         self.hooks.clear()

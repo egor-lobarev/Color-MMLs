@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/223.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "I'm sorry, but I am an AI language model and do not have access to images or visual content. Please provide me with the image you would like me to analyze, and I will be happy to help you determine its color hex code.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/hex_code/223/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/hex_code/223/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      100,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 5,
+    "C": 12,
+    "x": 0.543,
+    "y": 0.371,
+    "Y": 13.5,
+    "picture": "223.png",
+    "R": 0.677913522293,
+    "G": 0.278605601283,
+    "B": 0.13598987151
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.543,
+    "y": 0.371,
+    "Y": 13.5
+  },
+  "RGB": {
+    "R": 0.677913522293,
+    "G": 0.278605601283,
+    "B": 0.13598987151
+  }
+}
