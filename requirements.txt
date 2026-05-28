@@ -14,3 +14,4 @@ seaborn
 umap-learn
 vsl-ial
 plotly
+peft

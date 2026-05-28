@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/625.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a muted, solid green. It has a flat appearance with no gradients, patterns, or variations in shade.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/625/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/625/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/625/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5GY",
+    "V": 7,
+    "C": 6,
+    "x": 0.329,
+    "y": 0.412,
+    "Y": 38.1,
+    "picture": "625.png",
+    "R": 0.566506310613,
+    "G": 0.687099494436,
+    "B": 0.47587483525
+  },
+  "munsell_spec": "7.5GY",
+  "xyY": {
+    "x": 0.329,
+    "y": 0.412,
+    "Y": 38.1
+  },
+  "RGB": {
+    "R": 0.566506310613,
+    "G": 0.687099494436,
+    "B": 0.47587483525
+  }
+}

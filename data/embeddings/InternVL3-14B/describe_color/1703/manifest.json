@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1703.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid shade of pink. It has a medium to light intensity, leaning towards a soft, pastel tone. The hue is warm, with no visible patterns or gradients.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1703/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1703/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1703/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5RP",
+    "V": 6,
+    "C": 6,
+    "x": 0.362,
+    "y": 0.272,
+    "Y": 23.6,
+    "picture": "1703.png",
+    "R": 0.733192728441,
+    "G": 0.425633823932,
+    "B": 0.588255573215
+  },
+  "munsell_spec": "7.5RP",
+  "xyY": {
+    "x": 0.362,
+    "y": 0.272,
+    "Y": 23.6
+  },
+  "RGB": {
+    "R": 0.733192728441,
+    "G": 0.425633823932,
+    "B": 0.588255573215
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1230.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, deep purple. It has a rich and vibrant hue, often associated with royalty or sophistication.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1230/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1230/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1230/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 3,
+    "C": 10,
+    "x": 0.232,
+    "y": 0.181,
+    "Y": 4.29,
+    "picture": "1230.png",
+    "R": 0.229021225474,
+    "G": 0.199560320156,
+    "B": 0.411911984605
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.232,
+    "y": 0.181,
+    "Y": 4.29
+  },
+  "RGB": {
+    "R": 0.229021225474,
+    "G": 0.199560320156,
+    "B": 0.411911984605
+  }
+}

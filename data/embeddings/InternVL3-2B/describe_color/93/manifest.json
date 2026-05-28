@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/93.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid pink.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/93/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/93/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/93/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 7,
+    "C": 14,
+    "x": 0.499,
+    "y": 0.306,
+    "Y": 28.5,
+    "picture": "93.png",
+    "R": 0.990011690589,
+    "G": 0.335104221205,
+    "B": 0.436264178196
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.499,
+    "y": 0.306,
+    "Y": 28.5
+  },
+  "RGB": {
+    "R": 0.990011690589,
+    "G": 0.335104221205,
+    "B": 0.436264178196
+  }
+}

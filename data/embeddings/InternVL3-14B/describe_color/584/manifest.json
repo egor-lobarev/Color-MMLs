@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/584.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of green. It has a soft, muted tone that is often associated with tranquility and nature. This particular green is not too bright or too dark, providing a calm and soothing visual effect.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/584/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/584/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/584/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 8,
+    "C": 12,
+    "x": 0.371,
+    "y": 0.484,
+    "Y": 49.2,
+    "picture": "584.png",
+    "R": 0.659406423655,
+    "G": 0.775792684023,
+    "B": 0.306377651753
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.371,
+    "y": 0.484,
+    "Y": 49.2
+  },
+  "RGB": {
+    "R": 0.659406423655,
+    "G": 0.775792684023,
+    "B": 0.306377651753
+  }
+}

@@ -6,6 +6,7 @@ from PIL import Image
 from utils.embeddings.embedding_extractor_google import Gemma4EmbeddingExtractor
 from utils.embeddings.embedding_extractor_microsoft import Phi4EmbeddingExtractor
 from utils.embeddings.embedding_extractor_qwen import Qwen25VLEmbeddingExtractor
+from utils.embeddings.embedding_extractor_internvl3 import InternVL3EmbeddingExtractor
 
 __all__ = [
     "EmbeddingsExtractor",
@@ -35,6 +36,8 @@ def resolve_extractor_class(model_name: str) -> Type:
         return Phi4EmbeddingExtractor
     if "phi-4" in name_lower or "phi4" in name_lower:
         return Phi4EmbeddingExtractor
+    if "internvl3" in name_lower:
+        return InternVL3EmbeddingExtractor
 
     try:
         from transformers import AutoConfig

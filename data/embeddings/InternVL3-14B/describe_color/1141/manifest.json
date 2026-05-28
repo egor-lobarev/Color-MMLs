@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1141.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a light purple or lavender shade.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1141/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1141/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1141/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5PB",
+    "V": 9,
+    "C": 0,
+    "x": 0.31,
+    "y": 0.316,
+    "Y": 78.6,
+    "picture": "1141.png",
+    "R": 0.919562058958,
+    "G": 0.889035452832,
+    "B": 0.938565482813
+  },
+  "munsell_spec": "2.5PB",
+  "xyY": {
+    "x": 0.31,
+    "y": 0.316,
+    "Y": 78.6
+  },
+  "RGB": {
+    "R": 0.919562058958,
+    "G": 0.889035452832,
+    "B": 0.938565482813
+  }
+}

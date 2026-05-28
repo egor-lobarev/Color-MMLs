@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1370.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of purple. It has a muted, grayish tone, giving it a somewhat subdued and neutral appearance. This specific purple can be described as a dark lavender or a light slate, leaning more towards the cooler side of the color spectrum. The lack of bright or vibrant hues makes it versatile for various design applications, from backgrounds to clothing.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1370/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1370/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1370/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5P",
+    "V": 4,
+    "C": 2,
+    "x": 0.298,
+    "y": 0.284,
+    "Y": 10.6,
+    "picture": "1370.png",
+    "R": 0.380644927661,
+    "G": 0.345022512049,
+    "B": 0.422888406174
+  },
+  "munsell_spec": "2.5P",
+  "xyY": {
+    "x": 0.298,
+    "y": 0.284,
+    "Y": 10.6
+  },
+  "RGB": {
+    "R": 0.380644927661,
+    "G": 0.345022512049,
+    "B": 0.422888406174
+  }
+}

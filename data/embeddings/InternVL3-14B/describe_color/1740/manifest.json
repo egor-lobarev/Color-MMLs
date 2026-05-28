@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1740.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid shade of mauve, which is a muted purple-pink hue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1740/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1740/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1740/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 6,
+    "C": 4,
+    "x": 0.356,
+    "y": 0.296,
+    "Y": 25.7,
+    "picture": "1740.png",
+    "R": 0.70555522792,
+    "G": 0.47902498764,
+    "B": 0.569554232638
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.356,
+    "y": 0.296,
+    "Y": 25.7
+  },
+  "RGB": {
+    "R": 0.70555522792,
+    "G": 0.47902498764,
+    "B": 0.569554232638
+  }
+}

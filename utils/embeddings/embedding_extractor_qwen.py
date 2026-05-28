@@ -28,9 +28,8 @@ from typing import Dict, Optional, List
 import argparse
 import torch
 from PIL import Image
-from transformers import AutoProcessor, Qwen2_5_VLForConditionalGeneration, BitsAndBytesConfig
-from qwen_vl_utils import process_vision_info  # pip install qwen-vl-utils
-
+from transformers import AutoProcessor, BitsAndBytesConfig, Qwen2_5_VLForConditionalGeneration
+from qwen_vl_utils import process_vision_info
 
 from utils.embeddings.images_loader import (
     gather_image_paths,

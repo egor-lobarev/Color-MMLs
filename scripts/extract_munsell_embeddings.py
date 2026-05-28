@@ -110,9 +110,9 @@ def main() -> None:
                 del extractor
                 if torch.cuda.is_available():
                     torch.cuda.empty_cache()
-            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, quantize_8_bit=quantize_8_bit, system_prompt=init_prompt)
+            extractor = EmbeddingsExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, quantize_8_bit=quantize_8_bit, system_prompt=init_prompt)
         elif extractor is None:
-            extractor = Qwen25VLEmbeddingExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, quantize_8_bit=quantize_8_bit, system_prompt=init_prompt)
+            extractor = EmbeddingsExtractor(model_name=model_name, device=device, quantize_4_bit=quantize_4_bit, quantize_8_bit=quantize_8_bit, system_prompt=init_prompt)
 
         out = extractor.extract([img], prompt=prompt)
         img_dir = out_root / stem

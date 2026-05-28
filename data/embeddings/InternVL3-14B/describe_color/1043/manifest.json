@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1043.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a dark navy blue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1043/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1043/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1043/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0B",
+    "V": 1,
+    "C": 4,
+    "x": 0.223,
+    "y": 0.227,
+    "Y": 0.86,
+    "picture": "1043.png",
+    "R": 0.0481188804589,
+    "G": 0.0918963485351,
+    "B": 0.154860431874
+  },
+  "munsell_spec": "10.0B",
+  "xyY": {
+    "x": 0.223,
+    "y": 0.227,
+    "Y": 0.86
+  },
+  "RGB": {
+    "R": 0.0481188804589,
+    "G": 0.0918963485351,
+    "B": 0.154860431874
+  }
+}

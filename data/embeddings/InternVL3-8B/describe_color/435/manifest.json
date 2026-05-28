@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/435.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a dark brown shade, almost resembling a deep chocolate or espresso color. It's a muted and solid tone without any visible patterns or variations.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/435/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/435/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/435/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5Y",
+    "V": 2,
+    "C": 4,
+    "x": 0.439,
+    "y": 0.47,
+    "Y": 2.65,
+    "picture": "435.png",
+    "R": 0.211849813708,
+    "G": 0.17535714549,
+    "B": 0.0180363598596
+  },
+  "munsell_spec": "7.5Y",
+  "xyY": {
+    "x": 0.439,
+    "y": 0.47,
+    "Y": 2.65
+  },
+  "RGB": {
+    "R": 0.211849813708,
+    "G": 0.17535714549,
+    "B": 0.0180363598596
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/902.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a bright turquoise. Turquoise is a blue-green color that is often associated with calmness and clarity. It's a vibrant and refreshing shade, commonly used in design to evoke feelings of tranquility and openness.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/902/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/902/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/902/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5BG",
+    "V": 8,
+    "C": 8,
+    "x": 0.225,
+    "y": 0.31,
+    "Y": 46.9,
+    "picture": "902.png",
+    "R": 0.19444005494,
+    "G": 0.785250474537,
+    "B": 0.836127965162
+  },
+  "munsell_spec": "7.5BG",
+  "xyY": {
+    "x": 0.225,
+    "y": 0.31,
+    "Y": 46.9
+  },
+  "RGB": {
+    "R": 0.19444005494,
+    "G": 0.785250474537,
+    "B": 0.836127965162
+  }
+}

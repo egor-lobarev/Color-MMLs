@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/551.png",
+  "model": "microsoft/Phi-4-multimodal-instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is a solid color with no variations or patterns.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/Phi-4/describe_color/551/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/Phi-4/describe_color/551/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/Phi-4/describe_color/551/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1152
+    ],
+    "projected_pooled_mean": [
+      1,
+      545,
+      3072
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3072
+    ],
+    "vision_tokens": [
+      2,
+      1024,
+      1152
+    ],
+    "projected_tokens": [
+      1,
+      545,
+      3072
+    ],
+    "lm_last_hidden": [
+      1,
+      552,
+      3072
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5GY",
+    "V": 10,
+    "C": 8,
+    "x": 0.355,
+    "y": 0.405,
+    "Y": 93.2,
+    "picture": "551.png",
+    "R": 0.972840463183,
+    "G": 0.990993867834,
+    "B": 0.6937593408
+  },
+  "munsell_spec": "2.5GY",
+  "xyY": {
+    "x": 0.355,
+    "y": 0.405,
+    "Y": 93.2
+  },
+  "RGB": {
+    "R": 0.972840463183,
+    "G": 0.990993867834,
+    "B": 0.6937593408
+  }
+}

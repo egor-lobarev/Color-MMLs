@@ -1,0 +1,12 @@
+{
+  "csv": "data/colors/munsell_colors/munsell_manifest.csv",
+  "pics_dir": "data/colors/munsell_colors/pics",
+  "outdir_root": "data/embeddings/InternVL3-4B/describe_color",
+  "model": "OpenGVLab/InternVL3-2B",
+  "prompt": "Describe the color.",
+  "save_tokens": false,
+  "device": "cuda:1",
+  "batch": false,
+  "lm_per_image": false,
+  "restart_model_per_image": false
+}

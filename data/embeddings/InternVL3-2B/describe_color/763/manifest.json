@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/763.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted teal or forest green. It is a soft, uniform shade without any visible gradients or patterns.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/763/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/763/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/763/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0G",
+    "V": 6,
+    "C": 4,
+    "x": 0.288,
+    "y": 0.36,
+    "Y": 27.1,
+    "picture": "763.png",
+    "R": 0.428680220244,
+    "G": 0.591992967505,
+    "B": 0.523940791134
+  },
+  "munsell_spec": "5.0G",
+  "xyY": {
+    "x": 0.288,
+    "y": 0.36,
+    "Y": 27.1
+  },
+  "RGB": {
+    "R": 0.428680220244,
+    "G": 0.591992967505,
+    "B": 0.523940791134
+  }
+}

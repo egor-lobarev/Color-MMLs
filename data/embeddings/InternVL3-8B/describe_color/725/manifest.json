@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/725.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a muted, medium shade of green, often described as olive green. It has a subdued and earthy tone.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/725/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/725/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/725/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5G",
+    "V": 6,
+    "C": 4,
+    "x": 0.298,
+    "y": 0.369,
+    "Y": 27.3,
+    "picture": "725.png",
+    "R": 0.451625878512,
+    "G": 0.591488752036,
+    "B": 0.503180710274
+  },
+  "munsell_spec": "2.5G",
+  "xyY": {
+    "x": 0.298,
+    "y": 0.369,
+    "Y": 27.3
+  },
+  "RGB": {
+    "R": 0.451625878512,
+    "G": 0.591488752036,
+    "B": 0.503180710274
+  }
+}

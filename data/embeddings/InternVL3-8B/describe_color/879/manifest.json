@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/879.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a bright, turquoise shade. It has a light blue-green appearance, often associated with a clear sky or vibrant aquatic environments.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/879/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/879/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/879/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0BG",
+    "V": 8,
+    "C": 8,
+    "x": 0.228,
+    "y": 0.328,
+    "Y": 47.6,
+    "picture": "879.png",
+    "R": 0.148515196632,
+    "G": 0.797164962444,
+    "B": 0.799154255974
+  },
+  "munsell_spec": "5.0BG",
+  "xyY": {
+    "x": 0.228,
+    "y": 0.328,
+    "Y": 47.6
+  },
+  "RGB": {
+    "R": 0.148515196632,
+    "G": 0.797164962444,
+    "B": 0.799154255974
+  }
+}

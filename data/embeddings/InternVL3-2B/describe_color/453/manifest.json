@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/453.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted olive green.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/453/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/453/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/453/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5Y",
+    "V": 7,
+    "C": 8,
+    "x": 0.4,
+    "y": 0.433,
+    "Y": 38.1,
+    "picture": "453.png",
+    "R": 0.723126846565,
+    "G": 0.649771680843,
+    "B": 0.344436863291
+  },
+  "munsell_spec": "7.5Y",
+  "xyY": {
+    "x": 0.4,
+    "y": 0.433,
+    "Y": 38.1
+  },
+  "RGB": {
+    "R": 0.723126846565,
+    "G": 0.649771680843,
+    "B": 0.344436863291
+  }
+}

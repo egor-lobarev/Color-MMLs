@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/766.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of light gray. It has a soft, neutral tone that is often used as a background or for creating a calm, subdued atmosphere.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/766/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/766/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/766/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0G",
+    "V": 7,
+    "C": 2,
+    "x": 0.301,
+    "y": 0.335,
+    "Y": 41.4,
+    "picture": "766.png",
+    "R": 0.621937215405,
+    "G": 0.690683914088,
+    "B": 0.673920328295
+  },
+  "munsell_spec": "5.0G",
+  "xyY": {
+    "x": 0.301,
+    "y": 0.335,
+    "Y": 41.4
+  },
+  "RGB": {
+    "R": 0.621937215405,
+    "G": 0.690683914088,
+    "B": 0.673920328295
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/531.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of green. It has a muted, olive-like tone, which is neither too bright nor too dark. This type of green is often associated with natural elements like foliage or grass.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/531/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/531/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/531/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5GY",
+    "V": 7,
+    "C": 8,
+    "x": 0.375,
+    "y": 0.444,
+    "Y": 37.8,
+    "picture": "531.png",
+    "R": 0.647391584081,
+    "G": 0.669755534276,
+    "B": 0.355105759161
+  },
+  "munsell_spec": "2.5GY",
+  "xyY": {
+    "x": 0.375,
+    "y": 0.444,
+    "Y": 37.8
+  },
+  "RGB": {
+    "R": 0.647391584081,
+    "G": 0.669755534276,
+    "B": 0.355105759161
+  }
+}

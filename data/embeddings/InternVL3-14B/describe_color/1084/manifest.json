@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1084.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a light pastel blue. It has a soft, calming appearance, often associated with tranquility and serenity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1084/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1084/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1084/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0B",
+    "V": 9,
+    "C": 4,
+    "x": 0.278,
+    "y": 0.291,
+    "Y": 69.6,
+    "picture": "1084.png",
+    "R": 0.780210996276,
+    "G": 0.856525657967,
+    "B": 0.993224102931
+  },
+  "munsell_spec": "10.0B",
+  "xyY": {
+    "x": 0.278,
+    "y": 0.291,
+    "Y": 69.6
+  },
+  "RGB": {
+    "R": 0.780210996276,
+    "G": 0.856525657967,
+    "B": 0.993224102931
+  }
+}

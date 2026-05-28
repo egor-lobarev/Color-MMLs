@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/230.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid shade of brown. It has a warm tone, often associated with earthy or autumnal themes. This specific brown could be described as a muted, medium-dark shade, similar to the color of terracotta or a clay pot.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/230/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/230/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/230/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 6,
+    "C": 10,
+    "x": 0.48,
+    "y": 0.37,
+    "Y": 22.9,
+    "picture": "230.png",
+    "R": 0.776287555139,
+    "G": 0.417640904911,
+    "B": 0.289107434186
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.48,
+    "y": 0.37,
+    "Y": 22.9
+  },
+  "RGB": {
+    "R": 0.776287555139,
+    "G": 0.417640904911,
+    "B": 0.289107434186
+  }
+}
