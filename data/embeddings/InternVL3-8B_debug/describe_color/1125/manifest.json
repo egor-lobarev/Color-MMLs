@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1125.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, vibrant blue. It has a uniform appearance with no gradients or patterns, giving it a clean and simple look.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1125/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1125/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1125/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5PB",
+    "V": 6,
+    "C": 12,
+    "x": 0.216,
+    "y": 0.214,
+    "Y": 20.7,
+    "picture": "1125.png",
+    "R": 0.320807196687,
+    "G": 0.494225381454,
+    "B": 0.768739740331
+  },
+  "munsell_spec": "2.5PB",
+  "xyY": {
+    "x": 0.216,
+    "y": 0.214,
+    "Y": 20.7
+  },
+  "RGB": {
+    "R": 0.320807196687,
+    "G": 0.494225381454,
+    "B": 0.768739740331
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/500.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a light, muted yellow, often described as a pale or pastel yellow. It has a soft, subtle appearance without being overly bright or vibrant.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/500/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/500/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/500/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0Y",
+    "V": 9,
+    "C": 10,
+    "x": 0.386,
+    "y": 0.437,
+    "Y": 69.6,
+    "picture": "500.png",
+    "R": 0.897151014805,
+    "G": 0.865894329747,
+    "B": 0.473388402221
+  },
+  "munsell_spec": "10.0Y",
+  "xyY": {
+    "x": 0.386,
+    "y": 0.437,
+    "Y": 69.6
+  },
+  "RGB": {
+    "R": 0.897151014805,
+    "G": 0.865894329747,
+    "B": 0.473388402221
+  }
+}

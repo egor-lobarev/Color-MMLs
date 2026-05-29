@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/203.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, rich shade of maroon. Maroon is a dark red color, often associated with warmth and sophistication. It is a hue that sits between red and dark brown on the color spectrum, making it a versatile color that can be used in various contexts, from fashion to interior design. The specific shade in the image appears to be quite muted, lacking the brightness of a vivid red while maintaining a strong, deep presence. This particular maroon has a slightly brownish undertone, which adds to its richness and depth. The color can evoke feelings of elegance, stability, and even a touch of formality. It is often used in settings where a sense of seriousness or luxury is desired.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/203/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/203/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/203/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 2,
+    "C": 8,
+    "x": 0.593,
+    "y": 0.353,
+    "Y": 1.92,
+    "picture": "203.png",
+    "R": 0.300613439965,
+    "G": 0.059904132246,
+    "B": 0.0127166882448
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.593,
+    "y": 0.353,
+    "Y": 1.92
+  },
+  "RGB": {
+    "R": 0.300613439965,
+    "G": 0.059904132246,
+    "B": 0.0127166882448
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/435.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a dark shade of brown, often referred to as chocolate brown or dark taupe. It has a rich, earthy tone with muted, subdued characteristics. This type of color is commonly associated with warmth and can be found in various natural materials such as wood, soil, and certain types of fabric.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/435/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/435/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/435/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5Y",
+    "V": 2,
+    "C": 4,
+    "x": 0.439,
+    "y": 0.47,
+    "Y": 2.65,
+    "picture": "435.png",
+    "R": 0.211849813708,
+    "G": 0.17535714549,
+    "B": 0.0180363598596
+  },
+  "munsell_spec": "7.5Y",
+  "xyY": {
+    "x": 0.439,
+    "y": 0.47,
+    "Y": 2.65
+  },
+  "RGB": {
+    "R": 0.211849813708,
+    "G": 0.17535714549,
+    "B": 0.0180363598596
+  }
+}

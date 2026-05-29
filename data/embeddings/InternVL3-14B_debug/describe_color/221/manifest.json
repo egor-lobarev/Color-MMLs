@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/221.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid brown shade. It has a warm, earthy tone that is neither too light nor too dark. This type of brown is often associated with autumn leaves, wood, or chocolate.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/221/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/221/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/221/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 5,
+    "C": 8,
+    "x": 0.466,
+    "y": 0.359,
+    "Y": 15.3,
+    "picture": "221.png",
+    "R": 0.643115803647,
+    "G": 0.345234761456,
+    "B": 0.268693542871
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.466,
+    "y": 0.359,
+    "Y": 15.3
+  },
+  "RGB": {
+    "R": 0.643115803647,
+    "G": 0.345234761456,
+    "B": 0.268693542871
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/825.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, light teal or turquoise. It has a smooth, even tone without any visible gradients or patterns.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/825/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/825/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/825/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0G",
+    "V": 8,
+    "C": 6,
+    "x": 0.262,
+    "y": 0.351,
+    "Y": 50.9,
+    "picture": "825.png",
+    "R": 0.447932727413,
+    "G": 0.803602213625,
+    "B": 0.742243939693
+  },
+  "munsell_spec": "10.0G",
+  "xyY": {
+    "x": 0.262,
+    "y": 0.351,
+    "Y": 50.9
+  },
+  "RGB": {
+    "R": 0.447932727413,
+    "G": 0.803602213625,
+    "B": 0.742243939693
+  }
+}

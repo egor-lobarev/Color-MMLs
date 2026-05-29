@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/414.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted mustard yellow. It has a warm tone with a slightly desaturated appearance, giving it a subdued and earthy feel.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/414/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/414/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/414/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0Y",
+    "V": 6,
+    "C": 10,
+    "x": 0.456,
+    "y": 0.469,
+    "Y": 25.2,
+    "picture": "414.png",
+    "R": 0.65497750322,
+    "G": 0.524048475911,
+    "B": 0.0593963544223
+  },
+  "munsell_spec": "5.0Y",
+  "xyY": {
+    "x": 0.456,
+    "y": 0.469,
+    "Y": 25.2
+  },
+  "RGB": {
+    "R": 0.65497750322,
+    "G": 0.524048475911,
+    "B": 0.0593963544223
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/789.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted teal or dark green. It has a uniform and smooth appearance, with no visible texture or patterns.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/789/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/789/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/789/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5G",
+    "V": 5,
+    "C": 4,
+    "x": 0.272,
+    "y": 0.358,
+    "Y": 17.3,
+    "picture": "789.png",
+    "R": 0.295157451068,
+    "G": 0.489643280192,
+    "B": 0.437930151297
+  },
+  "munsell_spec": "7.5G",
+  "xyY": {
+    "x": 0.272,
+    "y": 0.358,
+    "Y": 17.3
+  },
+  "RGB": {
+    "R": 0.295157451068,
+    "G": 0.489643280192,
+    "B": 0.437930151297
+  }
+}

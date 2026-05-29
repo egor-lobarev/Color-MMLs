@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/565.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of green, often referred to as olive green. It is a muted, earthy tone that lies between yellow and blue on the color spectrum. Olive green is commonly associated with military uniforms, natural landscapes, and is often used in design for its calming and neutral qualities.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/565/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/565/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/565/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 5,
+    "C": 4,
+    "x": 0.334,
+    "y": 0.393,
+    "Y": 18.1,
+    "picture": "565.png",
+    "R": 0.433499641882,
+    "G": 0.479659298389,
+    "B": 0.356743422994
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.334,
+    "y": 0.393,
+    "Y": 18.1
+  },
+  "RGB": {
+    "R": 0.433499641882,
+    "G": 0.479659298389,
+    "B": 0.356743422994
+  }
+}

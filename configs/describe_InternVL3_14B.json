@@ -1,7 +1,7 @@
 {
   "csv": "data/colors/munsell_colors/munsell_manifest.csv",
   "pics_dir": "data/colors/munsell_colors/pics",
-  "outdir_root": "data/embeddings/InternVL3-14B/describe_color",
+  "outdir_root": "data/embeddings/InternVL3-14B_debug/describe_color",
   "model": "OpenGVLab/InternVL3-14B",
   "prompt": "Describe the color.",
   "save_tokens": false,

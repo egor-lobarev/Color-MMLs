@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1294.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "The color in the image is solid black. The HEX code for black is:\n\n**#000000**",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/1294/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/1294/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      100,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0PB",
+    "V": 3,
+    "C": 2,
+    "x": 0.292,
+    "y": 0.278,
+    "Y": 5.7,
+    "picture": "1294.png",
+    "R": 0.277163796254,
+    "G": 0.254193131977,
+    "B": 0.32253660474
+  },
+  "munsell_spec": "10.0PB",
+  "xyY": {
+    "x": 0.292,
+    "y": 0.278,
+    "Y": 5.7
+  },
+  "RGB": {
+    "R": 0.277163796254,
+    "G": 0.254193131977,
+    "B": 0.32253660474
+  }
+}

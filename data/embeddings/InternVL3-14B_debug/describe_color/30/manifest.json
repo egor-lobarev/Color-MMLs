@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/30.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a vibrant shade of magenta. Magenta is a bright, purplish-pink color that is often associated with creativity, passion, and energy. It is a vivid hue that stands out and can evoke feelings of excitement and playfulness.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/30/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/30/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/30/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5R",
+    "V": 5,
+    "C": 14,
+    "x": 0.508,
+    "y": 0.259,
+    "Y": 11.9,
+    "picture": "30.png",
+    "R": 0.748423887361,
+    "G": 0.0195924816216,
+    "B": 0.352340538152
+  },
+  "munsell_spec": "2.5R",
+  "xyY": {
+    "x": 0.508,
+    "y": 0.259,
+    "Y": 11.9
+  },
+  "RGB": {
+    "R": 0.748423887361,
+    "G": 0.0195924816216,
+    "B": 0.352340538152
+  }
+}

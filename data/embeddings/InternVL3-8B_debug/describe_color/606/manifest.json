@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/606.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, dark green shade. It appears uniform without any variations or patterns, giving it a muted and deep appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/606/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/606/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/606/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5GY",
+    "V": 3,
+    "C": 6,
+    "x": 0.323,
+    "y": 0.543,
+    "Y": 4.89,
+    "picture": "606.png",
+    "R": 0.118162117802,
+    "G": 0.280700810279,
+    "B": 0.0549894652848
+  },
+  "munsell_spec": "7.5GY",
+  "xyY": {
+    "x": 0.323,
+    "y": 0.543,
+    "Y": 4.89
+  },
+  "RGB": {
+    "R": 0.118162117802,
+    "G": 0.280700810279,
+    "B": 0.0549894652848
+  }
+}

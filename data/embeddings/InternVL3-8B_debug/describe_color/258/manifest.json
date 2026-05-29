@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/258.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a muted, medium-dark brown. It has a subtle, earthy tone with a slightly grayish undertone, giving it a subdued and neutral appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/258/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/258/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/258/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0YR",
+    "V": 4,
+    "C": 2,
+    "x": 0.35,
+    "y": 0.334,
+    "Y": 11.3,
+    "picture": "258.png",
+    "R": 0.432403295659,
+    "G": 0.351991872723,
+    "B": 0.343316425002
+  },
+  "munsell_spec": "5.0YR",
+  "xyY": {
+    "x": 0.35,
+    "y": 0.334,
+    "Y": 11.3
+  },
+  "RGB": {
+    "R": 0.432403295659,
+    "G": 0.351991872723,
+    "B": 0.343316425002
+  }
+}

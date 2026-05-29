@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/393.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "The image you provided is completely white. The HEX code for the color white is:\n\n**#FFFFFF**",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/393/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/393/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      100,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5Y",
+    "V": 9,
+    "C": 0,
+    "x": 0.31,
+    "y": 0.316,
+    "Y": 78.6,
+    "picture": "393.png",
+    "R": 0.919562058958,
+    "G": 0.889035452832,
+    "B": 0.938565482813
+  },
+  "munsell_spec": "2.5Y",
+  "xyY": {
+    "x": 0.31,
+    "y": 0.316,
+    "Y": 78.6
+  },
+  "RGB": {
+    "R": 0.919562058958,
+    "G": 0.889035452832,
+    "B": 0.938565482813
+  }
+}

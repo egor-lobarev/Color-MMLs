@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1722.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, rich shade of purple. It has a solid, uniform appearance with no additional patterns or textures. This particular shade of purple is often associated with luxury, elegance, and creativity. The hue is quite dark, leaning towards a maroon or burgundy tone, which can evoke feelings of sophistication and depth.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1722/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1722/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1722/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 2,
+    "C": 4,
+    "x": 0.39,
+    "y": 0.268,
+    "Y": 2.31,
+    "picture": "1722.png",
+    "R": 0.268795212274,
+    "G": 0.111982708586,
+    "B": 0.18393649005
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.39,
+    "y": 0.268,
+    "Y": 2.31
+  },
+  "RGB": {
+    "R": 0.268795212274,
+    "G": 0.111982708586,
+    "B": 0.18393649005
+  }
+}

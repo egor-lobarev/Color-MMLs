@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/899.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a light, muted blue-gray. It has a soft, pastel quality with a slight gray undertone, giving it a calm and subtle appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/899/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/899/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/899/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5BG",
+    "V": 8,
+    "C": 2,
+    "x": 0.291,
+    "y": 0.316,
+    "Y": 55.7,
+    "picture": "899.png",
+    "R": 0.708784033334,
+    "G": 0.78371213422,
+    "B": 0.825045633438
+  },
+  "munsell_spec": "7.5BG",
+  "xyY": {
+    "x": 0.291,
+    "y": 0.316,
+    "Y": 55.7
+  },
+  "RGB": {
+    "R": 0.708784033334,
+    "G": 0.78371213422,
+    "B": 0.825045633438
+  }
+}

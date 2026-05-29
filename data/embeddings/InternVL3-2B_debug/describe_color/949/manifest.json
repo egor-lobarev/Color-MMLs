@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/949.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, uniform shade of teal or turquoise.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/949/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/949/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/949/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5B",
+    "V": 5,
+    "C": 6,
+    "x": 0.231,
+    "y": 0.275,
+    "Y": 15.4,
+    "picture": "949.png",
+    "R": 0.233563847775,
+    "G": 0.455351123802,
+    "B": 0.554689645224
+  },
+  "munsell_spec": "2.5B",
+  "xyY": {
+    "x": 0.231,
+    "y": 0.275,
+    "Y": 15.4
+  },
+  "RGB": {
+    "R": 0.233563847775,
+    "G": 0.455351123802,
+    "B": 0.554689645224
+  }
+}

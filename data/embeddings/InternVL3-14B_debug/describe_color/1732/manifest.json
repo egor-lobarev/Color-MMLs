@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1732.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, rich shade of purple. It has a strong and bold appearance, often associated with luxury, creativity, and royalty. This particular hue is quite saturated, meaning it is vivid and intense without any significant mixing with other colors. The purple is neither too light nor too dark, striking a balance that makes it visually striking and easy to notice.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1732/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1732/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1732/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 4,
+    "C": 10,
+    "x": 0.444,
+    "y": 0.245,
+    "Y": 7.8,
+    "picture": "1732.png",
+    "R": 0.57378937869,
+    "G": 0.120275346072,
+    "B": 0.343436297029
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.444,
+    "y": 0.245,
+    "Y": 7.8
+  },
+  "RGB": {
+    "R": 0.57378937869,
+    "G": 0.120275346072,
+    "B": 0.343436297029
+  }
+}

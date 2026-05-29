@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/760.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of green, often referred to as teal or sea green. It has a medium tone with a slight blue undertone, giving it a calm and soothing appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/760/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/760/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/760/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0G",
+    "V": 5,
+    "C": 4,
+    "x": 0.282,
+    "y": 0.367,
+    "Y": 17.5,
+    "picture": "760.png",
+    "R": 0.319556444598,
+    "G": 0.490024849573,
+    "B": 0.42185106765
+  },
+  "munsell_spec": "5.0G",
+  "xyY": {
+    "x": 0.282,
+    "y": 0.367,
+    "Y": 17.5
+  },
+  "RGB": {
+    "R": 0.319556444598,
+    "G": 0.490024849573,
+    "B": 0.42185106765
+  }
+}
