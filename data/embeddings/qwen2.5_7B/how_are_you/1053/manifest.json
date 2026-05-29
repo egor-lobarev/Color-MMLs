@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1053.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "How are you?",
+  "answer": "I'm just a computer program, so I don't have feelings or emotions like humans do. How can I assist you today?",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B_test/how_are_you/1053/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B_test/how_are_you/1053/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0B",
+    "V": 3,
+    "C": 10,
+    "x": 0.192,
+    "y": 0.196,
+    "Y": 4.29,
+    "picture": "1053.png",
+    "R": 0.0443864646991,
+    "G": 0.235634169839,
+    "B": 0.403278374399
+  },
+  "munsell_spec": "10.0B",
+  "xyY": {
+    "x": 0.192,
+    "y": 0.196,
+    "Y": 4.29
+  },
+  "RGB": {
+    "R": 0.0443864646991,
+    "G": 0.235634169839,
+    "B": 0.403278374399
+  }
+}
