@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1215.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a deep, rich navy blue. It has a dark and solid appearance, often associated with sophistication and formality.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1215/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1215/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1215/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 1,
+    "C": 12,
+    "x": 0.205,
+    "y": 0.121,
+    "Y": 0.68,
+    "picture": "1215.png",
+    "R": 0.0860680423401,
+    "G": 0.0408829180549,
+    "B": 0.218868594828
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.205,
+    "y": 0.121,
+    "Y": 0.68
+  },
+  "RGB": {
+    "R": 0.0860680423401,
+    "G": 0.0408829180549,
+    "B": 0.218868594828
+  }
+}

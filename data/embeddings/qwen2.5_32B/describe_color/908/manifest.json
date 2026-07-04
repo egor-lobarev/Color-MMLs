@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/908.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image shows a solid **black** color. It is uniform and lacks any gradients, patterns, or variations in shade. Black is the absence of visible light and is often associated with darkness, depth, or simplicity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/908/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/908/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0BG",
+    "V": 2,
+    "C": 2,
+    "x": 0.26,
+    "y": 0.295,
+    "Y": 2.67,
+    "picture": "908.png",
+    "R": 0.129032066827,
+    "G": 0.186159170026,
+    "B": 0.216368765795
+  },
+  "munsell_spec": "10.0BG",
+  "xyY": {
+    "x": 0.26,
+    "y": 0.295,
+    "Y": 2.67
+  },
+  "RGB": {
+    "R": 0.129032066827,
+    "G": 0.186159170026,
+    "B": 0.216368765795
+  }
+}

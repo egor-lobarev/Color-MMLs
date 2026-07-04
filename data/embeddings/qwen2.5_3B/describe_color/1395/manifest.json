@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1395.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of purple. It appears to be a saturated, non-bleached purple, which gives it a vibrant and intense appearance. This type of purple can be found in various shades, from a very dark, almost blackish-purple to a lighter, more pastel-like hue. The exact shade can vary depending on the specific lighting conditions and the medium used (e.g., paint, fabric, or digital).",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1395/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1395/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5P",
+    "V": 6,
+    "C": 10,
+    "x": 0.272,
+    "y": 0.215,
+    "Y": 21.5,
+    "picture": "1395.png",
+    "R": 0.579519787014,
+    "G": 0.437963311717,
+    "B": 0.744199820872
+  },
+  "munsell_spec": "2.5P",
+  "xyY": {
+    "x": 0.272,
+    "y": 0.215,
+    "Y": 21.5
+  },
+  "RGB": {
+    "R": 0.579519787014,
+    "G": 0.437963311717,
+    "B": 0.744199820872
+  }
+}

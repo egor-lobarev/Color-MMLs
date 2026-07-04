@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/151.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a deep, rich shade of red that appears to be a solid, non-tinged hue. It could be described as a dark crimson or a deep maroon. This color is often associated with passion, intensity, and power.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/151/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/151/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0R",
+    "V": 2,
+    "C": 8,
+    "x": 0.57,
+    "y": 0.322,
+    "Y": 1.91,
+    "picture": "151.png",
+    "R": 0.307508409679,
+    "G": 0.0429911052235,
+    "B": 0.0586372606664
+  },
+  "munsell_spec": "10.0R",
+  "xyY": {
+    "x": 0.57,
+    "y": 0.322,
+    "Y": 1.91
+  },
+  "RGB": {
+    "R": 0.307508409679,
+    "G": 0.0429911052235,
+    "B": 0.0586372606664
+  }
+}

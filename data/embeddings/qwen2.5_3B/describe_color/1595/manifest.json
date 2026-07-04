@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1595.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you have described is a very dark shade of purple, which can be referred to as a deep or rich purple. It is not a common color and may be difficult to find in everyday life.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1595/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1595/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5RP",
+    "V": 4,
+    "C": 4,
+    "x": 0.324,
+    "y": 0.261,
+    "Y": 9.6,
+    "picture": "1595.png",
+    "R": 0.439826981805,
+    "G": 0.2953247284,
+    "B": 0.421446868701
+  },
+  "munsell_spec": "2.5RP",
+  "xyY": {
+    "x": 0.324,
+    "y": 0.261,
+    "Y": 9.6
+  },
+  "RGB": {
+    "R": 0.439826981805,
+    "G": 0.2953247284,
+    "B": 0.421446868701
+  }
+}

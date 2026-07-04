@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1505.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is completely white. It has no other colors, patterns, or gradients—just a uniform, solid white background. This color is often referred to as \"pure white\" or \"RGB (255, 255, 255)\" in digital contexts.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1505/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1505/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5P",
+    "V": 6,
+    "C": 8,
+    "x": 0.301,
+    "y": 0.231,
+    "Y": 22.4,
+    "picture": "1505.png",
+    "R": 0.646275890308,
+    "G": 0.431742545387,
+    "B": 0.701584010519
+  },
+  "munsell_spec": "7.5P",
+  "xyY": {
+    "x": 0.301,
+    "y": 0.231,
+    "Y": 22.4
+  },
+  "RGB": {
+    "R": 0.646275890308,
+    "G": 0.431742545387,
+    "B": 0.701584010519
+  }
+}

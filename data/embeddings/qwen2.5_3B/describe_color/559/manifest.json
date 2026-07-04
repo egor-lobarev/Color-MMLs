@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/559.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a deep, rich shade of green that appears to be a combination of various shades and tones. It has a slightly bluish tint, giving it a cool and refreshing appearance. The color is also slightly muted, with no bright or vibrant highlights. Overall, it has a calming and soothing effect on the eye.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/559/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/559/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 3,
+    "C": 2,
+    "x": 0.324,
+    "y": 0.367,
+    "Y": 6.18,
+    "picture": "559.png",
+    "R": 0.262114634971,
+    "G": 0.283258380058,
+    "B": 0.235948043779
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.324,
+    "y": 0.367,
+    "Y": 6.18
+  },
+  "RGB": {
+    "R": 0.262114634971,
+    "G": 0.283258380058,
+    "B": 0.235948043779
+  }
+}

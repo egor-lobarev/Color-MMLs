@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1174.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, deep blue. It has a rich and uniform tone, reminiscent of a clear sky or a deep ocean. There are no gradients, patterns, or variations in this shade, giving it a calm and consistent appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1174/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1174/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1174/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 4,
+    "C": 12,
+    "x": 0.213,
+    "y": 0.182,
+    "Y": 7.7,
+    "picture": "1174.png",
+    "R": 0.237570006058,
+    "G": 0.288653843204,
+    "B": 0.546721904706
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.213,
+    "y": 0.182,
+    "Y": 7.7
+  },
+  "RGB": {
+    "R": 0.237570006058,
+    "G": 0.288653843204,
+    "B": 0.546721904706
+  }
+}

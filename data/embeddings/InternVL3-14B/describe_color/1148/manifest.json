@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1148.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, dark blue. It resembles a navy blue or midnight blue, often used in formal attire or as a background for professional designs.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1148/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1148/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1148/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 1,
+    "C": 10,
+    "x": 0.191,
+    "y": 0.141,
+    "Y": 0.71,
+    "picture": "1148.png",
+    "R": 0.0447703325758,
+    "G": 0.0647472031926,
+    "B": 0.204866934518
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.191,
+    "y": 0.141,
+    "Y": 0.71
+  },
+  "RGB": {
+    "R": 0.0447703325758,
+    "G": 0.0647472031926,
+    "B": 0.204866934518
+  }
+}

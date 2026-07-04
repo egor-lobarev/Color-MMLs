@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1692.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted purple. It has a deep, rich tone with a slight reddish or pinkish undertone, giving it a sophisticated and elegant appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1692/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1692/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/1692/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5RP",
+    "V": 4,
+    "C": 6,
+    "x": 0.372,
+    "y": 0.257,
+    "Y": 8.9,
+    "picture": "1692.png",
+    "R": 0.502754743804,
+    "G": 0.241292648146,
+    "B": 0.388308714361
+  },
+  "munsell_spec": "7.5RP",
+  "xyY": {
+    "x": 0.372,
+    "y": 0.257,
+    "Y": 8.9
+  },
+  "RGB": {
+    "R": 0.502754743804,
+    "G": 0.241292648146,
+    "B": 0.388308714361
+  }
+}

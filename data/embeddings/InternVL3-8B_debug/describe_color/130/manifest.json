@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/130.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted red. It has a soft, pastel quality, reminiscent of a gentle shade of pinkish-red. The hue is uniform, without any gradients or patterns, giving it a simple and clean appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/130/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/130/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/130/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 6,
+    "C": 14,
+    "x": 0.526,
+    "y": 0.321,
+    "Y": 19.7,
+    "picture": "130.png",
+    "R": 0.852382858149,
+    "G": 0.273189549379,
+    "B": 0.307567264465
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.526,
+    "y": 0.321,
+    "Y": 19.7
+  },
+  "RGB": {
+    "R": 0.852382858149,
+    "G": 0.273189549379,
+    "B": 0.307567264465
+  }
+}

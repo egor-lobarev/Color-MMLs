@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/746.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a light, muted green, often described as a soft pastel or pale mint green.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/746/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/746/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/746/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5G",
+    "V": 9,
+    "C": 4,
+    "x": 0.302,
+    "y": 0.354,
+    "Y": 73.5,
+    "picture": "746.png",
+    "R": 0.764881644493,
+    "G": 0.906742551409,
+    "B": 0.820942550605
+  },
+  "munsell_spec": "2.5G",
+  "xyY": {
+    "x": 0.302,
+    "y": 0.354,
+    "Y": 73.5
+  },
+  "RGB": {
+    "R": 0.764881644493,
+    "G": 0.906742551409,
+    "B": 0.820942550605
+  }
+}

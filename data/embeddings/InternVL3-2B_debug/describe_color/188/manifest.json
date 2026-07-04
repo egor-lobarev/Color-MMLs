@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/188.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid coral or salmon shade. It is a warm, reddish-orange hue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/188/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/188/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/188/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0R",
+    "V": 7,
+    "C": 14,
+    "x": 0.516,
+    "y": 0.355,
+    "Y": 29.9,
+    "picture": "188.png",
+    "R": 0.952148130822,
+    "G": 0.41590128756,
+    "B": 0.309546690629
+  },
+  "munsell_spec": "10.0R",
+  "xyY": {
+    "x": 0.516,
+    "y": 0.355,
+    "Y": 29.9
+  },
+  "RGB": {
+    "R": 0.952148130822,
+    "G": 0.41590128756,
+    "B": 0.309546690629
+  }
+}

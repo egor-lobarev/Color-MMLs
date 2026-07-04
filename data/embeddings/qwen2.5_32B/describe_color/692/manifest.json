@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/692.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image shows a solid **green** color. It is a uniform, bright green with no gradients or variations in shade. The green appears to be a medium tone, neither too light nor too dark, and it fills the entire visible area of the image.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/692/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/692/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0GY",
+    "V": 8,
+    "C": 18,
+    "x": 0.3,
+    "y": 0.537,
+    "Y": 43.4,
+    "picture": "692.png",
+    "R": 0.254953056078,
+    "G": 0.788576966356,
+    "B": 0.281070082733
+  },
+  "munsell_spec": "10.0GY",
+  "xyY": {
+    "x": 0.3,
+    "y": 0.537,
+    "Y": 43.4
+  },
+  "RGB": {
+    "R": 0.254953056078,
+    "G": 0.788576966356,
+    "B": 0.281070082733
+  }
+}

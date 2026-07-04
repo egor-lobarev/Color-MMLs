@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/576.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of green. It has a muted, olive-like tone, which is neither too bright nor too dark. This type of green is often associated with nature, tranquility, and calmness.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/576/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/576/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/576/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 7,
+    "C": 8,
+    "x": 0.357,
+    "y": 0.446,
+    "Y": 37.5,
+    "picture": "576.png",
+    "R": 0.595817968215,
+    "G": 0.679586285543,
+    "B": 0.37389175399
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.357,
+    "y": 0.446,
+    "Y": 37.5
+  },
+  "RGB": {
+    "R": 0.595817968215,
+    "G": 0.679586285543,
+    "B": 0.37389175399
+  }
+}

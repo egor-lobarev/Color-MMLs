@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1659.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you've described is a very light, pastel shade of pink. It's soft and delicate, with a subtle hue that doesn't dominate the scene. This color is often associated with gentleness, femininity, and a touch of sweetness. It can evoke feelings of calmness and serenity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1659/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1659/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0RP",
+    "V": 6,
+    "C": 2,
+    "x": 0.322,
+    "y": 0.297,
+    "Y": 27.6,
+    "picture": "1659.png",
+    "R": 0.641294632392,
+    "G": 0.52961975314,
+    "B": 0.613561145688
+  },
+  "munsell_spec": "5.0RP",
+  "xyY": {
+    "x": 0.322,
+    "y": 0.297,
+    "Y": 27.6
+  },
+  "RGB": {
+    "R": 0.641294632392,
+    "G": 0.52961975314,
+    "B": 0.613561145688
+  }
+}

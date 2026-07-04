@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/332.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you've described is a shade of gray that is very light and almost white in appearance. It's a neutral color with a soft, pastel-like quality. This particular shade can be referred to as \"light gray\" or \"pale gray.\" It's often used in design and art for its calming effect and ability to blend well with other colors.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/332/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/332/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0YR",
+    "V": 5,
+    "C": 4,
+    "x": 0.378,
+    "y": 0.368,
+    "Y": 18.3,
+    "picture": "332.png",
+    "R": 0.551515618559,
+    "G": 0.444710187734,
+    "B": 0.360175726724
+  },
+  "munsell_spec": "10.0YR",
+  "xyY": {
+    "x": 0.378,
+    "y": 0.368,
+    "Y": 18.3
+  },
+  "RGB": {
+    "R": 0.551515618559,
+    "G": 0.444710187734,
+    "B": 0.360175726724
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1264.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a deep, rich shade of purple. It appears to be a saturated, non-bleached hue with a slight blue undertone, giving it a slightly cool and sophisticated appearance. The color is not overly bright or vibrant but rather has a subtle, almost muted quality that makes it appear elegant and refined.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1264/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1264/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 6,
+    "C": 12,
+    "x": 0.241,
+    "y": 0.204,
+    "Y": 20.7,
+    "picture": "1264.png",
+    "R": 0.477126038242,
+    "G": 0.454993933845,
+    "B": 0.777661768793
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.241,
+    "y": 0.204,
+    "Y": 20.7
+  },
+  "RGB": {
+    "R": 0.477126038242,
+    "G": 0.454993933845,
+    "B": 0.777661768793
+  }
+}

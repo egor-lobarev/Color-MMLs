@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1171.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid, dark shade of purple. It has a rich and deep hue, often associated with royalty or luxury.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1171/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1171/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1171/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 4,
+    "C": 6,
+    "x": 0.253,
+    "y": 0.238,
+    "Y": 9.1,
+    "picture": "1171.png",
+    "R": 0.30661839036,
+    "G": 0.322814247729,
+    "B": 0.476045221317
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.253,
+    "y": 0.238,
+    "Y": 9.1
+  },
+  "RGB": {
+    "R": 0.30661839036,
+    "G": 0.322814247729,
+    "B": 0.476045221317
+  }
+}

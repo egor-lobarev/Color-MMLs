@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/830.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a light turquoise. It's a soft, pale shade of blue-green that has a calming and refreshing appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/830/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/830/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/830/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0G",
+    "V": 9,
+    "C": 8,
+    "x": 0.251,
+    "y": 0.361,
+    "Y": 65.5,
+    "picture": "830.png",
+    "R": 0.377963917795,
+    "G": 0.914599668529,
+    "B": 0.818616017539
+  },
+  "munsell_spec": "10.0G",
+  "xyY": {
+    "x": 0.251,
+    "y": 0.361,
+    "Y": 65.5
+  },
+  "RGB": {
+    "R": 0.377963917795,
+    "G": 0.914599668529,
+    "B": 0.818616017539
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/805.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you have described is a very light, pastel shade of green. It is a soft and delicate hue that is often associated with spring or nature. The color is not too bright or intense, but rather has a gentle, almost ethereal quality to it. It can be used in various contexts, such as clothing, home decor, or fashion, to create a calming and peaceful atmosphere.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/805/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/805/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5G",
+    "V": 9,
+    "C": 6,
+    "x": 0.276,
+    "y": 0.36,
+    "Y": 69.6,
+    "picture": "805.png",
+    "R": 0.591234599051,
+    "G": 0.915165524839,
+    "B": 0.816161472034
+  },
+  "munsell_spec": "7.5G",
+  "xyY": {
+    "x": 0.276,
+    "y": 0.36,
+    "Y": 69.6
+  },
+  "RGB": {
+    "R": 0.591234599051,
+    "G": 0.915165524839,
+    "B": 0.816161472034
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/86.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a bright, vivid shade of red that is often associated with passion, energy, and intensity. It can be described as a deep, rich crimson or a bold, fiery hue. This color is commonly used in various contexts such as fashion, design, and marketing to convey strong emotions and attract attention.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/86/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/86/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 6,
+    "C": 16,
+    "x": 0.541,
+    "y": 0.292,
+    "Y": 18.2,
+    "picture": "86.png",
+    "R": 0.886548895829,
+    "G": 0.147348595981,
+    "B": 0.334815533572
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.541,
+    "y": 0.292,
+    "Y": 18.2
+  },
+  "RGB": {
+    "R": 0.886548895829,
+    "G": 0.147348595981,
+    "B": 0.334815533572
+  }
+}

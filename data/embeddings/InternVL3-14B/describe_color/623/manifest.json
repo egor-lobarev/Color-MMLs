@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/623.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of gray. Gray is a neutral color that is created by mixing black and white. It can vary in lightness and saturation, ranging from very light, almost white grays to very dark, almost black grays. The specific shade in the image appears to be a medium gray, leaning slightly towards a cooler tone. This particular shade of gray can evoke feelings of calmness, neutrality, and balance. It is often used in design to create a sense of sophistication and understated elegance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/623/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/623/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/623/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5GY",
+    "V": 7,
+    "C": 2,
+    "x": 0.316,
+    "y": 0.342,
+    "Y": 41.8,
+    "picture": "623.png",
+    "R": 0.66565549048,
+    "G": 0.685214476861,
+    "B": 0.648459737288
+  },
+  "munsell_spec": "7.5GY",
+  "xyY": {
+    "x": 0.316,
+    "y": 0.342,
+    "Y": 41.8
+  },
+  "RGB": {
+    "R": 0.66565549048,
+    "G": 0.685214476861,
+    "B": 0.648459737288
+  }
+}

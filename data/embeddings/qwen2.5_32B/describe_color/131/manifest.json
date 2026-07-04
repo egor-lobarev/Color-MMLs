@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/131.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image shows a solid **white** color. It is a bright, neutral, and pure white with no gradients or variations in tone. White is often associated with simplicity, cleanliness, and brightness.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/131/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/131/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 6,
+    "C": 16,
+    "x": 0.557,
+    "y": 0.32,
+    "Y": 18.5,
+    "picture": "131.png",
+    "R": 0.867002020177,
+    "G": 0.215002311201,
+    "B": 0.260922456906
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.557,
+    "y": 0.32,
+    "Y": 18.5
+  },
+  "RGB": {
+    "R": 0.867002020177,
+    "G": 0.215002311201,
+    "B": 0.260922456906
+  }
+}

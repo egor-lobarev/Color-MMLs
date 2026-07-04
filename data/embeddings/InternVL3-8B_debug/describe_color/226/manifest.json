@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/226.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a muted, solid taupe. It has a neutral, earthy tone with a slightly warm undertone.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/226/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/226/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/226/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 6,
+    "C": 2,
+    "x": 0.339,
+    "y": 0.328,
+    "Y": 28.9,
+    "picture": "226.png",
+    "R": 0.647941720144,
+    "G": 0.551535364628,
+    "B": 0.5543228453
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.339,
+    "y": 0.328,
+    "Y": 28.9
+  },
+  "RGB": {
+    "R": 0.647941720144,
+    "G": 0.551535364628,
+    "B": 0.5543228453
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/80.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted pink or mauve. It is a soft, uniform shade without any visible gradients or patterns.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/80/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/80/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/80/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 6,
+    "C": 4,
+    "x": 0.368,
+    "y": 0.315,
+    "Y": 26.1,
+    "picture": "80.png",
+    "R": 0.705551721994,
+    "G": 0.490167148318,
+    "B": 0.528493347243
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.368,
+    "y": 0.315,
+    "Y": 26.1
+  },
+  "RGB": {
+    "R": 0.705551721994,
+    "G": 0.490167148318,
+    "B": 0.528493347243
+  }
+}

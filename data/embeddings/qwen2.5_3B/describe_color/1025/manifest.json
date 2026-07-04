@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1025.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a shade of blue that appears to be a cool, light blue with a slight tint of purple or lavender. It has a soft, pastel-like quality and could be described as a \"baby blue\" or \"lilac blue.\" The hue is not overly saturated but rather has a gentle, almost dreamy quality to it.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1025/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1025/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5B",
+    "V": 6,
+    "C": 6,
+    "x": 0.248,
+    "y": 0.269,
+    "Y": 24.0,
+    "picture": "1025.png",
+    "R": 0.40052782191,
+    "G": 0.540727455838,
+    "B": 0.679141468588
+  },
+  "munsell_spec": "7.5B",
+  "xyY": {
+    "x": 0.248,
+    "y": 0.269,
+    "Y": 24.0
+  },
+  "RGB": {
+    "R": 0.40052782191,
+    "G": 0.540727455838,
+    "B": 0.679141468588
+  }
+}

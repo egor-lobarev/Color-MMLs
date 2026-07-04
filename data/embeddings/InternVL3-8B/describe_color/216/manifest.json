@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/216.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted brown. It has a warm tone, similar to a dark, earthy shade often associated with wood or chocolate.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/216/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/216/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/216/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 4,
+    "C": 12,
+    "x": 0.587,
+    "y": 0.368,
+    "Y": 7.6,
+    "picture": "216.png",
+    "R": 0.55770413244,
+    "G": 0.173680248583,
+    "B": 0.0138453388261
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.587,
+    "y": 0.368,
+    "Y": 7.6
+  },
+  "RGB": {
+    "R": 0.55770413244,
+    "G": 0.173680248583,
+    "B": 0.0138453388261
+  }
+}

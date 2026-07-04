@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1304.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you've described is a deep, rich shade of purple that appears to be a combination of blue and red hues. It has a slightly muted tone, giving it a soft and elegant appearance. The color could be reminiscent of a deep, dark lavender or a rich, royal purple. It's a versatile color that can be used in various contexts, from fashion and interior design to art and photography.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1304/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1304/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0PB",
+    "V": 4,
+    "C": 4,
+    "x": 0.282,
+    "y": 0.257,
+    "Y": 9.8,
+    "picture": "1304.png",
+    "R": 0.365846854847,
+    "G": 0.326285240618,
+    "B": 0.451430679997
+  },
+  "munsell_spec": "10.0PB",
+  "xyY": {
+    "x": 0.282,
+    "y": 0.257,
+    "Y": 9.8
+  },
+  "RGB": {
+    "R": 0.365846854847,
+    "G": 0.326285240618,
+    "B": 0.451430679997
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/431.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is yellow. Yellow is a primary color in the RGB color model, which stands for Red, Green, and Blue. It is often associated with sunlight, sunshine, and happiness. In the CMYK color model, it is one of the three primary colors: Cyan, Magenta, and Yellow. Yellow can also be a secondary color when mixed with red or blue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/431/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/431/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0Y",
+    "V": 9,
+    "C": 12,
+    "x": 0.42,
+    "y": 0.446,
+    "Y": 67.8,
+    "picture": "431.png",
+    "R": 0.966397231198,
+    "G": 0.833194475312,
+    "B": 0.369625296378
+  },
+  "munsell_spec": "5.0Y",
+  "xyY": {
+    "x": 0.42,
+    "y": 0.446,
+    "Y": 67.8
+  },
+  "RGB": {
+    "R": 0.966397231198,
+    "G": 0.833194475312,
+    "B": 0.369625296378
+  }
+}

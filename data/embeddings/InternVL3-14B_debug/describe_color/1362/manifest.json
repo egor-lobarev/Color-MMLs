@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1362.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of purple. It has a medium to dark tone, leaning towards a rich, deep purple hue. This type of purple is often associated with sophistication and elegance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1362/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1362/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1362/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5P",
+    "V": 3,
+    "C": 4,
+    "x": 0.285,
+    "y": 0.246,
+    "Y": 5.12,
+    "picture": "1362.png",
+    "R": 0.282450865766,
+    "G": 0.228306351445,
+    "B": 0.342435686702
+  },
+  "munsell_spec": "2.5P",
+  "xyY": {
+    "x": 0.285,
+    "y": 0.246,
+    "Y": 5.12
+  },
+  "RGB": {
+    "R": 0.282450865766,
+    "G": 0.228306351445,
+    "B": 0.342435686702
+  }
+}

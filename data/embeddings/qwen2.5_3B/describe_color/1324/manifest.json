@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1324.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you have described is a very light shade of purple, which can be referred to as a pastel or soft purple. It is not a deep or dark purple, but rather a lighter, more delicate shade that is often used in pastel palettes. This color can evoke feelings of calmness and tranquility, and it is commonly associated with springtime and new beginnings.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1324/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1324/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0PB",
+    "V": 6,
+    "C": 2,
+    "x": 0.298,
+    "y": 0.292,
+    "Y": 27.6,
+    "picture": "1324.png",
+    "R": 0.579634981374,
+    "G": 0.54771397118,
+    "B": 0.641387693307
+  },
+  "munsell_spec": "10.0PB",
+  "xyY": {
+    "x": 0.298,
+    "y": 0.292,
+    "Y": 27.6
+  },
+  "RGB": {
+    "R": 0.579634981374,
+    "G": 0.54771397118,
+    "B": 0.641387693307
+  }
+}

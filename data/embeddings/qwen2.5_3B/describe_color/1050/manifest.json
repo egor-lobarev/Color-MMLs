@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1050.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, rich blue that appears to be a shade of indigo or ultramarine. It has a slightly darker hue compared to lighter blues and is characterized by its deep, almost navy-like quality. The color is uniform throughout the image, suggesting it might be a solid or very saturated shade rather than a gradient or mixed with other colors.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1050/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1050/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0B",
+    "V": 3,
+    "C": 4,
+    "x": 0.251,
+    "y": 0.259,
+    "Y": 5.2,
+    "picture": "1050.png",
+    "R": 0.203860467646,
+    "G": 0.254748211841,
+    "B": 0.342692102074
+  },
+  "munsell_spec": "10.0B",
+  "xyY": {
+    "x": 0.251,
+    "y": 0.259,
+    "Y": 5.2
+  },
+  "RGB": {
+    "R": 0.203860467646,
+    "G": 0.254748211841,
+    "B": 0.342692102074
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1577.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very light, almost white shade of pink. It appears to be a pastel or soft pink hue with a slight tint of white, giving it a delicate and gentle appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1577/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1577/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0P",
+    "V": 9,
+    "C": 4,
+    "x": 0.314,
+    "y": 0.283,
+    "Y": 69.0,
+    "picture": "1577.png",
+    "R": 0.968744555957,
+    "G": 0.793760498579,
+    "B": 0.973362173602
+  },
+  "munsell_spec": "10.0P",
+  "xyY": {
+    "x": 0.314,
+    "y": 0.283,
+    "Y": 69.0
+  },
+  "RGB": {
+    "R": 0.968744555957,
+    "G": 0.793760498579,
+    "B": 0.973362173602
+  }
+}

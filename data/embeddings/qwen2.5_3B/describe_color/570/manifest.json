@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/570.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a shade of green that is very light and almost pastel in nature. It's a soft, muted green that doesn't have any strong or bright qualities. This color can be described as a pale, almost neon green with a slight yellow tint. It's often used in design for its calming effect and ability to create a sense of freshness and tranquility.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/570/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/570/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 6,
+    "C": 6,
+    "x": 0.351,
+    "y": 0.43,
+    "Y": 26.6,
+    "picture": "570.png",
+    "R": 0.513958891453,
+    "G": 0.578662765217,
+    "B": 0.350914011436
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.351,
+    "y": 0.43,
+    "Y": 26.6
+  },
+  "RGB": {
+    "R": 0.513958891453,
+    "G": 0.578662765217,
+    "B": 0.350914011436
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/350.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, warm orange or tan shade. It is a uniform, flat color with no gradients or variations in hue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/350/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/350/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/350/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0YR",
+    "V": 8,
+    "C": 10,
+    "x": 0.431,
+    "y": 0.415,
+    "Y": 50.9,
+    "picture": "350.png",
+    "R": 0.924344156674,
+    "G": 0.701716636186,
+    "B": 0.388951975355
+  },
+  "munsell_spec": "10.0YR",
+  "xyY": {
+    "x": 0.431,
+    "y": 0.415,
+    "Y": 50.9
+  },
+  "RGB": {
+    "R": 0.924344156674,
+    "G": 0.701716636186,
+    "B": 0.388951975355
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/754.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a dark green, often referred to as forest green or dark olive. It's a rich, deep shade that resembles the color of dense foliage.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/754/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/754/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/754/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0G",
+    "V": 2,
+    "C": 2,
+    "x": 0.284,
+    "y": 0.359,
+    "Y": 2.79,
+    "picture": "754.png",
+    "R": 0.127346625227,
+    "G": 0.196750520143,
+    "B": 0.171328256572
+  },
+  "munsell_spec": "5.0G",
+  "xyY": {
+    "x": 0.284,
+    "y": 0.359,
+    "Y": 2.79
+  },
+  "RGB": {
+    "R": 0.127346625227,
+    "G": 0.196750520143,
+    "B": 0.171328256572
+  }
+}

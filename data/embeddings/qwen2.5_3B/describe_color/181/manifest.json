@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/181.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a bright, vivid orange. It is a warm and energetic hue that can evoke feelings of excitement, enthusiasm, and creativity. The color is often associated with the sun, fire, and autumn leaves. It can be used to create a sense of warmth and energy in a design or setting.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/181/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/181/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0R",
+    "V": 6,
+    "C": 18,
+    "x": 0.597,
+    "y": 0.35,
+    "Y": 18.3,
+    "picture": "181.png",
+    "R": 0.863130418427,
+    "G": 0.22653667394,
+    "B": 0.0955463094348
+  },
+  "munsell_spec": "10.0R",
+  "xyY": {
+    "x": 0.597,
+    "y": 0.35,
+    "Y": 18.3
+  },
+  "RGB": {
+    "R": 0.863130418427,
+    "G": 0.22653667394,
+    "B": 0.0955463094348
+  }
+}

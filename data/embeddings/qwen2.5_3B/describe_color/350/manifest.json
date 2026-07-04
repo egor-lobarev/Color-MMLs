@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/350.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a shade of yellow that is very light and bright, almost like a pastel or a soft lemon color. It's not a deep or dark yellow, but rather a lighter, more delicate version of it. This color can be described as a soft, pastel yellow with a slight tint of green or blue, giving it a fresh and airy feel.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/350/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/350/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0YR",
+    "V": 8,
+    "C": 10,
+    "x": 0.431,
+    "y": 0.415,
+    "Y": 50.9,
+    "picture": "350.png",
+    "R": 0.924344156674,
+    "G": 0.701716636186,
+    "B": 0.388951975355
+  },
+  "munsell_spec": "10.0YR",
+  "xyY": {
+    "x": 0.431,
+    "y": 0.415,
+    "Y": 50.9
+  },
+  "RGB": {
+    "R": 0.924344156674,
+    "G": 0.701716636186,
+    "B": 0.388951975355
+  }
+}

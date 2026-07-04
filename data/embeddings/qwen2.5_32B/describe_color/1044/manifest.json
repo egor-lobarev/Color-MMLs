@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1044.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is **black**. It is a solid, uniform dark color with no variations or gradients. Black is often associated with darkness, depth, and absence of light.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1044/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1044/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0B",
+    "V": 1,
+    "C": 6,
+    "x": 0.195,
+    "y": 0.195,
+    "Y": 0.79,
+    "picture": "1044.png",
+    "R": 0.0146648161846,
+    "G": 0.0874916621638,
+    "B": 0.171654490493
+  },
+  "munsell_spec": "10.0B",
+  "xyY": {
+    "x": 0.195,
+    "y": 0.195,
+    "Y": 0.79
+  },
+  "RGB": {
+    "R": 0.0146648161846,
+    "G": 0.0874916621638,
+    "B": 0.171654490493
+  }
+}

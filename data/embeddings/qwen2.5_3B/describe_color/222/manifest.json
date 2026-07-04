@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/222.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a deep, rich shade of red that appears to be a solid, non-fluctuating hue. It's a warm and vibrant color that can evoke feelings of passion, energy, and intensity. The color is not a gradient or a blend but a pure, unadulterated shade of red.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/222/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/222/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 5,
+    "C": 10,
+    "x": 0.504,
+    "y": 0.365,
+    "Y": 14.4,
+    "picture": "222.png",
+    "R": 0.66310286522,
+    "G": 0.312546369172,
+    "B": 0.210063517866
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.504,
+    "y": 0.365,
+    "Y": 14.4
+  },
+  "RGB": {
+    "R": 0.66310286522,
+    "G": 0.312546369172,
+    "B": 0.210063517866
+  }
+}

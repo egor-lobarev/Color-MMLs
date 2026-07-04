@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1114.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid shade of blue. It has a medium tone, not too light or too dark, and appears to be a calm and neutral blue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1114/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1114/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1114/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5PB",
+    "V": 5,
+    "C": 6,
+    "x": 0.251,
+    "y": 0.253,
+    "Y": 15.4,
+    "picture": "1114.png",
+    "R": 0.362111271591,
+    "G": 0.428035921857,
+    "B": 0.580461711173
+  },
+  "munsell_spec": "2.5PB",
+  "xyY": {
+    "x": 0.251,
+    "y": 0.253,
+    "Y": 15.4
+  },
+  "RGB": {
+    "R": 0.362111271591,
+    "G": 0.428035921857,
+    "B": 0.580461711173
+  }
+}

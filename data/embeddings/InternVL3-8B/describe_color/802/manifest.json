@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/802.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a bright, turquoise green. It has a vivid and fresh appearance, reminiscent of a clear sky or a lush, vibrant plant.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/802/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/802/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/802/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5G",
+    "V": 8,
+    "C": 10,
+    "x": 0.244,
+    "y": 0.392,
+    "Y": 46.9,
+    "picture": "802.png",
+    "R": 0.0856373959379,
+    "G": 0.806541229171,
+    "B": 0.650657770371
+  },
+  "munsell_spec": "7.5G",
+  "xyY": {
+    "x": 0.244,
+    "y": 0.392,
+    "Y": 46.9
+  },
+  "RGB": {
+    "R": 0.0856373959379,
+    "G": 0.806541229171,
+    "B": 0.650657770371
+  }
+}

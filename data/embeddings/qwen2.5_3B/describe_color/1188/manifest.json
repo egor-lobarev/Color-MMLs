@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1188.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a deep, rich blue that appears to be a shade of indigo or ultramarine. It has a slightly darker hue than standard blue and is often associated with depth, stability, and tranquility. The color is not overly saturated but rather has a subtle, almost metallic sheen to it.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1188/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1188/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 5,
+    "C": 20,
+    "x": 0.172,
+    "y": 0.125,
+    "Y": 11.1,
+    "picture": "1188.png",
+    "R": 0.11812275356,
+    "G": 0.32481926829,
+    "B": 0.824228075042
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.172,
+    "y": 0.125,
+    "Y": 11.1
+  },
+  "RGB": {
+    "R": 0.11812275356,
+    "G": 0.32481926829,
+    "B": 0.824228075042
+  }
+}

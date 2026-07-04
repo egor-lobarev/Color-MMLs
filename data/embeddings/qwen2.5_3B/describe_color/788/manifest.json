@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/788.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very dark shade of green, almost black. It can be described as a deep, rich, and almost opaque green that is very dark and almost black in appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/788/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/788/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5G",
+    "V": 5,
+    "C": 2,
+    "x": 0.293,
+    "y": 0.336,
+    "Y": 18.5,
+    "picture": "788.png",
+    "R": 0.405220389284,
+    "G": 0.483621078029,
+    "B": 0.469817043499
+  },
+  "munsell_spec": "7.5G",
+  "xyY": {
+    "x": 0.293,
+    "y": 0.336,
+    "Y": 18.5
+  },
+  "RGB": {
+    "R": 0.405220389284,
+    "G": 0.483621078029,
+    "B": 0.469817043499
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/705.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is bright green. It is a vibrant shade of green that is often associated with nature, freshness, and growth.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/705/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/705/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0GY",
+    "V": 10,
+    "C": 26,
+    "x": 0.301,
+    "y": 0.571,
+    "Y": 72.2,
+    "picture": "705.png",
+    "R": 0.228839823981,
+    "G": 0.996599639527,
+    "B": 0.234757948942
+  },
+  "munsell_spec": "10.0GY",
+  "xyY": {
+    "x": 0.301,
+    "y": 0.571,
+    "Y": 72.2
+  },
+  "RGB": {
+    "R": 0.228839823981,
+    "G": 0.996599639527,
+    "B": 0.234757948942
+  }
+}

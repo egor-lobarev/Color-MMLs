@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/903.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a very light blue, almost white or pastel. It has a soft and delicate appearance, with no strong contrasts or deep shades. This color can be used to create a calming and soothing atmosphere, often associated with tranquility and serenity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/903/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/903/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5BG",
+    "V": 9,
+    "C": 2,
+    "x": 0.292,
+    "y": 0.317,
+    "Y": 74.9,
+    "picture": "903.png",
+    "R": 0.811670109791,
+    "G": 0.893616802536,
+    "B": 0.936766425494
+  },
+  "munsell_spec": "7.5BG",
+  "xyY": {
+    "x": 0.292,
+    "y": 0.317,
+    "Y": 74.9
+  },
+  "RGB": {
+    "R": 0.811670109791,
+    "G": 0.893616802536,
+    "B": 0.936766425494
+  }
+}

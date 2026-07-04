@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/761.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of green. It has a solid, uniform appearance without any patterns or gradients. The specific shade of green is a medium-dark tone, often referred to as forest green or dark green. This type of green is typically associated with nature, foliage, and can evoke feelings of calmness and stability.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/761/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/761/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/761/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0G",
+    "V": 5,
+    "C": 6,
+    "x": 0.259,
+    "y": 0.399,
+    "Y": 16.1,
+    "picture": "761.png",
+    "R": 0.161598153293,
+    "G": 0.491736621492,
+    "B": 0.379335179149
+  },
+  "munsell_spec": "5.0G",
+  "xyY": {
+    "x": 0.259,
+    "y": 0.399,
+    "Y": 16.1
+  },
+  "RGB": {
+    "R": 0.161598153293,
+    "G": 0.491736621492,
+    "B": 0.379335179149
+  }
+}

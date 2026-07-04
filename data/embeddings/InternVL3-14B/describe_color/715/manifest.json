@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/715.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of dark gray or taupe. It has a muted, neutral tone that is neither too light nor too dark, making it versatile for various backgrounds and designs.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/715/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/715/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/715/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5G",
+    "V": 4,
+    "C": 2,
+    "x": 0.301,
+    "y": 0.348,
+    "Y": 11.2,
+    "picture": "715.png",
+    "R": 0.323534906693,
+    "G": 0.382477114144,
+    "B": 0.352459781846
+  },
+  "munsell_spec": "2.5G",
+  "xyY": {
+    "x": 0.301,
+    "y": 0.348,
+    "Y": 11.2
+  },
+  "RGB": {
+    "R": 0.323534906693,
+    "G": 0.382477114144,
+    "B": 0.352459781846
+  }
+}

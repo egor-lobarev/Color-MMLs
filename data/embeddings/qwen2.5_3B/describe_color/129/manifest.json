@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/129.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of red that appears to be a solid, non-fluctuating hue. It has a warm and vibrant quality, with a slight sheen or glossiness that gives it a polished appearance. The color is likely to be a primary or secondary red, such as crimson, maroon, or burgundy, depending on its exact shade and saturation level.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/129/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/129/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 6,
+    "C": 12,
+    "x": 0.497,
+    "y": 0.323,
+    "Y": 20.7,
+    "picture": "129.png",
+    "R": 0.830291485204,
+    "G": 0.321748044299,
+    "B": 0.344853713656
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.497,
+    "y": 0.323,
+    "Y": 20.7
+  },
+  "RGB": {
+    "R": 0.830291485204,
+    "G": 0.321748044299,
+    "B": 0.344853713656
+  }
+}

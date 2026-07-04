@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1574.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a very bright, vivid shade of pink. It's a saturated and intense hue that stands out prominently against other colors. This particular shade can be described as a deep, rich pink with a slight magenta undertone, giving it a slightly darker and more intense appearance compared to lighter pinks.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1574/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1574/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0P",
+    "V": 8,
+    "C": 10,
+    "x": 0.319,
+    "y": 0.232,
+    "Y": 43.4,
+    "picture": "1574.png",
+    "R": 0.929903729961,
+    "G": 0.557113216457,
+    "B": 0.922424899931
+  },
+  "munsell_spec": "10.0P",
+  "xyY": {
+    "x": 0.319,
+    "y": 0.232,
+    "Y": 43.4
+  },
+  "RGB": {
+    "R": 0.929903729961,
+    "G": 0.557113216457,
+    "B": 0.922424899931
+  }
+}

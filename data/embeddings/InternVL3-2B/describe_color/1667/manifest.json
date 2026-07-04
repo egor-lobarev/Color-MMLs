@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1667.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid light purple or mauve.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1667/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1667/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1667/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0RP",
+    "V": 7,
+    "C": 4,
+    "x": 0.333,
+    "y": 0.283,
+    "Y": 36.8,
+    "picture": "1667.png",
+    "R": 0.790936334377,
+    "G": 0.576195789089,
+    "B": 0.719895142198
+  },
+  "munsell_spec": "5.0RP",
+  "xyY": {
+    "x": 0.333,
+    "y": 0.283,
+    "Y": 36.8
+  },
+  "RGB": {
+    "R": 0.790936334377,
+    "G": 0.576195789089,
+    "B": 0.719895142198
+  }
+}

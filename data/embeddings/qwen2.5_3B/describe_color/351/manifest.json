@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/351.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a bright, vivid yellow. It's a primary color and is often associated with sunshine, warmth, and optimism. The hue is pure and unadulterated, without any tints or shades of other colors mixed in. This makes it a striking and energetic color that can be used to create a sense of joy and positivity in design and art.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/351/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/351/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0YR",
+    "V": 8,
+    "C": 12,
+    "x": 0.456,
+    "y": 0.434,
+    "Y": 50.1,
+    "picture": "351.png",
+    "R": 0.941663400073,
+    "G": 0.690815430011,
+    "B": 0.274710881142
+  },
+  "munsell_spec": "10.0YR",
+  "xyY": {
+    "x": 0.456,
+    "y": 0.434,
+    "Y": 50.1
+  },
+  "RGB": {
+    "R": 0.941663400073,
+    "G": 0.690815430011,
+    "B": 0.274710881142
+  }
+}

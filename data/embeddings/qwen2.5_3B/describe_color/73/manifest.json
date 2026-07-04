@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/73.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of purple. It appears to be a saturated, almost magenta-like hue with a slight pinkish tint. The color is very intense and has a slightly warm undertone. It could be considered a dark purple or a deep magenta.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/73/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/73/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 5,
+    "C": 4,
+    "x": 0.374,
+    "y": 0.312,
+    "Y": 16.9,
+    "picture": "73.png",
+    "R": 0.594271333865,
+    "G": 0.392665218019,
+    "B": 0.432228650641
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.374,
+    "y": 0.312,
+    "Y": 16.9
+  },
+  "RGB": {
+    "R": 0.594271333865,
+    "G": 0.392665218019,
+    "B": 0.432228650641
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1127.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is entirely white. It has no other colors or patterns, and it appears to be a solid, uniform shade of white. This could represent a blank canvas, a clean background, or simply a minimalist design element.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1127/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1127/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5PB",
+    "V": 6,
+    "C": 16,
+    "x": 0.188,
+    "y": 0.188,
+    "Y": 18.9,
+    "picture": "1127.png",
+    "R": 0.0943026010232,
+    "G": 0.481638458685,
+    "B": 0.818149120246
+  },
+  "munsell_spec": "2.5PB",
+  "xyY": {
+    "x": 0.188,
+    "y": 0.188,
+    "Y": 18.9
+  },
+  "RGB": {
+    "R": 0.0943026010232,
+    "G": 0.481638458685,
+    "B": 0.818149120246
+  }
+}

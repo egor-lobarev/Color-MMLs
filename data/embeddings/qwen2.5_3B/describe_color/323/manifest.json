@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/323.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is completely black, with no visible content or details.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/323/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/323/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0YR",
+    "V": 1,
+    "C": 2,
+    "x": 0.4,
+    "y": 0.37,
+    "Y": 1.08,
+    "picture": "323.png",
+    "R": 0.142307622762,
+    "G": 0.0947323617958,
+    "B": 0.0661034652291
+  },
+  "munsell_spec": "10.0YR",
+  "xyY": {
+    "x": 0.4,
+    "y": 0.37,
+    "Y": 1.08
+  },
+  "RGB": {
+    "R": 0.142307622762,
+    "G": 0.0947323617958,
+    "B": 0.0661034652291
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/760.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very dark green, almost blackish in tone. It appears to be a very deep shade of green with a slight hint of blue or purple undertones. The color is quite muted and subdued, giving it a somewhat somber or mysterious appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/760/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/760/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0G",
+    "V": 5,
+    "C": 4,
+    "x": 0.282,
+    "y": 0.367,
+    "Y": 17.5,
+    "picture": "760.png",
+    "R": 0.319556444598,
+    "G": 0.490024849573,
+    "B": 0.42185106765
+  },
+  "munsell_spec": "5.0G",
+  "xyY": {
+    "x": 0.282,
+    "y": 0.367,
+    "Y": 17.5
+  },
+  "RGB": {
+    "R": 0.319556444598,
+    "G": 0.490024849573,
+    "B": 0.42185106765
+  }
+}

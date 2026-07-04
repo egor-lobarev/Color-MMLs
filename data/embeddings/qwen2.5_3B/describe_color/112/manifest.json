@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/112.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of purple. It appears to be a saturated, dark purple with a slight pinkish tint. This color can evoke feelings of luxury, sophistication, and elegance. It's often associated with royalty, nobility, and high status. The hue is quite intense and has a slightly glossy or metallic sheen to it.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/112/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/112/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 4,
+    "C": 6,
+    "x": 0.432,
+    "y": 0.317,
+    "Y": 9.2,
+    "picture": "112.png",
+    "R": 0.515374388074,
+    "G": 0.257958266913,
+    "B": 0.283240106777
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.432,
+    "y": 0.317,
+    "Y": 9.2
+  },
+  "RGB": {
+    "R": 0.515374388074,
+    "G": 0.257958266913,
+    "B": 0.283240106777
+  }
+}

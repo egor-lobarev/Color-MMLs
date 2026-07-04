@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/83.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid shade of pink. It has a medium to dark tone, leaning towards a muted or dusty pink hue. The shade is consistent throughout the image without any variations or patterns.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/83/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/83/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/83/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0R",
+    "V": 6,
+    "C": 10,
+    "x": 0.457,
+    "y": 0.306,
+    "Y": 21.5,
+    "picture": "83.png",
+    "R": 0.813530235871,
+    "G": 0.34766853743,
+    "B": 0.423630997671
+  },
+  "munsell_spec": "5.0R",
+  "xyY": {
+    "x": 0.457,
+    "y": 0.306,
+    "Y": 21.5
+  },
+  "RGB": {
+    "R": 0.813530235871,
+    "G": 0.34766853743,
+    "B": 0.423630997671
+  }
+}

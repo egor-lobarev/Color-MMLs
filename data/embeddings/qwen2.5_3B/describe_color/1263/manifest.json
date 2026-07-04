@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1263.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a deep, rich shade of purple. It appears to be a saturated, non-bleached hue that is likely to have a slight blue undertone. This type of purple can be described as a \"violet\" or \"royal\" purple, which is often associated with luxury, royalty, and sophistication. The color has a slightly warm tone, giving it a soft and inviting appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1263/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1263/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 6,
+    "C": 10,
+    "x": 0.25,
+    "y": 0.22,
+    "Y": 21.6,
+    "picture": "1263.png",
+    "R": 0.488923198813,
+    "G": 0.47189908278,
+    "B": 0.748142256141
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.25,
+    "y": 0.22,
+    "Y": 21.6
+  },
+  "RGB": {
+    "R": 0.488923198813,
+    "G": 0.47189908278,
+    "B": 0.748142256141
+  }
+}

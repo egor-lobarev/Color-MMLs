@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1723.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "The color of the picture is #000000, which is black.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/hex_code/1723/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/hex_code/1723/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      100,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 2,
+    "C": 6,
+    "x": 0.424,
+    "y": 0.247,
+    "Y": 2.1,
+    "picture": "1723.png",
+    "R": 0.294594920584,
+    "G": 0.0668451919604,
+    "B": 0.180281044039
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.424,
+    "y": 0.247,
+    "Y": 2.1
+  },
+  "RGB": {
+    "R": 0.294594920584,
+    "G": 0.0668451919604,
+    "B": 0.180281044039
+  }
+}

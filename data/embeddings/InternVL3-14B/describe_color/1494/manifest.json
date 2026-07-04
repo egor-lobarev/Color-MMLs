@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1494.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid shade of purple. It has a medium to dark tone, leaning towards a muted or dusty hue rather than a bright or vibrant one. This type of purple is often associated with calmness and tranquility.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1494/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1494/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1494/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5P",
+    "V": 5,
+    "C": 2,
+    "x": 0.308,
+    "y": 0.289,
+    "Y": 18.1,
+    "picture": "1494.png",
+    "R": 0.507481989648,
+    "G": 0.440565930106,
+    "B": 0.527723881759
+  },
+  "munsell_spec": "7.5P",
+  "xyY": {
+    "x": 0.308,
+    "y": 0.289,
+    "Y": 18.1
+  },
+  "RGB": {
+    "R": 0.507481989648,
+    "G": 0.440565930106,
+    "B": 0.527723881759
+  }
+}

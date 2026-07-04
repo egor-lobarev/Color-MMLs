@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/728.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, uniform shade of green.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/728/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/728/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/728/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5G",
+    "V": 6,
+    "C": 10,
+    "x": 0.266,
+    "y": 0.457,
+    "Y": 23.1,
+    "picture": "728.png",
+    "R": 0.104963714453,
+    "G": 0.591614514219,
+    "B": 0.362942736709
+  },
+  "munsell_spec": "2.5G",
+  "xyY": {
+    "x": 0.266,
+    "y": 0.457,
+    "Y": 23.1
+  },
+  "RGB": {
+    "R": 0.104963714453,
+    "G": 0.591614514219,
+    "B": 0.362942736709
+  }
+}

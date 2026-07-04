@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1140.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a solid light blue. It is a bright and clear shade of blue, often associated with calmness, serenity, and tranquility. The color is not too dark or too light, but rather a medium shade that is easy on the eyes and can be used in various contexts, from fashion to interior design.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1140/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1140/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5PB",
+    "V": 8,
+    "C": 8,
+    "x": 0.252,
+    "y": 0.257,
+    "Y": 46.5,
+    "picture": "1140.png",
+    "R": 0.601085656051,
+    "G": 0.713422780274,
+    "B": 0.940315023162
+  },
+  "munsell_spec": "2.5PB",
+  "xyY": {
+    "x": 0.252,
+    "y": 0.257,
+    "Y": 46.5
+  },
+  "RGB": {
+    "R": 0.601085656051,
+    "G": 0.713422780274,
+    "B": 0.940315023162
+  }
+}

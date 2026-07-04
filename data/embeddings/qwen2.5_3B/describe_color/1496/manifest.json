@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1496.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you've described is a deep, rich shade of purple that appears to be a combination of dark and light shades, creating a gradient effect. It has a slightly muted tone, which gives it a sophisticated and elegant appearance. The color could be reminiscent of a deep, rich wine or a deep, dark sky at night.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1496/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1496/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5P",
+    "V": 5,
+    "C": 6,
+    "x": 0.303,
+    "y": 0.241,
+    "Y": 15.2,
+    "picture": "1496.png",
+    "R": 0.529368597348,
+    "G": 0.368571042678,
+    "B": 0.569070195908
+  },
+  "munsell_spec": "7.5P",
+  "xyY": {
+    "x": 0.303,
+    "y": 0.241,
+    "Y": 15.2
+  },
+  "RGB": {
+    "R": 0.529368597348,
+    "G": 0.368571042678,
+    "B": 0.569070195908
+  }
+}

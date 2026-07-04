@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1748.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "The HEX code for the color in the picture is #FFC7CE.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/hex_code/1748/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/hex_code/1748/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/hex_code/1748/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 7,
+    "C": 6,
+    "x": 0.372,
+    "y": 0.291,
+    "Y": 34.7,
+    "picture": "1748.png",
+    "R": 0.856315182138,
+    "G": 0.524870683869,
+    "B": 0.648933261198
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.372,
+    "y": 0.291,
+    "Y": 34.7
+  },
+  "RGB": {
+    "R": 0.856315182138,
+    "G": 0.524870683869,
+    "B": 0.648933261198
+  }
+}

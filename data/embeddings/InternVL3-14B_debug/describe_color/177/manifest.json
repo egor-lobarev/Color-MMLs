@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/177.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid shade of reddish-brown, often referred to as terra cotta or burnt sienna. It has a warm, earthy tone.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/177/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/177/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/177/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0R",
+    "V": 6,
+    "C": 10,
+    "x": 0.475,
+    "y": 0.347,
+    "Y": 22.4,
+    "picture": "177.png",
+    "R": 0.793002694713,
+    "G": 0.392767354891,
+    "B": 0.336865977811
+  },
+  "munsell_spec": "10.0R",
+  "xyY": {
+    "x": 0.475,
+    "y": 0.347,
+    "Y": 22.4
+  },
+  "RGB": {
+    "R": 0.793002694713,
+    "G": 0.392767354891,
+    "B": 0.336865977811
+  }
+}

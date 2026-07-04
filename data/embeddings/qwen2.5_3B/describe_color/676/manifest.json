@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/676.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very light, almost white shade of green. It appears to be a pastel or soft green, with a slight tint of blue or purple. This color can be described as a pale, pastel green that has a subtle hint of blue or purple undertones. It's a soft and delicate shade that could be used in various design elements such as backgrounds, accents, or as a base color for clothing or accessories.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/676/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/676/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0GY",
+    "V": 7,
+    "C": 4,
+    "x": 0.311,
+    "y": 0.369,
+    "Y": 39.9,
+    "picture": "676.png",
+    "R": 0.587276343308,
+    "G": 0.692212027021,
+    "B": 0.586551046774
+  },
+  "munsell_spec": "10.0GY",
+  "xyY": {
+    "x": 0.311,
+    "y": 0.369,
+    "Y": 39.9
+  },
+  "RGB": {
+    "R": 0.587276343308,
+    "G": 0.692212027021,
+    "B": 0.586551046774
+  }
+}

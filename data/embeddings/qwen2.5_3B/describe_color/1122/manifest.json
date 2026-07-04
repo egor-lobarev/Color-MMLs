@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1122.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a shade of blue that appears to be a cool, pastel tone. It has a soft, muted hue that is not overly vibrant or bright. The color could be described as a light, pastel blue or a very pale, cool blue. It might also be considered a sky blue or a very light, pastel blue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1122/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1122/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5PB",
+    "V": 6,
+    "C": 6,
+    "x": 0.257,
+    "y": 0.26,
+    "Y": 24.0,
+    "picture": "1122.png",
+    "R": 0.458407743826,
+    "G": 0.525940571767,
+    "B": 0.691167481883
+  },
+  "munsell_spec": "2.5PB",
+  "xyY": {
+    "x": 0.257,
+    "y": 0.26,
+    "Y": 24.0
+  },
+  "RGB": {
+    "R": 0.458407743826,
+    "G": 0.525940571767,
+    "B": 0.691167481883
+  }
+}

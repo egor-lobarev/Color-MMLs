@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1146.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is currently in a state of darkness, making it difficult to describe the color accurately. If you have any specific details or context about the image, please provide them so I can assist you better.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1146/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1146/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 1,
+    "C": 6,
+    "x": 0.219,
+    "y": 0.185,
+    "Y": 0.79,
+    "picture": "1146.png",
+    "R": 0.0654526040912,
+    "G": 0.0769783916285,
+    "B": 0.174881023578
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.219,
+    "y": 0.185,
+    "Y": 0.79
+  },
+  "RGB": {
+    "R": 0.0654526040912,
+    "G": 0.0769783916285,
+    "B": 0.174881023578
+  }
+}

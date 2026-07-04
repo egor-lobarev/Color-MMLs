@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/114.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, rich shade of maroon. Maroon is a dark red color, often associated with warmth and sophistication. It is a hue that can evoke feelings of elegance and can be commonly seen in formal attire, interior design, and various branding elements. The specific shade in the image appears to be quite solid and uniform, without any gradients or patterns, giving it a classic and timeless appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/114/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/114/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/114/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 4,
+    "C": 10,
+    "x": 0.514,
+    "y": 0.308,
+    "Y": 7.8,
+    "picture": "114.png",
+    "R": 0.565217943591,
+    "G": 0.160332226439,
+    "B": 0.217979476543
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.514,
+    "y": 0.308,
+    "Y": 7.8
+  },
+  "RGB": {
+    "R": 0.565217943591,
+    "G": 0.160332226439,
+    "B": 0.217979476543
+  }
+}

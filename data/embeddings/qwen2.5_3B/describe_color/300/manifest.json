@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/300.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a shade of brown that is very dark and almost black in appearance. It can be described as a deep, rich brown with a slight reddish hue. This color is often associated with earthy tones and can be used in various design elements such as backgrounds, textures, or patterns.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/300/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/300/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5YR",
+    "V": 5,
+    "C": 6,
+    "x": 0.43,
+    "y": 0.387,
+    "Y": 17.0,
+    "picture": "300.png",
+    "R": 0.593235313649,
+    "G": 0.40892246884,
+    "B": 0.273532063432
+  },
+  "munsell_spec": "7.5YR",
+  "xyY": {
+    "x": 0.43,
+    "y": 0.387,
+    "Y": 17.0
+  },
+  "RGB": {
+    "R": 0.593235313649,
+    "G": 0.40892246884,
+    "B": 0.273532063432
+  }
+}

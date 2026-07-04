@@ -1,0 +1,10 @@
+{
+  "dataset_root": "data/colors/combvd",
+  "outdir_root": "data/embeddings/qwen2.5_7B/combvd/human_like",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "prompt": "Imagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.",
+  "save_tokens": false,
+  "device": "cuda:1",
+  "restart_model_per_image": true
+}

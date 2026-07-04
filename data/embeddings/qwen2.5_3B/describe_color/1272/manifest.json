@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1272.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a deep, rich shade of blue that appears to be a combination of various hues, creating a sense of depth and complexity. It could be described as a deep, royal blue with undertones of purple or indigo, giving it a slightly darker and more intense appearance compared to lighter shades of blue. The color has a smooth, even tone without any visible streaks or gradients, suggesting it might be a solid or very well-mixed paint or fabric.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1272/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1272/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 7,
+    "C": 10,
+    "x": 0.254,
+    "y": 0.228,
+    "Y": 31.6,
+    "picture": "1272.png",
+    "R": 0.58124210981,
+    "G": 0.567075078459,
+    "B": 0.861837594005
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.254,
+    "y": 0.228,
+    "Y": 31.6
+  },
+  "RGB": {
+    "R": 0.58124210981,
+    "G": 0.567075078459,
+    "B": 0.861837594005
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "csv": "data/colors/munsell_colors/munsell_manifest.csv",
+  "pics_dir": "data/colors/munsell_colors/pics",
+  "outdir_root": "data/embeddings/Phi-4/hex_code",
+  "model": "microsoft/Phi-4-multimodal-instruct",
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "save_tokens": false,
+  "device": "cuda:0",
+  "batch": false,
+  "lm_per_image": false,
+  "restart_model_per_image": false
+}

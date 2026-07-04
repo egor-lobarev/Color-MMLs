@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/126.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of pink. It appears to be a saturated or bright pink, with no noticeable variations in hue or saturation. The color is likely to be a warm and soft tone, often associated with feelings of love, affection, or tenderness.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/126/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/126/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 6,
+    "C": 6,
+    "x": 0.404,
+    "y": 0.325,
+    "Y": 24.6,
+    "picture": "126.png",
+    "R": 0.742255703377,
+    "G": 0.453714534674,
+    "B": 0.465713688519
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.404,
+    "y": 0.325,
+    "Y": 24.6
+  },
+  "RGB": {
+    "R": 0.742255703377,
+    "G": 0.453714534674,
+    "B": 0.465713688519
+  }
+}

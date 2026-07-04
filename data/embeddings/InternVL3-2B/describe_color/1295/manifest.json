@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1295.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, dark purple or navy blue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1295/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1295/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1295/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0PB",
+    "V": 3,
+    "C": 4,
+    "x": 0.277,
+    "y": 0.247,
+    "Y": 5.12,
+    "picture": "1295.png",
+    "R": 0.267510119586,
+    "G": 0.233456656462,
+    "B": 0.344172388308
+  },
+  "munsell_spec": "10.0PB",
+  "xyY": {
+    "x": 0.277,
+    "y": 0.247,
+    "Y": 5.12
+  },
+  "RGB": {
+    "R": 0.267510119586,
+    "G": 0.233456656462,
+    "B": 0.344172388308
+  }
+}

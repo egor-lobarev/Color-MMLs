@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/939.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "The color in the image is solid white. The HEX code for white is:\n\n**#FFFFFF**",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/939/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/939/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      100,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5B",
+    "V": 3,
+    "C": 2,
+    "x": 0.272,
+    "y": 0.297,
+    "Y": 5.8,
+    "picture": "939.png",
+    "R": 0.22379742493,
+    "G": 0.273560662142,
+    "B": 0.313481746604
+  },
+  "munsell_spec": "2.5B",
+  "xyY": {
+    "x": 0.272,
+    "y": 0.297,
+    "Y": 5.8
+  },
+  "RGB": {
+    "R": 0.22379742493,
+    "G": 0.273560662142,
+    "B": 0.313481746604
+  }
+}

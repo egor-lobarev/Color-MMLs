@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1575.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is completely white. It has no other colors or patterns, indicating a solid, uniform white background. This color is often associated with purity, simplicity, or neutrality.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1575/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1575/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0P",
+    "V": 8,
+    "C": 12,
+    "x": 0.321,
+    "y": 0.218,
+    "Y": 41.9,
+    "picture": "1575.png",
+    "R": 0.960958547151,
+    "G": 0.511616453163,
+    "B": 0.947850839201
+  },
+  "munsell_spec": "10.0P",
+  "xyY": {
+    "x": 0.321,
+    "y": 0.218,
+    "Y": 41.9
+  },
+  "RGB": {
+    "R": 0.960958547151,
+    "G": 0.511616453163,
+    "B": 0.947850839201
+  }
+}

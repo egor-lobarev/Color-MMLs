@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/993.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a light blue that is very close to white. It has a soft, pastel-like quality and appears to be slightly transparent or semi-transparent. The hue is cool and calming, with a slight greenish tint. This color can evoke feelings of serenity, calmness, and tranquility.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/993/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/993/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0B",
+    "V": 7,
+    "C": 6,
+    "x": 0.249,
+    "y": 0.28,
+    "Y": 35.3,
+    "picture": "993.png",
+    "R": 0.459659379355,
+    "G": 0.651996801612,
+    "B": 0.781604502213
+  },
+  "munsell_spec": "5.0B",
+  "xyY": {
+    "x": 0.249,
+    "y": 0.28,
+    "Y": 35.3
+  },
+  "RGB": {
+    "R": 0.459659379355,
+    "G": 0.651996801612,
+    "B": 0.781604502213
+  }
+}

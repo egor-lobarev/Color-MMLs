@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/234.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a light, muted pink or mauve. It has a soft, pastel quality with a slightly warm undertone.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/234/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/234/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/234/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 7,
+    "C": 2,
+    "x": 0.336,
+    "y": 0.327,
+    "Y": 41.4,
+    "picture": "234.png",
+    "R": 0.754398349031,
+    "G": 0.651594734666,
+    "B": 0.657794183614
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.336,
+    "y": 0.327,
+    "Y": 41.4
+  },
+  "RGB": {
+    "R": 0.754398349031,
+    "G": 0.651594734666,
+    "B": 0.657794183614
+  }
+}

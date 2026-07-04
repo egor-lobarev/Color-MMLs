@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/123.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of red that appears to be a solid, non-fluctuating hue. It has a high saturation level, meaning it is very vivid and intense. The color is likely to be a primary or secondary red, such as crimson, maroon, or burgundy. It could also be a variant of these colors, such as a dark red or a bright red. Overall, the color is striking and bold, with a strong sense of energy and passion.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/123/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/123/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 5,
+    "C": 16,
+    "x": 0.584,
+    "y": 0.304,
+    "Y": 11.5,
+    "picture": "123.png",
+    "R": 0.747099115693,
+    "G": 0.0440880867334,
+    "B": 0.201673945591
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.584,
+    "y": 0.304,
+    "Y": 11.5
+  },
+  "RGB": {
+    "R": 0.747099115693,
+    "G": 0.0440880867334,
+    "B": 0.201673945591
+  }
+}

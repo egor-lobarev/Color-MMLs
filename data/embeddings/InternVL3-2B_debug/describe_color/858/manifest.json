@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/858.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is light blue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/858/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/858/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/858/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5BG",
+    "V": 9,
+    "C": 2,
+    "x": 0.296,
+    "y": 0.324,
+    "Y": 75.7,
+    "picture": "858.png",
+    "R": 0.818005955881,
+    "G": 0.899667172317,
+    "B": 0.917525693478
+  },
+  "munsell_spec": "2.5BG",
+  "xyY": {
+    "x": 0.296,
+    "y": 0.324,
+    "Y": 75.7
+  },
+  "RGB": {
+    "R": 0.818005955881,
+    "G": 0.899667172317,
+    "B": 0.917525693478
+  }
+}

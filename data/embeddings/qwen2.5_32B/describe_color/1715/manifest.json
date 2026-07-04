@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1715.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is completely white. It has no other colors, patterns, or variations—just a solid, uniform white background. This type of color is often referred to as \"pure white\" or \"white\" in design and art contexts.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1715/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/1715/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5RP",
+    "V": 8,
+    "C": 2,
+    "x": 0.324,
+    "y": 0.305,
+    "Y": 55.3,
+    "picture": "1715.png",
+    "R": 0.86409636562,
+    "G": 0.732751694529,
+    "B": 0.815777887489
+  },
+  "munsell_spec": "7.5RP",
+  "xyY": {
+    "x": 0.324,
+    "y": 0.305,
+    "Y": 55.3
+  },
+  "RGB": {
+    "R": 0.86409636562,
+    "G": 0.732751694529,
+    "B": 0.815777887489
+  }
+}

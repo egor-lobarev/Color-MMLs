@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/796.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of teal, which is a medium tone combining blue and green. It has a calm and soothing appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/796/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/796/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/796/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5G",
+    "V": 7,
+    "C": 6,
+    "x": 0.266,
+    "y": 0.368,
+    "Y": 36.8,
+    "picture": "796.png",
+    "R": 0.371593287429,
+    "G": 0.699836772236,
+    "B": 0.606854668552
+  },
+  "munsell_spec": "7.5G",
+  "xyY": {
+    "x": 0.266,
+    "y": 0.368,
+    "Y": 36.8
+  },
+  "RGB": {
+    "R": 0.371593287429,
+    "G": 0.699836772236,
+    "B": 0.606854668552
+  }
+}

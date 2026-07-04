@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/441.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a shade of gray that appears to be a very light, almost pastel version of the color. It has a soft, muted tone and does not have any strong or bright colors.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/441/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/441/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5Y",
+    "V": 5,
+    "C": 2,
+    "x": 0.334,
+    "y": 0.346,
+    "Y": 19.2,
+    "picture": "441.png",
+    "R": 0.503115623005,
+    "G": 0.470734120082,
+    "B": 0.435150836965
+  },
+  "munsell_spec": "7.5Y",
+  "xyY": {
+    "x": 0.334,
+    "y": 0.346,
+    "Y": 19.2
+  },
+  "RGB": {
+    "R": 0.503115623005,
+    "G": 0.470734120082,
+    "B": 0.435150836965
+  }
+}

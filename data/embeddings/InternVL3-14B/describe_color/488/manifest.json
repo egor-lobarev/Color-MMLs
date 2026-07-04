@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/488.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid, muted olive green. It has a calm and neutral tone, often associated with earthy or natural themes.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/488/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/488/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/488/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0Y",
+    "V": 7,
+    "C": 8,
+    "x": 0.389,
+    "y": 0.439,
+    "Y": 38.1,
+    "picture": "488.png",
+    "R": 0.690045933007,
+    "G": 0.660488734417,
+    "B": 0.347272341745
+  },
+  "munsell_spec": "10.0Y",
+  "xyY": {
+    "x": 0.389,
+    "y": 0.439,
+    "Y": 38.1
+  },
+  "RGB": {
+    "R": 0.690045933007,
+    "G": 0.660488734417,
+    "B": 0.347272341745
+  }
+}

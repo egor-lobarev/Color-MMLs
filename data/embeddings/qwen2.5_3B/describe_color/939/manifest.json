@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/939.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid, deep blue shade. It appears to be a very saturated and uniform blue without any gradients or variations. The hue is consistent throughout the image, suggesting it might be a digital or printed representation rather than an actual photograph of a physical object.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/939/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/939/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5B",
+    "V": 3,
+    "C": 2,
+    "x": 0.272,
+    "y": 0.297,
+    "Y": 5.8,
+    "picture": "939.png",
+    "R": 0.22379742493,
+    "G": 0.273560662142,
+    "B": 0.313481746604
+  },
+  "munsell_spec": "2.5B",
+  "xyY": {
+    "x": 0.272,
+    "y": 0.297,
+    "Y": 5.8
+  },
+  "RGB": {
+    "R": 0.22379742493,
+    "G": 0.273560662142,
+    "B": 0.313481746604
+  }
+}

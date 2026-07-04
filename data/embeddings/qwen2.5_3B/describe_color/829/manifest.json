@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/829.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very light blue, almost white in appearance. It has a soft and pastel-like quality to it.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/829/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/829/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0G",
+    "V": 9,
+    "C": 6,
+    "x": 0.267,
+    "y": 0.35,
+    "Y": 69.0,
+    "picture": "829.png",
+    "R": 0.555089112773,
+    "G": 0.914116223279,
+    "B": 0.847041842365
+  },
+  "munsell_spec": "10.0G",
+  "xyY": {
+    "x": 0.267,
+    "y": 0.35,
+    "Y": 69.0
+  },
+  "RGB": {
+    "R": 0.555089112773,
+    "G": 0.914116223279,
+    "B": 0.847041842365
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/371.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a shade of brown that is very dark and almost black in appearance. It can be described as a deep, rich brown with a slight hint of purple or blue undertones. This color is often associated with earthy tones and can evoke feelings of warmth, stability, and depth.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/371/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/371/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5Y",
+    "V": 5,
+    "C": 6,
+    "x": 0.423,
+    "y": 0.415,
+    "Y": 17.3,
+    "picture": "371.png",
+    "R": 0.558110612754,
+    "G": 0.432071872274,
+    "B": 0.237227236881
+  },
+  "munsell_spec": "2.5Y",
+  "xyY": {
+    "x": 0.423,
+    "y": 0.415,
+    "Y": 17.3
+  },
+  "RGB": {
+    "R": 0.558110612754,
+    "G": 0.432071872274,
+    "B": 0.237227236881
+  }
+}

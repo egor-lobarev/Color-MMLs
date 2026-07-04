@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1224.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a deep, rich shade of blue that appears to be a dark or very saturated hue. It could be described as a deep navy blue or a very dark royal blue. The color is uniform and lacks any noticeable variations in tone or intensity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1224/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1224/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 2,
+    "C": 16,
+    "x": 0.193,
+    "y": 0.1,
+    "Y": 1.69,
+    "picture": "1224.png",
+    "R": 0.15233002214,
+    "G": 0.0615573099345,
+    "B": 0.388073739113
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.193,
+    "y": 0.1,
+    "Y": 1.69
+  },
+  "RGB": {
+    "R": 0.15233002214,
+    "G": 0.0615573099345,
+    "B": 0.388073739113
+  }
+}

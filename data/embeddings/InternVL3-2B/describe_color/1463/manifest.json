@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1463.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid light purple.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1463/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1463/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/1463/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0P",
+    "V": 7,
+    "C": 10,
+    "x": 0.283,
+    "y": 0.222,
+    "Y": 31.4,
+    "picture": "1463.png",
+    "R": 0.712074921696,
+    "G": 0.517115369349,
+    "B": 0.853375504977
+  },
+  "munsell_spec": "5.0P",
+  "xyY": {
+    "x": 0.283,
+    "y": 0.222,
+    "Y": 31.4
+  },
+  "RGB": {
+    "R": 0.712074921696,
+    "G": 0.517115369349,
+    "B": 0.853375504977
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/39.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a bright, vivid pink. It has a strong and bold appearance, often associated with energy and vibrancy.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/39/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/39/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/39/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5R",
+    "V": 6,
+    "C": 16,
+    "x": 0.513,
+    "y": 0.262,
+    "Y": 18.0,
+    "picture": "39.png",
+    "R": 0.900476889192,
+    "G": 0.0332986864122,
+    "B": 0.418631325661
+  },
+  "munsell_spec": "2.5R",
+  "xyY": {
+    "x": 0.513,
+    "y": 0.262,
+    "Y": 18.0
+  },
+  "RGB": {
+    "R": 0.900476889192,
+    "G": 0.0332986864122,
+    "B": 0.418631325661
+  }
+}

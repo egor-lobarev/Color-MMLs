@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/232.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a bright, vivid orange. It's a warm and energetic shade that can evoke feelings of excitement, enthusiasm, and creativity. This color is often associated with sunshine, fire, and the sun itself. It's a bold and striking hue that can be used in various contexts, from fashion and design to advertising and marketing.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/232/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/232/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 6,
+    "C": 14,
+    "x": 0.543,
+    "y": 0.382,
+    "Y": 21.0,
+    "picture": "232.png",
+    "R": 0.811773212725,
+    "G": 0.359781746862,
+    "B": 0.139898488477
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.543,
+    "y": 0.382,
+    "Y": 21.0
+  },
+  "RGB": {
+    "R": 0.811773212725,
+    "G": 0.359781746862,
+    "B": 0.139898488477
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1492.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, vibrant purple. It has a rich and deep hue, reminiscent of amethyst or certain types of grape. The uniformity of the color suggests it's a flat, non-textured surface.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1492/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1492/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/1492/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5P",
+    "V": 4,
+    "C": 12,
+    "x": 0.297,
+    "y": 0.178,
+    "Y": 7.6,
+    "picture": "1492.png",
+    "R": 0.464148667705,
+    "G": 0.18630876425,
+    "B": 0.515317355425
+  },
+  "munsell_spec": "7.5P",
+  "xyY": {
+    "x": 0.297,
+    "y": 0.178,
+    "Y": 7.6
+  },
+  "RGB": {
+    "R": 0.464148667705,
+    "G": 0.18630876425,
+    "B": 0.515317355425
+  }
+}

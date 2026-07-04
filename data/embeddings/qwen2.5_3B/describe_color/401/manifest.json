@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/401.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a deep, rich shade of purple. It has a slightly muted and subdued appearance, with a slight hint of blue in it. The hue is not overly bright or vibrant, but rather a more subdued and earthy tone.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/401/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/401/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0Y",
+    "V": 3,
+    "C": 2,
+    "x": 0.35,
+    "y": 0.357,
+    "Y": 6.24,
+    "picture": "401.png",
+    "R": 0.307077198995,
+    "G": 0.27147594307,
+    "B": 0.234286081184
+  },
+  "munsell_spec": "5.0Y",
+  "xyY": {
+    "x": 0.35,
+    "y": 0.357,
+    "Y": 6.24
+  },
+  "RGB": {
+    "R": 0.307077198995,
+    "G": 0.27147594307,
+    "B": 0.234286081184
+  }
+}

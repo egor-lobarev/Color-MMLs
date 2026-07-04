@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1649.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of purple. It appears to be a very saturated and intense hue, with no visible white or gray tones. This type of purple can be associated with various emotions and contexts, such as royalty, luxury, or mystery. The exact shade might vary slightly depending on the specific lighting conditions and the medium in which it is observed (e.g., paint, fabric, digital display).",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1649/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1649/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0RP",
+    "V": 4,
+    "C": 6,
+    "x": 0.35,
+    "y": 0.245,
+    "Y": 8.9,
+    "picture": "1649.png",
+    "R": 0.48660651141,
+    "G": 0.247454724264,
+    "B": 0.416102147333
+  },
+  "munsell_spec": "5.0RP",
+  "xyY": {
+    "x": 0.35,
+    "y": 0.245,
+    "Y": 8.9
+  },
+  "RGB": {
+    "R": 0.48660651141,
+    "G": 0.247454724264,
+    "B": 0.416102147333
+  }
+}

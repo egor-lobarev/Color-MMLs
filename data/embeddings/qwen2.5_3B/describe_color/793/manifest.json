@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/793.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very dark green, almost blackish in tone. It has a deep, rich hue that is not as bright or vibrant as lighter greens. The shade appears to be quite saturated and dense, giving it a somewhat muted appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/793/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/793/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5G",
+    "V": 6,
+    "C": 6,
+    "x": 0.258,
+    "y": 0.374,
+    "Y": 25.0,
+    "picture": "793.png",
+    "R": 0.252600199857,
+    "G": 0.594410927665,
+    "B": 0.504912966358
+  },
+  "munsell_spec": "7.5G",
+  "xyY": {
+    "x": 0.258,
+    "y": 0.374,
+    "Y": 25.0
+  },
+  "RGB": {
+    "R": 0.252600199857,
+    "G": 0.594410927665,
+    "B": 0.504912966358
+  }
+}

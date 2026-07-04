@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/257.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid brown.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/257/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/257/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/257/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0YR",
+    "V": 3,
+    "C": 8,
+    "x": 0.549,
+    "y": 0.392,
+    "Y": 4.58,
+    "picture": "257.png",
+    "R": 0.401642266299,
+    "G": 0.168208692371,
+    "B": 0.0195851030224
+  },
+  "munsell_spec": "5.0YR",
+  "xyY": {
+    "x": 0.549,
+    "y": 0.392,
+    "Y": 4.58
+  },
+  "RGB": {
+    "R": 0.401642266299,
+    "G": 0.168208692371,
+    "B": 0.0195851030224
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "source": "vsl_ial.datasets.distance.load_combvd",
+  "picture_size": {
+    "width": 224,
+    "height": 224
+  },
+  "datasets": [
+    {
+      "dataset": "witt",
+      "dir": "data/colors/combvd/witt",
+      "csv": "data/colors/combvd/witt/manifest.csv",
+      "num_colors": 538,
+      "num_pairs": 418
+    },
+    {
+      "dataset": "leeds",
+      "dir": "data/colors/combvd/leeds",
+      "csv": "data/colors/combvd/leeds/manifest.csv",
+      "num_colors": 482,
+      "num_pairs": 307
+    },
+    {
+      "dataset": "bfd_p-c",
+      "dir": "data/colors/combvd/bfd_p-c",
+      "csv": "data/colors/combvd/bfd_p-c/manifest.csv",
+      "num_colors": 210,
+      "num_pairs": 200
+    },
+    {
+      "dataset": "bfd_p-d65",
+      "dir": "data/colors/combvd/bfd_p-d65",
+      "csv": "data/colors/combvd/bfd_p-d65/manifest.csv",
+      "num_colors": 2502,
+      "num_pairs": 2028
+    },
+    {
+      "dataset": "bfd_p-m",
+      "dir": "data/colors/combvd/bfd_p-m",
+      "csv": "data/colors/combvd/bfd_p-m/manifest.csv",
+      "num_colors": 567,
+      "num_pairs": 548
+    },
+    {
+      "dataset": "rit-dupont",
+      "dir": "data/colors/combvd/rit-dupont",
+      "csv": "data/colors/combvd/rit-dupont/manifest.csv",
+      "num_colors": 468,
+      "num_pairs": 312
+    }
+  ]
+}

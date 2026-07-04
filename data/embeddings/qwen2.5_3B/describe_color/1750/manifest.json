@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1750.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a bright, vivid shade of pink. It appears to be a saturated and intense hue, with no visible variations in tone or saturation. This color can evoke feelings of warmth, love, and affection, and it is often associated with femininity and gentleness.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1750/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1750/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0RP",
+    "V": 7,
+    "C": 10,
+    "x": 0.413,
+    "y": 0.273,
+    "Y": 31.0,
+    "picture": "1750.png",
+    "R": 0.938350875733,
+    "G": 0.412648182507,
+    "B": 0.617835400003
+  },
+  "munsell_spec": "10.0RP",
+  "xyY": {
+    "x": 0.413,
+    "y": 0.273,
+    "Y": 31.0
+  },
+  "RGB": {
+    "R": 0.938350875733,
+    "G": 0.412648182507,
+    "B": 0.617835400003
+  }
+}

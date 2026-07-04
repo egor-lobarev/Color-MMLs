@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/573.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a light, pastel shade of green. It has a soft, almost delicate appearance and can be described as a pale, almost minty green.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/573/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/573/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 7,
+    "C": 2,
+    "x": 0.32,
+    "y": 0.342,
+    "Y": 41.8,
+    "picture": "573.png",
+    "R": 0.679178802658,
+    "G": 0.681636243313,
+    "B": 0.644650110799
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.32,
+    "y": 0.342,
+    "Y": 41.8
+  },
+  "RGB": {
+    "R": 0.679178802658,
+    "G": 0.681636243313,
+    "B": 0.644650110799
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1167.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid, deep blue. It has a rich and uniform appearance, reminiscent of a clear, deep ocean or a royal blue hue. This shade of blue is often associated with tranquility, stability, and professionalism.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1167/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1167/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B_debug/describe_color/1167/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 3,
+    "C": 16,
+    "x": 0.178,
+    "y": 0.127,
+    "Y": 3.72,
+    "picture": "1167.png",
+    "R": 0.101607142137,
+    "G": 0.1817869774,
+    "B": 0.496148858229
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.178,
+    "y": 0.127,
+    "Y": 3.72
+  },
+  "RGB": {
+    "R": 0.101607142137,
+    "G": 0.1817869774,
+    "B": 0.496148858229
+  }
+}

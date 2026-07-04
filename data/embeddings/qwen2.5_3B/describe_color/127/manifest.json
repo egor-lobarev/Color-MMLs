@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/127.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a deep, rich shade of pink. It appears to be a saturated, vibrant hue that is not overly bright or pastel-like. The color has a warm tone and could be associated with feelings of love, passion, or tenderness. It's a color that can evoke a sense of softness and delicacy.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/127/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/127/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 6,
+    "C": 8,
+    "x": 0.435,
+    "y": 0.326,
+    "Y": 23.3,
+    "picture": "127.png",
+    "R": 0.776144720092,
+    "G": 0.414030486658,
+    "B": 0.424036035858
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.435,
+    "y": 0.326,
+    "Y": 23.3
+  },
+  "RGB": {
+    "R": 0.776144720092,
+    "G": 0.414030486658,
+    "B": 0.424036035858
+  }
+}

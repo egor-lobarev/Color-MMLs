@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/279.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, warm orange.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/279/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/279/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-2B_debug/describe_color/279/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0YR",
+    "V": 7,
+    "C": 12,
+    "x": 0.488,
+    "y": 0.404,
+    "Y": 33.9,
+    "picture": "279.png",
+    "R": 0.886355602744,
+    "G": 0.530040255766,
+    "B": 0.246386979858
+  },
+  "munsell_spec": "5.0YR",
+  "xyY": {
+    "x": 0.488,
+    "y": 0.404,
+    "Y": 33.9
+  },
+  "RGB": {
+    "R": 0.886355602744,
+    "G": 0.530040255766,
+    "B": 0.246386979858
+  }
+}

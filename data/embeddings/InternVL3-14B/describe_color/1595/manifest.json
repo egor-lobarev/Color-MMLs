@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1595.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid purple hue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1595/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1595/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1595/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5RP",
+    "V": 4,
+    "C": 4,
+    "x": 0.324,
+    "y": 0.261,
+    "Y": 9.6,
+    "picture": "1595.png",
+    "R": 0.439826981805,
+    "G": 0.2953247284,
+    "B": 0.421446868701
+  },
+  "munsell_spec": "2.5RP",
+  "xyY": {
+    "x": 0.324,
+    "y": 0.261,
+    "Y": 9.6
+  },
+  "RGB": {
+    "R": 0.439826981805,
+    "G": 0.2953247284,
+    "B": 0.421446868701
+  }
+}

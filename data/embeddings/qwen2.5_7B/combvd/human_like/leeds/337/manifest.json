@@ -1,0 +1,59 @@
+{
+  "dataset": "leeds",
+  "image": "data/colors/combvd/leeds/337.png",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "init_prompt": null,
+  "prompt": "Imagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.",
+  "answer": "system\nYou are a helpful assistant.\nuser\nImagine you are a human with normal vision and typical color perception. You are presented with solid color, and your task is to intuitively describe it, not just in terms of numerical values (like RGB or HSV), but in an abstract, almost emotional sense. Think about how they might evoke different sensations, moods, or associations.\n addCriterion\n addCriterion\n: The color in the image is a soft, muted shade of pink. It evokes a sense of calmness and tranquility, reminiscent of a gentle sunrise or a soft blanket of clouds. This hue can also be associated with femininity and tenderness, often evoking feelings of warmth and comfort. It's a color that can make one feel relaxed and at ease, perfect for creating a soothing atmosphere in a room or a moment of reflection.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/337/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/337/lm_pooled_mean.npy",
+    "visual_token_lens": "data/embeddings/qwen2.5_7B/combvd/human_like/leeds/337/visual_token_lens.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      3584
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      64,
+      3584
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      149,
+      3584
+    ],
+    "visual_token_lens": [
+      1
+    ]
+  },
+  "index": 337,
+  "xyz": [
+    0.2173518871512629,
+    0.1554819933548855,
+    0.0818529080982323
+  ],
+  "xyY": [
+    0.47802551690231543,
+    0.3419540599191878,
+    0.1554819933548855
+  ],
+  "srgb": [
+    0.6832577118746943,
+    0.3216418332661401,
+    0.28687746950821524
+  ],
+  "rgb_255": [
+    174,
+    82,
+    73
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/597.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is bright yellow. It is a vibrant and energetic shade of yellow, often associated with sunshine, lemons, and sunny days.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/597/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/597/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0GY",
+    "V": 10,
+    "C": 14,
+    "x": 0.371,
+    "y": 0.474,
+    "Y": 86.9,
+    "picture": "597.png",
+    "R": 0.868565686742,
+    "G": 0.992422927886,
+    "B": 0.437871150349
+  },
+  "munsell_spec": "5.0GY",
+  "xyY": {
+    "x": 0.371,
+    "y": 0.474,
+    "Y": 86.9
+  },
+  "RGB": {
+    "R": 0.868565686742,
+    "G": 0.992422927886,
+    "B": 0.437871150349
+  }
+}

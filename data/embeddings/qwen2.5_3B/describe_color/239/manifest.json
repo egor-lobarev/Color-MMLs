@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/239.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a bright, vivid shade of orange that is often associated with warmth, energy, and enthusiasm. It can be described as a warm, rich, and slightly saturated shade of orange, which is often used in design and art to evoke feelings of happiness, excitement, and creativity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/239/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/239/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5YR",
+    "V": 7,
+    "C": 12,
+    "x": 0.488,
+    "y": 0.377,
+    "Y": 32.6,
+    "picture": "239.png",
+    "R": 0.910399926744,
+    "G": 0.492863449229,
+    "B": 0.314054936067
+  },
+  "munsell_spec": "2.5YR",
+  "xyY": {
+    "x": 0.488,
+    "y": 0.377,
+    "Y": 32.6
+  },
+  "RGB": {
+    "R": 0.910399926744,
+    "G": 0.492863449229,
+    "B": 0.314054936067
+  }
+}

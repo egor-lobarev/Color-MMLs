@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/998.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in question is a light blue that is very close to white. It has a soft, pastel-like quality and appears to be a shade of sky blue or a very light turquoise. The color is not too bright but rather has a gentle, calming effect.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/998/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/998/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0B",
+    "V": 8,
+    "C": 6,
+    "x": 0.253,
+    "y": 0.285,
+    "Y": 49.2,
+    "picture": "998.png",
+    "R": 0.548195623217,
+    "G": 0.756571590944,
+    "B": 0.88959439295
+  },
+  "munsell_spec": "5.0B",
+  "xyY": {
+    "x": 0.253,
+    "y": 0.285,
+    "Y": 49.2
+  },
+  "RGB": {
+    "R": 0.548195623217,
+    "G": 0.756571590944,
+    "B": 0.88959439295
+  }
+}

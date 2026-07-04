@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/191.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a soft, light pink. It has a gentle and soothing appearance, often associated with calmness and warmth.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/191/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/191/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/191/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0R",
+    "V": 8,
+    "C": 4,
+    "x": 0.358,
+    "y": 0.33,
+    "Y": 54.2,
+    "picture": "191.png",
+    "R": 0.914677780928,
+    "G": 0.714043422652,
+    "B": 0.711010266142
+  },
+  "munsell_spec": "10.0R",
+  "xyY": {
+    "x": 0.358,
+    "y": 0.33,
+    "Y": 54.2
+  },
+  "RGB": {
+    "R": 0.914677780928,
+    "G": 0.714043422652,
+    "B": 0.711010266142
+  }
+}

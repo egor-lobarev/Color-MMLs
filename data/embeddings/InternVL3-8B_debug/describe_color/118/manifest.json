@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/118.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid, muted maroon. It has a deep, warm tone with a slight reddish-brown undertone, giving it a rich and subdued appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/118/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/118/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B_debug/describe_color/118/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      308,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 5,
+    "C": 6,
+    "x": 0.415,
+    "y": 0.322,
+    "Y": 15.8,
+    "picture": "118.png",
+    "R": 0.628372639726,
+    "G": 0.356559023163,
+    "B": 0.374226517196
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.415,
+    "y": 0.322,
+    "Y": 15.8
+  },
+  "RGB": {
+    "R": 0.628372639726,
+    "G": 0.356559023163,
+    "B": 0.374226517196
+  }
+}

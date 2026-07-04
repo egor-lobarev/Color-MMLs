@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/295.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Say the HEX code of color of picture. In format '#XXXXXX'",
+  "answer": "The image you provided is completely black. The HEX code for black is:\n\n**#000000**\n\nThis represents the absence of all colors in the RGB color model, where each component (red, green, and blue) has a value of 0.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/295/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/hex_code/295/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      100,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5YR",
+    "V": 4,
+    "C": 4,
+    "x": 0.397,
+    "y": 0.365,
+    "Y": 10.7,
+    "picture": "295.png",
+    "R": 0.458808631667,
+    "G": 0.33333860518,
+    "B": 0.268043790532
+  },
+  "munsell_spec": "7.5YR",
+  "xyY": {
+    "x": 0.397,
+    "y": 0.365,
+    "Y": 10.7
+  },
+  "RGB": {
+    "R": 0.458808631667,
+    "G": 0.33333860518,
+    "B": 0.268043790532
+  }
+}

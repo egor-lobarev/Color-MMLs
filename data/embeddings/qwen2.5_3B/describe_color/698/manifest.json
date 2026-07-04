@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/698.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very light green, almost pastel in nature. It has a soft and delicate appearance, with a slight hint of blue undertones that give it a subtle coolness. This color can be described as a pale, almost neon green, which is often associated with freshness, calmness, and tranquility. It's a color that can evoke feelings of serenity and relaxation, making it a popular choice for calming environments or as a background color in design.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/698/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/698/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0GY",
+    "V": 9,
+    "C": 10,
+    "x": 0.311,
+    "y": 0.432,
+    "Y": 66.6,
+    "picture": "698.png",
+    "R": 0.611728322625,
+    "G": 0.906921450716,
+    "B": 0.592300709279
+  },
+  "munsell_spec": "10.0GY",
+  "xyY": {
+    "x": 0.311,
+    "y": 0.432,
+    "Y": 66.6
+  },
+  "RGB": {
+    "R": 0.611728322625,
+    "G": 0.906921450716,
+    "B": 0.592300709279
+  }
+}

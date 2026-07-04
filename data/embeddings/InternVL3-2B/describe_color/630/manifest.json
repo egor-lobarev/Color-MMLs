@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/630.png",
+  "model": "OpenGVLab/InternVL3-2B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a solid bright green.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/630/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/630/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-4B/describe_color/630/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      1536
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      1536
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      1536
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      1536
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5GY",
+    "V": 7,
+    "C": 16,
+    "x": 0.346,
+    "y": 0.561,
+    "Y": 32.1,
+    "picture": "630.png",
+    "R": 0.383498969269,
+    "G": 0.674492185686,
+    "B": 0.0231333221818
+  },
+  "munsell_spec": "7.5GY",
+  "xyY": {
+    "x": 0.346,
+    "y": 0.561,
+    "Y": 32.1
+  },
+  "RGB": {
+    "R": 0.383498969269,
+    "G": 0.674492185686,
+    "B": 0.0231333221818
+  }
+}

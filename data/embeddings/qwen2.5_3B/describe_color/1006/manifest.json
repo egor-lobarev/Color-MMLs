@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1006.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, rich blue that appears to be a shade of navy or midnight blue. It has a slight gradient effect, with a darker hue at the top and a lighter, more muted tone towards the bottom. The color is very dark and almost black, giving it a sense of depth and intensity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1006/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1006/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5B",
+    "V": 2,
+    "C": 2,
+    "x": 0.267,
+    "y": 0.282,
+    "Y": 2.67,
+    "picture": "1006.png",
+    "R": 0.149917375279,
+    "G": 0.180540989252,
+    "B": 0.224042464431
+  },
+  "munsell_spec": "7.5B",
+  "xyY": {
+    "x": 0.267,
+    "y": 0.282,
+    "Y": 2.67
+  },
+  "RGB": {
+    "R": 0.149917375279,
+    "G": 0.180540989252,
+    "B": 0.224042464431
+  }
+}

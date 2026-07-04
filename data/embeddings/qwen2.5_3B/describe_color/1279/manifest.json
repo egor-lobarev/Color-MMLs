@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1279.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very light shade of blue, which can be described as a pastel or soft blue. It is not a deep or dark blue, but rather a lighter, more delicate shade that is often associated with calmness and serenity. This color can evoke feelings of tranquility and peace, making it a popular choice for various applications such as interior design, fashion, and art.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1279/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1279/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5PB",
+    "V": 9,
+    "C": 2,
+    "x": 0.298,
+    "y": 0.3,
+    "Y": 73.5,
+    "picture": "1279.png",
+    "R": 0.87824596726,
+    "G": 0.860871822348,
+    "B": 0.969385979262
+  },
+  "munsell_spec": "7.5PB",
+  "xyY": {
+    "x": 0.298,
+    "y": 0.3,
+    "Y": 73.5
+  },
+  "RGB": {
+    "R": 0.87824596726,
+    "G": 0.860871822348,
+    "B": 0.969385979262
+  }
+}

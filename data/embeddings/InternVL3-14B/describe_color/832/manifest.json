@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/832.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a dark, muted green, often referred to as dark teal or forest green. It has a deep, rich tone with a slight bluish undertone.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/832/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/832/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/832/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5BG",
+    "V": 1,
+    "C": 2,
+    "x": 0.241,
+    "y": 0.325,
+    "Y": 1.0,
+    "picture": "832.png",
+    "R": 0.0258408745846,
+    "G": 0.112811844525,
+    "B": 0.11487335145
+  },
+  "munsell_spec": "2.5BG",
+  "xyY": {
+    "x": 0.241,
+    "y": 0.325,
+    "Y": 1.0
+  },
+  "RGB": {
+    "R": 0.0258408745846,
+    "G": 0.112811844525,
+    "B": 0.11487335145
+  }
+}

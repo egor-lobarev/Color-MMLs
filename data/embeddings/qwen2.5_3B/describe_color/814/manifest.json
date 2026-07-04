@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/814.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very dark shade of blue, almost black. It is a deep, rich blue that is not easily distinguishable from black.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/814/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/814/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0G",
+    "V": 5,
+    "C": 2,
+    "x": 0.289,
+    "y": 0.331,
+    "Y": 18.5,
+    "picture": "814.png",
+    "R": 0.40041891632,
+    "G": 0.483780799715,
+    "B": 0.479721870583
+  },
+  "munsell_spec": "10.0G",
+  "xyY": {
+    "x": 0.289,
+    "y": 0.331,
+    "Y": 18.5
+  },
+  "RGB": {
+    "R": 0.40041891632,
+    "G": 0.483780799715,
+    "B": 0.479721870583
+  }
+}

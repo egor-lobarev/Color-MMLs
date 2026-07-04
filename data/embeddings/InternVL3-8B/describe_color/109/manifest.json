@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/109.png",
+  "model": "OpenGVLab/InternVL3-8B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color is a deep, rich burgundy. It has a dark, muted tone with slight hints of red and purple, giving it an elegant and sophisticated appearance.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/109/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/109/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-8B/describe_color/109/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      3584
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      3584
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      3584
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      3584
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5R",
+    "V": 3,
+    "C": 10,
+    "x": 0.546,
+    "y": 0.298,
+    "Y": 4.0,
+    "picture": "109.png",
+    "R": 0.443687771389,
+    "G": 0.0599546551873,
+    "B": 0.143078821862
+  },
+  "munsell_spec": "7.5R",
+  "xyY": {
+    "x": 0.546,
+    "y": 0.298,
+    "Y": 4.0
+  },
+  "RGB": {
+    "R": 0.443687771389,
+    "G": 0.0599546551873,
+    "B": 0.143078821862
+  }
+}

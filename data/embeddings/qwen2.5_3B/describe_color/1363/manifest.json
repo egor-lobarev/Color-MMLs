@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1363.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you've described is a deep, rich shade of purple. It appears to be a dark, almost blackish-purple hue with a slight blue undertone. This color can evoke feelings of mystery, depth, and sophistication.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1363/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1363/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5P",
+    "V": 3,
+    "C": 6,
+    "x": 0.276,
+    "y": 0.218,
+    "Y": 4.75,
+    "picture": "1363.png",
+    "R": 0.286844167622,
+    "G": 0.20724947154,
+    "B": 0.365877245388
+  },
+  "munsell_spec": "2.5P",
+  "xyY": {
+    "x": 0.276,
+    "y": 0.218,
+    "Y": 4.75
+  },
+  "RGB": {
+    "R": 0.286844167622,
+    "G": 0.20724947154,
+    "B": 0.365877245388
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/479.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a shade of yellow that is very bright and vivid, often described as a \"canary yellow\" or \"lemon yellow.\" It has a high chroma (colorfulness) and a high saturation (intensity), making it stand out prominently against other colors. This particular shade can be found in various contexts, such as in clothing, textiles, and graphic design, where it is used to convey energy, optimism, and cheerfulness.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/479/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/479/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0Y",
+    "V": 5,
+    "C": 8,
+    "x": 0.423,
+    "y": 0.489,
+    "Y": 16.6,
+    "picture": "479.png",
+    "R": 0.479168926862,
+    "G": 0.453495217662,
+    "B": 0.0676096921389
+  },
+  "munsell_spec": "10.0Y",
+  "xyY": {
+    "x": 0.423,
+    "y": 0.489,
+    "Y": 16.6
+  },
+  "RGB": {
+    "R": 0.479168926862,
+    "G": 0.453495217662,
+    "B": 0.0676096921389
+  }
+}

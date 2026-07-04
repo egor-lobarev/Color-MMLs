@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1588.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a shade of purple. It has a muted, dark tone, often referred to as a deep or rich purple. This type of color is commonly associated with royalty, luxury, and creativity.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1588/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1588/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1588/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5RP",
+    "V": 3,
+    "C": 2,
+    "x": 0.318,
+    "y": 0.28,
+    "Y": 5.7,
+    "picture": "1588.png",
+    "R": 0.315898008521,
+    "G": 0.241642840366,
+    "B": 0.310368464887
+  },
+  "munsell_spec": "2.5RP",
+  "xyY": {
+    "x": 0.318,
+    "y": 0.28,
+    "Y": 5.7
+  },
+  "RGB": {
+    "R": 0.315898008521,
+    "G": 0.241642840366,
+    "B": 0.310368464887
+  }
+}

@@ -12,4 +12,7 @@ pandas
 scikit-learn
 seaborn
 umap-learn
--e .
+vsl-ial
+plotly
+peft
+pandas

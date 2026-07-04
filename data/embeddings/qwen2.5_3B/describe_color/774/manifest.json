@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/774.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a very light, almost pastel shade of green. It appears to be a soft, muted green that is not too bright or vibrant. This color can be described as a pale, pastel green with a slight tint of blue or turquoise. It has a delicate and subtle appearance, making it suitable for use in various design elements such as backgrounds, accents, or as a neutral color in mixed palettes.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/774/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/774/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0G",
+    "V": 8,
+    "C": 8,
+    "x": 0.269,
+    "y": 0.39,
+    "Y": 49.6,
+    "picture": "774.png",
+    "R": 0.395831744153,
+    "G": 0.807677064377,
+    "B": 0.647067755805
+  },
+  "munsell_spec": "5.0G",
+  "xyY": {
+    "x": 0.269,
+    "y": 0.39,
+    "Y": 49.6
+  },
+  "RGB": {
+    "R": 0.395831744153,
+    "G": 0.807677064377,
+    "B": 0.647067755805
+  }
+}

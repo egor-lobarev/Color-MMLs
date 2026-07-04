@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/377.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you're referring to is a shade of yellow that is very light and almost white in appearance. It's often described as a pastel or soft yellow, with a slight tint of white. This color can be used in various contexts, such as in design, art, or as a background for text or images.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/377/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/377/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5Y",
+    "V": 6,
+    "C": 8,
+    "x": 0.434,
+    "y": 0.429,
+    "Y": 25.9,
+    "picture": "377.png",
+    "R": 0.672428258986,
+    "G": 0.522432443537,
+    "B": 0.24573139137
+  },
+  "munsell_spec": "2.5Y",
+  "xyY": {
+    "x": 0.434,
+    "y": 0.429,
+    "Y": 25.9
+  },
+  "RGB": {
+    "R": 0.672428258986,
+    "G": 0.522432443537,
+    "B": 0.24573139137
+  }
+}

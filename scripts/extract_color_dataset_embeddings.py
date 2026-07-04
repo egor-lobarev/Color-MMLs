@@ -38,6 +38,7 @@ def main() -> None:
     dataset_dir = Path(cfg.get("dataset_dir", "")).expanduser()
     if not dataset_dir.exists() or not dataset_dir.is_dir():
         raise SystemExit(f"Dataset directory not found or not a directory: {dataset_dir.as_posix()}")
+    print(dataset_dir)
 
     subfolder_name = dataset_dir.name
     out_root_root = Path(cfg.get("outdir_root", "embeddings")).expanduser()

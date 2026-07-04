@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/460.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a solid mustard yellow. Mustard yellow is a warm, rich shade that falls between yellow and gold on the color spectrum. It often has earthy and vibrant qualities, making it a popular choice for both interior design and fashion. This particular shade of yellow can evoke feelings of sunshine, warmth, and energy.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/460/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/460/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/460/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "7.5Y",
+    "V": 8,
+    "C": 12,
+    "x": 0.426,
+    "y": 0.469,
+    "Y": 50.1,
+    "picture": "460.png",
+    "R": 0.82587944731,
+    "G": 0.737668699483,
+    "B": 0.225745154392
+  },
+  "munsell_spec": "7.5Y",
+  "xyY": {
+    "x": 0.426,
+    "y": 0.469,
+    "Y": 50.1
+  },
+  "RGB": {
+    "R": 0.82587944731,
+    "G": 0.737668699483,
+    "B": 0.225745154392
+  }
+}

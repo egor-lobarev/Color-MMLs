@@ -2,12 +2,15 @@ from pathlib import Path
 from typing import Optional, List
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-from sklearn.manifold import TSNE
+import plotly.graph_objects as go
+from umap import UMAP
+from sklearn.manifold import TSNE, Isomap
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 import numpy as np
 from numpy.linalg import norm
-from scipy.spatial.distance import cosine, euclidean, cityblock
+from scipy.spatial.distance import cosine, euclidean, cityblock, pdist
+from scipy.stats import pearsonr
 import pandas as pd
 from colour.plotting import plot_chromaticity_diagram_CIE1931
 from colour import xyY_to_XYZ
@@ -61,17 +64,87 @@ class MunsellEmbeddingsAnalyzer:
             'scaler': scaler
         }
 
-    def pca_by_embeddings(self, data: dict[str, np.ndarray]):
+    def pca_by_embeddings(self, data: dict[str, np.ndarray], metadata: List[dict] = None):
         """Returns PCA decomposition for embeddings in dictionary.
 
         Args:
             data (dict[str, np.ndarray]): the dictionary with embeddings for "lm_pooled" and "vl_pooled"
+            metadata (List[dict], optional): List of metadata dictionaries for each embedding.
+                                             Required for 3D plotting with plot_pca_3d.
         """
         result = {}
         for embed_type in ['lm_pooled', 'vl_pooled']:
             embedding_matrix = data[embed_type]
             result[embed_type] = self._pca_by_matrix(embedding_matrix)
+            if metadata is not None:
+                meta_filtered = self._filter_metadata_by_embedding_indices(
+                    metadata, embed_type, data
+                )
+                result[embed_type]['meta_filtered'] = meta_filtered
         return result
+
+    def _filter_metadata_by_embedding_indices(self, metadata: List[dict], embed_type: str, data: dict[str, np.ndarray]):
+        """Filter metadata to match the filtered embeddings from leave_one_grey filtering."""
+        embedding_matrix_full = data.get(embed_type, None)
+        if embedding_matrix_full is None:
+            return None
+        
+        meta = pd.DataFrame(metadata)
+        if 'V' not in meta.columns or 'C' not in meta.columns:
+            return pd.DataFrame(metadata)
+        
+        keep_indices = set(meta['csv_index'].tolist())
+        
+        meta['csv_index'] = np.arange(len(meta))
+        keep_indices = set(meta.loc[meta['C'] != 0, 'csv_index'].tolist())
+        
+        for v_value, group in meta.groupby('V'):
+            c0_rows = group[group['C'] == 0]
+            if not c0_rows.empty:
+                keep_indices.add(c0_rows.iloc[0]['csv_index'])
+        
+        keep_indices = sorted(list(keep_indices))
+        meta_filtered = meta.loc[meta['csv_index'].isin(keep_indices)].reset_index(drop=True)
+        return meta_filtered
+
+    def pca_all_embeddings(self, n_components=3):
+        """Perform PCA for both LM and VL embeddings using provided embeddings dictionary.
+        Includes metadata for plotting.
+        Supports n_components = 2 or 3.
+        """
+        embeddings_dict = self.chain_loader.get_all_available_embeddings()
+        meta = self.chain_loader.get_all_available_colors()
+        
+        # if n_components not in [2, 3]:
+        #     raise ValueError("n_components must be 2 or 3")
+
+        results = {}
+        
+        for embedding_name in ['lm_pooled', 'vl_pooled']:
+            embedding_matrix_full = embeddings_dict.get(embedding_name, None)
+            if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
+                results[embedding_name] = None
+                continue
+            
+            embedding_matrix_filtered, meta_filtered = self.filter_embeddings_leave_one_grey(
+                embedding_matrix_full, meta
+            )
+            
+            pca_result = self._pca_by_matrix(embedding_matrix_filtered)
+            
+            results[embedding_name] = {
+                'pca_result': pca_result['pca_result'],
+                'explained_variance_ratio': pca_result['explained_variance_ratio'],
+                'cumulative_variance': pca_result['cumulative_variance'],
+                'n_components_90': pca_result['n_components_90'],
+                'n_components_95': pca_result['n_components_95'],
+                'n_components_99': pca_result['n_components_99'],
+                'pca_model': pca_result['pca_model'],
+                'scaler': pca_result['scaler'],
+                'meta_filtered': meta_filtered,
+                'method': 'PCA'
+            }
+        return results
             
     def pca_by_chains_specification(self, variables, values, fixed_h, fixed_c, fixed_v):
         """
@@ -150,9 +223,48 @@ class MunsellEmbeddingsAnalyzer:
         plt.tight_layout()
         plt.show()
         
+    
+    def filter_embeddings_leave_one_grey(self, embedding_matrix: np.ndarray, color_metadata: List[dict]):
+        """
+        Filter embedding matrix to leave one grey per value level.
+        Args:
+            embedding_matrix (np.ndarray): Full embedding matrix.
+            color_metadata (List[dict]): Corresponding metadata with 'C' and 'V' keys.
+        Returns:
+            np.ndarray: Filtered embedding matrix.
+            pd.DataFrame: Filtered metadata DataFrame.
+        """
+        meta = pd.DataFrame(color_metadata)
+        keep_indices = set(meta['csv_index'].tolist())
+        
+        # Filtration logic
+        if 'V' not in meta.columns or 'C' not in meta.columns:
+            raise ValueError("color_metadata must contain 'V' and 'C' columns")
+        
+        meta['csv_index'] = np.arange(len(meta))
+        keep_indices = set(meta.loc[meta['C'] != 0, 'csv_index'].tolist())
+        
+        for v_value, group in meta.groupby('V'):
+            c0_rows = group[group['C'] == 0]
+            if not c0_rows.empty:
+                keep_indices.add(c0_rows.iloc[0]['csv_index'])
+        
+        keep_indices = sorted(keep_indices)
+        embedding_matrix_filtered = embedding_matrix[keep_indices]
+        meta_filtered = meta.loc[meta['csv_index'].isin(keep_indices)].reset_index(drop=True)
+        
+        return embedding_matrix_filtered, meta_filtered
+        
 
-    def tsne(self, variables, values, fixed_h, fixed_c, fixed_v, perplexity=7, n_iter=5000, leave_one_grey=True):
-        """Perform t-SNE for both LM and VL embeddings using get_list_of_chains_by_specifications, with C=0 filtering."""
+    def tsne(self, variables, values, fixed_h, fixed_c, fixed_v, 
+             n_components=2, perplexity=7, n_iter=5000, leave_one_grey=True):
+        """
+        Perform t-SNE for both LM and VL embeddings using get_list_of_chains_by_specifications.
+        Supports n_components = 2 or 3.
+        """
+        # Validate n_components
+        # if n_components not in [2, 3]:
+        #     raise ValueError("n_components must be 2 or 3")
 
         data = self.chain_loader.get_list_of_chains_by_specifications(
             variables=variables,
@@ -167,32 +279,23 @@ class MunsellEmbeddingsAnalyzer:
 
         results = {}
         meta = pd.DataFrame(color_metadata)
+        
         for embedding_name in ['lm_pooled', 'vl_pooled']:
             embedding_matrix_full = data.get(embedding_name, None)
             if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
                 results[embedding_name] = None
                 continue
-            keep_indices = set(meta['csv_index'].tolist())
-            if leave_one_grey:
-                # Filtration
-                if 'V' not in meta.columns or 'C' not in meta.columns:
-                    raise ValueError(f"color_metadata must contain 'V' and 'C' columns for {embedding_name}")
-                meta['csv_index'] = np.arange(len(meta))
-                keep_indices = set(meta.loc[meta['C'] != 0,'csv_index'].tolist())
-                for v_value, group in meta.groupby('V'):
-                    c0_rows = group[group['C'] == 0]
-                    if not c0_rows.empty:
-                        keep_indices.add(c0_rows.iloc[0]['csv_index'])
-                keep_indices = sorted(keep_indices)
-            embedding_matrix_filtered = embedding_matrix_full[keep_indices]
-            meta_filtered = meta.loc[meta['csv_index'].isin(keep_indices)].reset_index(drop=True)
+            
+            embedding_matrix_filtered, meta_filtered = self.filter_embeddings_leave_one_grey(
+                embedding_matrix_full, color_metadata
+            )
+
+            # Run PCA (using existing internal method)
             pca_result = self._pca_by_matrix(embedding_matrix_filtered)
-            # Standardize
-            # scaler = StandardScaler()
-            # embedding_matrix_scaled = scaler.fit_transform(embedding_matrix_filtered)
+            
             # t-SNE
             tsne = TSNE(
-                n_components=2,
+                n_components=n_components,
                 perplexity=perplexity,
                 max_iter=n_iter,
                 random_state=42,
@@ -200,75 +303,486 @@ class MunsellEmbeddingsAnalyzer:
                 min_grad_norm=1e-8,
                 n_iter_without_progress=1000
             )
+            # Ensure PCA result is compatible with t-SNE input
             tsne_result = tsne.fit_transform(pca_result['pca_result'])
+            
             results[embedding_name] = {
-                'tsne_result': tsne_result,
-                'tsne_model': tsne,
+                'embedding_result': tsne_result, # Generic name for consistency
+                'model': tsne,
                 'scaler': pca_result['scaler'],
                 'pca_model': pca_result['pca_model'],
-                'meta_filtered': meta_filtered
+                'meta_filtered': meta_filtered,
+                'method': 't-SNE'
+            }
+        return results
+
+    def umap(self, variables, values, fixed_h, fixed_c, fixed_v, 
+             n_components=2, n_neighbors=15, min_dist=0.1, leave_one_grey=True):
+        """
+        Perform UMAP for both LM and VL embeddings using get_list_of_chains_by_specifications.
+        Supports n_components = 2 or 3.
+        """
+        # if n_components not in [2, 3]:
+        #     raise ValueError("n_components must be 2 or 3")
+
+        data = self.chain_loader.get_list_of_chains_by_specifications(
+            variables=variables,
+            values=values,
+            fixed_h=fixed_h,
+            fixed_c=fixed_c,
+            fixed_v=fixed_v
+        )
+        color_metadata = data.get('metadata', None)
+        if color_metadata is None:
+            raise ValueError("No metadata found for chain group.")
+
+        results = {}
+        
+        for embedding_name in ['lm_pooled', 'vl_pooled']:
+            embedding_matrix_full = data.get(embedding_name, None)
+            if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
+                results[embedding_name] = None
+                continue
+            embedding_matrix_filtered, meta_filtered = self.filter_embeddings_leave_one_grey(
+                embedding_matrix_full, color_metadata
+            )
+            # # Run PCA
+            # pca_result = self._pca_by_matrix(embedding_matrix_filtered)
+            
+            # UMAP
+            reducer = UMAP(
+                n_components=n_components,
+                n_neighbors=n_neighbors,
+                min_dist=min_dist,
+                random_state=42,
+                n_jobs=-1 # Use parallel processing
+            )
+            umap_result = reducer.fit_transform(embedding_matrix_filtered)
+            
+            results[embedding_name] = {
+                'embedding_result': umap_result,
+                'model': reducer,
+                'scaler': None,
+                'pca_model': None,
+                'meta_filtered': meta_filtered,
+                'method': 'UMAP'
             }
         return results
     
+    def umap_all_embeddings(self,n_components=2, n_neighbors=15, min_dist=0.1):
+        """
+        Perform UMAP for both LM and VL embeddings using provided embeddings dictionary.
+        Supports n_components = 2 or 3.
+        """
+        embeddings_dict = self.chain_loader.get_all_available_embeddings()
+        meta = self.chain_loader.get_all_available_colors()
+        # if n_components not in [2, 3]:
+        #     raise ValueError("n_components must be 2 or 3")
+
+        results = {}
+        
+        for embedding_name in ['lm_pooled', 'vl_pooled']:
+            embedding_matrix_full = embeddings_dict.get(embedding_name, None)
+            if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
+                results[embedding_name] = None
+                continue
+            filterd_embedding_matrix, meta_filtered = self.filter_embeddings_leave_one_grey(
+                embedding_matrix_full, meta
+            )
+
+            # UMAP
+            reducer = UMAP(
+                n_components=n_components,
+                n_neighbors=n_neighbors,
+                min_dist=min_dist,
+                random_state=42,
+                n_jobs=-1, # Use parallel processing
+                unique=True
+            )
+            umap_result = reducer.fit_transform(filterd_embedding_matrix)
+            
+            results[embedding_name] = {
+                'embedding_result': umap_result,
+                'model': reducer,
+                'scaler': None,
+                'pca_model': None,
+                'meta_filtered': meta_filtered,
+                'method': 'UMAP'
+            }
+        return results
+    
+    def tsne_all_embeddings(self, n_components=2, perplexity=7, n_iter=5000):
+        """
+        Perform t-SNE for both LM and VL embeddings using provided embeddings dictionary.
+        Supports n_components = 2 or 3.
+        """
+        embeddings_dict = self.chain_loader.get_all_available_embeddings()
+        meta = self.chain_loader.get_all_available_colors()
+        
+        # Validate n_components
+        # if n_components not in [2, 3]:
+        #     raise ValueError("n_components must be 2 or 3")
+
+        results = {}
+        
+        for embedding_name in ['lm_pooled', 'vl_pooled']:
+            embedding_matrix_full = embeddings_dict.get(embedding_name, None)
+            if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
+                results[embedding_name] = None
+                continue
+            
+            # # Run PCA (using existing internal method)
+            # pca_result = self._pca_by_matrix(embedding_matrix_full)
+            filterd_embedding_matrix, meta_filtered = self.filter_embeddings_leave_one_grey(
+                embedding_matrix_full, meta
+            )
+
+            # t-SNE
+            tsne = TSNE(
+                n_components=n_components,
+                perplexity=perplexity,
+                max_iter=n_iter,
+                random_state=42,
+                verbose=1,
+                min_grad_norm=1e-8,
+                n_iter_without_progress=1000
+            )
+            # Ensure PCA result is compatible with t-SNE input
+            tsne_result = tsne.fit_transform(filterd_embedding_matrix)
+            
+            results[embedding_name] = {
+                'embedding_result': tsne_result, # Generic name for consistency
+                'model': tsne,
+                'scaler': None,
+                'pca_model': None,
+                'meta_filtered': meta_filtered,
+                'method': 't-SNE'
+            }
+        return results
+
     @staticmethod
-    def plot_tsne_results(tsne_results, embedding_name):
-        """Plot t-SNE results using filtered metadata"""
-        if embedding_name not in tsne_results or tsne_results[embedding_name] is None:
+    def _plot_embedding_generic(results_dict, embedding_name, method_name):
+        """Internal helper to plot either t-SNE or UMAP results."""
+        if embedding_name not in results_dict or results_dict[embedding_name] is None:
+            print(f"No results found for {embedding_name}")
             return
         
-        tsne_result = tsne_results[embedding_name]['tsne_result']
-        meta = tsne_results[embedding_name]['meta_filtered']
+        result_data = results_dict[embedding_name]['embedding_result']
+        meta = results_dict[embedding_name]['meta_filtered']
+        n_components = result_data.shape[1]
 
-        # Извлекаем данные для цветовой визуализации
+        # Extract visualization data
         hues = meta.get('H', pd.Series(['Unknown'] * len(meta)))
         chromas = meta.get('C', pd.Series([0] * len(meta)))
         values = meta.get('V', pd.Series([0] * len(meta)))
-        rgb_vals = meta.get('RGB', pd.Series([0] * len(meta)))
+        rgb_vals = meta.get('RGB', pd.Series([(0.5, 0.5, 0.5)] * len(meta)))
 
+        # === 3D PLOTTING (PLOTLY) ===
+        if n_components == 3:
+            # Prepare colors for Plotly
+            # If rgb_vals are tuples of floats (0-1), convert to 'rgb(255,0,0)' string format
+            plotly_colors = []
+            for val in rgb_vals:
+                if isinstance(val, (tuple, list)) and len(val) == 3:
+                    # Check if float 0-1 or int 0-255
+                    if all(isinstance(x, float) and x <= 1.0 for x in val):
+                        plotly_colors.append(f'rgb({int(val[0]*255)}, {int(val[1]*255)}, {int(val[2]*255)})')
+                    else:
+                        plotly_colors.append(f'rgb({val[0]}, {val[1]}, {val[2]})')
+                else:
+                    # Fallback or pass string directly (e.g. hex)
+                    plotly_colors.append(val)
 
-        # Фигура
-        fig, axes = plt.subplots(2, 2, figsize=(16, 12))
-        fig.suptitle(f't-SNE Visualization for {embedding_name}', fontsize=16)
+            # Create Hover Text
+            hover_texts = [f"Hue: {h}<br>Val: {v}<br>Chr: {c}" for h, v, c in zip(hues, values, chromas)]
 
-        # --- 1. По Hue ---
-        unique_hues = list(set(hues))
-        hue_colors = plt.cm.Set3(np.linspace(0, 1, len(unique_hues)))
-        hue_color_map = {hue: hue_colors[i] for i, hue in enumerate(unique_hues)}
+            fig = go.Figure(data=[go.Scatter3d(
+                x=result_data[:, 0],
+                y=result_data[:, 1],
+                z=result_data[:, 2],
+                mode='markers',
+                marker=dict(
+                    size=5,
+                    color=plotly_colors, 
+                    opacity=0.8,
+                    line=dict(width=0)
+                ),
+                text=hover_texts,
+                hoverinfo='text'
+            )])
 
-        for hue in unique_hues:
-            mask = hues == hue
-            axes[0,0].scatter(tsne_result[mask, 0], tsne_result[mask, 1],
-                            c=[hue_color_map[hue]], label=hue, alpha=1, s=100)
-        axes[0,0].set_title('Colored by Hue')
-        axes[0,0].legend(bbox_to_anchor=(1.05, 1), loc='upper left')
-        axes[0,0].grid(True, alpha=0.3)
+            fig.update_layout(
+                title=f"3D {method_name} Visualization for {embedding_name}",
+                scene=dict(
+                    xaxis_title='Component 1',
+                    yaxis_title='Component 2',
+                    zaxis_title='Component 3'
+                ),
+                margin=dict(l=0, r=0, b=0, t=40)
+            )
+            fig.show()
 
-        # --- 2. По Chroma ---
-        sc1 = axes[0,1].scatter(tsne_result[:, 0], tsne_result[:, 1],
-                                c=chromas, cmap='viridis', alpha=0.7, s=100)
-        axes[0,1].set_title('Colored by Chroma')
-        plt.colorbar(sc1, ax=axes[0,1])
-        axes[0,1].grid(True, alpha=0.3)
-        # --- 3. По Value ---
-        sc2 = axes[1,0].scatter(tsne_result[:, 0], tsne_result[:, 1],
-                                c=values, cmap='plasma', alpha=0.7, s=100)
-        axes[1,0].set_title('Colored by Value')
-        plt.colorbar(sc2, ax=axes[1,0])
-        axes[1,0].grid(True, alpha=0.3)
+        # === 2D PLOTTING (MATPLOTLIB) ===
+        else:
+            # Figure setup
+            fig, axes = plt.subplots(2, 2, figsize=(16, 12))
+            fig.suptitle(f'{method_name} Visualization for {embedding_name}', fontsize=16)
 
-        # --- 4. С подписями Munsell Notation ---
+            # --- 1. By Hue ---
+            unique_hues = list(set(hues))
+            hue_colors = plt.cm.Set3(np.linspace(0, 1, len(unique_hues)))
+            hue_color_map = {hue: hue_colors[i] for i, hue in enumerate(unique_hues)}
+
+            for hue in unique_hues:
+                mask = hues == hue
+                axes[0,0].scatter(result_data[mask, 0], result_data[mask, 1],
+                                c=[hue_color_map[hue]], label=hue, alpha=1, s=100)
+            axes[0,0].set_title('Colored by Hue')
+            axes[0,0].legend(bbox_to_anchor=(1.05, 1), loc='upper left')
+            axes[0,0].grid(True, alpha=0.3)
+
+            # --- 2. By Chroma ---
+            sc1 = axes[0,1].scatter(result_data[:, 0], result_data[:, 1],
+                                    c=chromas, cmap='viridis', alpha=0.7, s=100)
+            axes[0,1].set_title('Colored by Chroma')
+            plt.colorbar(sc1, ax=axes[0,1])
+            axes[0,1].grid(True, alpha=0.3)
+            
+            # --- 3. By Value ---
+            sc2 = axes[1,0].scatter(result_data[:, 0], result_data[:, 1],
+                                    c=values, cmap='plasma', alpha=0.7, s=100)
+            axes[1,0].set_title('Colored by Value')
+            plt.colorbar(sc2, ax=axes[1,0])
+            axes[1,0].grid(True, alpha=0.3)
+
+            # --- 4. Munsell Notation / RGB ---
+            for h, c, v, rgb, i in zip(hues, chromas, values, rgb_vals, range(len(hues))):
+                axes[1,1].scatter(result_data[i, 0], result_data[i, 1], c=rgb, s=200)
+                notation = f"{h}/{v} {c}"
+                axes[1,1].annotate(str(notation), (result_data[i, 0], result_data[i, 1]),
+                                xytext=(5, 5), textcoords='offset points', fontsize=10)
+            axes[1,1].set_title('With Munsell Notations')
+            axes[1,1].grid(True, alpha=0.3)
+
+            plt.tight_layout()
+            plt.show()
+
+    @staticmethod
+    def plot_tsne_results(tsne_results, embedding_name):
+        """Plot t-SNE results (2D Matplotlib or 3D Plotly)"""
+        MunsellEmbeddingsAnalyzer._plot_embedding_generic(tsne_results, embedding_name, "t-SNE")
+
+    @staticmethod
+    def plot_umap_results(umap_results, embedding_name):
+        """Plot UMAP results (2D Matplotlib or 3D Plotly)"""
+        MunsellEmbeddingsAnalyzer._plot_embedding_generic(umap_results, embedding_name, "UMAP")
+
+    def isomap(self, variables, values, fixed_h, fixed_c, fixed_v, 
+               n_components=2, n_neighbors=5, leave_one_grey=True):
+        """
+        Perform ISOMAP for both LM and VL embeddings using get_list_of_chains_by_specifications.
+        Supports n_components = 2 or 3.
+        """
+        # if n_components not in [2, 3]:
+        #     raise ValueError("n_components must be 2 or 3")
+
+        data = self.chain_loader.get_list_of_chains_by_specifications(
+            variables=variables,
+            values=values,
+            fixed_h=fixed_h,
+            fixed_c=fixed_c,
+            fixed_v=fixed_v
+        )
+        color_metadata = data.get('metadata', None)
+        if color_metadata is None:
+            raise ValueError("No metadata found for chain group.")
+
+        results = {}
         
-        
-        for h, c, v, rgb, i in zip(hues, chromas, values, rgb_vals, range(len(hues))):
-            axes[1,1].scatter(tsne_result[i, 0], tsne_result[i, 1], c=rgb, s=200)
-            notation = f"{h}/{v} {c}"
-            axes[1,1].annotate(str(notation), (tsne_result[i, 0], tsne_result[i, 1]),
-                            xytext=(5, 5), textcoords='offset points', fontsize=10)
-        axes[1,1].set_title('With Munsell Notations')
-        axes[1,1].grid(True, alpha=0.3)
+        for embedding_name in ['lm_pooled', 'vl_pooled']:
+            embedding_matrix_full = data.get(embedding_name, None)
+            if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
+                results[embedding_name] = None
+                continue
+            
+            embedding_matrix_filtered, meta_filtered = self.filter_embeddings_leave_one_grey(
+                embedding_matrix_full, color_metadata
+            )
+            
+            scaler = StandardScaler()
+            embedding_matrix_scaled = scaler.fit_transform(embedding_matrix_filtered)
+            
+            isomap = Isomap(
+                n_components=n_components,
+                n_neighbors=n_neighbors
+            )
+            isomap_result = isomap.fit_transform(embedding_matrix_scaled)
+            
+            results[embedding_name] = {
+                'embedding_result': isomap_result,
+                'model': isomap,
+                'scaler': scaler,
+                'pca_model': None,
+                'meta_filtered': meta_filtered,
+                'method': 'ISOMAP'
+            }
+        return results
 
-        plt.tight_layout()
-        plt.show()
+    def isomap_all_embeddings(self, n_components=2, n_neighbors=5):
+        """
+        Perform ISOMAP for both LM and VL embeddings using provided embeddings dictionary.
+        Supports n_components = 2 or 3.
+        """
+        embeddings_dict = self.chain_loader.get_all_available_embeddings()
+        meta = self.chain_loader.get_all_available_colors()
+        
+        # if n_components not in [2, 3]:
+        #     raise ValueError("n_components must be 2 or 3")
+
+        results = {}
+        
+        for embedding_name in ['lm_pooled', 'vl_pooled']:
+            embedding_matrix_full = embeddings_dict.get(embedding_name, None)
+            if embedding_matrix_full is None or len(embedding_matrix_full) == 0:
+                results[embedding_name] = None
+                continue
+            
+            filtered_embedding_matrix, meta_filtered = self.filter_embeddings_leave_one_grey(
+                embedding_matrix_full, meta
+            )
+            
+            scaler = StandardScaler()
+            embedding_matrix_scaled = scaler.fit_transform(filtered_embedding_matrix)
+            
+            isomap = Isomap(
+                n_components=n_components,
+                n_neighbors=n_neighbors
+            )
+            isomap_result = isomap.fit_transform(embedding_matrix_scaled)
+            
+            results[embedding_name] = {
+                'embedding_result': isomap_result,
+                'model': isomap,
+                'scaler': scaler,
+                'pca_model': None,
+                'meta_filtered': meta_filtered,
+                'method': 'ISOMAP'
+            }
+        return results
+
+    @staticmethod
+    def plot_isomap_results(isomap_results, embedding_name):
+        """Plot ISOMAP results (2D Matplotlib or 3D Plotly)"""
+        MunsellEmbeddingsAnalyzer._plot_embedding_generic(isomap_results, embedding_name, "ISOMAP")
+
+    @staticmethod
+    def plot_pca_3d(pca_results, embedding_name):
+        """Plot 3D PCA results using Plotly"""
+        if embedding_name not in pca_results or pca_results[embedding_name] is None:
+            print(f"No PCA results found for {embedding_name}")
+            return
+        
+        result_data = pca_results[embedding_name]
+        pca_result = result_data.get('pca_result')
+        if pca_result is None or len(pca_result) == 0:
+            print(f"No embedding result in PCA for {embedding_name}")
+            return
+        
+        if pca_result.shape[1] < 3:
+            print(f"PCA result has only {pca_result.shape[1]} components, need 3 for 3D plot")
+            return
+        
+        if 'meta_filtered' in result_data:
+            meta = result_data['meta_filtered']
+        else:
+            print("No metadata found in PCA results")
+            return
+        
+        hues = meta.get('H', pd.Series(['Unknown'] * len(meta)))
+        chromas = meta.get('C', pd.Series([0] * len(meta)))
+        values = meta.get('V', pd.Series([0] * len(meta)))
+        rgb_vals = meta.get('RGB', pd.Series([(0.5, 0.5, 0.5)] * len(meta)))
+        
+        plotly_colors = []
+        for val in rgb_vals:
+            if isinstance(val, (tuple, list)) and len(val) == 3:
+                if all(isinstance(x, float) and x <= 1.0 for x in val):
+                    plotly_colors.append(f'rgb({int(val[0]*255)}, {int(val[1]*255)}, {int(val[2]*255)})')
+                else:
+                    plotly_colors.append(f'rgb({val[0]}, {val[1]}, {val[2]})')
+            else:
+                plotly_colors.append(val)
+        
+        hover_texts = [f"Hue: {h}<br>Val: {v}<br>Chr: {c}" for h, v, c in zip(hues, values, chromas)]
+        
+        fig = go.Figure(data=[go.Scatter3d(
+            x=pca_result[:, 0],
+            y=pca_result[:, 1],
+            z=pca_result[:, 2],
+            mode='markers',
+            marker=dict(
+                size=5,
+                color=plotly_colors,
+                opacity=0.8,
+                line=dict(width=0)
+            ),
+            text=hover_texts,
+            hoverinfo='text'
+        )])
+        
+        explained_var = result_data.get('explained_variance_ratio', [])
+        title = f"3D PCA Visualization for {embedding_name}"
+        if len(explained_var) >= 3:
+            title += f"<br>(Var explained: PC1={explained_var[0]:.2%}, PC2={explained_var[1]:.2%}, PC3={explained_var[2]:.2%})"
+        
+        # fig.update_layout(
+        #     title=title,
+        #     scene=dict(
+        #         xaxis_title='PC1',
+        #         yaxis_title='PC2',
+        #         zaxis_title='PC3'
+        #     ),
+        #     margin=dict(l=0, r=0, b=0, t=60)
+        # )
+        fig.update_layout(
+            scene=dict(
+                xaxis=dict(
+                    visible=False,           # Hide axis line
+                    showticklabels=False,    # Hide tick labels
+                    showgrid=False,          # Hide grid lines
+                    showline=False,          # Hide axis line
+                    showbackground=False,    # Hide axis background
+                    zeroline=False           # Hide zero line
+                ),
+                yaxis=dict(
+                    visible=False,
+                    showticklabels=False,
+                    showgrid=False,
+                    showline=False,
+                    showbackground=False,
+                    zeroline=False
+                ),
+                zaxis=dict(
+                    visible=False,
+                    showticklabels=False,
+                    showgrid=False,
+                    showline=False,
+                    showbackground=False,
+                    zeroline=False
+                ),
+                # Remove the gray cube background
+                bgcolor='rgba(0,0,0,0)',
+                # Remove the axis lines and planes
+                aspectmode='data',  # Keeps point proportions
+            ),
+            # Remove all margins and background
+            margin=dict(l=0, r=0, t=0, b=0),
+            paper_bgcolor='rgba(0,0,0,0)',
+            plot_bgcolor='rgba(0,0,0,0)',
+            # Remove title if you don't want it
+            showlegend=False
+        )
+        fig.show()
     
     def plot_chromaticity_diagram(self, variables, values, fixed_h, fixed_c, fixed_v, show_labels=False, show=False):
         """
@@ -519,3 +1033,215 @@ class MunsellEmbeddingsAnalyzer:
         
         plt.tight_layout()
         return fig, ax
+
+    def calculate_all_embeddings_distances(self, filter_greys: bool = True):
+        """
+        Calculate distance matrices for all available embeddings and color spaces.
+        
+        Calculates pairwise distances between all colors using:
+        - VL cosine distance (vision-language embeddings)
+        - LM cosine distance (language model embeddings)
+        - sRGB euclidean distance
+        - xyY euclidean distance
+        - CAM16UCS (Delta E)
+        
+        Args:
+            filter_greys (bool): If True, filter to leave one grey per value level (default: True).
+        
+        Returns:
+            dict: Dictionary containing:
+                - 'vl_cosine': np.ndarray - cosine distance matrix for VL embeddings
+                - 'lm_cosine': np.ndarray - cosine distance matrix for LM embeddings
+                - 'srgb': np.ndarray - euclidean distance matrix in sRGB space
+                - 'xyY': np.ndarray - euclidean distance matrix in xyY space
+                - 'cam': np.ndarray - CAM16UCS Delta E distance matrix
+                - 'metadata': pd.DataFrame - filtered metadata for corresponding rows
+                - 'embeddings': dict - filtered embedding matrices
+        """
+        embeddings_dict = self.chain_loader.get_all_available_embeddings()
+        metadata = self.chain_loader.get_all_available_colors()
+        
+        if embeddings_dict is None or 'lm_pooled' not in embeddings_dict:
+            raise ValueError("No embeddings available")
+        
+        if metadata is None or len(metadata) == 0:
+            raise ValueError("No metadata available")
+        
+        meta = pd.DataFrame(metadata)
+        n_samples = len(meta)
+        
+        vl_embeds = np.array(embeddings_dict['lm_pooled'])
+        lm_embeds = np.array(embeddings_dict['vl_pooled'])
+        
+        if filter_greys:
+            vl_embeds_filtered, meta_filtered = self.filter_embeddings_leave_one_grey(vl_embeds, metadata)
+            lm_embeds_filtered, _ = self.filter_embeddings_leave_one_grey(lm_embeds, metadata)
+        else:
+            vl_embeds_filtered = vl_embeds
+            lm_embeds_filtered = lm_embeds
+            meta_filtered = meta
+        
+        srgb_colors_arr = np.array([np.array(rgb) if isinstance(rgb, (tuple, list)) else rgb 
+                                    for rgb in meta_filtered['RGB']])
+        xyY_arr = np.array([np.array(xyy) if isinstance(xyy, (tuple, list)) else xyy 
+                           for xyy in meta_filtered['xyY']])
+        
+        n_filtered = len(meta_filtered)
+        
+        distances_matrix = {
+            'vl_cosine': np.zeros((n_filtered, n_filtered)),
+            'lm_cosine': np.zeros((n_filtered, n_filtered)),
+            'srgb': np.zeros((n_filtered, n_filtered)),
+            'xyY': np.zeros((n_filtered, n_filtered)),
+            'cam': np.zeros((n_filtered, n_filtered)),
+            'metadata': meta_filtered,
+            'embeddings': {
+                'lm_pooled': vl_embeds_filtered,
+                'vl_pooled': lm_embeds_filtered
+            }
+        }
+        
+        for i in range(n_filtered):
+            for j in range(i + 1, n_filtered):
+                srgb_dist = euclidean(srgb_colors_arr[i], srgb_colors_arr[j])
+                xyY_dist = euclidean(xyY_arr[i], xyY_arr[j])
+                vl_cos_dist = cosine(vl_embeds_filtered[i], vl_embeds_filtered[j])
+                lm_cos_dist = cosine(lm_embeds_filtered[i], lm_embeds_filtered[j])
+                
+                prev_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(xyY_arr[i]))
+                curr_cam = XYZ_to_CAM16LCD(xyY_to_XYZ(xyY_arr[j]))
+                cam_dist = delta_E_CAM16UCS(prev_cam, curr_cam)
+                
+                distances_matrix['srgb'][i, j] = srgb_dist
+                distances_matrix['srgb'][j, i] = srgb_dist
+                
+                distances_matrix['xyY'][i, j] = xyY_dist
+                distances_matrix['xyY'][j, i] = xyY_dist
+                
+                distances_matrix['vl_cosine'][i, j] = vl_cos_dist
+                distances_matrix['vl_cosine'][j, i] = vl_cos_dist
+                
+                distances_matrix['lm_cosine'][i, j] = lm_cos_dist
+                distances_matrix['lm_cosine'][j, i] = lm_cos_dist
+                
+                distances_matrix['cam'][i, j] = cam_dist
+                distances_matrix['cam'][j, i] = cam_dist
+        
+        return distances_matrix
+
+    def calculate_dr_distances(self, dr_result: dict, rgb_array: np.ndarray = None, 
+                                xyy_array: np.ndarray = None):
+        """
+        Calculate distances from dimensionality reduction results.
+        
+        Args:
+            dr_result (dict): Result from UMAP, t-SNE, ISOMAP, or PCA method.
+                              Should contain 'embedding_result', 'meta_filtered', 'method'.
+            rgb_array (np.ndarray, optional): RGB array for comparison. If None, uses metadata RGB.
+            xyy_array (np.ndarray, optional): xyY array for comparison. If None, uses metadata xyY.
+        
+        Returns:
+            dict: Dictionary containing:
+                - 'embedding': np.ndarray - euclidean distances in embedding space
+                - 'rgb': np.ndarray - euclidean distances in RGB space (if rgb_array provided)
+                - 'xyY': np.ndarray - euclidean distances in xyY space (if xyy_array provided)
+                - 'method': str - the dimensionality reduction method used
+                - 'n_samples': int - number of samples
+        """
+        embedding_result = dr_result.get('embedding_result')
+        if embedding_result is None:
+            embedding_result = dr_result.get('pca_result')
+        
+        if embedding_result is None:
+            raise ValueError("No embedding result found in dr_result")
+        
+        meta = dr_result.get('meta_filtered')
+        n_samples = len(embedding_result)
+        
+        if rgb_array is None and meta is not None:
+            rgb_array = np.array([np.array(rgb) if isinstance(rgb, (tuple, list)) else rgb 
+                                  for rgb in meta['RGB']])
+        
+        if xyy_array is None and meta is not None:
+            xyy_array = np.array([np.array(xyy) if isinstance(xyy, (tuple, list)) else xyy 
+                                  for xyy in meta['xyY']])
+        
+        distances = {
+            'embedding': np.zeros((n_samples, n_samples)),
+            'method': dr_result.get('method', 'Unknown'),
+            'n_samples': n_samples
+        }
+        
+        if rgb_array is not None:
+            distances['rgb'] = np.zeros((n_samples, n_samples))
+        if xyy_array is not None:
+            distances['xyY'] = np.zeros((n_samples, n_samples))
+        
+        for i in range(n_samples):
+            for j in range(i + 1, n_samples):
+                emb_dist = euclidean(embedding_result[i], embedding_result[j])
+                distances['embedding'][i, j] = emb_dist
+                distances['embedding'][j, i] = emb_dist
+                
+                if rgb_array is not None:
+                    rgb_dist = euclidean(rgb_array[i], rgb_array[j])
+                    distances['rgb'][i, j] = rgb_dist
+                    distances['rgb'][j, i] = rgb_dist
+                
+                if xyy_array is not None:
+                    xyy_dist = euclidean(xyy_array[i], xyy_array[j])
+                    distances['xyY'][i, j] = xyy_dist
+                    distances['xyY'][j, i] = xyy_dist
+        
+        return distances
+
+    @staticmethod
+    def plot_distance_correlations(distances_dict, method_name: str = "Distance", show: bool = True):
+        """
+        Plot correlation scatter plots between different distance measures.
+        
+        Args:
+            distances_dict (dict): Dictionary with distance matrices as values.
+                                   Keys like 'embedding', 'rgb', 'xyY', 'cam', etc.
+            method_name (str): Name for plot title.
+            show (bool): Whether to show the plot.
+        """
+        distance_names = list(distances_dict.keys())
+        distance_names = [d for d in distance_names if isinstance(distances_dict[d], np.ndarray) 
+                         and distances_dict[d].ndim == 2]
+        
+        n_distances = len(distance_names)
+        if n_distances < 2:
+            print("Need at least 2 distance matrices to plot correlations")
+            return
+        
+        fig, axes = plt.subplots(n_distances - 1, n_distances - 1, figsize=(4 * (n_distances - 1), 
+                                                                            4 * (n_distances - 1)))
+        
+        for i in range(n_distances - 1):
+            for j in range(n_distances - 1):
+                ax = axes[i, j] if n_distances > 2 else (axes[0, 0] if n_distances == 2 else None)
+                if ax is None:
+                    continue
+                
+                dist1 = distances_dict[distance_names[i]]
+                dist2 = distances_dict[distance_names[j + 1]]
+                
+                mask = np.triu(np.ones_like(dist1, dtype=bool), k=1)
+                
+                d1_flat = dist1[mask]
+                d2_flat = dist2[mask]
+                
+                corr, _ = pearsonr(d1_flat, d2_flat)
+                
+                ax.scatter(d1_flat, d2_flat, alpha=0.3, s=1)
+                ax.set_xlabel(distance_names[i])
+                ax.set_ylabel(distance_names[j + 1])
+                ax.set_title(f'r = {corr:.3f}')
+                ax.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        if show:
+            plt.show()
+        
+        return fig, axes

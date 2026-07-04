@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/737.png",
+  "model": "Qwen/Qwen2.5-VL-32B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The image is completely white. It has no other colors or patterns, indicating a solid, uniform white background.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/737/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_32B/describe_color/737/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      5120
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      64,
+      5120
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5G",
+    "V": 8,
+    "C": 2,
+    "x": 0.306,
+    "y": 0.335,
+    "Y": 56.9,
+    "picture": "737.png",
+    "R": 0.739023433936,
+    "G": 0.791222199873,
+    "B": 0.771964543151
+  },
+  "munsell_spec": "2.5G",
+  "xyY": {
+    "x": 0.306,
+    "y": 0.335,
+    "Y": 56.9
+  },
+  "RGB": {
+    "R": 0.739023433936,
+    "G": 0.791222199873,
+    "B": 0.771964543151
+  }
+}

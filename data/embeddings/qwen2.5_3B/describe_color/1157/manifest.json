@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1157.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep, rich blue that appears to be a shade of indigo or ultramarine. It has a slightly darker hue compared to lighter blues and is likely to be used as a background or accent color in various design contexts.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1157/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1157/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 2,
+    "C": 12,
+    "x": 0.19,
+    "y": 0.146,
+    "Y": 1.85,
+    "picture": "1157.png",
+    "R": 0.0833447864816,
+    "G": 0.127676863128,
+    "B": 0.325488966379
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.19,
+    "y": 0.146,
+    "Y": 1.85
+  },
+  "RGB": {
+    "R": 0.0833447864816,
+    "G": 0.127676863128,
+    "B": 0.325488966379
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "image": "data/colors/munsell_colors/pics/1584.png",
+  "model": "OpenGVLab/InternVL3-14B",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color in the image is a deep shade of purple, often referred to as maroon or burgundy. It's a rich, dark hue with a slight reddish tint.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1584/vision_pooled_mean.npy",
+    "projected_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1584/projected_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/InternVL3-14B/describe_color/1584/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_pooled_mean": [
+      1,
+      256,
+      5120
+    ],
+    "lm_pooled_mean": [
+      1,
+      1,
+      5120
+    ],
+    "vision_tokens": [
+      1,
+      1024,
+      1024
+    ],
+    "projected_tokens": [
+      1,
+      256,
+      5120
+    ],
+    "lm_last_hidden": [
+      1,
+      1,
+      5120
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "2.5RP",
+    "V": 2,
+    "C": 4,
+    "x": 0.327,
+    "y": 0.236,
+    "Y": 2.31,
+    "picture": "1584.png",
+    "R": 0.239795311218,
+    "G": 0.1236573749,
+    "B": 0.227371052504
+  },
+  "munsell_spec": "2.5RP",
+  "xyY": {
+    "x": 0.327,
+    "y": 0.236,
+    "Y": 2.31
+  },
+  "RGB": {
+    "R": 0.239795311218,
+    "G": 0.1236573749,
+    "B": 0.227371052504
+  }
+}

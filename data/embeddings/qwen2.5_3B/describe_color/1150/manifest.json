@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/1150.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you provided is a deep, rich shade of blue that appears to be a dark or very dark blue. It could be described as a deep navy blue or a very dark blue.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1150/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/1150/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "5.0PB",
+    "V": 1,
+    "C": 14,
+    "x": 0.167,
+    "y": 0.099,
+    "Y": 0.65,
+    "picture": "1150.png",
+    "R": 0.0195317121212,
+    "G": 0.0458047821516,
+    "B": 0.24836398542
+  },
+  "munsell_spec": "5.0PB",
+  "xyY": {
+    "x": 0.167,
+    "y": 0.099,
+    "Y": 0.65
+  },
+  "RGB": {
+    "R": 0.0195317121212,
+    "G": 0.0458047821516,
+    "B": 0.24836398542
+  }
+}

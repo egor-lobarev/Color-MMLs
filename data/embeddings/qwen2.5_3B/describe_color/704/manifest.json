@@ -1,0 +1,58 @@
+{
+  "image": "data/colors/munsell_colors/pics/704.png",
+  "model": "Qwen/Qwen2.5-VL-3B-Instruct",
+  "init_prompt": null,
+  "restart_model_per_image": false,
+  "prompt": "Describe the color.",
+  "answer": "The color you described is a bright, vivid green. It appears to be a primary or secondary color, depending on the context, and it has a high saturation level, making it appear very intense and pure. This shade of green could be associated with nature, freshness, or a sense of calmness due to its association with the natural world.",
+  "saved": {
+    "vision_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/704/vision_pooled_mean.npy",
+    "lm_pooled_mean": "data/embeddings/qwen2.5_3B/describe_color/704/lm_pooled_mean.npy"
+  },
+  "shapes": {
+    "vision_pooled_mean": [
+      1,
+      2048
+    ],
+    "projected_pooled_mean": null,
+    "lm_pooled_mean": [
+      1,
+      1,
+      2048
+    ],
+    "vision_tokens": [
+      64,
+      2048
+    ],
+    "projected_tokens": null,
+    "lm_last_hidden": [
+      1,
+      89,
+      2048
+    ],
+    "visual_token_lens": null
+  },
+  "csv_row": {
+    "H": "10.0GY",
+    "V": 9,
+    "C": 22,
+    "x": 0.298,
+    "y": 0.563,
+    "Y": 56.2,
+    "picture": "704.png",
+    "R": 0.19276399562,
+    "G": 0.892032817827,
+    "B": 0.244195345919
+  },
+  "munsell_spec": "10.0GY",
+  "xyY": {
+    "x": 0.298,
+    "y": 0.563,
+    "Y": 56.2
+  },
+  "RGB": {
+    "R": 0.19276399562,
+    "G": 0.892032817827,
+    "B": 0.244195345919
+  }
+}
