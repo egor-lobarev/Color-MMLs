@@ -90,36 +90,75 @@ plt.close(fig)
 
 
 # ==================================================== Fig 0: graphical abstract
-fig = plt.figure(figsize=(9.2, 4.2))
-ax = fig.add_axes([0.06, 0.20, 0.90, 0.62])
-ax.set_xlim(0.06, 0.62); ax.set_ylim(-1, 1)
-ax.get_yaxis().set_visible(False)
-for s in ("left", "right", "top"):
-    ax.spines[s].set_visible(False)
-ax.spines["bottom"].set_position(("data", 0))
-ax.set_xlabel("STRESS · рассогласование с психофизикой цветоразличения  (↓ лучше)",
-              fontsize=11)
+# Left: method pipeline. Right: two STRESS number lines (suprathreshold Munsell,
+# threshold Leeds) on a shared scale. All values delta_E-proper / by-center split.
+fig = plt.figure(figsize=(11.6, 4.6))
+gs = fig.add_gridspec(2, 2, width_ratios=[1.0, 1.9], hspace=1.15,
+                      left=0.02, right=0.97, top=0.80, bottom=0.17)
 
-pts = [
-    (NOISE, "пол шума\nчеловека",           FLOOR,   "|", True,  1),
-    (0.227, "карта МЯМ\n(наш результат)",   ACCENT_D, "o", True, 1),
-    (0.296, "CAM16-LCD",                    GRAY_D,  "o", False, -1),
-    (0.548, "CAM16-LCD\nна Манселле",       GRAY,    "o", False, -1),
+# ---- left: pipeline schematic ----
+axp = fig.add_subplot(gs[:, 0]); axp.axis("off")
+axp.set_xlim(0, 1); axp.set_ylim(0, 1)
+boxes = [
+    (0.90, "Однородные цветовые патчи\nМанселл · COMBVD", "#F2F2F2", "#666"),
+    (0.62, "МЯМ (Qwen2.5-VL)\nэмбеддинги e_VL, e_LM", "#E8EEF7", ACCENT_D),
+    (0.34, "Линейная карта A\n(метрическое обучение\nна психофизике человека)", "#E8EEF7", ACCENT_D),
+    (0.06, "‖A·Δe‖ ≈ воспринимаемое\nцветовое различие", "#EAF5EF", FLOOR),
 ]
-for val, lab, col, mark, filled, side in pts:
-    ax.plot([val], [0], marker=mark, ms=17 if mark == "|" else 14,
-            mfc=col if filled else "white", mec=col, mew=2.4, zorder=4)
-    ax.annotate(lab, xy=(val, 0), xytext=(val, side * 0.62),
-                ha="center", va="center", fontsize=9.5, color=col,
-                fontweight="bold" if filled and mark == "o" else "normal",
-                arrowprops=dict(arrowstyle="-", color=col, lw=1))
-# arrow: map beats CAM16-LCD (above the axis to avoid the x-label)
-ax.annotate("", xy=(0.234, 0.17), xytext=(0.289, 0.17),
-            arrowprops=dict(arrowstyle="->", color=ACCENT_D, lw=1.6))
-ax.text(0.262, 0.30, "лучше", ha="center", color=ACCENT_D, fontsize=9)
-ax.set_title("Карта из внутренних представлений МЯМ согласуется с восприятием\n"
-             "цветовых различий не хуже CAM16-LCD — модель этому не обучалась",
-             fontsize=12.5, pad=12)
+for y, txt, fc, ec in boxes:
+    axp.text(0.5, y, txt, ha="center", va="center", fontsize=9.3, color="#222",
+             bbox=dict(boxstyle="round,pad=0.45", fc=fc, ec=ec, lw=1.2))
+for y0, y1 in [(0.83, 0.72), (0.55, 0.46), (0.24, 0.15)]:
+    axp.annotate("", xy=(0.5, y1), xytext=(0.5, y0),
+                 arrowprops=dict(arrowstyle="->", color="#888", lw=1.4))
+
+# ---- right: two number lines on a shared STRESS scale ----
+XLIM = (0.05, 0.44)
+
+def numline(ax, pts, title):
+    ax.set_xlim(*XLIM); ax.set_ylim(-1.15, 1.15)
+    ax.get_yaxis().set_visible(False)
+    for s in ("left", "right", "top"):
+        ax.spines[s].set_visible(False)
+    ax.spines["bottom"].set_position(("data", 0))
+    ax.tick_params(labelsize=8.5)
+    for val, lab, col, mark, filled, side in pts:
+        ax.plot([val], [0], marker=mark, ms=15 if mark == "|" else 11,
+                mfc=col if filled else "white", mec=col, mew=2.2, zorder=4,
+                clip_on=False)
+        if lab:
+            ax.annotate(lab, xy=(val, 0), xytext=(val, side * 0.80),
+                        ha="center", va="center", fontsize=8.6, color=col,
+                        fontweight="bold" if filled and mark == "o" else "normal",
+                        arrowprops=dict(arrowstyle="-", color=col, lw=0.9))
+    ax.set_title(title, fontsize=10.5, loc="left", pad=4)
+
+ax1 = fig.add_subplot(gs[0, 1])
+numline(ax1, [
+    (0.102, "карта МЯМ  0.102",           ACCENT_D, "o", True,  1),
+    (0.288, None,                          GRAY_D,   "o", False, -1),
+    (0.297, "семейство CAM16\nLCD · UCS · SCD", GRAY_D, "o", False, -1),
+    (0.303, None,                          GRAY_D,   "o", False, -1),
+], "Надпороговые различия · Манселл (group-k)")
+ax1.annotate("", xy=(0.115, 0.42), xytext=(0.283, 0.42),
+             arrowprops=dict(arrowstyle="->", color=ACCENT_D, lw=1.5))
+ax1.text(0.198, 0.68, "почти ×3", ha="center", color=ACCENT_D, fontsize=8.6)
+
+ax2 = fig.add_subplot(gs[1, 1])
+numline(ax2, [
+    (NOISE, "пол шума\nчеловека",          FLOOR,    "|", True,  1),
+    (0.195, "CIEDE2000",                   WARN,     "o", False, -1),
+    (0.227, "карта МЯМ  0.227",            ACCENT_D, "o", True,  1),
+    (0.256, None,                          GRAY_D,   "o", False, -1),
+    (0.287, "семейство CAM16\nSCD · UCS · LCD", GRAY_D, "o", False, -1),
+    (0.322, None,                          GRAY_D,   "o", False, -1),
+], "Пороговые различия · COMBVD-Leeds (сплит по центрам)")
+fig.text(0.62, 0.015, "STRESS · рассогласование с психофизикой цветоразличения  (↓ лучше)",
+         ha="center", fontsize=10)
+
+fig.suptitle("Внутренние представления МЯМ воспроизводят метрику цветовых различий человека:\n"
+             "линейная карта превосходит каждый вариант CAM16 на его масштабе — модель не обучалась цветоразличению",
+             fontsize=12, y=0.97)
 for ext in ("png", "pdf"):
     fig.savefig(OUT / f"fig0_graphical_abstract.{ext}", bbox_inches="tight")
 plt.close(fig)
