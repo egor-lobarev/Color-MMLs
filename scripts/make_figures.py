@@ -26,19 +26,25 @@ WARN = "#C77B30"
 NOISE = 0.090
 
 # --- verified numbers (STRESS, lower is better) ------------------------------
-# Leeds (threshold), by-center split for MLLM
+# All CAM16 values are formula-proper delta_E (K_L applied); sources:
+# verify_combvd_leak.py (Leeds, by-center split for MLLM) and
+# cam16_munsell_group_stress.py / map_munsell_group_stress.py (Munsell, group-k).
 leeds = [
     ("CIELAB\n(ΔE76)",      0.400, GRAY,   False),
-    ("CAM16-LCD",           0.296, GRAY_D, False),
+    ("CAM16-LCD",           0.322, GRAY_D, False),
+    ("CAM16-UCS",           0.287, GRAY_D, False),
+    ("CAM16-SCD",           0.256, GRAY_D, False),
     ("CIEDE2000",           0.195, WARN,   False),
     ("МЯМ · LM",            0.238, ACCENT, True),
     ("МЯМ · VL",            0.227, ACCENT_D, True),
 ]
-# Munsell (suprathreshold); MLLM verified in diploma, CAM16 value is UCS (provisional)
+# Munsell (suprathreshold), group-k regime throughout (full color set for CAM16,
+# object-wise CV for the map at m=256)
 munsell = [
-    ("CAM16-LCD*",          0.548, GRAY_D, False),
-    ("МЯМ · LM",            0.250, ACCENT, True),
-    ("МЯМ · VL",            0.210, ACCENT_D, True),
+    ("CAM16-LCD",           0.364, GRAY_D, False),
+    ("CAM16-UCS",           0.343, GRAY_D, False),
+    ("МЯМ · LM",            0.173, ACCENT, True),
+    ("МЯМ · VL",            0.102, ACCENT_D, True),
 ]
 
 
@@ -67,10 +73,7 @@ def bars(ax, data, title):
 fig, (a1, a2) = plt.subplots(1, 2, figsize=(11, 4.6),
                              gridspec_kw={"width_ratios": [5, 3]})
 bars(a1, leeds, "Пороговые различия · COMBVD-Leeds")
-bars(a2, munsell, "Надпороговые различия · Манселл")
-a2.annotate("*из ВКР (вариант UCS);\nпересчитать в LCD", xy=(0, 0.548),
-            xytext=(0.25, 0.50), fontsize=8, color=GRAY_D,
-            ha="left", va="top")
+bars(a2, munsell, "Надпороговые различия · Манселл (group-k)")
 fig.suptitle("Согласованность метрики с психофизикой цветовых различий человека",
              fontsize=13, y=1.00)
 # legend
@@ -125,7 +128,7 @@ plt.close(fig)
 # verified by scripts/map_munsell_group_stress.py (1755 colors, object-wise 5-fold,
 # per-group k). CAM16-LCD recomputed on the same color subset.
 cats = ["Тон\n(varying-H)", "Насыщенность\n(varying-C)", "Светлота\n(varying-V)", "Среднее\n(Group-k)"]
-cam16   = [0.504, 0.288, 0.073, 0.288]
+cam16   = [0.504, 0.286, 0.074, 0.288]  # delta_E-proper (map_munsell_group_stress.py)
 map_vl  = [0.110, 0.120, 0.076, 0.102]
 map_lm  = [0.230, 0.192, 0.096, 0.173]
 err_vl  = [0.008, 0.015, 0.006, 0.0]

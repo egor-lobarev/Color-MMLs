@@ -12,9 +12,16 @@ Target: neighboring colors in a uniform Munsell chain are 1 perceptual step apar
 import numpy as np
 import pandas as pd
 from colour import xyY_to_XYZ
-from colour.models import XYZ_to_CAM16UCS, XYZ_to_CAM16LCD
+from colour.models import XYZ_to_CAM16UCS, XYZ_to_CAM16LCD, XYZ_to_CAM16SCD
+from colour.difference import (delta_E_CAM16UCS, delta_E_CAM16LCD,
+                               delta_E_CAM16SCD)
 from colour import XYZ_to_Lab
 from vsl_ial.stress import stress as stress_fn
+
+# NB: colour-science does NOT bake K_L into the UCS/LCD/SCD coordinates, so a
+# plain Euclidean norm on the coordinates understates/overstates the lightness
+# weighting for K_L != 1 (LCD: 0.77, SCD: 1.24). Formula-proper distances must
+# go through the delta_E_* functions. UCS has K_L = 1, so both agree there.
 
 CSV = "data/munsell_3-3.csv"
 
@@ -68,13 +75,13 @@ def build_pairs(df):
     return groups
 
 
-def report(name, coords, groups):
+def report(name, coords, groups, dist_fn):
     print(f"\n{'='*64}\n{name}\n{'='*64}")
     all_pred, all_tgt = [], []
     per_group = {}
     for gname, pairs in groups.items():
         I = np.array([p[0] for p in pairs]); J = np.array([p[1] for p in pairs])
-        d = np.linalg.norm(coords[I] - coords[J], axis=1)
+        d = dist_fn(coords[I], coords[J])
         t = np.ones(len(d))
         s = stress(d, t)                     # vsl_ial fits optimal k internally
         per_group[gname] = s
@@ -89,21 +96,27 @@ def report(name, coords, groups):
     return global_s, group_mean, per_group
 
 
+def euclid(a, b):
+    return np.linalg.norm(a - b, axis=1)
+
+
 def main():
     df = pd.read_csv(CSV)
     df["H"] = df["H"].astype(str)
     XYZ = xyY_to_XYZ(df[["x", "y", "Y"]].to_numpy(float) * np.array([1, 1, 1 / 100.0]))
-    coords = {
-        "CAM16-LCD": XYZ_to_CAM16LCD(XYZ),
-        "CAM16-UCS": XYZ_to_CAM16UCS(XYZ),
-        "CIELAB": XYZ_to_Lab(XYZ),
+    spaces = {
+        # name -> (coords, formula-proper distance)
+        "CAM16-LCD (dE, K_L=0.77)": (XYZ_to_CAM16LCD(XYZ), delta_E_CAM16LCD),
+        "CAM16-UCS (dE, K_L=1)":    (XYZ_to_CAM16UCS(XYZ), delta_E_CAM16UCS),
+        "CAM16-SCD (dE, K_L=1.24)": (XYZ_to_CAM16SCD(XYZ), delta_E_CAM16SCD),
+        "CIELAB (dE76)":            (XYZ_to_Lab(XYZ), euclid),
     }
     groups = build_pairs(df)
     print(f"Munsell pairs: " + ", ".join(f"{k}={len(v)}" for k, v in groups.items())
           + f"  (total {sum(len(v) for v in groups.values())})")
     print("Reference (diploma, CAM16-UCS): GLOBAL-k=0.548, GROUP-k=0.354")
-    for name in ["CAM16-LCD", "CAM16-UCS", "CIELAB"]:
-        report(name, coords[name], groups)
+    for name, (coords, dist_fn) in spaces.items():
+        report(name, coords, groups, dist_fn)
 
 
 if __name__ == "__main__":

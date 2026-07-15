@@ -21,7 +21,9 @@ import numpy as np
 import torch
 from sklearn.model_selection import KFold
 from colour import xyY_to_XYZ
-from colour.models import XYZ_to_CAM16UCS, XYZ_to_CAM16LCD
+from colour.models import XYZ_to_CAM16UCS, XYZ_to_CAM16LCD, XYZ_to_CAM16SCD
+from colour.difference import (delta_E_CAM16UCS, delta_E_CAM16LCD,
+                               delta_E_CAM16SCD)
 from colour import XYZ_to_Lab, delta_E
 
 from vsl_ial.stress import stress as stress_fn
@@ -70,15 +72,31 @@ def stress(d_true, d_pred):
 
 # --------------------------------------------------------------------- baselines
 def cam_baselines(XYZ, I, J, DV):
+    """Formula-proper distances. NB: colour-science does NOT bake K_L into the
+    UCS/LCD/SCD coordinates, so for K_L != 1 (LCD 0.77, SCD 1.24) the distance
+    must go through delta_E_*; Euclid on coords is only correct for UCS."""
     out = {}
-    for name, fn in [("CAM16-UCS", XYZ_to_CAM16UCS), ("CAM16-LCD", XYZ_to_CAM16LCD)]:
-        for scale, tag in [(1.0, ""), (100.0, " (XYZ*100)")]:
-            try:
-                coords = fn(XYZ * scale)
-                d = np.linalg.norm(coords[I] - coords[J], axis=1)
-                out[name + tag] = stress(DV, d)
-            except Exception as e:
-                out[name + tag] = f"err:{e}"
+    for name, fn, dE in [("CAM16-UCS (dE)", XYZ_to_CAM16UCS, delta_E_CAM16UCS),
+                         ("CAM16-LCD (dE)", XYZ_to_CAM16LCD, delta_E_CAM16LCD),
+                         ("CAM16-SCD (dE)", XYZ_to_CAM16SCD, delta_E_CAM16SCD)]:
+        try:
+            coords = fn(XYZ)
+            out[name] = stress(DV, dE(coords[I], coords[J]))
+        except Exception as e:
+            out[name] = f"err:{e}"
+    # raw CAM16 correlates, no UCS compression: Euclid on (J, M cos h, M sin h)
+    try:
+        from colour.appearance import XYZ_to_CAM16, VIEWING_CONDITIONS_CAM16
+        from colour.models import xy_to_XYZ
+        XYZ_w = xy_to_XYZ(np.array([0.3127, 0.3290])) * 100
+        spec = XYZ_to_CAM16(XYZ * 100, XYZ_w, L_A=64 / np.pi * 0.2 * 100, Y_b=20,
+                            surround=VIEWING_CONDITIONS_CAM16["Average"])
+        raw = np.stack([spec.J, spec.M * np.cos(np.radians(spec.h)),
+                        spec.M * np.sin(np.radians(spec.h))], axis=-1)
+        out["raw CAM16 (J,M,h Euclid)"] = stress(
+            DV, np.linalg.norm(raw[I] - raw[J], axis=1))
+    except Exception as e:
+        out["raw CAM16 (J,M,h Euclid)"] = f"err:{e}"
     # CIELAB / CIEDE2000 anchors (D65 white)
     Lab = XYZ_to_Lab(XYZ)
     d76 = np.linalg.norm(Lab[I] - Lab[J], axis=1)

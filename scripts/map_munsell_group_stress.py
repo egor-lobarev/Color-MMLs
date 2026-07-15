@@ -12,7 +12,9 @@ import numpy as np
 import pandas as pd
 import torch
 from colour import xyY_to_XYZ
-from colour.models import XYZ_to_CAM16LCD
+from colour.models import XYZ_to_CAM16UCS, XYZ_to_CAM16LCD, XYZ_to_CAM16SCD
+from colour.difference import (delta_E_CAM16UCS, delta_E_CAM16LCD,
+                               delta_E_CAM16SCD)
 from sklearn.model_selection import KFold
 from vsl_ial.stress import stress as stress_fn
 
@@ -94,15 +96,25 @@ def main():
     groups = build_pairs(df)
     print(f"colors={len(df)}  pairs: " + ", ".join(f"{k}={len(v)}" for k, v in groups.items()))
 
-    # ---- CAM16-LCD baseline on this exact color set (per-group k) ----
+    # ---- CAM16 baselines on this exact color set (per-group k) ----
+    # Formula-proper distances via delta_E_* (K_L is NOT baked into the coords).
     XYZ = xyY_to_XYZ(df[["x", "y", "Y"]].to_numpy(float) * np.array([1, 1, 1 / 100]))
-    cam = XYZ_to_CAM16LCD(XYZ)
-    print("\nCAM16-LCD (this subset, group-k):")
-    cam_pg = {}
-    for gn, pr in groups.items():
-        cam_pg[gn] = stress(np.linalg.norm(cam[pr[:, 0]] - cam[pr[:, 1]], axis=1), np.ones(len(pr)))
-        print(f"  {gn:10s}: {cam_pg[gn]:.3f}")
-    print(f"  Group-k mean: {np.mean(list(cam_pg.values())):.3f}")
+    variants = {
+        "CAM16-LCD": (XYZ_to_CAM16LCD(XYZ), delta_E_CAM16LCD),
+        "CAM16-UCS": (XYZ_to_CAM16UCS(XYZ), delta_E_CAM16UCS),
+        "CAM16-SCD": (XYZ_to_CAM16SCD(XYZ), delta_E_CAM16SCD),
+    }
+    cam_all = {}
+    for vname, (co, dE) in variants.items():
+        pg = {}
+        for gn, pr in groups.items():
+            pg[gn] = stress(dE(co[pr[:, 0]], co[pr[:, 1]]), np.ones(len(pr)))
+        cam_all[vname] = pg
+        print(f"\n{vname} (this subset, group-k, dE):")
+        for gn in groups:
+            print(f"  {gn:10s}: {pg[gn]:.3f}")
+        print(f"  Group-k mean: {np.mean(list(pg.values())):.3f}")
+    cam_pg = cam_all["CAM16-LCD"]  # reference column printed next to the map
 
     # ---- learned map: object-wise 5-fold, per-group test STRESS ----
     for layer, X in [("LM", LM), ("VL", VL)]:
