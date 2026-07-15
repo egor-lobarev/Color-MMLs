@@ -1,14 +1,21 @@
 """
 (1) Dependence of test STRESS on the test-set size (data efficiency / stability):
     Munsell (object-wise split) and COMBVD-Leeds (center-wise split), m=256.
-(2) Error analysis of the learned map across the Munsell space: mean per-color
-    deviation |k_g*d_hat - 1| on held-out pairs, pivoted over Value x Chroma
-    (analog of LIM26 Fig. 3, but for the metric map).
+(2) Error analysis across the Munsell body (Value x Chroma), two variants:
+    - fig7_error_heatmap    : metric-map step error |k_g*d_hat - 1| on held-out
+      pairs, unitless (fraction of one Munsell step; per-pair STRESS contribution).
+    - fig7_error_heatmap_dE : LIM26-Fig.3 analog in familiar dE units — linear
+      decoding of CAM16-LCD coordinates from embeddings, per-test-color ||y_hat-y||.
+      (A Munsell step has no fixed dE equivalent, so the dE view uses coordinate
+      decoding instead of the metric map.)
+
+Run `python scripts/analyze_testsize_errors.py --heatmap-only` to skip the sweep.
 
 Produces (graphics/):
   fig6_testsize.(png|pdf)
-  fig7_error_heatmap.(png|pdf)
+  fig7_error_heatmap.(png|pdf), fig7_error_heatmap_dE.(png|pdf)
 """
+import sys
 import importlib.util
 from pathlib import Path
 
@@ -126,11 +133,59 @@ def error_heatmap(df, groups, layers):
     return err_maps
 
 
+# ------------------------------------- 2b) error heatmap in dE units (LIM26-style)
+def error_heatmap_dE(df, layers):
+    """Linear decoding of CAM16-LCD coords (Ridge, object-wise 5-fold);
+    per-test-color error ||y_hat - y|| in dE units of CAM16-LCD."""
+    from colour import xyY_to_XYZ
+    from colour.models import XYZ_to_CAM16LCD
+    from sklearn.linear_model import Ridge
+
+    XYZ = xyY_to_XYZ(df[["x", "y", "Y"]].to_numpy(float) * np.array([1, 1, 1 / 100]))
+    Y = XYZ_to_CAM16LCD(XYZ)
+    maps = {}
+    for name, X in layers.items():
+        sd = X.std(0); sd[sd == 0] = 1; Xs = X / sd
+        err = np.full(len(df), np.nan)
+        for tr_i, te_i in KFold(5, shuffle=True, random_state=RNG).split(Xs):
+            reg = Ridge(alpha=1.0).fit(Xs[tr_i], Y[tr_i])
+            err[te_i] = np.linalg.norm(reg.predict(Xs[te_i]) - Y[te_i], axis=1)
+        piv = (pd.DataFrame({"V": df["V"], "C": df["C"], "err": err})
+               .groupby(["V", "C"])["err"].mean().unstack())
+        maps[name] = piv
+        print(f"  dE heatmap {name}: mean={np.nanmean(err):.3f} dE, "
+              f"max cell={np.nanmax(piv.values):.3f}")
+    fig, axes = plt.subplots(1, 2, figsize=(12.6, 4.6))
+    vmax = max(np.nanmax(maps[n].values) for n in maps)
+    for ax, name in zip(axes, ("VL", "LM")):
+        piv = maps[name]
+        im = ax.imshow(piv.values, cmap="magma_r", vmin=0, vmax=vmax,
+                       aspect="auto", origin="lower")
+        ax.set_xticks(range(len(piv.columns))); ax.set_xticklabels(piv.columns, fontsize=7.5)
+        ax.set_yticks(range(len(piv.index))); ax.set_yticklabels(piv.index, fontsize=8)
+        ax.set_xlabel("Chroma (C) → насыщеннее")
+        ax.set_ylabel("Value (V) → светлее")
+        ax.set_title(f"{name} · среднее {np.nanmean(maps[name].values):.2f} ΔE", fontsize=11.5)
+        plt.colorbar(im, ax=ax, label="ΔE (CAM16-LCD)")
+    fig.suptitle("Ошибка линейного декодирования координат CAM16-LCD по телу Манселла\n"
+                 "(тестовые цвета, 5-фолд по цветам; аналог Fig. 3 LIM26)", fontsize=12.5)
+    fig.tight_layout(rect=(0, 0, 1, 0.90))
+    for ext in ("png", "pdf"):
+        fig.savefig(OUT / f"fig7_error_heatmap_dE.{ext}", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main():
     df, VL, LM = mm.load()
     groups = mm.build_pairs(df)
     layers = {"VL": VL, "LM": LM}
     colors = {"VL": ACCENT_D, "LM": ACCENT}
+
+    if "--heatmap-only" in sys.argv:
+        print("== error heatmap (dE, coordinate decoding) ==")
+        error_heatmap_dE(df, layers)
+        print("saved fig7_error_heatmap_dE")
+        return
 
     print("== test-size sweep: Munsell ==")
     mres = munsell_sweep(df, groups, layers)
@@ -190,7 +245,10 @@ def main():
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"fig7_error_heatmap.{ext}", bbox_inches="tight")
     plt.close(fig)
-    print("saved fig6_testsize, fig7_error_heatmap")
+
+    print("== error heatmap (dE, coordinate decoding) ==")
+    error_heatmap_dE(df, layers)
+    print("saved fig6_testsize, fig7_error_heatmap, fig7_error_heatmap_dE")
 
 
 if __name__ == "__main__":
