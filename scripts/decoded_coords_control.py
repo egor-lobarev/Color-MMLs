@@ -49,6 +49,7 @@ def main():
         return pr[[a in S and b in S for a, b in pr]]
 
     print("Munsell unit-step STRESS (group-k) via DECODED CAM16-LCD coordinates:")
+    res = {}
     for name, X in [("VL", VL), ("LM", LM)]:
         sd = X.std(0); sd[sd == 0] = 1; Xs = X / sd
         fold_pg = {g: [] for g in groups}
@@ -67,8 +68,22 @@ def main():
         print(f"  {name}: H={means['varying-H']:.3f} C={means['varying-C']:.3f} "
               f"V={means['varying-V']:.3f}  -> Group-k mean = "
               f"{np.mean(list(means.values())):.3f}")
+        res[name] = {"group_k_mean": round(float(np.mean(list(means.values()))), 4),
+                     "per_group": {g: round(float(v), 4) for g, v in means.items()}}
     print("\nreference: true CAM16-LCD coords Group-k = 0.288 (H 0.504/C 0.286/V 0.074)")
     print("           direct metric map: VL 0.102 / LM 0.173")
+
+    import json
+    from datetime import date
+    out = Path("data/analysis"); out.mkdir(parents=True, exist_ok=True)
+    json.dump({
+        "script": "scripts/decoded_coords_control.py",
+        "date": str(date.today()),
+        "protocol": "контроль: расстояния через ДЕКОДИРОВАННЫЕ координаты CAM16-LCD "
+                    "(Ridge, 5-фолд по цветам), group-k STRESS на единичных шагах",
+        "results": res,
+    }, open(out / "decoded_coords_control.json", "w"), indent=2, ensure_ascii=False)
+    print("saved data/analysis/decoded_coords_control.json")
 
 
 if __name__ == "__main__":

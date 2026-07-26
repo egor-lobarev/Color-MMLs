@@ -9,6 +9,10 @@ varying-V chains, plus their mean (Group STRESS).
 
 Target: neighboring colors in a uniform Munsell chain are 1 perceptual step apart.
 """
+import json
+from datetime import date
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 from colour import xyY_to_XYZ
@@ -115,8 +119,22 @@ def main():
     print(f"Munsell pairs: " + ", ".join(f"{k}={len(v)}" for k, v in groups.items())
           + f"  (total {sum(len(v) for v in groups.values())})")
     print("Reference (diploma, CAM16-UCS): GLOBAL-k=0.548, GROUP-k=0.354")
+    results = {}
     for name, (coords, dist_fn) in spaces.items():
-        report(name, coords, groups, dist_fn)
+        global_s, group_mean, per_group = report(name, coords, groups, dist_fn)
+        results[name] = {"global_k": round(global_s, 4),
+                         "group_k_mean": round(group_mean, 4),
+                         "per_group": {g: round(v, 4) for g, v in per_group.items()}}
+    out = Path("data/analysis"); out.mkdir(parents=True, exist_ok=True)
+    json.dump({
+        "script": "scripts/cam16_munsell_group_stress.py",
+        "date": str(date.today()),
+        "protocol": "полный munsell_3-3 (2985 цветов), цепочки H/C/V, цель=1 шаг; "
+                    "формульные dE (K_L учтён); STRESS с global-k и group-k",
+        "n_pairs": {k: len(v) for k, v in groups.items()},
+        "results": results,
+    }, open(out / "cam16_munsell.json", "w"), indent=2, ensure_ascii=False)
+    print("\nsaved data/analysis/cam16_munsell.json")
 
 
 if __name__ == "__main__":

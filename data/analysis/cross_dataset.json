@@ -1,0 +1,20 @@
+{
+  "LM": {
+    "munsell_to_leeds": 0.28682834860155854,
+    "leeds_to_munsell_groupk": 0.37968252097400607,
+    "leeds_to_munsell_groups": {
+      "varying-H": 0.4426503078581366,
+      "varying-C": 0.5423189901311491,
+      "varying-V": 0.1540782649327325
+    }
+  },
+  "VL": {
+    "munsell_to_leeds": 0.2575691014999722,
+    "leeds_to_munsell_groupk": 0.32647831658898413,
+    "leeds_to_munsell_groups": {
+      "varying-H": 0.3860838616858694,
+      "varying-C": 0.45830686219281497,
+      "varying-V": 0.1350442258882681
+    }
+  }
+}

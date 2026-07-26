@@ -1,0 +1,48 @@
+{
+  "script": "scripts/cam16_munsell_group_stress.py",
+  "date": "2026-07-18",
+  "protocol": "полный munsell_3-3 (2985 цветов), цепочки H/C/V, цель=1 шаг; формульные dE (K_L учтён); STRESS с global-k и group-k",
+  "n_pairs": {
+    "varying-H": 2689,
+    "varying-C": 2584,
+    "varying-V": 2529
+  },
+  "results": {
+    "CAM16-LCD (dE, K_L=0.77)": {
+      "global_k": 0.4815,
+      "group_k_mean": 0.3642,
+      "per_group": {
+        "varying-H": 0.5649,
+        "varying-C": 0.401,
+        "varying-V": 0.1266
+      }
+    },
+    "CAM16-UCS (dE, K_L=1)": {
+      "global_k": 0.4784,
+      "group_k_mean": 0.3433,
+      "per_group": {
+        "varying-H": 0.5139,
+        "varying-C": 0.4126,
+        "varying-V": 0.1035
+      }
+    },
+    "CAM16-SCD (dE, K_L=1.24)": {
+      "global_k": 0.4662,
+      "group_k_mean": 0.3445,
+      "per_group": {
+        "varying-H": 0.4927,
+        "varying-C": 0.4406,
+        "varying-V": 0.1002
+      }
+    },
+    "CIELAB (dE76)": {
+      "global_k": 0.4937,
+      "group_k_mean": 0.4489,
+      "per_group": {
+        "varying-H": 0.653,
+        "varying-C": 0.4741,
+        "varying-V": 0.2197
+      }
+    }
+  }
+}

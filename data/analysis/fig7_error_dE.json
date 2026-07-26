@@ -1,0 +1,15 @@
+{
+  "script": "scripts/analyze_testsize_errors.py (error_heatmap_dE)",
+  "date": "2026-07-18",
+  "protocol": "Ridge(alpha=1) декодирование координат CAM16-LCD, 5-фолд по цветам; ошибка ||y_hat - y|| в dE на тестовых цветах",
+  "results": {
+    "VL": {
+      "mean_dE": 0.7,
+      "max_cell_dE": 2.181
+    },
+    "LM": {
+      "mean_dE": 0.546,
+      "max_cell_dE": 2.7
+    }
+  }
+}

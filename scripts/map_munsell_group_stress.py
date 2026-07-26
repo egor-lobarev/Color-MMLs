@@ -7,6 +7,7 @@ evaluated per group with per-group optimal k on held-out colors -- the same
 group-k treatment given to CAM16 in cam16_munsell_group_stress.py.
 """
 import json
+from datetime import date
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -117,8 +118,10 @@ def main():
     cam_pg = cam_all["CAM16-LCD"]  # reference column printed next to the map
 
     # ---- learned map: object-wise 5-fold, per-group test STRESS ----
+    map_res = {}
     for layer, X in [("LM", LM), ("VL", VL)]:
         sd = X.std(0); sd[sd == 0] = 1; Xs = X / sd
+        map_res[layer] = {}
         for m in [3, 32, 256]:
             fold_pg = {g: [] for g in groups}
             kf = KFold(5, shuffle=True, random_state=RNG)
@@ -137,6 +140,24 @@ def main():
             for g in groups:
                 print(f"  {g:10s}: {means[g]:.3f} ± {np.std(fold_pg[g]):.3f}  (CAM16 {cam_pg[g]:.3f})")
             print(f"  Group-k mean: {gm:.3f}   (CAM16 {np.mean(list(cam_pg.values())):.3f})")
+            map_res[layer][m] = {
+                "group_k_mean": round(float(gm), 4),
+                "per_group": {g: {"mean": round(float(means[g]), 4),
+                                  "std": round(float(np.std(fold_pg[g])), 4)}
+                              for g in groups}}
+
+    json.dump({
+        "script": "scripts/map_munsell_group_stress.py",
+        "date": str(date.today()),
+        "protocol": "Манселл, подмножество с эмбеддингами (1755 цветов), объектная "
+                    "5-фолд CV, MSE-лосс (цель=1 шаг), reg=1e-3, 400 эпох; STRESS "
+                    "group-k; CAM16 — формульные dE на том же подмножестве",
+        "cam16_on_subset": {v: {g: round(x, 4) for g, x in pg.items()}
+                            for v, pg in cam_all.items()},
+        "map": map_res,
+    }, open(Path("data/analysis") / "map_munsell_groupk.json", "w"),
+        indent=2, ensure_ascii=False)
+    print("\nsaved data/analysis/map_munsell_groupk.json")
 
 
 if __name__ == "__main__":

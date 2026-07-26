@@ -15,6 +15,7 @@ Data on disk: Qwen2.5-VL-7B, prompt = "human_like", subset = leeds only.
 """
 import json
 import csv
+from datetime import date
 from pathlib import Path
 
 import numpy as np
@@ -179,18 +180,42 @@ def main():
     print(f"Leeds: {len(centers)} centers, {len(I)} pairs, d=3584, prompt=human_like")
 
     print("\n" + "="*74 + "\nCAM16 / CIE baselines (STRESS vs human dv) -- for scale calibration\n" + "="*74)
-    for k, v in cam_baselines(XYZ, I, J, DV).items():
+    baselines = cam_baselines(XYZ, I, J, DV)
+    for k, v in baselines.items():
         print(f"  {k:24s}: {v if isinstance(v,str) else f'{v:.3f}'}")
     print(f"  {'noise floor (repeats)':24s}: {NOISE_FLOOR:.3f}")
     print("  [diploma reported CAM16-UCS on Leeds = 0.271]")
 
     ms = [3, 32, 256, 1024]
+    proto = {}
     for layer, X in [("LM", LM), ("VL", VL)]:
         print(f"\n########## LAYER {layer} ##########")
-        run_protocol(f"(A) SPLIT BY PAIR  [leaky, reproduces diploma] -- {layer}",
-                     X, I, J, DV, centers, by_center=False, ms=ms)
-        run_protocol(f"(B) SPLIT BY CENTER [correct] -- {layer}",
-                     X, I, J, DV, centers, by_center=True, ms=ms)
+        ra = run_protocol(f"(A) SPLIT BY PAIR  [leaky, reproduces diploma] -- {layer}",
+                          X, I, J, DV, centers, by_center=False, ms=ms)
+        rb = run_protocol(f"(B) SPLIT BY CENTER [correct] -- {layer}",
+                          X, I, J, DV, centers, by_center=True, ms=ms)
+        proto[layer] = {
+            "by_pair_leaky": {m: {"mean": round(float(np.mean(v)), 4),
+                                  "std": round(float(np.std(v)), 4)}
+                              for m, v in ra.items()},
+            "by_center": {m: {"mean": round(float(np.mean(v)), 4),
+                              "std": round(float(np.std(v)), 4)}
+                          for m, v in rb.items()},
+        }
+
+    out = Path("data/analysis"); out.mkdir(parents=True, exist_ok=True)
+    json.dump({
+        "script": "scripts/verify_combvd_leak.py",
+        "date": str(date.today()),
+        "protocol": "COMBVD-Leeds (307 пар), Qwen-7B prompt=human_like; MSE-лосс на "
+                    "dv, reg=1e-3, 350 эпох; (A) сплит по парам [утечка], (B) по "
+                    "цветовым центрам [корректно], 5-фолд CV; бейзлайны — формульные dE",
+        "baselines": {k: (round(v, 4) if not isinstance(v, str) else v)
+                      for k, v in baselines.items()},
+        "noise_floor_repeats": NOISE_FLOOR,
+        "map": proto,
+    }, open(out / "verify_combvd_leak.json", "w"), indent=2, ensure_ascii=False)
+    print("\nsaved data/analysis/verify_combvd_leak.json")
 
 
 if __name__ == "__main__":

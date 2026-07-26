@@ -17,6 +17,8 @@ Produces (graphics/):
 """
 import sys
 import importlib.util
+import json
+from datetime import date
 from pathlib import Path
 
 import numpy as np
@@ -143,7 +145,7 @@ def error_heatmap_dE(df, layers):
 
     XYZ = xyY_to_XYZ(df[["x", "y", "Y"]].to_numpy(float) * np.array([1, 1, 1 / 100]))
     Y = XYZ_to_CAM16LCD(XYZ)
-    maps = {}
+    maps, summ = {}, {}
     for name, X in layers.items():
         sd = X.std(0); sd[sd == 0] = 1; Xs = X / sd
         err = np.full(len(df), np.nan)
@@ -153,8 +155,19 @@ def error_heatmap_dE(df, layers):
         piv = (pd.DataFrame({"V": df["V"], "C": df["C"], "err": err})
                .groupby(["V", "C"])["err"].mean().unstack())
         maps[name] = piv
+        summ[name] = {"mean_dE": round(float(np.nanmean(err)), 3),
+                      "max_cell_dE": round(float(np.nanmax(piv.values)), 3)}
         print(f"  dE heatmap {name}: mean={np.nanmean(err):.3f} dE, "
               f"max cell={np.nanmax(piv.values):.3f}")
+    aout = Path("data/analysis"); aout.mkdir(parents=True, exist_ok=True)
+    json.dump({
+        "script": "scripts/analyze_testsize_errors.py (error_heatmap_dE)",
+        "date": str(date.today()),
+        "protocol": "Ridge(alpha=1) декодирование координат CAM16-LCD, 5-фолд по "
+                    "цветам; ошибка ||y_hat - y|| в dE на тестовых цветах",
+        "results": summ,
+    }, open(aout / "fig7_error_dE.json", "w"), indent=2, ensure_ascii=False)
+    print("  saved data/analysis/fig7_error_dE.json")
     fig, axes = plt.subplots(1, 2, figsize=(12.6, 4.6))
     vmax = max(np.nanmax(maps[n].values) for n in maps)
     for ax, name in zip(axes, ("VL", "LM")):
@@ -248,7 +261,30 @@ def main():
 
     print("== error heatmap (dE, coordinate decoding) ==")
     error_heatmap_dE(df, layers)
-    print("saved fig6_testsize, fig7_error_heatmap, fig7_error_heatmap_dE")
+
+    aout = Path("data/analysis"); aout.mkdir(parents=True, exist_ok=True)
+    json.dump({
+        "script": "scripts/analyze_testsize_errors.py",
+        "date": str(date.today()),
+        "protocol": f"m={M}, сиды {SEEDS}; Манселл — объектный сплит, group-k; "
+                    "Leeds — сплит по центрам (мостиковые пары отброшены); "
+                    "тепловая карта — |k_g*d_hat - 1| на тестовых парах, 5-фолд",
+        "fig6_testsize": {
+            "fracs": FRACS,
+            "munsell": {n: {str(f): {"mean": round(float(np.nanmean(mres[n][f])), 4),
+                                     "std": round(float(np.nanstd(mres[n][f])), 4)}
+                            for f in FRACS} for n in mres},
+            "leeds": {n: {str(f): {"mean": round(float(np.nanmean(lres[n][f])), 4),
+                                   "std": round(float(np.nanstd(lres[n][f])), 4)}
+                          for f in FRACS} for n in lres},
+        },
+        "fig7_error_metric": {n: {"mean_step_err": round(float(np.nanmean(
+                                      err_maps[n].values[np.isfinite(err_maps[n].values)])), 3),
+                                  "max_cell": round(float(np.nanmax(err_maps[n].values)), 3)}
+                              for n in err_maps},
+    }, open(aout / "testsize_fig6_fig7.json", "w"), indent=2, ensure_ascii=False)
+    print("saved fig6_testsize, fig7_error_heatmap, fig7_error_heatmap_dE, "
+          "data/analysis/testsize_fig6_fig7.json")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,23 @@
+{
+  "script": "scripts/decoded_coords_control.py",
+  "date": "2026-07-18",
+  "protocol": "контроль: расстояния через ДЕКОДИРОВАННЫЕ координаты CAM16-LCD (Ridge, 5-фолд по цветам), group-k STRESS на единичных шагах",
+  "results": {
+    "VL": {
+      "group_k_mean": 0.299,
+      "per_group": {
+        "varying-H": 0.5035,
+        "varying-C": 0.3082,
+        "varying-V": 0.0853
+      }
+    },
+    "LM": {
+      "group_k_mean": 0.2988,
+      "per_group": {
+        "varying-H": 0.5141,
+        "varying-C": 0.2977,
+        "varying-V": 0.0847
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "script": "scripts/map_munsell_group_stress.py",
+  "date": "2026-07-18",
+  "protocol": "Манселл, подмножество с эмбеддингами (1755 цветов), объектная 5-фолд CV, MSE-лосс (цель=1 шаг), reg=1e-3, 400 эпох; STRESS group-k; CAM16 — формульные dE на том же подмножестве",
+  "cam16_on_subset": {
+    "CAM16-LCD": {
+      "varying-H": 0.5041,
+      "varying-C": 0.2865,
+      "varying-V": 0.0736
+    },
+    "CAM16-UCS": {
+      "varying-H": 0.4645,
+      "varying-C": 0.3516,
+      "varying-V": 0.0736
+    },
+    "CAM16-SCD": {
+      "varying-H": 0.4453,
+      "varying-C": 0.3917,
+      "varying-V": 0.0734
+    }
+  },
+  "map": {
+    "LM": {
+      "3": {
+        "group_k_mean": 0.2376,
+        "per_group": {
+          "varying-H": {
+            "mean": 0.3269,
+            "std": 0.0197
+          },
+          "varying-C": {
+            "mean": 0.2643,
+            "std": 0.0375
+          },
+          "varying-V": {
+            "mean": 0.1216,
+            "std": 0.003
+          }
+        }
+      },
+      "32": {
+        "group_k_mean": 0.2074,
+        "per_group": {
+          "varying-H": {
+            "mean": 0.2782,
+            "std": 0.0115
+          },
+          "varying-C": {
+            "mean": 0.2304,
+            "std": 0.0331
+          },
+          "varying-V": {
+            "mean": 0.1138,
+            "std": 0.0075
+          }
+        }
+      },
+      "256": {
+        "group_k_mean": 0.1727,
+        "per_group": {
+          "varying-H": {
+            "mean": 0.2304,
+            "std": 0.0211
+          },
+          "varying-C": {
+            "mean": 0.1922,
+            "std": 0.0261
+          },
+          "varying-V": {
+            "mean": 0.0955,
+            "std": 0.0115
+          }
+        }
+      }
+    },
+    "VL": {
+      "3": {
+        "group_k_mean": 0.2308,
+        "per_group": {
+          "varying-H": {
+            "mean": 0.3083,
+            "std": 0.019
+          },
+          "varying-C": {
+            "mean": 0.2461,
+            "std": 0.0134
+          },
+          "varying-V": {
+            "mean": 0.1379,
+            "std": 0.0217
+          }
+        }
+      },
+      "32": {
+        "group_k_mean": 0.1716,
+        "per_group": {
+          "varying-H": {
+            "mean": 0.2257,
+            "std": 0.0139
+          },
+          "varying-C": {
+            "mean": 0.1889,
+            "std": 0.0172
+          },
+          "varying-V": {
+            "mean": 0.1002,
+            "std": 0.0099
+          }
+        }
+      },
+      "256": {
+        "group_k_mean": 0.102,
+        "per_group": {
+          "varying-H": {
+            "mean": 0.1103,
+            "std": 0.0078
+          },
+          "varying-C": {
+            "mean": 0.12,
+            "std": 0.0152
+          },
+          "varying-V": {
+            "mean": 0.0756,
+            "std": 0.0059
+          }
+        }
+      }
+    }
+  }
+}

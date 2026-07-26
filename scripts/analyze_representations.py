@@ -17,6 +17,8 @@ Reuses loaders/training from map_munsell_group_stress.py (same protocol:
 object-wise split, group-k STRESS mean over varying-H/C/V).
 """
 import importlib.util
+import json
+from datetime import date
 from pathlib import Path
 
 import numpy as np
@@ -199,7 +201,31 @@ def main():
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"fig5_map_spectrum.{ext}", bbox_inches="tight")
     plt.close(fig)
-    print("saved fig4_manifold, fig5_map_spectrum")
+
+    aout = Path("data/analysis"); aout.mkdir(parents=True, exist_ok=True)
+    json.dump({
+        "script": "scripts/analyze_representations.py",
+        "date": str(date.today()),
+        "protocol": "Манселл 1755 цветов; PCA на центрированных эмбеддингах; "
+                    "ID: Levina-Bickel MLE (L2-норм.), TwoNN; карта A: m=256, "
+                    "объектный 80/20 сплит, SVD-усечение, group-k STRESS",
+        "fig4_manifold": {n: {"participation_ratio": round(pca_res[n]["pr"], 2),
+                              "n90": pca_res[n]["n90"], "n95": pca_res[n]["n95"],
+                              "n99": pca_res[n]["n99"],
+                              "mle_k": dict(zip(map(str, ks),
+                                                [round(v, 2) for v in id_res[n]["mle"]])),
+                              "twonn": round(id_res[n]["twonn"], 2)}
+                          for n in layers},
+        "fig5_map_spectrum": {n: {
+            "n95_energy_of_256": int(np.searchsorted(
+                np.cumsum(spec[n] ** 2) / np.sum(spec[n] ** 2), 0.95) + 1),
+            "stress_vs_rank": dict(zip(map(str, ranks),
+                                       [round(v, 4) for v in curves[n]]))}
+            for n in layers},
+    }, open(aout / "representations_fig4_fig5.json", "w"),
+        indent=2, ensure_ascii=False)
+    print("saved fig4_manifold, fig5_map_spectrum, "
+          "data/analysis/representations_fig4_fig5.json")
 
 
 if __name__ == "__main__":

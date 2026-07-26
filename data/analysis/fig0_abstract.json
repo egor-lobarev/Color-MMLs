@@ -1,0 +1,48 @@
+{
+  "script": "scripts/make_graphical_abstract.py",
+  "date": "2026-07-18",
+  "protocol": "зумы: карта VL m=256, объектный 80/20, пары из теста; групповой k и для CAM16-UCS, и для карты; гистограммы — из map_munsell_groupk.json и verify_combvd_leak.json",
+  "zoom_pairs": {
+    "varying-H": {
+      "i": 577,
+      "j": 627,
+      "munsell_i": "5.0GY 7/12",
+      "munsell_j": "7.5GY 7/12",
+      "ratio_cam": 1.288562316639447,
+      "ratio_map": 0.9922237437300157,
+      "k_cam": 0.2313156620272912,
+      "k_map": 0.9756770765887934,
+      "median_abs_err_cam": 0.35863567906422467,
+      "median_abs_err_map": 0.06571706243122999
+    },
+    "varying-V": {
+      "i": 1454,
+      "j": 1462,
+      "munsell_i": "5.0P 6/10",
+      "munsell_j": "5.0P 7/10",
+      "ratio_cam": 0.9700910836905678,
+      "ratio_map": 0.994480526613912,
+      "k_cam": 0.10169451412814998,
+      "k_map": 0.921358890594671,
+      "median_abs_err_cam": 0.04460169972684941,
+      "median_abs_err_map": 0.047808635461747795
+    }
+  },
+  "bars": {
+    "munsell": {
+      "CAM16-LCD": 0.2881,
+      "CAM16-UCS": 0.2966,
+      "CAM16-SCD": 0.3035,
+      "МЯМ · LM": 0.1727,
+      "МЯМ · VL": 0.102
+    },
+    "leeds": {
+      "CAM16-LCD": 0.3219,
+      "CAM16-UCS": 0.2873,
+      "CAM16-SCD": 0.2563,
+      "CIEDE2000": 0.1946,
+      "МЯМ · LM": 0.2385,
+      "МЯМ · VL": 0.2271
+    }
+  }
+}
