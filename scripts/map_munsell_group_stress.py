@@ -12,10 +12,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import torch
-from colour import xyY_to_XYZ
+from colour import xyY_to_XYZ, XYZ_to_Lab
 from colour.models import XYZ_to_CAM16UCS, XYZ_to_CAM16LCD, XYZ_to_CAM16SCD
 from colour.difference import (delta_E_CAM16UCS, delta_E_CAM16LCD,
-                               delta_E_CAM16SCD)
+                               delta_E_CAM16SCD, delta_E_CIE2000)
 from sklearn.model_selection import KFold
 from vsl_ial.stress import stress as stress_fn
 
@@ -104,6 +104,7 @@ def main():
         "CAM16-LCD": (XYZ_to_CAM16LCD(XYZ), delta_E_CAM16LCD),
         "CAM16-UCS": (XYZ_to_CAM16UCS(XYZ), delta_E_CAM16UCS),
         "CAM16-SCD": (XYZ_to_CAM16SCD(XYZ), delta_E_CAM16SCD),
+        "CIEDE2000": (XYZ_to_Lab(XYZ), delta_E_CIE2000),
     }
     cam_all = {}
     for vname, (co, dE) in variants.items():
@@ -151,7 +152,7 @@ def main():
         "date": str(date.today()),
         "protocol": "Манселл, подмножество с эмбеддингами (1755 цветов), объектная "
                     "5-фолд CV, MSE-лосс (цель=1 шаг), reg=1e-3, 400 эпох; STRESS "
-                    "group-k; CAM16 — формульные dE на том же подмножестве",
+                    "group-k; CAM16 и CIEDE2000 — формульные dE на том же подмножестве",
         "cam16_on_subset": {v: {g: round(x, 4) for g, x in pg.items()}
                             for v, pg in cam_all.items()},
         "map": map_res,

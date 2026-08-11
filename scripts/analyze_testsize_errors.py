@@ -32,7 +32,7 @@ RNG = 42
 np.random.seed(RNG); torch.manual_seed(RNG)
 OUT = Path("graphics"); OUT.mkdir(exist_ok=True)
 rcParams.update({
-    "font.size": 11, "axes.spines.top": False, "axes.spines.right": False,
+    "font.size": 14, "axes.spines.top": False, "axes.spines.right": False,
     "axes.edgecolor": "#444", "axes.linewidth": 0.8, "figure.dpi": 140,
     "font.family": "DejaVu Sans",
 })
@@ -168,21 +168,22 @@ def error_heatmap_dE(df, layers):
         "results": summ,
     }, open(aout / "fig7_error_dE.json", "w"), indent=2, ensure_ascii=False)
     print("  saved data/analysis/fig7_error_dE.json")
-    fig, axes = plt.subplots(1, 2, figsize=(12.6, 4.6))
+    fig, axes = plt.subplots(1, 2, figsize=(13.2, 5.2))
     vmax = max(np.nanmax(maps[n].values) for n in maps)
     for ax, name in zip(axes, ("VL", "LM")):
         piv = maps[name]
         im = ax.imshow(piv.values, cmap="magma_r", vmin=0, vmax=vmax,
                        aspect="auto", origin="lower")
-        ax.set_xticks(range(len(piv.columns))); ax.set_xticklabels(piv.columns, fontsize=7.5)
-        ax.set_yticks(range(len(piv.index))); ax.set_yticklabels(piv.index, fontsize=8)
+        ax.set_xticks(range(len(piv.columns))); ax.set_xticklabels(piv.columns, fontsize=11)
+        ax.set_yticks(range(len(piv.index))); ax.set_yticklabels(piv.index, fontsize=11)
         ax.set_xlabel("Chroma (C) → насыщеннее")
         ax.set_ylabel("Value (V) → светлее")
-        ax.set_title(f"{name} · среднее {np.nanmean(maps[name].values):.2f} ΔE", fontsize=11.5)
-        plt.colorbar(im, ax=ax, label="ΔE (CAM16-LCD)")
-    fig.suptitle("Ошибка линейного декодирования координат CAM16-LCD по телу Манселла\n"
-                 "(тестовые цвета, 5-фолд по цветам; аналог Fig. 3 LIM26)", fontsize=12.5)
-    fig.tight_layout(rect=(0, 0, 1, 0.90))
+        ax.text(0.03, 0.97, f"{name} · среднее {np.nanmean(maps[name].values):.2f} ΔE",
+                transform=ax.transAxes, ha="left", va="top", fontsize=13, color="#111",
+                bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="none", alpha=0.75))
+        cb = plt.colorbar(im, ax=ax); cb.set_label("ΔE (CAM16-LCD)", fontsize=13)
+        cb.ax.tick_params(labelsize=11)
+    fig.tight_layout()
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"fig7_error_heatmap_dE.{ext}", bbox_inches="tight")
     plt.close(fig)
@@ -205,56 +206,56 @@ def main():
     print("== test-size sweep: Leeds ==")
     lres = leeds_sweep()
 
-    fig, (a1, a2) = plt.subplots(1, 2, figsize=(10.6, 4.2), sharey=False)
+    fig, (a1, a2) = plt.subplots(1, 2, figsize=(11.8, 4.8), sharey=False)
     for name in ("VL", "LM"):
         mu = [np.nanmean(mres[name][f]) for f in FRACS]
         sdv = [np.nanstd(mres[name][f]) for f in FRACS]
         a1.errorbar(FRACS, mu, yerr=sdv, fmt="o-", color=colors[name],
-                    lw=2, capsize=3, label=name)
+                    lw=2.2, capsize=3, label=name)
         mu = [np.nanmean(lres[name][f]) for f in FRACS]
         sdv = [np.nanstd(lres[name][f]) for f in FRACS]
         a2.errorbar(FRACS, mu, yerr=sdv, fmt="o-", color=colors[name],
-                    lw=2, capsize=3, label=name)
+                    lw=2.2, capsize=3, label=name)
     a1.axhline(0.288, color=GRAY_D, ls="--", lw=1.2)
-    a1.text(0.97, 0.293, "CAM16-LCD", ha="right", color=GRAY_D, fontsize=8.5,
+    a1.text(0.97, 0.293, "CAM16-LCD", ha="right", color=GRAY_D, fontsize=12,
             transform=a1.get_yaxis_transform())
-    a1.set_title("Манселл (сплит по цветам, group-k)", fontsize=11.5)
+    a1.text(0.03, 0.97, "Манселл (сплит по цветам, group-k)", transform=a1.transAxes,
+            ha="left", va="top", fontsize=13, fontweight="bold", color="#333")
     a2.axhline(0.256, color=GRAY_D, ls="--", lw=1.2)
-    a2.text(0.97, 0.259, "CAM16-SCD", ha="right", color=GRAY_D, fontsize=8.5,
+    a2.text(0.97, 0.259, "CAM16-SCD", ha="right", color=GRAY_D, fontsize=12,
             transform=a2.get_yaxis_transform())
-    a2.set_title("COMBVD-Leeds (сплит по центрам)", fontsize=11.5)
+    a2.text(0.03, 0.97, "COMBVD-Leeds (сплит по центрам)", transform=a2.transAxes,
+            ha="left", va="top", fontsize=13, fontweight="bold", color="#333")
     a2.text(0.5, 0.02, "f=0.1 и f≥0.7 недостижимы: сплит по центрам\nотбрасывает «мостиковые» пары",
-            transform=a2.transAxes, ha="center", fontsize=8, color="#888")
+            transform=a2.transAxes, ha="center", fontsize=11, color="#888")
     for ax in (a1, a2):
         ax.set_xlim(0.05, 0.95)
         ax.set_xlabel("Доля тестовой выборки")
         ax.set_ylabel("STRESS на тесте")
-        ax.legend(frameon=False); ax.grid(color="#EEE")
-    fig.suptitle("Зависимость качества карты от размера тестовой выборки "
-                 f"(m={M}, {len(SEEDS)} сида, mean±std)", fontsize=12.5)
-    fig.tight_layout(rect=(0, 0, 1, 0.94))
+        ax.legend(frameon=False, fontsize=13); ax.grid(color="#EEE")
+    fig.tight_layout()
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"fig6_testsize.{ext}", bbox_inches="tight")
     plt.close(fig)
 
     print("== error heatmap ==")
     err_maps = error_heatmap(df, groups, layers)
-    fig, axes = plt.subplots(1, 2, figsize=(12.6, 4.6))
+    fig, axes = plt.subplots(1, 2, figsize=(13.2, 5.2))
     vmax = max(np.nanmax(err_maps[n].values) for n in err_maps)
     for ax, name in zip(axes, ("VL", "LM")):
         piv = err_maps[name]
         im = ax.imshow(piv.values, cmap="magma_r", vmin=0, vmax=vmax,
                        aspect="auto", origin="lower")
-        ax.set_xticks(range(len(piv.columns))); ax.set_xticklabels(piv.columns, fontsize=7.5)
-        ax.set_yticks(range(len(piv.index))); ax.set_yticklabels(piv.index, fontsize=8)
+        ax.set_xticks(range(len(piv.columns))); ax.set_xticklabels(piv.columns, fontsize=11)
+        ax.set_yticks(range(len(piv.index))); ax.set_yticklabels(piv.index, fontsize=11)
         ax.set_xlabel("Chroma (C) → насыщеннее")
         ax.set_ylabel("Value (V) → светлее")
-        ax.set_title(f"Карта · {name}", fontsize=11.5)
-        plt.colorbar(im, ax=ax, label="средняя |k·d̂ − 1|")
-    fig.suptitle("Анализ ошибок карты по цветовому телу Манселла: отклонение "
-                 "воспроизведения единичного шага (тестовые пары, 5-фолд)",
-                 fontsize=12.5)
-    fig.tight_layout(rect=(0, 0, 1, 0.93))
+        ax.text(0.03, 0.97, f"Отображение · {name}", transform=ax.transAxes,
+                ha="left", va="top", fontsize=13, color="#111",
+                bbox=dict(boxstyle="round,pad=0.3", fc="white", ec="none", alpha=0.75))
+        cb = plt.colorbar(im, ax=ax); cb.set_label("средняя |k·d̂ − 1|", fontsize=13)
+        cb.ax.tick_params(labelsize=11)
+    fig.tight_layout()
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"fig7_error_heatmap.{ext}", bbox_inches="tight")
     plt.close(fig)

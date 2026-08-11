@@ -1,6 +1,6 @@
 {
   "script": "scripts/analyze_representations.py",
-  "date": "2026-07-18",
+  "date": "2026-07-27",
   "protocol": "Манселл 1755 цветов; PCA на центрированных эмбеддингах; ID: Levina-Bickel MLE (L2-норм.), TwoNN; карта A: m=256, объектный 80/20 сплит, SVD-усечение, group-k STRESS",
   "fig4_manifold": {
     "VL": {

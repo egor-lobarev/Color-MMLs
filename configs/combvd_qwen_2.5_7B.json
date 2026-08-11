@@ -1,0 +1,16 @@
+{
+  "dataset_root": "data/colors/combvd",
+  "outdir_root": "data/embeddings/qwen2.5_7B/combvd/describe_color",
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "prompt": "Describe the color.",
+  "init_prompt": null,
+  "datasets": [
+    "leeds",
+    "rit-dupont",
+    "witt",
+    "bfd_p-d65",
+    "bfd_p-m"
+  ],
+  "save_tokens": false,
+  "device": "cuda:0"
+}

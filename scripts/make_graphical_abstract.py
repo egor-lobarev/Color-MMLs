@@ -1,22 +1,27 @@
 """
-Графический абстракт (fig0), версия 2.
+Графический абстракт (fig0), версия 4.
 
-Слева: цветовые центры Манселла (1755, реальные sRGB-цвета) в плоскости a'b'
-CAM16-UCS + рёбра соседних пар цепочек. Два «зума» вынесены в сторону: конкретная
-пара центров и три отрезка в одном масштабе — «по данным» (1 шаг Манселла),
-предсказание CAM16-UCS и предсказание нашей карты (оба после честной групповой
-калибровки k). Тоновая пара — CAM16 промахивается, карта держит единицу;
-светлотная — оба точны.
+Слева: цветовые центры Манселла (1755, реальные sRGB-цвета) в ТРЁХМЕРНЫХ
+координатах CAM16-UCS (a′, b′, J′) + рёбра соседних пар цепочек. Трёхмерное
+представление разделяет цвета разной светлоты, которые в плоскости a′b′
+сливались. Прямоугольная рамка выделяет область зелёных цветов; вынесенная
+выноска показывает ДВЕ пары из этой области с общим якорем 7.5G 7/4 — одну с
+различием по насыщенности (7/4 ↔ 7/6), другую по светлоте (7/4 ↔ 8/4). Для
+каждой пары — три отрезка в одном масштабе: «по данным» (1 шаг Манселла),
+предсказание CAM16-UCS и предсказание линейного отображения (оба после групповой
+калибровки k своей оси).
 
-Справа: STRESS-гистограммы «мы vs аналитическая колориметрия» на Манселле
-(group-k, подмножество 1755) и Leeds (сплит по центрам) + пол шума человека.
+Справа: STRESS-гистограммы «отображение vs аналитическая колориметрия» на
+Манселле (group-k, подмножество 1755) и Leeds (сплит по центрам) + пол шума
+человека.
 
 Прозрачность: гистограммы читают data/analysis/{map_munsell_groupk,
 verify_combvd_leak}.json; параметры зум-пар пишутся в data/analysis/fig0_abstract.json.
-Карта для зумов: VL, m=256, объектный 80/20 сплит (протокол map_munsell_group_stress),
-зум-пары выбираются только из тестовых.
+Отображение для зумов: VL, m=256, объектный 80/20 сплит (протокол
+map_munsell_group_stress); групповой k каждой оси считается по тестовым парам.
 """
 import importlib.util
+import itertools
 import json
 from datetime import date
 from pathlib import Path
@@ -25,8 +30,8 @@ import numpy as np
 import torch
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
-from matplotlib.collections import LineCollection
-from matplotlib.patches import ConnectionPatch, FancyBboxPatch
+from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
+from mpl_toolkits.mplot3d.art3d import Line3DCollection
 from colour import xyY_to_XYZ, XYZ_to_sRGB
 from colour.models import XYZ_to_CAM16UCS
 
@@ -34,13 +39,14 @@ RNG = 42
 OUT = Path("graphics")
 A = Path("data/analysis")
 rcParams.update({
-    "font.size": 11, "axes.spines.top": False, "axes.spines.right": False,
+    "font.size": 14, "axes.spines.top": False, "axes.spines.right": False,
     "axes.edgecolor": "#444", "axes.linewidth": 0.8, "figure.dpi": 140,
     "font.family": "DejaVu Sans",
 })
 ACCENT, ACCENT_D = "#3B6FB5", "#26456f"
 GRAY, GRAY_D = "#9AA0A6", "#5F6368"
 FLOOR, WARN, GT = "#2E9E6B", "#C77B30", "#333333"
+PAIR = "#D62728"          # сравниваемые пары в приближении зелёной области
 NOISE = 0.090
 
 
@@ -64,7 +70,7 @@ def compute_zoom_data():
     ucs = XYZ_to_CAM16UCS(XYZ)                     # (J', a', b')
     srgb = np.clip(XYZ_to_sRGB(XYZ), 0, 1)
 
-    # map: VL, m=256, object-wise 80/20 (protocol of analyze_representations)
+    # mapping: VL, m=256, object-wise 80/20 (protocol of analyze_representations)
     X = VL
     sd = X.std(0); sd[sd == 0] = 1; Xs = X / sd
     idx = np.random.RandomState(RNG).permutation(len(df))
@@ -80,45 +86,61 @@ def compute_zoom_data():
     def k_opt(d):                                   # argmin ||k d - 1||
         return d.sum() / (d ** 2).sum()
 
-    zoom = {}
-    for g in ("varying-H", "varying-V"):
+    def d_cam(i, j):
+        return float(np.linalg.norm(ucs[i] - ucs[j]))
+
+    def d_map(i, j):
+        return float(np.linalg.norm((Xs[i] - Xs[j]) @ Amap.T))
+
+    def group_k(g):                                 # per-axis group-k on test pairs
         tep = sub(groups[g], te)
-        d_cam = np.linalg.norm(ucs[tep[:, 0]] - ucs[tep[:, 1]], axis=1)
-        dx = Xs[tep[:, 0]] - Xs[tep[:, 1]]
-        d_map = np.linalg.norm(dx @ Amap.T, axis=1)
-        k_cam, k_map = k_opt(d_cam), k_opt(d_map)
-        r_cam, r_map = k_cam * d_cam, k_map * d_map
-        if g == "varying-H":
-            # типичный промах CAM16 по тону: |r-1| около медианы промахов,
-            # карта близка к 1, пара хроматическая (видна на плоскости a'b')
-            med = np.median(np.abs(r_cam - 1))
-            ok = (np.abs(r_map - 1) < 0.06) & (d_cam > 4)
-            cand = np.where(ok)[0]
-            pick = cand[np.argmin(np.abs(np.abs(r_cam[cand] - 1) - med))]
-        else:
-            # светлотная пара: оба точны; берём хроматическую, чтобы цвета видны
-            C = df["C"].to_numpy()
-            ok = (np.abs(r_map - 1) < 0.04) & (np.abs(r_cam - 1) < 0.04) \
-                 & (C[tep[:, 0]] >= 6)
-            cand = np.where(ok)[0]
-            pick = cand[len(cand) // 2]
-        i, j = tep[pick]
-        zoom[g] = dict(
-            i=int(i), j=int(j),
-            munsell_i=f"{df.loc[i,'H']} {df.loc[i,'V']}/{df.loc[i,'C']}",
-            munsell_j=f"{df.loc[j,'H']} {df.loc[j,'V']}/{df.loc[j,'C']}",
-            ratio_cam=float(r_cam[pick]), ratio_map=float(r_map[pick]),
-            k_cam=float(k_cam), k_map=float(k_map),
-            median_abs_err_cam=float(np.median(np.abs(r_cam - 1))),
-            median_abs_err_map=float(np.median(np.abs(r_map - 1))))
+        dc = np.linalg.norm(ucs[tep[:, 0]] - ucs[tep[:, 1]], axis=1)
+        dm = np.linalg.norm((Xs[tep[:, 0]] - Xs[tep[:, 1]]) @ Amap.T, axis=1)
+        return k_opt(dc), k_opt(dm)
+
+    def find(H, V, C):
+        q = df[(df.H == H) & (df.V == V) & (df.C == C)]
+        return int(q.index[0])
+
+    anchor = find("7.5G", 7, 4)
+    hue_j = find("5.0G", 7, 4)                      # шаг по тону (varying-H)
+    bri_j = find("7.5G", 8, 4)                      # шаг по светлоте (varying-V)
+    sat_j = find("7.5G", 7, 6)                      # шаг по насыщенности (varying-C)
+    kh_cam, kh_map = group_k("varying-H")
+    kv_cam, kv_map = group_k("varying-V")
+    kc_cam, kc_map = group_k("varying-C")
+
+    def pack(i, j, k_cam, k_map):
+        return dict(i=int(i), j=int(j),
+                    munsell_i=f"{df.loc[i,'H']} {df.loc[i,'V']}/{df.loc[i,'C']}",
+                    munsell_j=f"{df.loc[j,'H']} {df.loc[j,'V']}/{df.loc[j,'C']}",
+                    ratio_cam=float(k_cam * d_cam(i, j)),
+                    ratio_map=float(k_map * d_map(i, j)))
+
+    zoom = dict(
+        anchor_munsell=f"{df.loc[anchor,'H']} {df.loc[anchor,'V']}/{df.loc[anchor,'C']}",
+        box_idx=[int(anchor), int(hue_j), int(bri_j), int(sat_j)],
+        hue=pack(anchor, hue_j, kh_cam, kh_map),     # H
+        bri=pack(anchor, bri_j, kv_cam, kv_map),     # V
+        sat=pack(anchor, sat_j, kc_cam, kc_map))     # C
     return df, groups, ucs, srgb, zoom
+
+
+# ---------------------------------------------------------- 3-D wireframe box
+def draw_box3d(ax, pts_abJ, pad, color):
+    lo = pts_abJ.min(0) - pad
+    hi = pts_abJ.max(0) + pad
+    corners = np.array(list(itertools.product(*zip(lo, hi))))   # 8 × 3
+    for a, b in itertools.combinations(range(8), 2):
+        if np.sum(corners[a] != corners[b]) == 1:               # edge = 1 coord differs
+            seg = np.array([corners[a], corners[b]])
+            ax.plot(seg[:, 0], seg[:, 1], seg[:, 2], color=color, lw=1.7, zorder=6)
 
 
 # --------------------------------------------------------------------- figure
 def main():
     df, groups, ucs, srgb, zoom = compute_zoom_data()
     mapg = json.load(open(A / "map_munsell_groupk.json"))
-    leak = json.load(open(A / "verify_combvd_leak.json"))
 
     cam = mapg["cam16_on_subset"]
     def gk(v):                                       # group-k mean of a variant
@@ -128,130 +150,190 @@ def main():
         ("CAM16-LCD", gk("CAM16-LCD"), GRAY_D),
         ("CAM16-UCS", gk("CAM16-UCS"), GRAY_D),
         ("CAM16-SCD", gk("CAM16-SCD"), GRAY_D),
-        ("МЯМ · LM", mapg["map"]["LM"]["256"]["group_k_mean"], ACCENT),
-        ("МЯМ · VL", mapg["map"]["VL"]["256"]["group_k_mean"], ACCENT_D),
-    ]
-    bl = leak["baselines"]
-    leeds_bars = [
-        ("CAM16-LCD", bl["CAM16-LCD (dE)"], GRAY_D),
-        ("CAM16-UCS", bl["CAM16-UCS (dE)"], GRAY_D),
-        ("CAM16-SCD", bl["CAM16-SCD (dE)"], GRAY_D),
-        ("CIEDE2000", bl["CIEDE2000"], WARN),
-        ("МЯМ · LM", leak["map"]["LM"]["by_center"]["1024"]["mean"], ACCENT),
-        ("МЯМ · VL", leak["map"]["VL"]["by_center"]["256"]["mean"], ACCENT_D),
+        ("CIEDE2000", gk("CIEDE2000"), WARN),
+        ("отображение·LM", mapg["map"]["LM"]["256"]["group_k_mean"], ACCENT),
+        ("отображение·VL", mapg["map"]["VL"]["256"]["group_k_mean"], ACCENT_D),
     ]
 
-    fig = plt.figure(figsize=(14.6, 5.6))
-    # осевые области: [x0, y0, w, h]
-    axs = fig.add_axes([0.045, 0.10, 0.30, 0.74])        # scatter
-    axz1 = fig.add_axes([0.375, 0.50, 0.215, 0.34])      # zoom: тон
-    axz2 = fig.add_axes([0.375, 0.08, 0.215, 0.34])      # zoom: светлота
-    axb1 = fig.add_axes([0.665, 0.575, 0.325, 0.275])    # bars: Манселл
-    axb2 = fig.add_axes([0.665, 0.10, 0.325, 0.275])     # bars: Leeds
+    fig = plt.figure(figsize=(12, 5.0))
+    ax3d = fig.add_axes([0.00, 0.05, 0.37, 0.90], projection="3d")
+    axz = fig.add_axes([0.395, 0.05, 0.285, 0.90])        # green zoom (3 pairs)
+    axb1 = fig.add_axes([0.745, 0.22, 0.235, 0.56])       # bars: Манселл (+CIEDE2000)
 
-    # ---------------- scatter + chains ----------------
+    # ---------------- 3-D scatter + chains ----------------
     segs = []
     for g in groups:
         pr = groups[g]
-        segs.append(np.stack([ucs[pr[:, 0]][:, 1:], ucs[pr[:, 1]][:, 1:]], axis=1))
-    axs.add_collection(LineCollection(np.concatenate(segs), colors="#CCCCCC",
-                                      linewidths=0.35, alpha=0.55, zorder=1))
-    axs.scatter(ucs[:, 1], ucs[:, 2], s=7, c=srgb, lw=0, zorder=2)
-    axs.set_aspect("equal")
-    axs.set_xlabel("CAM16-UCS a′", fontsize=9.5)
-    axs.set_ylabel("CAM16-UCS b′", fontsize=9.5)
-    axs.set_title("Цветовые центры Манселла и единичные\nперцептивные шаги (цепочки H/C/V)",
-                  fontsize=10.5, pad=6)
-    axs.tick_params(labelsize=8)
+        p0 = ucs[pr[:, 0]][:, [1, 2, 0]]                  # (a', b', J')
+        p1 = ucs[pr[:, 1]][:, [1, 2, 0]]
+        segs.append(np.stack([p0, p1], axis=1))
+    ax3d.add_collection3d(Line3DCollection(np.concatenate(segs), colors="#AAAAAA",
+                                           linewidths=0.6, alpha=0.6))
+    ax3d.scatter(ucs[:, 1], ucs[:, 2], ucs[:, 0], c=srgb, s=6, lw=0,
+                 depthshade=False)
+    ax3d.set_xlabel("a′", fontsize=14, labelpad=2)
+    ax3d.set_ylabel("b′", fontsize=14, labelpad=2)
+    ax3d.set_zlabel("J′ (светлота)", fontsize=14, labelpad=4)
+    ax3d.tick_params(labelsize=10)
+    ax3d.view_init(elev=16, azim=-60)
+    ax3d.set_box_aspect((1, 1, 0.9))
 
-    # ---------------- zoom insets ----------------
-    def zoom_inset(ax, g, title, note):
-        z = zoom[g]
-        i, j = z["i"], z["j"]
-        ax.set_xlim(0, 1); ax.set_ylim(0, 1); ax.axis("off")
-        ax.add_patch(FancyBboxPatch((0.01, 0.01), 0.98, 0.98,
-                                    boxstyle="round,pad=0.012", fc="#FAFAFA",
-                                    ec="#BBB", lw=1.0, zorder=0,
-                                    transform=ax.transAxes))
-        ax.text(0.05, 0.90, title, fontsize=9.5, fontweight="bold", color="#222")
-        ax.text(0.97, 0.90, f"{z['munsell_i']} ↔ {z['munsell_j']}",
-                fontsize=7.8, color="#666", ha="right")
-        x0, L = 0.30, 0.42                       # базовая длина = 1 шаг
+    # rectangular frame around the highlighted green region
+    box_pts = ucs[zoom["box_idx"]][:, [1, 2, 0]]          # (a', b', J')
+    box_pad = np.array([4.0, 4.0, 5.0])
+    draw_box3d(ax3d, box_pts, pad=box_pad, color=FLOOR)
+
+    # ---- magnified copy of the framed region, in the free zone on top ----
+    from mpl_toolkits.mplot3d import proj3d
+    fig.canvas.draw()
+    bc = box_pts.mean(0)
+    xb, yb, _ = proj3d.proj_transform(bc[0], bc[1], bc[2], ax3d.get_proj())
+    bx_fig = fig.transFigure.inverted().transform(ax3d.transData.transform((xb, yb)))
+
+    axmag = fig.add_axes([0.075, 0.685, 0.147, 0.259], projection="3d")   # ~30% меньше
+    P = ucs[:, [1, 2, 0]]
+    # тесное поле приближения: сравниваемые цвета отстоят от якоря на один шаг
+    # (разброс по b′ всего ≈1.9), при широком поле пары сливались в точку
+    mag_pad = np.array([2.2, 1.8, 2.8])
+    lo = box_pts.min(0) - mag_pad
+    hi = box_pts.max(0) + mag_pad
+    sel = np.all((P >= lo) & (P <= hi), axis=1)
+    key = np.array(zoom["box_idx"])                      # [anchor, hue, bri, sat]
+    anchor_i, neigh = int(key[0]), key[1:]
+    keymask = np.zeros(len(df), bool); keymask[key] = True
+    ctx = sel & ~keymask
+    locsegs = []
+    for g in groups:
+        pr = groups[g]
+        m = sel[pr[:, 0]] & sel[pr[:, 1]]
+        if m.any():
+            locsegs.append(np.stack([P[pr[m, 0]], P[pr[m, 1]]], axis=1))
+    if locsegs:
+        axmag.add_collection3d(Line3DCollection(np.concatenate(locsegs),
+                                                colors="#CCCCCC", linewidths=0.6))
+    axmag.scatter(P[ctx, 0], P[ctx, 1], P[ctx, 2], c=srgb[ctx], s=26, lw=0,
+                  alpha=0.5, depthshade=False)
+    draw_box3d(axmag, box_pts, pad=mag_pad, color=FLOOR)
+    vpad = mag_pad * 1.20                       # рамка — чуть внутри поля зрения
+    vlo, vhi = box_pts.min(0) - vpad, box_pts.max(0) + vpad
+    axmag.set_xlim(vlo[0], vhi[0])
+    axmag.set_ylim(vlo[1], vhi[1])
+    axmag.set_zlim(vlo[2], vhi[2])
+    # три сравниваемые пары «якорь ↔ сосед» — красные рёбра поверх серых цепочек
+    pair_segs = np.stack([np.repeat(P[[anchor_i]], len(neigh), axis=0), P[neigh]],
+                         axis=1)
+    axmag.add_collection3d(Line3DCollection(pair_segs, colors=PAIR,
+                                            linewidths=2.4, zorder=6))
+    # соседи, затем якорь-звезда — последней, чтобы её не перекрывали маркеры
+    axmag.scatter(P[neigh, 0], P[neigh, 1], P[neigh, 2], c=srgb[neigh], s=85,
+                  edgecolors=PAIR, linewidths=1.8, depthshade=False, zorder=7)
+    axmag.scatter([P[anchor_i, 0]], [P[anchor_i, 1]], [P[anchor_i, 2]],
+                  c=[srgb[anchor_i]], marker="*", s=300, edgecolors=PAIR,
+                  linewidths=1.6, depthshade=False, zorder=8)
+    axmag.view_init(elev=16, azim=-60)
+    axmag.set_box_aspect((1, 1, 0.9))
+    axmag.set_xticks([]); axmag.set_yticks([]); axmag.set_zticks([])
+    axmag.text2D(0.5, 1.02, "приближение выделенной области",
+                 transform=axmag.transAxes, ha="center", va="bottom",
+                 fontsize=10.5, fontweight="bold", color="#1c6b49")
+    # legend for the three compared points (+ anchor) beside the inset
+    # чуть левее оси J′, чтобы подложка не накрывала верхнюю метку шкалы
+    axleg = fig.add_axes([0.192, 0.655, 0.166, 0.275]); axleg.axis("off")
+    axleg.set_xlim(0, 1); axleg.set_ylim(0, 1)
+    # полупрозрачная подложка, чтобы легенда читалась поверх облака точек
+    axleg.add_patch(FancyBboxPatch((0.03, 0.03), 0.94, 0.94,
+                                   boxstyle="round,pad=0.018", fc="white",
+                                   ec="#C9D6D0", lw=0.8, alpha=0.85, zorder=0,
+                                   transform=axleg.transAxes))
+    items = [("*", srgb[anchor_i], 260, "7.5G 7/4  (якорь)"),
+             ("o", srgb[neigh[0]], 95, "5.0G 7/4 — тон"),
+             ("o", srgb[neigh[1]], 95, "7.5G 8/4 — светлота"),
+             ("o", srgb[neigh[2]], 95, "7.5G 7/6 — насыщенность")]
+    for r, (mk, col, sz, txt) in enumerate(items):
+        y = 0.86 - r * 0.235
+        axleg.scatter([0.09], [y], marker=mk, s=sz, c=[col], edgecolors=PAIR,
+                      linewidths=1.4, zorder=3)
+        axleg.text(0.22, y, txt, va="center", ha="left", fontsize=9.5, color="#222",
+                   zorder=3)
+    # magnifier leader lines from the framed region to the inset bottom corners
+    for corner in [(0.075, 0.685), (0.222, 0.685)]:
+        fig.add_artist(FancyArrowPatch(bx_fig, corner, transform=fig.transFigure,
+                                       arrowstyle="-", color="#9DBFAE", lw=1.0,
+                                       linestyle="--", zorder=0))
+
+    # ---------------- green zoom inset (two pairs) ----------------
+    axz.set_xlim(0, 1); axz.set_ylim(0, 1); axz.axis("off")
+    axz.add_patch(FancyBboxPatch((0.01, 0.01), 0.98, 0.98,
+                                 boxstyle="round,pad=0.012", fc="#F6FBF8",
+                                 ec=FLOOR, lw=1.8, zorder=0, transform=axz.transAxes))
+    axz.text(0.06, 0.965, f"Зелёная область ({zoom['anchor_munsell']})",
+             fontsize=13, fontweight="bold", color="#1c6b49")
+
+    x0, L = 0.46, 0.28                               # базовая длина = 1 шаг
+
+    def block(y_sub, sub_title, pair):
+        i, j = pair["i"], pair["j"]
+        axz.text(0.06, y_sub, sub_title, fontsize=11.5, fontweight="bold", color="#333")
         rows = [("по данным", 1.0, GT, True),
-                ("CAM16-UCS", z["ratio_cam"], GRAY_D, False),
-                ("карта МЯМ", z["ratio_map"], ACCENT_D, False)]
+                ("CAM16-UCS", pair["ratio_cam"], GRAY_D, False),
+                ("отображение", pair["ratio_map"], ACCENT_D, False)]
+        y0 = y_sub - 0.070
         for r, (lab, val, col, is_gt) in enumerate(rows):
-            y = 0.68 - r * 0.235
-            ax.text(x0 - 0.03, y, lab, ha="right", va="center", fontsize=8.8,
-                    color="#333")
-            ax.plot([x0, x0 + L * val], [y, y], color=col, lw=4.5,
-                    solid_capstyle="butt", zorder=3)
-            if is_gt:                            # концы = реальные цвета пары
-                ax.scatter([x0, x0 + L * val], [y, y], s=110,
-                           c=[srgb[i], srgb[j]], edgecolors="#333",
-                           linewidths=0.8, zorder=4)
+            y = y0 - r * 0.056
+            axz.text(x0 - 0.03, y, lab, ha="right", va="center", fontsize=10.5,
+                     color="#333")
+            axz.plot([x0, x0 + L * val], [y, y], color=col, lw=4.5,
+                     solid_capstyle="butt", zorder=3)
+            if is_gt:
+                axz.scatter([x0, x0 + L * val], [y, y], s=95,
+                            c=[srgb[i], srgb[j]], edgecolors="#333",
+                            linewidths=0.8, zorder=4)
                 lab_v = "1 шаг"
             else:
                 lab_v = f"{val:.2f}"
-            ax.text(x0 + L * max(val, 1.0) + 0.035, y, lab_v, va="center",
-                    fontsize=8.8, color=col,
-                    fontweight="bold" if col == ACCENT_D else "normal")
-            if is_gt:                            # пунктир-ориентир единицы
-                ax.plot([x0 + L, x0 + L], [0.13, 0.78], ls=":", lw=0.9,
-                        color="#999", zorder=2)
-        ax.text(0.05, 0.06, note, fontsize=8.2, color="#555")
-        return i, j
+            axz.text(x0 + L * max(val, 1.0) + 0.02, y, lab_v, va="center",
+                     fontsize=11, color=col,
+                     fontweight="bold" if col == ACCENT_D else "normal")
+        axz.plot([x0 + L, x0 + L], [y0 - 0.135, y0 + 0.028], ls=":", lw=1.0,
+                 color="#999", zorder=2)
 
-    i1, j1 = zoom_inset(axz1, "varying-H", "Тоновая пара",
-                        "CAM16 растягивает шаг по тону — карта держит единицу")
-    i2, j2 = zoom_inset(axz2, "varying-V", "Светлотная пара",
-                        "по светлоте CAM16 уже точен — карта его повторяет")
+    block(0.895, "по тону (H):  7.5G ↔ 5.0G", zoom["hue"])
+    axz.axhline(0.655, xmin=0.06, xmax=0.94, color="#DDE7E1", lw=1.2)
+    block(0.605, "по светлоте (V):  7/4 ↔ 8/4", zoom["bri"])
+    axz.axhline(0.365, xmin=0.06, xmax=0.94, color="#DDE7E1", lw=1.2)
+    block(0.315, "по насыщенности (C):  7/4 ↔ 7/6", zoom["sat"])
 
-    for (i, j), axz, yz in [((i1, j1), axz1, 0.5), ((i2, j2), axz2, 0.5)]:
-        mid = ucs[[i, j], 1:].mean(0)
-        axs.scatter(ucs[[i, j], 1], ucs[[i, j], 2], s=46, facecolors="none",
-                    edgecolors="#333", linewidths=1.1, zorder=3)
-        fig.add_artist(ConnectionPatch(
-            xyA=mid, coordsA=axs.transData, xyB=(0.015, yz),
-            coordsB=axz.transAxes, color="#999", lw=0.9, ls="-", zorder=1))
+    # (зелёная стрелка-выноска к зум-блоку убрана: перекрывала подпись оси J′)
 
     # ---------------- bars ----------------
-    def bars(ax, data, title, ymax, noise_line=False):
+    def bars(ax, data, label, ymax, noise_line=False):
         x = np.arange(len(data))
         vals = [d[1] for d in data]
         ax.bar(x, vals, color=[d[2] for d in data], width=0.62, zorder=3,
                edgecolor="white", linewidth=0.6)
         for xi, v in zip(x, vals):
             ax.text(xi, v + ymax * 0.025, f"{v:.3f}", ha="center", va="bottom",
-                    fontsize=8.2, color="#222")
+                    fontsize=11, color="#222")
         if noise_line:
-            ax.axhline(NOISE, ls="--", lw=1.2, color=FLOOR, zorder=2)
-            # подпись — в свободной зоне над столбцами, с образцом пунктира
-            ax.plot([2.62, 3.02], [0.378, 0.378], ls="--", lw=1.2, color=FLOOR,
+            ax.axhline(NOISE, ls="--", lw=1.3, color=FLOOR, zorder=2)
+            ax.plot([3.25, 3.6], [0.40, 0.40], ls="--", lw=1.3, color=FLOOR,
                     clip_on=False)
-            ax.text(3.12, 0.378, "пол шума человека 0.090", va="center",
-                    ha="left", color=FLOOR, fontsize=8)
+            ax.text(3.7, 0.40, "пол шума человека 0.090", va="center",
+                    ha="left", color=FLOOR, fontsize=11)
         ax.set_xticks(x)
-        ax.set_xticklabels([d[0] for d in data], fontsize=8.2)
+        ax.set_xticklabels([d[0] for d in data], fontsize=9, rotation=28, ha="right")
         ax.set_ylim(0, ymax)
-        ax.set_ylabel("STRESS ↓", fontsize=9)
-        ax.set_title(title, fontsize=10.5, pad=5, loc="left")
+        ax.set_ylabel("STRESS ↓", fontsize=13)
+        ax.text(0.0, 1.04, label, transform=ax.transAxes, fontsize=13,
+                fontweight="bold", va="bottom", color="#333")
         ax.grid(axis="y", color="#EEE", zorder=0)
-        ax.tick_params(labelsize=8)
+        ax.tick_params(labelsize=11)
 
-    bars(axb1, mun_bars, "Надпороговые · Манселл (group-k, те же цвета)", 0.42)
-    bars(axb2, leeds_bars, "Пороговые · Leeds (сплит по центрам)", 0.42,
-         noise_line=True)
-    # скобка «×2.8» между лучшим CAM16 и картой VL, над столбцами
-    yb = 0.365
-    axb1.plot([0, 0, 4, 4], [0.325, yb, yb, 0.14], color=ACCENT_D, lw=1.0)
-    axb1.text(2.0, yb + 0.008, "в 2.8 раза ближе к человеку", color=ACCENT_D,
-              fontsize=8.6, ha="center", fontweight="bold")
-
-    fig.suptitle(
-        "Внутренние представления МЯМ воспроизводят метрику цветовых различий человека:\n"
-        "линейная карта из эмбеддингов превосходит каждый вариант CAM16 на его масштабе — "
-        "модель не обучалась цветоразличению", fontsize=12, y=0.985)
+    bars(axb1, mun_bars, "Надпороговые", 0.50)
+    yb = 0.445
+    axb1.plot([0, 0, 5, 5], [0.35, yb, yb, 0.15], color=ACCENT_D, lw=1.1)
+    axb1.text(2.5, yb + 0.008, "в 2.8 раза ближе к человеку", color=ACCENT_D,
+              fontsize=12, ha="center", fontweight="bold")
 
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"fig0_graphical_abstract.{ext}", bbox_inches="tight")
@@ -260,19 +342,21 @@ def main():
     json.dump({
         "script": "scripts/make_graphical_abstract.py",
         "date": str(date.today()),
-        "protocol": "зумы: карта VL m=256, объектный 80/20, пары из теста; "
-                    "групповой k и для CAM16-UCS, и для карты; гистограммы — из "
-                    "map_munsell_groupk.json и verify_combvd_leak.json",
-        "zoom_pairs": zoom,
-        "bars": {"munsell": {n: round(v, 4) for n, v, _ in mun_bars},
-                 "leeds": {n: round(v, 4) for n, v, _ in leeds_bars}},
+        "protocol": "3D CAM16-UCS (a',b',J'); две зелёные зум-пары с якорем 7.5G 7/4 "
+                    "(по насыщенности 7/4↔7/6 = varying-C, по светлоте 7/4↔8/4 = "
+                    "varying-V); отображение VL m=256, объектный 80/20; групповой k "
+                    "каждой оси по тестовым парам, тот же k и для CAM16-UCS, и для "
+                    "отображения; гистограммы — из map_munsell_groupk.json и "
+                    "verify_combvd_leak.json",
+        "zoom_pairs_green": {"anchor": zoom["anchor_munsell"], "hue": zoom["hue"],
+                             "bri": zoom["bri"], "sat": zoom["sat"]},
+        "bars": {"munsell": {n: round(v, 4) for n, v, _ in mun_bars}},
     }, open(A / "fig0_abstract.json", "w"), indent=2, ensure_ascii=False)
     print("saved fig0_graphical_abstract + data/analysis/fig0_abstract.json")
-    for g, z in zoom.items():
-        print(f"  {g}: {z['munsell_i']} <-> {z['munsell_j']}  "
-              f"CAM16 {z['ratio_cam']:.2f}  map {z['ratio_map']:.2f}  "
-              f"(медианный |err| CAM16 {z['median_abs_err_cam']:.2f}, "
-              f"map {z['median_abs_err_map']:.2f})")
+    for tag in ("hue", "bri", "sat"):
+        z = zoom[tag]
+        print(f"  {tag}: {z['munsell_i']} <-> {z['munsell_j']}  "
+              f"CAM16 {z['ratio_cam']:.2f}  map {z['ratio_map']:.2f}")
 
 
 if __name__ == "__main__":

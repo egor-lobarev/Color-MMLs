@@ -1,0 +1,161 @@
+{
+  "script": "scripts/audit_combvd_gamut.py",
+  "date": "2026-08-11",
+  "protocol": "Вне гамута = линейный sRGB вне [0,1] хотя бы по одному каналу (допуск 1e-06); XYZ берётся из manifest.json до клиппинга. Пара исключается, если вне гамута хотя бы один из двух цветов. Порог разрешения: drgb8 >= 2 (drgb8 = макс. по каналу разница 8-битных кодовых значений).",
+  "min_drgb8": 2,
+  "excluded_datasets": {
+    "bfd_p-c": "медиана различия пар ΔE00 = 0.42 — набор почти целиком ниже разрешения 8-битного носителя"
+  },
+  "totals": {
+    "pairs_total_in_source": 3813,
+    "pairs_kept": 2796,
+    "colors_kept": 3609,
+    "datasets_used": [
+      "bfd_p-d65",
+      "bfd_p-m",
+      "leeds",
+      "rit-dupont",
+      "witt"
+    ]
+  },
+  "datasets": {
+    "bfd_p-d65": {
+      "excluded": false,
+      "colors_total": 2502,
+      "colors_out_of_gamut": 265,
+      "colors_kept": 1935,
+      "pairs_total": 2028,
+      "pairs_dropped_gamut": 204,
+      "pairs_dropped_resolution": 279,
+      "pairs_kept": 1545,
+      "drgb8": {
+        "collapsed_identical": 34,
+        "le_1": 307,
+        "median": 4.0,
+        "p90": 11.0,
+        "max": 49.0
+      },
+      "dv": {
+        "min": 0.108568,
+        "max": 8.05,
+        "median": 1.43436,
+        "unique": 1463
+      }
+    },
+    "bfd_p-m": {
+      "excluded": false,
+      "colors_total": 567,
+      "colors_out_of_gamut": 191,
+      "colors_kept": 359,
+      "pairs_total": 548,
+      "pairs_dropped_gamut": 192,
+      "pairs_dropped_resolution": 10,
+      "pairs_kept": 346,
+      "drgb8": {
+        "collapsed_identical": 3,
+        "le_1": 20,
+        "median": 8.0,
+        "p90": 19.0,
+        "max": 73.0
+      },
+      "dv": {
+        "min": 0.106549,
+        "max": 7.2042,
+        "median": 2.5137099999999997,
+        "unique": 532
+      }
+    },
+    "leeds": {
+      "excluded": false,
+      "colors_total": 482,
+      "colors_out_of_gamut": 0,
+      "colors_kept": 454,
+      "pairs_total": 307,
+      "pairs_dropped_gamut": 0,
+      "pairs_dropped_resolution": 16,
+      "pairs_kept": 291,
+      "drgb8": {
+        "collapsed_identical": 0,
+        "le_1": 16,
+        "median": 4.0,
+        "p90": 8.0,
+        "max": 21.0
+      },
+      "dv": {
+        "min": 0.409816,
+        "max": 1.853486,
+        "median": 1.047156,
+        "unique": 144
+      }
+    },
+    "rit-dupont": {
+      "excluded": false,
+      "colors_total": 468,
+      "colors_out_of_gamut": 38,
+      "colors_kept": 415,
+      "pairs_total": 312,
+      "pairs_dropped_gamut": 28,
+      "pairs_dropped_resolution": 10,
+      "pairs_kept": 274,
+      "drgb8": {
+        "collapsed_identical": 0,
+        "le_1": 14,
+        "median": 3.0,
+        "p90": 5.0,
+        "max": 26.0
+      },
+      "dv": {
+        "min": 1.02,
+        "max": 1.02,
+        "median": 1.02,
+        "unique": 1
+      }
+    },
+    "witt": {
+      "excluded": false,
+      "colors_total": 538,
+      "colors_out_of_gamut": 3,
+      "colors_kept": 446,
+      "pairs_total": 418,
+      "pairs_dropped_gamut": 2,
+      "pairs_dropped_resolution": 76,
+      "pairs_kept": 340,
+      "drgb8": {
+        "collapsed_identical": 6,
+        "le_1": 76,
+        "median": 3.0,
+        "p90": 9.0,
+        "max": 24.0
+      },
+      "dv": {
+        "min": 0.206832,
+        "max": 3.248986,
+        "median": 0.9630615,
+        "unique": 280
+      }
+    },
+    "bfd_p-c": {
+      "excluded": true,
+      "colors_total": 210,
+      "colors_out_of_gamut": 63,
+      "colors_kept": 83,
+      "pairs_total": 200,
+      "pairs_dropped_gamut": 60,
+      "pairs_dropped_resolution": 64,
+      "pairs_kept": 76,
+      "drgb8": {
+        "collapsed_identical": 16,
+        "le_1": 105,
+        "median": 1.0,
+        "p90": 4.0,
+        "max": 13.0
+      },
+      "dv": {
+        "min": 0.081419,
+        "max": 1.21528,
+        "median": 0.45875849999999996,
+        "unique": 183
+      }
+    }
+  }
+}

@@ -224,15 +224,19 @@ def main():
     L.append("")
 
     # -------- рис. 1 (графический абстракт) --------
-    L.append("## Рис. 1 — графический абстракт (зум-пары)")
+    L.append("## Рис. 1 — графический абстракт (зелёная зум-пара)")
     L.append("Источник: `fig0_abstract.json` ← `scripts/make_graphical_abstract.py` "
-             "(гистограммы — из `map_munsell_groupk.json` и `verify_combvd_leak.json`)\n")
+             "(3D CAM16-UCS a′b′J′; гистограммы — из `map_munsell_groupk.json` и "
+             "`verify_combvd_leak.json`)\n")
     if fig0:
-        for g, z in fig0["zoom_pairs"].items():
-            L.append(f"- {g}: {z['munsell_i']} ↔ {z['munsell_j']} — CAM16-UCS "
-                     f"{z['ratio_cam']:.2f}, карта {z['ratio_map']:.2f} "
-                     f"(медианный |err| по группе: CAM16 {z['median_abs_err_cam']:.2f}, "
-                     f"карта {z['median_abs_err_map']:.2f})")
+        zp = fig0["zoom_pairs_green"]
+        L.append(f"- якорь зелёной области: {zp['anchor']}")
+        for tag, name in (("hue", "по тону (H)"), ("bri", "по светлоте (V)"),
+                          ("sat", "по насыщенности (C)")):
+            z = zp[tag]
+            L.append(f"- {name}: {z['munsell_i']} ↔ {z['munsell_j']} — CAM16-UCS "
+                     f"{z['ratio_cam']:.2f}, отображение {z['ratio_map']:.2f} "
+                     f"(групповой k своей оси)")
     else:
         L.append("⚠️ не посчитано")
     L.append("")

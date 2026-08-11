@@ -1,0 +1,16 @@
+{
+  "dataset_root": "data/colors/combvd",
+  "outdir_root": "data/embeddings/Phi-4/combvd/describe_color",
+  "model": "microsoft/Phi-4-multimodal-instruct",
+  "prompt": "Describe the color.",
+  "init_prompt": null,
+  "datasets": [
+    "leeds",
+    "rit-dupont",
+    "witt",
+    "bfd_p-d65",
+    "bfd_p-m"
+  ],
+  "save_tokens": false,
+  "device": "cuda:0"
+}

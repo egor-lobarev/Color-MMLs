@@ -41,7 +41,7 @@ RNG = 42
 OUT = Path("graphics"); OUT.mkdir(exist_ok=True)
 AOUT = Path("data/analysis"); AOUT.mkdir(exist_ok=True, parents=True)
 rcParams.update({
-    "font.size": 11, "axes.spines.top": False, "axes.spines.right": False,
+    "font.size": 14, "axes.spines.top": False, "axes.spines.right": False,
     "axes.edgecolor": "#444", "axes.linewidth": 0.8, "figure.dpi": 140,
     "font.family": "DejaVu Sans",
 })
@@ -180,73 +180,75 @@ def make_figure(summary, spectra, init_spectra, M_LIST,
                 ref_line=(0.288, "CAM16-LCD (0.288)"),
                 ylabel3="STRESS на тесте (group-k)",
                 ylim_spec=(1e-3, 8), annotate="noise"):
+    def corner(ax, txt):
+        ax.text(0.03, 0.97, txt, transform=ax.transAxes, ha="left", va="top",
+                fontsize=14, fontweight="bold", color="#333")
+
     show_m = [32, 256, 1024, 3584]
-    fig, axes = plt.subplots(1, 4, figsize=(17.2, 4.2))
+    fig, axes = plt.subplots(1, 4, figsize=(18.0, 4.8))
     a1, a2, a3, a4 = axes
     cmap = plt.get_cmap("Blues")
     shades = [cmap(0.35 + 0.6 * i / (len(show_m) - 1)) for i in range(len(show_m))]
 
-    for ax, layer, ttl in [(a1, "LM", "а) Спектр AᵀA — языковой декодер (LM)"),
-                           (a2, "VL", "б) Спектр AᵀA — визуальный энкодер (VL)")]:
+    for ax, layer, ttl in [(a1, "LM", "а)  LM"), (a2, "VL", "б)  VL")]:
         for c, m in zip(shades, show_m):
             lam = spectra[(layer, m)]
-            ax.plot(np.arange(1, len(lam) + 1), lam / lam[0], color=c, lw=1.8,
+            ax.plot(np.arange(1, len(lam) + 1), lam / lam[0], color=c, lw=2.0,
                     label=f"m={m}")
         lam0 = init_spectra[(layer, 3584)]
         lam = spectra[(layer, 3584)]
         ax.plot(np.arange(1, len(lam0) + 1), lam0 / lam[0], color="#999999",
-                lw=1.2, ls="--", label="A до обучения (шум)")
+                lw=1.3, ls="--", label="A до обучения (шум)")
         if annotate == "noise":
             n_above = int((lam > lam0[0]).sum())
             ax.annotate(f"{n_above} λ над полкой шума",
                         xy=(max(n_above, 1), lam[max(n_above - 1, 0)] / lam[0]),
                         xytext=(max(n_above, 1) * 6, 2.6),
                         arrowprops=dict(arrowstyle="->", color="#666", lw=0.9),
-                        fontsize=8.5, color="#333")
+                        fontsize=12, color="#333")
         elif annotate == "rq":
             rq = int(round(summary[layer]["3584"]["rq_mean"]))
             ax.annotate(f"r_q ≈ {rq}: дальше метрика пуста",
                         xy=(rq, lam[rq - 1] / lam[0]), xytext=(rq * 6, 1.2),
                         arrowprops=dict(arrowstyle="->", color="#666", lw=0.9),
-                        fontsize=8.5, color="#333")
+                        fontsize=12, color="#333")
         ax.set_xscale("log"); ax.set_yscale("log")
         ax.set_ylim(*ylim_spec)
         ax.set_xlabel("Номер собственного значения (log)")
         ax.set_ylabel("λᵢ / λ₁ (log)")
-        ax.set_title(ttl, fontsize=11)
-        ax.legend(frameon=False, fontsize=8, loc="lower left")
+        corner(ax, ttl)
+        ax.legend(frameon=False, fontsize=11, loc="lower left")
         ax.grid(color="#EEE")
 
     ms = np.array(M_LIST)
     for layer, col in [("LM", ACCENT), ("VL", ACCENT_D)]:
         st = [summary[layer][str(m)]["stress_mean"] for m in M_LIST]
         er = [summary[layer][str(m)]["stress_std"] for m in M_LIST]
-        a3.errorbar(ms, st, yerr=er, fmt="o-", color=col, lw=2, ms=4,
+        a3.errorbar(ms, st, yerr=er, fmt="o-", color=col, lw=2.2, ms=5,
                     capsize=2, label=layer)
     a3.axhline(ref_line[0], color=GRAY_D, ls="--", lw=1.2)
     a3.text(ms[-1], ref_line[0] + 0.006, ref_line[1], ha="right", color=GRAY_D,
-            fontsize=8)
+            fontsize=12)
     a3.set_xscale("log")
     a3.set_xlabel("Выходная размерность m (log)")
     a3.set_ylabel(ylabel3)
-    a3.set_title("в) Качество vs m", fontsize=11)
-    a3.legend(frameon=False); a3.grid(color="#EEE")
+    corner(a3, "в)")
+    a3.legend(frameon=False, fontsize=13); a3.grid(color="#EEE")
 
     for layer, col in [("LM", ACCENT), ("VL", ACCENT_D)]:
         rq = [np.mean(summary[layer][str(m)]["rq_all"]) for m in M_LIST]
         er = [np.std(summary[layer][str(m)]["rq_all"]) for m in M_LIST]
-        a4.errorbar(ms, rq, yerr=er, fmt="o-", color=col, lw=2, ms=4,
+        a4.errorbar(ms, rq, yerr=er, fmt="o-", color=col, lw=2.2, ms=5,
                     capsize=2, label=layer)
     a4.plot(ms, ms, color="#BBB", lw=1, ls=":")
-    a4.text(ms[2], ms[2] * 1.5, "r = m", color="#999", fontsize=8, rotation=38)
+    a4.text(ms[2], ms[2] * 1.5, "r = m", color="#999", fontsize=11, rotation=38)
     a4.set_xscale("log"); a4.set_yscale("log")
     a4.set_xlabel("Выходная размерность m (log)")
     a4.set_ylabel("Функциональный ранг r_q")
-    a4.set_title("г) Сколько направлений реально работает", fontsize=11)
-    a4.legend(frameon=False); a4.grid(color="#EEE")
+    corner(a4, "г)")
+    a4.legend(frameon=False, fontsize=13); a4.grid(color="#EEE")
 
-    fig.suptitle(suptitle, fontsize=12.5)
-    fig.tight_layout(rect=(0, 0, 1, 0.92))
+    fig.tight_layout()
     for ext in ("png", "pdf"):
         fig.savefig(OUT / f"{fname}.{ext}", bbox_inches="tight")
     plt.close(fig)

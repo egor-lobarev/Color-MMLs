@@ -1,6 +1,6 @@
 {
   "script": "scripts/analyze_testsize_errors.py",
-  "date": "2026-07-18",
+  "date": "2026-07-27",
   "protocol": "m=256, сиды [0, 1, 2]; Манселл — объектный сплит, group-k; Leeds — сплит по центрам (мостиковые пары отброшены); тепловая карта — |k_g*d_hat - 1| на тестовых парах, 5-фолд",
   "fig6_testsize": {
     "fracs": [
