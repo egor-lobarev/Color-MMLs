@@ -1,0 +1,16 @@
+{
+  "dataset_root": "data/colors/combvd",
+  "outdir_root": "data/embeddings/gemma3-4B/combvd/describe_color",
+  "model": "google/gemma-3-4b-it",
+  "prompt": "Describe the color.",
+  "init_prompt": null,
+  "datasets": [
+    "leeds",
+    "rit-dupont",
+    "witt",
+    "bfd_p-d65",
+    "bfd_p-m"
+  ],
+  "save_tokens": false,
+  "device": "cuda:0"
+}

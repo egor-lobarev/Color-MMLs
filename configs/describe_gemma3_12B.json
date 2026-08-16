@@ -1,0 +1,12 @@
+{
+  "csv": "data/colors/munsell_colors/munsell_manifest.csv",
+  "pics_dir": "data/colors/munsell_colors/pics",
+  "outdir_root": "data/embeddings/gemma3-12B/describe_color",
+  "model": "google/gemma-3-12b-it",
+  "prompt": "Describe the color.",
+  "save_tokens": false,
+  "device": "cuda:0",
+  "batch": false,
+  "lm_per_image": false,
+  "restart_model_per_image": false
+}

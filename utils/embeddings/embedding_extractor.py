@@ -3,14 +3,14 @@ from typing import Dict, List, Type
 import torch
 from PIL import Image
 
-from utils.embeddings.embedding_extractor_google import Gemma4EmbeddingExtractor
+from utils.embeddings.embedding_extractor_google import GemmaEmbeddingExtractor
 from utils.embeddings.embedding_extractor_microsoft import Phi4EmbeddingExtractor
 from utils.embeddings.embedding_extractor_qwen import Qwen25VLEmbeddingExtractor
 from utils.embeddings.embedding_extractor_internvl3 import InternVL3EmbeddingExtractor
 
 __all__ = [
     "EmbeddingsExtractor",
-    "Gemma4EmbeddingExtractor",
+    "GemmaEmbeddingExtractor",
     "Phi4EmbeddingExtractor",
     "Qwen25VLEmbeddingExtractor",
     "resolve_extractor_class",
@@ -28,10 +28,8 @@ def resolve_extractor_class(model_name: str) -> Type:
 
     if "qwen" in name_lower and ("vl" in name_lower or "2.5" in name_lower or "2_5" in name_lower):
         return Qwen25VLEmbeddingExtractor
-    if "gemma" in name_lower and "4" in name_lower:
-        return Gemma4EmbeddingExtractor
-    if "gemma" in name_lower:
-        return Gemma4EmbeddingExtractor
+    if "gemma" in name_lower:                    # Gemma 3 и Gemma 4 — один экстрактор
+        return GemmaEmbeddingExtractor
     if "phi" in name_lower and "multimodal" in name_lower:
         return Phi4EmbeddingExtractor
     if "phi-4" in name_lower or "phi4" in name_lower:
@@ -48,8 +46,8 @@ def resolve_extractor_class(model_name: str) -> Type:
 
         if "qwen2_5_vl" in model_type or "qwen2_5_vl" in arch_blob:
             return Qwen25VLEmbeddingExtractor
-        if "gemma4" in model_type or "gemma4" in arch_blob:
-            return Gemma4EmbeddingExtractor
+        if "gemma" in model_type or "gemma" in arch_blob:
+            return GemmaEmbeddingExtractor
         if "phi4" in model_type or "phi4multimodal" in arch_blob.replace("_", ""):
             return Phi4EmbeddingExtractor
     except Exception:

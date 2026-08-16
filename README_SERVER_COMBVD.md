@@ -92,6 +92,39 @@ python scripts/extract_combvd_embeddings.py --config configs/combvd_qwen_2.5_7B.
 | `configs/combvd_InternVL3_8B.json` | `OpenGVLab/InternVL3-8B` | `data/embeddings/InternVL3-8B/combvd/describe_color` |
 | `configs/combvd_InternVL3_14B.json` | `OpenGVLab/InternVL3-14B` | `data/embeddings/InternVL3-14B/combvd/describe_color` |
 | `configs/combvd_phi4.json` | `microsoft/Phi-4-multimodal-instruct` | `data/embeddings/Phi-4/combvd/describe_color` |
+| `configs/combvd_gemma3_4B.json` | `google/gemma-3-4b-it` | `data/embeddings/gemma3-4B/combvd/describe_color` |
+| `configs/combvd_gemma3_12B.json` | `google/gemma-3-12b-it` | `data/embeddings/gemma3-12B/combvd/describe_color` |
+
+### Gemma 3 — отдельно
+
+У Gemma **нет ни одного эмбеддинга**, в отличие от остального зоопарка: нужно
+прогнать и Манселл, и COMBVD, то есть 1755 + 3609 = **5364 цвета на модель**.
+
+```bash
+python scripts/extract_munsell_embeddings.py --config configs/describe_gemma3_12B.json
+python scripts/extract_combvd_embeddings.py  --config configs/combvd_gemma3_12B.json
+```
+
+Зачем она нужна помимо расширения выборки: в Gemma 3 зрительная башня
+(SigLIP-400M) **одна и та же у 4B, 12B и 27B и заморожена при обучении**. Значит
+`vision_pooled_mean` у этих размеров обязан совпадать, и получается контрольный
+эксперимент под главный тезис статьи: зрительный вход зафиксирован по
+построению, поэтому любое расхождение по слою LM изолирует вклад именно
+языкового декодера. Ни Qwen, ни InternVL такого контроля не дают — там при смене
+размера меняются обе части сразу.
+
+Побочная проверка протокола: если STRESS по VL у 4B и 12B разойдётся заметно,
+это признак ошибки в пайплайне, а не свойство моделей.
+
+Вход Gemma 3 — 896×896 против наших патчей 224×224. Для однородной заливки
+апскейл точно без потерь (все пиксели одного значения), расхождения
+с Qwen/InternVL это не создаёт.
+
+⚠️ Экстрактор Gemma до этого никогда не запускался: в
+`utils/embeddings/embedding_extractor_google.py` был закомментирован импорт
+класса модели, из-за чего файл падал с `NameError` ещё до загрузки весов.
+Починено, но **на живой модели не проверено** — первый запуск обязательно
+с `--limit 5`.
 
 ### Обязательно: проверить план до запуска
 
@@ -145,11 +178,27 @@ tail -f logs/combvd_internvl3_14b.log
 
 | Модель | ≈ с/цвет | ≈ на прогон |
 |---|---|---|
-| InternVL3-2B, qwen 3B | 0.1–0.2 | 10–15 мин |
+| InternVL3-2B, qwen 3B, Gemma 3 4B | 0.1–0.2 | 10–15 мин |
 | qwen 7B, InternVL3-8B, Phi-4 | 0.2–0.3 | 15–25 мин |
-| InternVL3-14B | 0.3–0.5 | 25–35 мин |
+| InternVL3-14B, Gemma 3 12B | 0.3–0.5 | 25–35 мин |
 
-Суммарно порядка 2–3 GPU-часов на все шесть моделей.
+Суммарно порядка 2–3 GPU-часов на шесть исходных моделей; Gemma 3 добавляет
+ещё около часа (у неё считается и Манселл — 5364 цвета вместо 3609).
+
+Память под веса в bf16 — что влезает на A100:
+
+| модель | вес | 40 ГБ | 80 ГБ |
+|---|---|---|---|
+| Gemma 3 4B | ~8 ГБ | да | да |
+| Gemma 3 12B | ~24 ГБ | да | да |
+| Gemma 3 27B | ~54 ГБ | нет | да |
+| Gemma 4 12B | ~24 ГБ | да | да |
+| Gemma 4 26B-A4B | ~52 ГБ | нет | да |
+| Gemma 4 31B | ~62 ГБ | нет | впритык |
+
+⚠️ `gemma-4-26B-A4B` — не 4-миллиардная модель: «A4B» это 4B *активных*
+параметров на токен, но все 26B экспертов держатся в VRAM. По памяти она
+не легче 27B-денса.
 
 Рекомендуемый порядок: **сначала qwen2.5_7B** — на нём построены все текущие
 результаты статьи, и он сразу даёт сравнение нового прогона со старым Leeds.

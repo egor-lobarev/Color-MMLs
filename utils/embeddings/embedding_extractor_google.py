@@ -2,7 +2,6 @@ import os
 import math
 import torch
 import transformers.modeling_utils as _modeling_utils
-# from transformers import Gemma4ForConditionalGeneration
 
 os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 
@@ -29,12 +28,34 @@ from utils.embeddings.device_utils import (
 )
 
 
+# Gemma 3 и Gemma 4 грузятся разными классами (Gemma3ForConditionalGeneration /
+# Gemma4ForConditionalGeneration), причём набор доступных символов зависит от
+# версии transformers. Берём класс через Auto-фасад, чтобы не завязываться на имя.
+def _resolve_model_class():
+    import transformers
+
+    for attr in ("AutoModelForImageTextToText", "AutoModelForVision2Seq"):
+        cls = getattr(transformers, attr, None)
+        if cls is not None:
+            return cls
+    raise ImportError(
+        "В установленном transformers нет ни AutoModelForImageTextToText, "
+        "ни AutoModelForVision2Seq — обновите transformers для поддержки Gemma."
+    )
+
+
+# Проектор из зрительной башни в пространство языковой модели называется
+# по-разному в разных поколениях Gemma: у Gemma 3 это multi_modal_projector,
+# у Gemma 4 — embed_vision.
+_PROJECTOR_ATTRS = ("embed_vision", "multi_modal_projector", "vision_projector")
+
+
 def _get_free_memory_gb(gpu_idx: int) -> float:
     free_bytes, _ = torch.cuda.mem_get_info(gpu_idx)
     return free_bytes / 1024 ** 3
 
 
-def _split_gemma4_device_map(model_name: str, headroom_gb: float = 10.0) -> Dict[str, int]:
+def _split_gemma_device_map(model_name: str, headroom_gb: float = 10.0) -> Dict[str, int]:
     """
     Build device map using actual config parameter counts to estimate
     per-layer memory, rather than guessing from total model size.
@@ -82,7 +103,7 @@ def _split_gemma4_device_map(model_name: str, headroom_gb: float = 10.0) -> Dict
         free_bytes, _ = torch.cuda.mem_get_info(i)
         free_gb[i] = max(0.0, free_bytes / 1024 ** 3 - headroom_gb)
 
-    print(f"  Gemma4 layer count    : {num_layers}")
+    print(f"  Gemma layer count     : {num_layers}")
     print(f"  Estimated layer size  : {layer_gb:.2f} GiB  (hidden={hidden}, interm={interm})")
     print(f"  Vision overhead GPU 0 : {vis_gb:.2f} GiB ViT + {embed_gb:.2f} GiB embed = {overhead_gpu0:.2f} GiB")
     for i in range(world_size):
@@ -91,9 +112,10 @@ def _split_gemma4_device_map(model_name: str, headroom_gb: float = 10.0) -> Dict
 
     # Pin non-layer components to GPU 0
     device_map: Dict[str, int] = {}
+    # имя проектора различается у поколений Gemma; лишние ключи безвредны
     for key in (
         "model.vision_tower",
-        "model.embed_vision",
+        *(f"model.{a}" for a in _PROJECTOR_ATTRS),
         "model.language_model.embed_tokens",
         "model.language_model.norm",
         "model.language_model.lm_head",
@@ -125,10 +147,17 @@ def _split_gemma4_device_map(model_name: str, headroom_gb: float = 10.0) -> Dict
 
     return device_map
 
-class Gemma4EmbeddingExtractor:
+class GemmaEmbeddingExtractor:
+    """Извлечение эмбеддингов для мультимодальных Gemma (3 и 4).
+
+    В Gemma 3 зрительная башня (SigLIP-400M) одна и та же у 4B/12B/27B и
+    заморожена при обучении, поэтому vision_pooled_mean у этих размеров должен
+    совпадать — это готовый контроль для сравнения слоёв VL и LM.
+    """
+
     def __init__(
         self,
-        model_name: str = "google/gemma-4-27b-it",
+        model_name: str = "google/gemma-3-12b-it",
         device: str = None,
         quantize_4_bit: bool = False,
         quantize_8_bit: bool = False,
@@ -139,7 +168,7 @@ class Gemma4EmbeddingExtractor:
     ):
         if quantize_4_bit or quantize_8_bit:
             raise NotImplementedError(
-                "Gemma4EmbeddingExtractor does not support bitsandbytes quantization yet."
+                "GemmaEmbeddingExtractor does not support bitsandbytes quantization yet."
             )
 
         self.system_prompt = system_prompt
@@ -148,10 +177,10 @@ class Gemma4EmbeddingExtractor:
 
         n_gpus = torch.cuda.device_count()
         if n_gpus > 1 and self.device != "cpu":
-            print(f"Gemma4EmbeddingExtractor: splitting across {n_gpus} GPUs.")
-            device_map = _split_gemma4_device_map(model_name, headroom_gb=headroom_gb)
+            print(f"GemmaEmbeddingExtractor: splitting across {n_gpus} GPUs.")
+            device_map = _split_gemma_device_map(model_name, headroom_gb=headroom_gb)
         elif self.device == "cpu":
-            print("Gemma4EmbeddingExtractor: loading on CPU.")
+            print("GemmaEmbeddingExtractor: loading on CPU.")
             device_map = "cpu"
         else:
             device_map = {"": 0}
@@ -165,7 +194,7 @@ class Gemma4EmbeddingExtractor:
 
         self.processor = AutoProcessor.from_pretrained(model_name)
 
-        self.model = Gemma4ForConditionalGeneration.from_pretrained(
+        self.model = _resolve_model_class().from_pretrained(
             model_name,
             torch_dtype=self.torch_dtype,
             device_map=device_map,
@@ -207,12 +236,17 @@ class Gemma4EmbeddingExtractor:
 
     def _register_hooks(self):
         vision_tower = getattr(self._backbone, "vision_tower", None)
-        embed_vision  = getattr(self._backbone, "embed_vision", None)
+        embed_vision = next(
+            (m for m in (getattr(self._backbone, a, None) for a in _PROJECTOR_ATTRS)
+             if m is not None),
+            None,
+        )
 
         if vision_tower is None or embed_vision is None:
             available = [n for n, _ in self._backbone.named_children()]
             raise AttributeError(
-                f"Missing vision_tower or embed_vision. Backbone children: {available}"
+                f"Не найдены vision_tower и/или проектор "
+                f"(искали {_PROJECTOR_ATTRS}). Дети backbone: {available}"
             )
 
         def hook_vision(_m, _inp, out):
@@ -299,3 +333,7 @@ class Gemma4EmbeddingExtractor:
         for h in self.hooks:
             h.remove()
         self.hooks.clear()
+
+
+# Обратно совместимый псевдоним: класс обслуживает и Gemma 3, и Gemma 4.
+Gemma4EmbeddingExtractor = GemmaEmbeddingExtractor
