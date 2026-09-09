@@ -21,6 +21,11 @@ class Phi4EmbeddingExtractor:
     - "lm_last_hidden"        [B, T, D]  last LLM decoder layer
     - pooled means for all three
     """
+    # Сколько токенов генерировать после прямого прохода. Эмбеддинги
+    # снимаются хуками на prefill, поэтому для их извлечения ответ модели не
+    # нужен: скрипты выставляют 1, что убирает авторегрессионный декод
+    # (~30-60 токенов на цвет) и ускоряет прогон примерно на порядок.
+    max_new_tokens: int = 256
 
     USER_PROMPT = "<|user|>"
     ASSISTANT_PROMPT = "<|assistant|>"
@@ -235,18 +240,30 @@ class Phi4EmbeddingExtractor:
 
         result = dict(self.captures)
 
-        # Pooled means
+        # Pooled means.
+        # Усреднять нужно по ОСИ ТОКЕНОВ. Прежний код брал mean(dim=0) и на
+        # реальных формах не пулил вовсе: vision_tokens [2, 1024, 1152] (2 тайла
+        # HD-трансформа) усреднялись по тайлам -> [1, 1024, 1152], а
+        # projected_tokens [1, 545, 3072] давали no-op -> [1, 545, 3072].
+        # В результате «pooled»-файлы содержали сотни векторов вместо одного
+        # (~11 МиБ на цвет) и требовали отдельного прогона
+        # data/embeddings/compress_embeddings.py. Схлопываем все ведущие оси и
+        # приводим к [1, 1, D] — той же форме, что даёт compress_embeddings.py.
+        def _pool_tokens(t):
+            return t.reshape(-1, t.shape[-1]).mean(dim=0).reshape(1, 1, -1)
+
         if "vision_tokens" in result:
-            result["vision_pooled_mean"] = result["vision_tokens"].mean(dim=0, keepdim=True)
+            result["vision_pooled_mean"] = _pool_tokens(result["vision_tokens"])
         if "projected_tokens" in result:
-            result["projected_pooled_mean"] = result["projected_tokens"].mean(dim=0, keepdim=True)
+            result["projected_pooled_mean"] = _pool_tokens(result["projected_tokens"])
         if "lm_last_hidden" in result:
+            # здесь ось токенов — dim=1, пулинг уже был корректным
             result["lm_pooled_mean"] = result["lm_last_hidden"].mean(dim=1, keepdim=True)
 
         # Generation — keep adapter enabled (same session)
         generated_ids = self.model.generate(
             **inputs,
-            max_new_tokens=256,
+            max_new_tokens=self.max_new_tokens,
             generation_config=self.generation_config,
             eos_token_id=self.processor.tokenizer.eos_token_id,
             pad_token_id=self.processor.tokenizer.eos_token_id,
@@ -269,3 +286,8 @@ class Phi4EmbeddingExtractor:
         for h in self.hooks:
             h.remove()
         self.hooks.clear()
+
+    # Единый API экстракторов: фасад EmbeddingsExtractor вызывает close() в
+    # блоке finally, поэтому без этого псевдонима прогон падал бы в самом конце
+    # (AttributeError), теряя _run_log.json и список ошибок.
+    close = remove_hooks

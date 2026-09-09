@@ -1,0 +1,73 @@
+{
+  "script": "scripts/make_map_structure_figure.py",
+  "date": "2026-08-18",
+  "protocol": "Манселл, group-k, 5-фолд CV по цветам; кривые усечения и спектры при m=256; PCA — по 1755 цветам без центрирования по признакам",
+  "pca_n95": {
+    "VL": 6,
+    "LM": 11
+  },
+  "pca_participation_ratio": {
+    "VL": 2.64,
+    "LM": 4.91
+  },
+  "rank_to_reach_cam16_lcd": {
+    "VL_separate": 7,
+    "VL_joint": 3,
+    "LM_separate": 10,
+    "LM_joint": 5
+  },
+  "stress_saturation": {
+    "VL_separate": {
+      "m": 512,
+      "stress": 0.0965,
+      "std": 0.005
+    },
+    "VL_joint": {
+      "m": 3584,
+      "stress": 0.148,
+      "std": 0.0069
+    },
+    "LM_separate": {
+      "m": 1024,
+      "stress": 0.1516,
+      "std": 0.0205
+    },
+    "LM_joint": {
+      "m": 1024,
+      "stress": 0.1508,
+      "std": 0.0127
+    }
+  },
+  "above_shelf": {
+    "VL_m256": {
+      "n": 0,
+      "lambda1_over_shelf": 0.69,
+      "energy_above": 0.0
+    },
+    "VL_m1024": {
+      "n": 5,
+      "lambda1_over_shelf": 1.88,
+      "energy_above": 0.0287
+    },
+    "VL_m3584": {
+      "n": 18,
+      "lambda1_over_shelf": 5.77,
+      "energy_above": 0.0457
+    },
+    "LM_m256": {
+      "n": 0,
+      "lambda1_over_shelf": 0.38,
+      "energy_above": 0.0
+    },
+    "LM_m1024": {
+      "n": 0,
+      "lambda1_over_shelf": 0.63,
+      "energy_above": 0.0
+    },
+    "LM_m3584": {
+      "n": 5,
+      "lambda1_over_shelf": 1.49,
+      "energy_above": 0.0076
+    }
+  }
+}

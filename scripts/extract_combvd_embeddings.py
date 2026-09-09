@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import time
 from datetime import datetime
 from pathlib import Path
@@ -34,8 +35,17 @@ from tqdm import tqdm
 ROOT = Path(__file__).resolve().parent.parent
 KEEP_COLORS = ROOT / "data" / "colors" / "combvd" / "keep_colors.json"
 
-# файлы, по наличию которых цвет считается посчитанным
-REQUIRED = ("vision_pooled_mean.npy", "projected_pooled_mean.npy", "lm_pooled_mean.npy")
+# Признак готовности цвета — manifest.json, который пишется ПОСЛЕДНИМ и атомарно
+# (см. write_manifest_atomic). Проверять по .npy нельзя по двум причинам:
+#   1) у Qwen2.5-VL проектор входит в состав зрительной башни, отдельного
+#      projected_pooled_mean.npy не бывает вовсе — условие «есть все три файла»
+#      не выполнялось никогда, и возобновление пересчитывало всё заново;
+#   2) процесс, убитый внутри np.save, оставляет обрезанный файл, который по
+#      факту существования был бы принят за готовый и никогда не пересчитан.
+DONE_MARKER = "manifest.json"
+
+# столько ошибок подряд считаем отказом окружения, а не проблемой цвета
+MAX_CONSECUTIVE_ERRORS = 8
 
 
 def parse_args() -> argparse.Namespace:
@@ -70,7 +80,31 @@ def load_keep_colors() -> Dict[str, List[int]]:
 
 
 def is_done(color_dir: Path) -> bool:
-    return all((color_dir / f).exists() for f in REQUIRED)
+    """Цвет посчитан, если лежит валидный manifest.json.
+
+    Разбор JSON, а не просто наличие файла: манифест от прошлых (неатомарных)
+    версий скрипта мог остаться обрезанным.
+    """
+    marker = color_dir / DONE_MARKER
+    if not marker.exists():
+        return False
+    try:
+        json.loads(marker.read_text(encoding="utf-8"))
+        return True
+    except (json.JSONDecodeError, OSError):
+        return False
+
+
+def write_manifest_atomic(color_dir: Path, payload: dict) -> None:
+    """Пишет манифест во временный файл и переименовывает.
+
+    os.replace атомарен в пределах файловой системы, поэтому манифест либо есть
+    целиком, либо его нет — промежуточного состояния не возникает даже при
+    SIGKILL или падении узла.
+    """
+    tmp = color_dir / (DONE_MARKER + ".tmp")
+    tmp.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    os.replace(tmp, color_dir / DONE_MARKER)
 
 
 def color_meta(dataset_dir: Path) -> Dict[int, dict]:
@@ -90,6 +124,9 @@ def main() -> int:
     init_prompt = cfg.get("init_prompt")
     device = args.device or cfg.get("device")
     save_tokens = bool(cfg.get("save_tokens", False))
+    # ответ модели для эмбеддингов не нужен: 1 токен вместо 256 убирает
+    # авторегрессионный декод (~30-60 токенов на цвет)
+    max_new_tokens = int(cfg.get("max_new_tokens", 1))
 
     keep = load_keep_colors()
     names = args.datasets or cfg.get("datasets") or sorted(keep)
@@ -116,7 +153,9 @@ def main() -> int:
     print(f"модель:  {model_name}")
     print(f"промпт:  {prompt!r}")
     print(f"выход:   {out_root.relative_to(ROOT)}")
-    print(f"device:  {device or 'auto'}\n")
+    print(f"device:  {device or 'auto'}")
+    print(f"генерация ответа: max_new_tokens={max_new_tokens}"
+          f"{' (ответ не сохраняется осмысленно, эмбеддинги с prefill)' if max_new_tokens <= 1 else ''}\n")
     print(f"{'датасет':12s} {'в гамуте':>9s} {'готово':>7s} {'к расчёту':>10s}")
     print("-" * 42)
     for ds in names:
@@ -137,9 +176,11 @@ def main() -> int:
     from utils.embeddings.images_loader import save_all, tensor_shape
 
     extractor = EmbeddingsExtractor(model_name=model_name, device=device,
-                                    system_prompt=init_prompt)
+                                    system_prompt=init_prompt,
+                                    max_new_tokens=max_new_tokens)
     started = time.time()
     processed, failed = 0, []
+    consecutive_errors = 0
 
     try:
         for ds in names:
@@ -159,7 +200,7 @@ def main() -> int:
                     color_dir.mkdir(parents=True, exist_ok=True)
                     saved = save_all(color_dir, out, save_tokens)
                     m = meta.get(idx, {})
-                    (color_dir / "manifest.json").write_text(json.dumps({
+                    write_manifest_atomic(color_dir, {
                         "dataset": ds,
                         "index": idx,
                         "image": img_path.relative_to(ROOT).as_posix(),
@@ -173,11 +214,20 @@ def main() -> int:
                             "lm_pooled_mean", "visual_token_lens")},
                         "xyz": m.get("xyz"), "xyY": m.get("xyY"),
                         "srgb": m.get("srgb"), "rgb_255": m.get("rgb_255"),
-                    }, ensure_ascii=False, indent=2), encoding="utf-8")
+                    })
                     processed += 1
+                    consecutive_errors = 0
                 except Exception as exc:                       # noqa: BLE001
                     failed.append({"dataset": ds, "index": idx, "error": repr(exc)})
                     print(f"\n[ОШИБКА] {ds}/{idx}: {exc!r}")
+                    consecutive_errors += 1
+                    # после OOM или device-side assert контекст CUDA обычно мёртв
+                    # и все оставшиеся цвета упадут с той же ошибкой; без отсечки
+                    # прогон впустую занимал бы GPU до конца очереди
+                    if consecutive_errors >= MAX_CONSECUTIVE_ERRORS:
+                        print(f"\nПрервано: {consecutive_errors} ошибок подряд — "
+                              f"похоже, сломано окружение, а не отдельный цвет.")
+                        raise SystemExit(2) from exc
     finally:
         extractor.close()
         if torch.cuda.is_available():

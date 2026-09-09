@@ -54,9 +54,16 @@ def resolve_device(requested: Optional[str] = None) -> str:
 
 
 def default_dtype(device: str, torch_dtype=None) -> torch.dtype:
+    """bfloat16 на CUDA, float32 иначе.
+
+    Сравнение идёт по префиксу: конфиги задают устройство как ``"cuda:0"``, и
+    строгое ``== "cuda"`` молча возвращало float32 — модель грузилась в двойном
+    объёме памяти (InternVL3-14B ≈ 57 ГБ вместо 28, гарантированный OOM
+    на A100 40 ГБ).
+    """
     if torch_dtype is not None:
         return torch_dtype
-    if device == "cuda":
+    if str(device).split(":", 1)[0] in ("cuda", "gpu"):
         return torch.bfloat16
     return torch.float32
 

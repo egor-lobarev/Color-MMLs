@@ -46,10 +46,12 @@ OUT_JSON = ROOT / "data" / "analysis" / "combvd_audit.json"
 OUT_PAIRS = ROOT / "data" / "combvd_pairs_clean.csv"
 OUT_KEEP = COLORS / "keep_colors.json"
 
-# bfd_p-c исключён целиком: медиана различия пар ΔE00 = 0.42, то есть набор почти
-# полностью лежит ниже разрешения 8-битного носителя (после фильтров осталось бы
-# 76 пар из 200). Статистика по нему всё равно считается и пишется в отчёт —
-# ею обосновывается исключение в Методах.
+# bfd_p-c исключён целиком: почти весь набор лежит ниже разрешения 8-битного
+# носителя (медиана ΔV — см. отчёт; после фильтров осталось бы 76 пар из 200).
+# Статистика по нему всё равно считается и пишется в отчёт — ею обосновывается
+# исключение в Методах. Конкретные числа НЕ дублируются здесь текстом: они
+# подставляются из посчитанного (см. excluded_datasets ниже), иначе комментарий
+# рассинхронизируется с данными.
 EXCLUDED = ("bfd_p-c",)
 
 # XYZ -> линейный sRGB (та же матрица, что в scripts/generate_combvd_pictures.py)
@@ -150,12 +152,27 @@ def main() -> int:
             },
         }
 
+    if not keep_pairs:
+        raise SystemExit(
+            "Не осталось ни одной пары — проверьте --datasets и --min-drgb8.\n"
+            f"Запрошены: {names}"
+        )
     clean = pd.concat(keep_pairs, ignore_index=True)
-    clean.to_csv(OUT_PAIRS, index=False)
-    OUT_KEEP.write_text(json.dumps(keep_colors, indent=2), encoding="utf-8")
+
+    # Канонические файлы перезаписываются только при полном наборе датасетов.
+    # Иначе отладочный запуск вида «--datasets witt» молча ужимал бы рабочий
+    # набор до одного датасета, а extract_combvd_embeddings.py потом честно
+    # посчитал бы 446 цветов вместо 3609 — ошибка всплыла бы только на обучении.
+    partial = bool(args.datasets)
+    out_pairs = OUT_PAIRS.with_name(OUT_PAIRS.stem + ".partial.csv") if partial else OUT_PAIRS
+    out_keep = OUT_KEEP.with_name(OUT_KEEP.stem + ".partial.json") if partial else OUT_KEEP
+    clean.to_csv(out_pairs, index=False)
+    out_keep.write_text(json.dumps(keep_colors, indent=2), encoding="utf-8")
 
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
-    OUT_JSON.write_text(json.dumps({
+    out_json = (OUT_JSON.with_name(OUT_JSON.stem + ".partial.json") if partial
+                else OUT_JSON)
+    out_json.write_text(json.dumps({
         "script": "scripts/audit_combvd_gamut.py",
         "date": str(date.today()),
         "protocol": (
@@ -166,9 +183,13 @@ def main() -> int:
             "(drgb8 = макс. по каналу разница 8-битных кодовых значений)."
         ),
         "min_drgb8": args.min_drgb8,
+        # формулируется из посчитанных чисел, а не хардкодом: величина в
+        # combvd_pairs.csv — это ΔV (визуальное различие), не ΔE00
         "excluded_datasets": {
-            ds: "медиана различия пар ΔE00 = 0.42 — набор почти целиком ниже "
-                "разрешения 8-битного носителя"
+            ds: (f"медиана ΔV = {report[ds]['dv']['median']:.3f}; "
+                 f"после фильтров осталось бы {report[ds]['pairs_kept']} пар "
+                 f"из {report[ds]['pairs_total']} — набор почти целиком ниже "
+                 f"разрешения 8-битного носителя")
             for ds in EXCLUDED if ds in report
         },
         "totals": {
@@ -195,8 +216,11 @@ def main() -> int:
             r = report[ds]
             print(f"\nисключён: {ds} ({r['pairs_total']} пар; после фильтров осталось бы "
                   f"{r['pairs_kept']}) — ниже разрешения носителя")
-    print(f"\n{OUT_PAIRS.relative_to(ROOT)}\n{OUT_KEEP.relative_to(ROOT)}\n"
-          f"{OUT_JSON.relative_to(ROOT)}")
+    if partial:
+        print("\n⚠️  частичный запуск (--datasets): канонические файлы НЕ тронуты,\n"
+              "    результат записан с суффиксом .partial")
+    print(f"\n{out_pairs.relative_to(ROOT)}\n{out_keep.relative_to(ROOT)}\n"
+          f"{out_json.relative_to(ROOT)}")
     return 0
 
 

@@ -154,6 +154,11 @@ class GemmaEmbeddingExtractor:
     заморожена при обучении, поэтому vision_pooled_mean у этих размеров должен
     совпадать — это готовый контроль для сравнения слоёв VL и LM.
     """
+    # Сколько токенов генерировать после прямого прохода. Эмбеддинги
+    # снимаются хуками на prefill, поэтому для их извлечения ответ модели не
+    # нужен: скрипты выставляют 1, что убирает авторегрессионный декод
+    # (~30-60 токенов на цвет) и ускоряет прогон примерно на порядок.
+    max_new_tokens: int = 256
 
     def __init__(
         self,
@@ -295,7 +300,7 @@ class GemmaEmbeddingExtractor:
         self,
         images: List[Image.Image],
         prompt: str = "Describe the images.",
-        max_new_tokens: int = 256,
+        max_new_tokens: int = None,
     ) -> Dict:
         self.captures.clear()
         inputs = self._build_inputs(images, prompt)
@@ -318,7 +323,7 @@ class GemmaEmbeddingExtractor:
 
         generated_ids = self.model.generate(
             **inputs,
-            max_new_tokens=max_new_tokens,
+            max_new_tokens=max_new_tokens or self.max_new_tokens,
             do_sample=False,
         )
         input_len = inputs["input_ids"].shape[1]

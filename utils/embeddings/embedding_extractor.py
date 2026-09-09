@@ -74,6 +74,7 @@ class EmbeddingsExtractor:
         quantize_8_bit: bool = False,
         torch_dtype=None,
         system_prompt=None,
+        max_new_tokens: int = None,
     ):
         self.model_name = model_name
         extractor_cls = resolve_extractor_class(model_name)
@@ -85,6 +86,11 @@ class EmbeddingsExtractor:
             torch_dtype=torch_dtype,
             system_prompt=system_prompt,
         )
+        # Длина генерируемого ответа. Для извлечения эмбеддингов ответ не нужен
+        # (они снимаются хуками на prefill), поэтому скрипты ставят 1: это
+        # убирает авторегрессионный декод и ускоряет прогон примерно на порядок.
+        if max_new_tokens is not None:
+            self._extractor.max_new_tokens = int(max_new_tokens)
 
     @torch.no_grad()
     def extract(

@@ -83,6 +83,11 @@ class Qwen25VLEmbeddingExtractor:
     # pooled_lm_mean      = out.get("lm_pooled_mean")
     # extractor.close()
     """
+    # Сколько токенов генерировать после прямого прохода. Эмбеддинги
+    # снимаются хуками на prefill, поэтому для их извлечения ответ модели не
+    # нужен: скрипты выставляют 1, что убирает авторегрессионный декод
+    # (~30-60 токенов на цвет) и ускоряет прогон примерно на порядок.
+    max_new_tokens: int = 256
 
     def __init__(self, model_name="Qwen/Qwen2.5-VL-7B-Instruct", device=None, quantize_4_bit=False, quantize_8_bit=False, torch_dtype=None, system_prompt=None):
         # Pick a sensible device automatically; allow manual override via CLI
@@ -343,7 +348,8 @@ class Qwen25VLEmbeddingExtractor:
         result = dict(self.captures)
 
         # Generation
-        generated_ids = self.model.generate(**inputs, max_new_tokens=256, do_sample=False)
+        generated_ids = self.model.generate(**inputs, max_new_tokens=self.max_new_tokens,
+                                          do_sample=False)
         input_len = inputs["input_ids"].shape[1]
         result["model_answer"] = self.processor.batch_decode(
             generated_ids[:, input_len:],   # ← slice off input tokens

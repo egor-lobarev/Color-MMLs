@@ -8,6 +8,7 @@ from transformers import AutoModel, AutoTokenizer, AutoConfig
 from typing import Dict, List, Optional, Tuple
 
 from utils.embeddings.device_utils import (
+    default_dtype,
     model_input_device,
     resolve_device,
 )
@@ -116,6 +117,13 @@ class InternVL3EmbeddingExtractor:
       "lm_pooled_mean"         masked mean over real tokens (excludes EOS/PAD)
       "lm_last_token"          last real token (better than mean for classification)
     """
+    # Сколько токенов генерировать после прямого прохода. Эмбеддинги
+    # снимаются хуками на prefill, поэтому для их извлечения ответ модели не
+    # нужен: скрипты выставляют 1, что убирает авторегрессионный декод
+    # (~30-60 токенов на цвет) и ускоряет прогон примерно на порядок.
+    # У InternVL3 генерация — основной путь (model.chat), убрать её нельзя,
+    # но ограничить одним токеном можно.
+    max_new_tokens: int = 256
 
     def __init__(
         self,
@@ -137,7 +145,8 @@ class InternVL3EmbeddingExtractor:
         self.max_tiles = max_tiles
         self.system_prompt = system_prompt
         self.device = resolve_device(device)
-        self.torch_dtype = torch_dtype
+        # без этого from_pretrained(torch_dtype=None) брал float32 по умолчанию
+        self.torch_dtype = default_dtype(self.device, torch_dtype)
 
         # Removed custom GPU splitting mapping. Assign straightforward string.
         device_map = self.device
@@ -321,7 +330,8 @@ class InternVL3EmbeddingExtractor:
         self.captures.clear()
 
         if generation_config is None:
-            generation_config = {"max_new_tokens": 256, "do_sample": False}
+            generation_config = {"max_new_tokens": self.max_new_tokens,
+                                 "do_sample": False}
 
         pixel_values, num_patches = self.preprocess_images(images)
         question = self._build_question(len(images), prompt)
@@ -372,7 +382,8 @@ class InternVL3EmbeddingExtractor:
         If batch sizes > 1 are used, tiles from distinct images will be mixed! 
         """
         if generation_config is None:
-            generation_config = {"max_new_tokens": 256, "do_sample": False}
+            generation_config = {"max_new_tokens": self.max_new_tokens,
+                                 "do_sample": False}
 
         all_tiles, num_patches_list, questions = [], [], []
 
@@ -422,3 +433,8 @@ class InternVL3EmbeddingExtractor:
         for h in self.hooks:
             h.remove()
         self.hooks.clear()
+
+    # Единый API экстракторов: фасад EmbeddingsExtractor вызывает close() в
+    # блоке finally, поэтому без этого псевдонима прогон падал бы в самом конце
+    # (AttributeError), теряя _run_log.json и список ошибок.
+    close = remove_hooks
